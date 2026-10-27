@@ -31,9 +31,11 @@ test("profile, navigation, scroll effect and page health", async ({
     page.getByRole("heading", { name: "考える、つなぐ、つくる。" }),
   ).toBeVisible();
   await expect(
-    page.locator("#contact").getByRole("link", { name: "プロジェクトを相談する" }),
+    page
+      .locator("#contact")
+      .getByRole("link", { name: "プロジェクトを相談する" }),
   ).toHaveAttribute("href", "mailto:cbnbc07@gmail.com");
-  await page.evaluate(() => scrollTo(0, 400));
+  await page.evaluate(() => scrollTo(0, 650));
   await expect
     .poll(() =>
       page
@@ -96,4 +98,84 @@ test("reduced motion keeps content accessible and disables effects", async ({
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
+});
+
+test("category filters preserve project identity and show matching concepts", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const controls = page.getByRole("group", {
+    name: "ポートフォリオのカテゴリ",
+  });
+  await controls.getByRole("button", { name: /Webシステム/ }).click();
+  await expect(page.locator(".work-card")).toHaveCount(1);
+  await expect(page.locator(".work-card")).toContainText(
+    "毎日の業務を、もっとシンプルに。",
+  );
+  await page.locator(".work-card").click();
+  await expect(page.getByRole("dialog")).toContainText("ダッシュボード");
+  await page.keyboard.press("Escape");
+  await controls.getByRole("button", { name: /アプリ/ }).click();
+  await expect(page.locator(".work-card")).toHaveCount(1);
+  await expect(page.locator(".work-card")).toContainText(
+    "手のひらから、心地よい体験を。",
+  );
+  await controls.getByRole("button", { name: /すべて/ }).click();
+  await expect(page.locator(".work-card")).toHaveCount(3);
+});
+
+test("contact channels use supplied identifiers and support copying", async ({
+  page,
+  context,
+}) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Discordの連絡先をコピー" }).click();
+  await expect(page.locator(".contact-copy-status")).toContainText(
+    "Discordの連絡先をコピーしました",
+  );
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+    "shiner715",
+  );
+  await page.getByRole("button", { name: "Chatworkの連絡先をコピー" }).click();
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+    "3htt4mii70cg8",
+  );
+  await expect(
+    page.getByRole("link", { name: "Chatworkで連絡する" }),
+  ).toHaveAttribute("href", "https://www.chatwork.com/3htt4mii70cg8");
+  await expect(
+    page.getByRole("link", { name: "メールを書く" }),
+  ).toHaveAttribute("href", "mailto:cbnbc07@gmail.com");
+  await expect(
+    page.getByRole("link", { name: /Lancersでプロフィール/ }),
+  ).toHaveAttribute("href", "https://www.lancers.jp/profile/Ryuji_0524_Xp");
+  await page.locator("#contact-name").fill("山田 太郎");
+  await page.locator("#contact-email").fill("taro@example.com");
+  await page
+    .locator("#contact-message")
+    .fill("新しいウェブサービスを相談したいです。");
+  await page
+    .getByRole("button", { name: "相談内容をコピー", exact: true })
+    .click();
+  const draft = await page.evaluate(() => navigator.clipboard.readText());
+  expect(draft).toContain("山田 太郎");
+  expect(draft).toContain("taro@example.com");
+  expect(draft).toContain("新しいウェブサービスを相談したいです。");
+});
+
+test("desktop portfolio hover reveals the project label", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(
+    isMobile,
+    "Hover is a mouse interaction. Touch users open the card directly.",
+  );
+  await page.goto("/");
+  const card = page.locator(".work-card").first();
+  await card.hover();
+  await expect(card.locator(".project-hover-label")).toBeVisible();
+  await expect(page.locator(".custom-cursor")).toHaveAttribute("data-active", "true");
+  await expect(page.locator(".custom-cursor")).toHaveCSS("opacity", "1");
 });
