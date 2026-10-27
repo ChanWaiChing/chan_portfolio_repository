@@ -31,7 +31,7 @@ test("profile, navigation, scroll effect and page health", async ({
     page.getByRole("heading", { name: "考える、つなぐ、つくる。" }),
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "プロジェクトを相談する" }),
+    page.locator("#contact").getByRole("link", { name: "プロジェクトを相談する" }),
   ).toHaveAttribute("href", "mailto:cbnbc07@gmail.com");
   await page.evaluate(() => scrollTo(0, 400));
   await expect

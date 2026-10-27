@@ -1,12 +1,12 @@
 @import "@fontsource-variable/dm-sans";
 @import "@fontsource-variable/noto-sans-jp";
 :root {
-  --paper: #f6f6ee;
-  --ink: #253e34;
+  --paper: #eef1f6;
+  --ink: #252e3e;
   --muted: #6b766d;
-  --line: #d9ded2;
-  --lime: #d7ee86;
-  --green: #214c3b;
+  --line: #d1d6df;
+  --lime: #86acee;
+  --green: #21314c;
   --sans: "DM Sans Variable", "Noto Sans JP Variable", sans-serif;
 }
 * {
@@ -55,7 +55,7 @@ a:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid #7a9b43;
+  outline: 3px solid #43649b;
   outline-offset: 5px;
 }
 ::selection {
@@ -157,7 +157,7 @@ a svg {
   transition: background 0.3s;
 }
 .header-contact:hover {
-  background: #47704a;
+  background: #475670;
 }
 .menu-toggle {
   display: none;
@@ -187,8 +187,8 @@ a svg {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #68975d;
-  box-shadow: 0 0 0 4px #dfe6cf;
+  background: #5d7297;
+  box-shadow: 0 0 0 4px #cfd8e6;
 }
 .hero-content {
   display: grid;
@@ -294,10 +294,10 @@ a svg {
 }
 .button-dark {
   background: var(--ink);
-  color: #f6f8ed;
+  color: #edf1f8;
 }
 .button-dark:hover {
-  background: #3c5c41;
+  background: #3c485c;
 }
 .button-tag {
   position: absolute;
@@ -315,7 +315,7 @@ a svg {
     opacity 0.25s,
     transform 0.25s;
   pointer-events: none;
-  box-shadow: 0 3px 5px #253e3410;
+  box-shadow: 0 3px 5px #252e3e10;
 }
 .button-tag:after {
   content: "";
@@ -344,7 +344,7 @@ a svg {
   left: 12%;
   top: 15%;
   border-radius: 46% 54% 57% 43%;
-  background: radial-gradient(at 30% 25%, #e2f7a0, #c1d98e);
+  background: radial-gradient(at 30% 25%, #a0c0f7, #8eaad9);
   opacity: 0.55;
 }
 .hero-canvas {
@@ -359,14 +359,14 @@ a svg {
   width: 92%;
   height: 60%;
   top: 21%;
-  border: 1px solid #9bab7a66;
+  border: 1px solid #7a8cab66;
   border-radius: 50%;
   transform: rotate(-30deg);
   pointer-events: none;
 }
 .orbit-two {
   transform: rotate(35deg);
-  border-color: #9bab7a2a;
+  border-color: #7a8cab2a;
   width: 90%;
   left: 7%;
 }
@@ -384,7 +384,7 @@ a svg {
   font-size: 22px;
   left: 11%;
   bottom: 22%;
-  color: #507b45;
+  color: #45597b;
 }
 .star-three {
   font-size: 24px;
@@ -396,9 +396,9 @@ a svg {
   position: absolute;
   top: 12%;
   left: 22%;
-  background: #fffffa;
-  border: 1px solid #e4e7dc;
-  box-shadow: 0 5px 15px #43573008;
+  background: #fafcff;
+  border: 1px solid #dce0e7;
+  box-shadow: 0 5px 15px #303e5708;
   padding: 16px 20px;
   border-radius: 18px 18px 18px 3px;
   font-weight: 700;
@@ -430,7 +430,7 @@ a svg {
   position: relative;
   width: 230px;
   height: 250px;
-  filter: drop-shadow(7px 14px 8px #24422a15);
+  filter: drop-shadow(7px 14px 8px #242f4215);
 }
 .robot-head {
   position: absolute;
@@ -438,11 +438,11 @@ a svg {
   top: 36px;
   width: 190px;
   height: 135px;
-  background: linear-gradient(125deg, #fff 30%, #fafbf4 60%, #d8dfd0);
+  background: linear-gradient(125deg, #fff 30%, #f4f7fb 60%, #d0d6df);
   border-radius: 54px 54px 49px 49px;
   box-shadow:
-    inset 0 -5px 4px #b3c2aa66,
-    0 5px 0 #f7f8f0;
+    inset 0 -5px 4px #a9b3c366,
+    0 5px 0 #f0f3f8;
   transform: rotate(-5deg);
   z-index: 4;
   border: 1px solid #fff;
@@ -453,7 +453,7 @@ a svg {
   left: 21px;
   width: 146px;
   height: 71px;
-  background: linear-gradient(140deg, #2d4a3d, #172e25);
+  background: linear-gradient(140deg, #2d384a, #17202e);
   border-radius: 27px 27px 30px 30px;
   box-shadow: inset 0 2px 5px #0004;
   display: flex;
@@ -465,8 +465,8 @@ a svg {
   width: 11px;
   height: 18px;
   border-radius: 8px;
-  background: #daf8aa;
-  box-shadow: 0 0 10px #b9ff8050;
+  background: #aac7f8;
+  box-shadow: 0 0 10px #8ab1f550;
   animation: blink 6s infinite;
 }
 .robot-smile {
@@ -474,7 +474,7 @@ a svg {
   top: 38px;
   width: 16px;
   height: 9px;
-  border: 2px solid #cdeaa1;
+  border: 2px solid #a1bcea;
   border-top: 0;
   border-radius: 0 0 12px 12px;
 }
@@ -509,7 +509,7 @@ a svg {
   top: 9px;
   height: 37px;
   width: 7px;
-  background: #e8eddc;
+  background: #dce2ed;
   border: 1px solid #fff;
   transform: rotate(-10deg);
   z-index: 3;
@@ -517,18 +517,18 @@ a svg {
 .robot-antenna i {
   width: 18px;
   height: 18px;
-  background: radial-gradient(at 30% 20%, #f1ffb3, #a9cc69);
+  background: radial-gradient(at 30% 20%, #b9d1f9, #698ecc);
   border-radius: 50%;
   position: absolute;
   top: -6px;
   left: -6px;
-  box-shadow: 0 0 0 4px #d4ed8d44;
+  box-shadow: 0 0 0 4px #8db1ed44;
 }
 .robot-ear {
   position: absolute;
   width: 20px;
   height: 39px;
-  background: linear-gradient(90deg, #a5bc8b, #e9f0d9);
+  background: linear-gradient(90deg, #8b9dbc, #d9e2f0);
   border-radius: 10px;
   top: 86px;
 }
@@ -546,7 +546,7 @@ a svg {
   top: 164px;
   width: 39px;
   height: 15px;
-  background: #9aaf8b;
+  background: #8b98af;
 }
 .robot-body {
   position: absolute;
@@ -554,17 +554,17 @@ a svg {
   top: 167px;
   width: 110px;
   height: 65px;
-  background: linear-gradient(120deg, #fff, #e6ecdf);
+  background: linear-gradient(120deg, #fff, #dfe4ec);
   border-radius: 24px 24px 36px 36px;
   z-index: 2;
-  box-shadow: inset 0 -5px 4px #b6c2a966;
+  box-shadow: inset 0 -5px 4px #a8b2c366;
   border: 1px solid white;
 }
 .robot-heart {
   position: absolute;
   left: 39px;
   top: 9px;
-  color: #6b8d46;
+  color: #46608d;
   font-size: 29px;
   line-height: 1;
 }
@@ -575,7 +575,7 @@ a svg {
   width: 5px;
   height: 3px;
   border-radius: 5px;
-  background: #a5bd7f;
+  background: #7f96bd;
 }
 .robot-arm {
   position: absolute;
@@ -583,8 +583,8 @@ a svg {
   width: 25px;
   height: 48px;
   border-radius: 18px;
-  background: linear-gradient(120deg, #fff, #d6dfcc);
-  border: 1px solid #f9fbf1;
+  background: linear-gradient(120deg, #fff, #ccd3df);
+  border: 1px solid #f1f5fb;
   z-index: 1;
 }
 .arm-left {
@@ -608,7 +608,7 @@ a svg {
   width: 34px;
   height: 23px;
   border-radius: 12px;
-  background: linear-gradient(#fdfef7, #ced9c1);
+  background: linear-gradient(#f7fafe, #c1cad9);
   z-index: 1;
 }
 .foot-left {
@@ -626,7 +626,7 @@ a svg {
   width: 36%;
   height: 15px;
   border-radius: 50%;
-  background: #4e69492a;
+  background: #4955692a;
   filter: blur(9px);
   animation: shadow-pulse 5s ease-in-out infinite;
 }
@@ -636,9 +636,9 @@ a svg {
   display: flex;
   align-items: center;
   gap: 9px;
-  background: #fcfdf7ed;
+  background: #f7f9fded;
   border: 1px solid #fff;
-  box-shadow: 0 7px 18px #2b483113;
+  box-shadow: 0 7px 18px #2b364813;
   border-radius: 10px;
   padding: 14px 16px;
   font-size: 9px;
@@ -648,7 +648,7 @@ a svg {
 .floating-chip i {
   width: 5px;
   height: 5px;
-  background: #a4c56d;
+  background: #6d8ec5;
   border-radius: 50%;
   margin-left: 6px;
 }
@@ -670,7 +670,7 @@ a svg {
   left: 25%;
   font-size: 8px;
   letter-spacing: 1.6px;
-  color: #6a785b;
+  color: #57657c;
 }
 .hero-bottom {
   display: flex;
@@ -689,7 +689,7 @@ a svg {
 .scroll-circle {
   width: 37px;
   height: 37px;
-  border: 1px solid #a7b2a0;
+  border: 1px solid #9aa5b8;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -714,7 +714,7 @@ a svg {
 .statement-strip {
   height: 66px;
   background: var(--ink);
-  color: #edf0d8;
+  color: #d8e1f0;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -761,7 +761,7 @@ a svg {
   font-size: 13px;
   line-height: 2.3;
   margin-top: 24px;
-  color: #697365;
+  color: #59677f;
   letter-spacing: 0.5px;
 }
 .about-section .section-heading {
@@ -786,14 +786,14 @@ a svg {
 .profile-card {
   padding: 25px 32px 29px;
   border-radius: 10px;
-  border: 1px solid #d7ddcf;
+  border: 1px solid #cfd4dd;
   overflow: hidden;
 }
 .profile-engineer {
-  background: #e7ecdf;
+  background: #dfe4ec;
 }
 .profile-designer {
-  background: #eeeee4;
+  background: #e4e8ee;
 }
 .profile-top {
   display: flex;
@@ -811,19 +811,19 @@ a svg {
 }
 .abstract-window {
   width: 224px;
-  background: #2b493a;
-  color: #dde8bd;
-  border: 4px solid #d8e0ca;
+  background: #2b3649;
+  color: #bdcde8;
+  border: 4px solid #cad2e0;
   border-radius: 9px;
   padding: 8px 12px;
   transform: rotate(-5deg);
-  box-shadow: 9px 10px 0 #c5d0b555;
+  box-shadow: 9px 10px 0 #b5bfd055;
 }
 .abstract-window > span {
   display: inline-block;
   width: 4px;
   height: 4px;
-  background: #8fae76;
+  background: #768bae;
   border-radius: 50%;
   margin-right: 3px;
   vertical-align: top;
@@ -839,7 +839,7 @@ a svg {
   position: absolute;
   right: 12%;
   bottom: 27px;
-  color: #67804b;
+  color: #4b5f80;
 }
 .profile-title {
   display: flex;
@@ -873,7 +873,7 @@ a svg {
 .profile-card > p {
   font-size: 12px;
   line-height: 2.1;
-  color: #697365;
+  color: #59677f;
 }
 .profile-tags {
   display: flex;
@@ -883,7 +883,7 @@ a svg {
 }
 .profile-tags span {
   font-size: 9px;
-  border: 1px solid #c4cfbc;
+  border: 1px solid #bbc3d0;
   padding: 6px 9px;
   border-radius: 4px;
 }
@@ -899,19 +899,19 @@ a svg {
   place-items: center;
   border-radius: 50%;
   z-index: 3;
-  border: 1px solid #d7ddcf;
+  border: 1px solid #cfd4dd;
   font-size: 27px;
   font-style: italic;
 }
 .design-square {
   width: 104px;
   height: 104px;
-  border: 1px solid #708664;
+  border: 1px solid #60708a;
   position: absolute;
   left: 24%;
   top: 32px;
   transform: rotate(-13deg);
-  background: #d4dfa855;
+  background: #a8bcdf55;
 }
 .design-square:before,
 .design-square:after {
@@ -919,7 +919,7 @@ a svg {
   position: absolute;
   width: 5px;
   height: 5px;
-  border: 1px solid #708664;
+  border: 1px solid #60708a;
   background: var(--paper);
   top: -3px;
   left: -3px;
@@ -946,14 +946,14 @@ a svg {
   top: 19px;
   font-size: 92px;
   line-height: 1;
-  color: #355845;
+  color: #354258;
   transform: rotate(12deg);
 }
 .design-pointer {
   position: absolute;
   left: 66%;
   bottom: 24px;
-  color: #355845;
+  color: #354258;
   transform: rotate(-8deg);
 }
 .design-pointer svg {
@@ -962,7 +962,7 @@ a svg {
 }
 .design-pointer span {
   display: block;
-  background: #355845;
+  background: #354258;
   color: white;
   padding: 4px 8px;
   font-size: 8px;
@@ -980,7 +980,7 @@ a svg {
 }
 .about-footnote > span:first-child {
   font-size: 29px;
-  color: #7d965a;
+  color: #5a7096;
 }
 .about-footnote p {
   font-size: 11px;
@@ -994,7 +994,7 @@ a svg {
   margin-left: auto;
 }
 .services-section {
-  background: #ecefe5;
+  background: #e5e9ef;
   max-width: none;
   padding-top: 96px;
   padding-bottom: 100px;
@@ -1017,7 +1017,7 @@ a svg {
 }
 .service-card {
   background: var(--paper);
-  border: 1px solid #dfe3d7;
+  border: 1px solid #d7dbe3;
   padding: 25px 20px 20px;
   border-radius: 7px;
   transition:
@@ -1025,7 +1025,7 @@ a svg {
     transform 0.3s;
 }
 .service-card:hover {
-  background: #f9faed;
+  background: #edf2fa;
   transform: translateY(-5px);
 }
 .service-top {
@@ -1036,10 +1036,10 @@ a svg {
 }
 .service-top > span {
   font-size: 10px;
-  color: #71816b;
+  color: #61708b;
 }
 .service-top > svg {
-  color: #53724b;
+  color: #4b5972;
 }
 .service-en {
   font-size: 10px;
@@ -1056,7 +1056,7 @@ a svg {
 }
 .service-card > p {
   font-size: 11px;
-  color: #6c7668;
+  color: #5b6a83;
   line-height: 2;
   min-height: 110px;
   margin-top: 12px;
@@ -1103,7 +1103,7 @@ a svg {
 }
 .skills-label > p {
   font-size: 10px;
-  color: #728168;
+  color: #606f89;
 }
 .marquee {
   overflow: hidden;
@@ -1143,11 +1143,11 @@ a svg {
   font-size: 20px;
   margin-left: 20px;
   font-weight: 400;
-  color: #a2b18c;
+  color: #8c9ab1;
 }
 .toolbox-note {
   font-size: 9px;
-  color: #7a8573;
+  color: #667692;
   margin-top: 21px;
   text-align: center;
 }
@@ -1157,7 +1157,7 @@ a svg {
 .outline-pill {
   display: inline-block;
   font-size: 8px;
-  border: 1px solid #b5c1a9;
+  border: 1px solid #a8b2c2;
   border-radius: 20px;
   padding: 6px 10px;
   letter-spacing: 1px;
@@ -1165,7 +1165,7 @@ a svg {
 .works-note p {
   font-size: 10px;
   line-height: 2;
-  color: #78816f;
+  color: #62728e;
   margin-top: 13px;
 }
 .works-grid {
@@ -1193,10 +1193,10 @@ a svg {
   transform: translateY(-5px);
 }
 .work-brand .work-preview {
-  background: #d9d8c8;
+  background: #c8ced9;
 }
 .work-dashboard .work-preview {
-  background: #d8e3dc;
+  background: #d7dce4;
 }
 .work-mobile .work-preview {
   background: #e9ddcd;
@@ -1206,7 +1206,7 @@ a svg {
   height: 195px;
   background: #fbf8ee;
   transform: rotate(-5deg);
-  box-shadow: 2px 12px 20px #263b2825;
+  box-shadow: 2px 12px 20px #262e3b25;
 }
 .mock-nav {
   display: flex;
@@ -1225,7 +1225,7 @@ a svg {
 }
 .brand-visual {
   height: 128px;
-  background: #cac8b4;
+  background: #b3bccb;
   position: relative;
   margin: 0 8px;
   overflow: hidden;
@@ -1239,7 +1239,7 @@ a svg {
   font-size: 25px;
   line-height: 1.15;
   letter-spacing: -1px;
-  color: #fffef3;
+  color: #f4f8fe;
 }
 .brand-visual > span em {
   font-size: 22px;
@@ -1248,7 +1248,7 @@ a svg {
 .vase {
   position: absolute;
   background: linear-gradient(90deg, #a9967a, #d7c7ab 45%, #bcaa8d 85%);
-  box-shadow: 9px 10px 10px #4e544433;
+  box-shadow: 9px 10px 10px #3e485a33;
 }
 .vase-one {
   width: 65px;
@@ -1275,7 +1275,7 @@ a svg {
   right: 9px;
   bottom: -4px;
   border-radius: 15px 15px 40% 40%;
-  background: linear-gradient(90deg, #79816a, #a5ae8d, #778065);
+  background: linear-gradient(90deg, #60708b, #8c99af, #5e6d87);
 }
 .mock-bottom {
   display: flex;
@@ -1292,7 +1292,7 @@ a svg {
   height: 34px;
   display: grid;
   place-items: center;
-  background: #f9faef;
+  background: #eff3fa;
   border-radius: 50%;
   box-shadow: 0 1px 4px #0001;
   transition:
@@ -1309,7 +1309,7 @@ a svg {
   font-size: 7px;
   letter-spacing: 0.8px;
   margin: 20px 0 11px;
-  color: #6c7966;
+  color: #5b6a84;
 }
 .work-card h3 {
   font-size: 14px;
@@ -1319,7 +1319,7 @@ a svg {
 .work-tag {
   display: inline-block;
   font-size: 9px;
-  color: #7b846f;
+  color: #64748f;
   margin-top: 8px;
 }
 .dashboard-mock {
@@ -1327,14 +1327,14 @@ a svg {
   transform: rotate(4deg);
   width: 88%;
   height: 195px;
-  background: #fcfdf9;
-  box-shadow: 2px 12px 20px #263b2820;
+  background: #f9fafd;
+  box-shadow: 2px 12px 20px #262e3b20;
   border-radius: 4px;
   overflow: hidden;
 }
 .dashboard-mock aside {
   width: 32px;
-  background: #2a493d;
+  background: #2a3549;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -1345,13 +1345,13 @@ a svg {
 .dashboard-mock aside b {
   font-size: 21px;
   line-height: 1;
-  color: #d3e98c;
+  color: #8caee9;
 }
 .dashboard-mock aside i {
   width: 9px;
   height: 6px;
   border-radius: 1px;
-  background: #829a87;
+  background: #7a89a2;
 }
 .dash-main {
   padding: 10px;
@@ -1365,7 +1365,7 @@ a svg {
   margin-bottom: 9px;
 }
 .dash-nav span {
-  color: #aac17b;
+  color: #7b95c1;
 }
 .dash-main > small {
   font-size: 6px;
@@ -1376,7 +1376,7 @@ a svg {
   margin-top: 9px;
 }
 .dash-stats > div {
-  background: #edf2e5;
+  background: #e5eaf2;
   padding: 7px;
   flex: 1;
   font-size: 5px;
@@ -1390,17 +1390,17 @@ a svg {
 }
 .dash-stats small {
   font-size: 5px;
-  color: #739755;
+  color: #556d97;
 }
 .dash-chart {
   padding: 10px 8px 4px;
-  border: 1px solid #edf0e7;
+  border: 1px solid #e7eaf0;
   margin-top: 7px;
   border-radius: 3px;
 }
 .dash-chart > span {
   font-size: 4px;
-  color: #89947e;
+  color: #74839e;
 }
 .bars {
   height: 42px;
@@ -1412,16 +1412,16 @@ a svg {
     to top,
     transparent,
     transparent 12px,
-    #e8eddc 13px
+    #dce2ed 13px
   );
 }
 .bars i {
-  background: #b5cb87;
+  background: #87a0cb;
   flex: 1;
   border-radius: 2px 2px 0 0;
 }
 .bars i:nth-child(3n) {
-  background: #5f8061;
+  background: #5b6a84;
 }
 .dash-task {
   display: flex;
@@ -1433,11 +1433,11 @@ a svg {
 .dash-task > i {
   width: 5px;
   height: 5px;
-  border: 1px solid #b9c2b0;
+  border: 1px solid #acb6c6;
 }
 .dash-task > span {
   margin-left: auto;
-  color: #859659;
+  color: #597096;
 }
 .mobile-mock {
   position: relative;
@@ -1453,7 +1453,7 @@ a svg {
   height: 245px;
   border: 4px solid #fffcf4;
   border-radius: 21px;
-  background: #f8f5e8;
+  background: #e8eef8;
   transform: rotate(-9deg);
   box-shadow: 7px 10px 17px #5f452a24;
   z-index: 2;
@@ -1465,7 +1465,7 @@ a svg {
   width: 37px;
   height: 8px;
   border-radius: 6px;
-  background: #253e34;
+  background: #252e3e;
 }
 .phone-time {
   font-size: 5px;
@@ -1498,7 +1498,7 @@ a svg {
   left: 12px;
   top: 10px;
   font-size: 19px;
-  color: #f8f0c2;
+  color: #c2d6f8;
   line-height: 1;
 }
 .phone-art > div {
@@ -1506,7 +1506,7 @@ a svg {
   width: 95px;
   height: 60px;
   border-radius: 50%;
-  background: #79956a;
+  background: #697a96;
   bottom: -30px;
   right: -15px;
   transform: rotate(-30deg);
@@ -1515,7 +1515,7 @@ a svg {
   position: absolute;
   width: 110px;
   height: 57px;
-  background: #acb389;
+  background: #8999b3;
   border-radius: 50%;
   bottom: -35px;
   left: -35px;
@@ -1535,7 +1535,7 @@ a svg {
 .phone-tabs {
   font-size: 10px;
   margin-top: 12px;
-  color: #81906c;
+  color: #677895;
   white-space: nowrap;
 }
 .mobile-flower {
@@ -1559,7 +1559,7 @@ a svg {
   display: grid;
   grid-template-columns: 1fr 1.05fr;
   gap: 80px;
-  background: #e9ede1;
+  background: #e1e5ed;
   max-width: none;
   padding-top: 95px;
   padding-bottom: 95px;
@@ -1574,20 +1574,20 @@ a svg {
   display: flex;
   gap: 22px;
   padding: 26px 0;
-  border-top: 1px solid #c7d2bd;
+  border-top: 1px solid #bdc5d2;
 }
 .process-row:last-child {
-  border-bottom: 1px solid #c7d2bd;
+  border-bottom: 1px solid #bdc5d2;
 }
 .process-number {
   font-size: 11px;
-  color: #83926e;
+  color: #697a97;
   padding-top: 2px;
 }
 .process-en {
   font-size: 8px;
   letter-spacing: 1px;
-  color: #718460;
+  color: #5d6d87;
   display: block;
   margin-bottom: 10px;
 }
@@ -1597,7 +1597,7 @@ a svg {
 }
 .process-row p {
   font-size: 11px;
-  color: #6e7b64;
+  color: #5b6a84;
   line-height: 2;
   margin-top: 12px;
 }
@@ -1646,7 +1646,7 @@ a svg {
 .faq-item p {
   font-size: 11px;
   line-height: 2.1;
-  color: #707c66;
+  color: #5d6c85;
   padding: 0 25px 23px 34px;
 }
 .contact-section {
@@ -1682,7 +1682,7 @@ a svg {
   top: -85px;
   font-size: 560px;
   line-height: 1;
-  color: #c6e375;
+  color: #759ee3;
   transform: rotate(15deg);
   pointer-events: none;
 }
@@ -1707,7 +1707,7 @@ a svg {
   top: 10px;
   right: 5px;
   padding: 14px 18px;
-  background: #f7f9eb;
+  background: #ebf0f9;
   border-radius: 15px 15px 15px 3px;
   transform: rotate(5deg);
 }
@@ -1719,7 +1719,7 @@ a svg {
 .contact-secondary {
   display: block;
   background: none;
-  border-bottom: 1px solid #7e985d;
+  border-bottom: 1px solid #5d7398;
   font-size: 10px;
   padding: 5px 0;
   margin-top: 20px;
@@ -1755,7 +1755,7 @@ a svg {
   padding-top: 19px;
   font-size: 7px;
   letter-spacing: 1px;
-  color: #849078;
+  color: #6e7e9a;
 }
 .custom-cursor {
   position: fixed;
@@ -1772,7 +1772,7 @@ a svg {
   top: -12px;
   width: 24px;
   height: 24px;
-  border: 1px solid #617b4766;
+  border: 1px solid #475a7b66;
   border-radius: 50%;
   transition:
     width 0.3s,
@@ -1798,7 +1798,7 @@ a svg {
   height: 69px;
   left: -34px;
   top: -34px;
-  background: #294d3de6;
+  background: #29364de6;
   border-color: transparent;
 }
 .custom-cursor[data-active="true"] span {
@@ -1814,7 +1814,7 @@ a svg {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: #132b22a6;
+  background: #131c2ba6;
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
@@ -1836,7 +1836,7 @@ a svg {
   position: absolute;
   right: 15px;
   top: 15px;
-  background: #e8ecde;
+  background: #dee3ec;
   display: grid;
   place-items: center;
   width: 32px;
@@ -1855,10 +1855,10 @@ a svg {
 .modal > p {
   font-size: 12px;
   line-height: 2;
-  color: #718069;
+  color: #606f89;
 }
 .concept-detail {
-  background: #e4e9d7;
+  background: #d7dee9;
   padding: 40px 25px;
   margin: 25px 0;
   border-radius: 6px;
@@ -1875,7 +1875,7 @@ a svg {
 .modal .modal-note {
   font-size: 10px;
   line-height: 1.9;
-  color: #77846c;
+  color: #62728e;
   margin-top: 18px;
 }
 .text-button {
@@ -1897,8 +1897,8 @@ a svg {
 .modal select,
 .modal textarea {
   width: 100%;
-  border: 1px solid #c8d0bc;
-  background: #fffef7;
+  border: 1px solid #bcc3d0;
+  background: #f8fafe;
   color: var(--ink);
   padding: 13px;
   border-radius: 5px;
@@ -2219,7 +2219,7 @@ a svg {
   }
   .mobile-nav a span {
     font-size: 10px;
-    color: #8e9d7a;
+    color: #7786a0;
   }
   .mobile-nav a svg {
     margin-left: auto;
@@ -2251,7 +2251,7 @@ a svg {
   .status-dot {
     width: 4px;
     height: 4px;
-    box-shadow: 0 0 0 3px #dfe6cf;
+    box-shadow: 0 0 0 3px #cfd8e6;
   }
   .hero-content {
     display: flex;

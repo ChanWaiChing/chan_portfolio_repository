@@ -22,7 +22,7 @@ export default function HeroScene() {
       });
     } catch {
       return;
-    } // The CSS orb remains as a WebGL fallback.
+    } // The photographic background remains as a WebGL fallback.
     renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -40,9 +40,9 @@ export default function HeroScene() {
       void main(){vec2 p=vUv-vec2(.74,.52);p.x*=uAspect;p-=uMouse*.035;
       float a=atan(p.y,p.x);float r=length(p);float wave=sin(a*3.+uTime*.35+uScroll*5.)*.025+cos(a*5.-uTime*.2)*.012;
       float radius=.29+wave+uScroll*2.2;float shape=1.-smoothstep(radius-.002,radius+.004,r);
-      vec3 lime=vec3(.82,.94,.43);vec3 mint=vec3(.64,.80,.62);float shade=clamp((p.x+p.y)*1.15+.45,0.,1.);
+      vec3 lime=vec3(.88,.95,1.);vec3 mint=vec3(.58,.77,.98);float shade=clamp((p.x+p.y)*1.15+.45,0.,1.);
       vec3 color=mix(lime,mint,shade*.65);float bands=sin((r+sin(a*2.+uTime*.2)*.025)*100.-uScroll*12.);color+=bands*.008;
-      gl_FragColor=vec4(color,shape*.88);}`,
+      gl_FragColor=vec4(color,shape*smoothstep(.02,.8,uScroll));}`,
     });
     const geometry = new THREE.PlaneGeometry(2, 2);
     scene.add(new THREE.Mesh(geometry, material));

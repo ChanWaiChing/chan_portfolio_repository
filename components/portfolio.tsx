@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -146,7 +147,7 @@ function AnimatedLink({
     >
       <span>{children}</span>
       <ArrowUpRight size={18} />
-      {tag && <span className="button-tag">{tag}</span>}
+      {tag && <span className="button-tag" aria-hidden="true">{tag}</span>}
     </a>
   );
 }
@@ -292,20 +293,58 @@ export default function Portfolio() {
       </a>
       <header className="site-header">
         <a href="#" className="wordmark" aria-label="大穂兄弟 BROTHERS トップ">
-          brothers<span className="logo-dot">✳</span>
-          <span className="brand-jp">大穂兄弟</span>
+          <svg className="brand-symbol" viewBox="0 0 80 30" aria-hidden="true">
+            <path
+              d="M5 23C15 23 17 5 27 5S38 24 47 24 58 8 67 8"
+              fill="none"
+              stroke="#1767d4"
+              strokeWidth="5"
+              strokeLinecap="round"
+            />
+            <path
+              d="M22 24C32 24 34 7 44 7S56 24 65 24 73 15 76 12"
+              fill="none"
+              stroke="#f27725"
+              strokeWidth="4"
+              strokeLinecap="round"
+            />
+          </svg>
+          <span className="brand-name">
+            大穂兄弟<span>OHO BROTHERS</span>
+          </span>
         </a>
+        <div className="header-actions">
+          <a href="#services" className="header-pill pill-green">
+            <span className="header-mini-bot">
+              <Robot small />
+            </span>
+            <span>
+              デザインから開発まで<small>ふたりの専門性で、一貫して対応</small>
+            </span>
+            <ChevronRight size={17} />
+          </a>
+          <a href="#contact" className="header-pill pill-orange">
+            <span>
+              プロジェクトのご相談<small>アイデアの段階から、お気軽に</small>
+            </span>
+            <ArrowUpRight size={18} />
+          </a>
+          <a href="#works" className="header-pill pill-blue">
+            <span>
+              制作イメージを見る<small>Web・システム・モバイル</small>
+            </span>
+            <ChevronRight size={17} />
+          </a>
+        </div>
         <nav className="desktop-nav" aria-label="メインナビゲーション">
           {nav.map(([label, id]) => (
             <a href={`#${id}`} key={id}>
               {label}
             </a>
           ))}
+          <a href="#faq">よくあるご質問</a>
+          <a href="#contact">お問い合わせ</a>
         </nav>
-        <a href="#contact" className="header-contact">
-          まずは相談する
-          <ArrowUpRight size={15} />
-        </a>
         <button
           className="menu-toggle"
           aria-label={menu ? "メニューを閉じる" : "メニューを開く"}
@@ -337,6 +376,16 @@ export default function Portfolio() {
       <main id="main">
         <div className="hero-track" ref={heroTrack}>
           <section className="hero" aria-labelledby="hero-title">
+            <div className="hero-photograph">
+              <Image
+                src="/images/studio-hero.png"
+                alt="明るいスタジオと、青とオレンジの小さなロボット。クリエイティブなものづくりを表現したイメージ。"
+                fill
+                sizes="100vw"
+                preload
+                quality={90}
+              />
+            </div>
             <div className="hero-shader">
               <HeroScene />
             </div>
@@ -349,8 +398,10 @@ export default function Portfolio() {
             <div className="hero-content">
               <div className="hero-copy">
                 <div className="hero-kicker">
-                  <span className="little-star">✳</span>{" "}
-                  いいチームで、いいものを。
+                  <span className="little-star">
+                    <Sparkles size={16} />
+                  </span>{" "}
+                  ITコンサル × フルスタック × デザイン
                 </div>
                 <h1 id="hero-title">
                   兄弟の力で、
@@ -358,10 +409,14 @@ export default function Portfolio() {
                   アイデアを
                   <br />
                   <span className="hero-emphasis">カタチに。</span>
-                  <span className="headline-star" aria-hidden="true">
-                    ✳
-                  </span>
                 </h1>
+                <p className="hero-subtitle">
+                  <strong>
+                    デザインも、開発も。
+                    <br />
+                    その先の運用まで。
+                  </strong>
+                </p>
                 <p>
                   考える兄と、描く弟。
                   <br />
@@ -377,33 +432,31 @@ export default function Portfolio() {
                   私たちに相談する
                 </AnimatedLink>
               </div>
-              <div className="hero-art" ref={spotlight}>
-                <div className="orb-fallback" />
-                <div className="orbit orbit-one" />
-                <div className="orbit orbit-two" />
-                <div className="art-star star-one">✦</div>
-                <div className="art-star star-two">✳</div>
-                <div className="art-star star-three">+</div>
-                <div className="bot-bubble">
-                  ひらめきを、いっしょに。<span>HELLO, WE ARE BROTHERS!</span>
-                </div>
-                <div className="hero-bot">
-                  <Robot waving />
-                </div>
-                <div className="floating-chip chip-code">
-                  <Code2 size={20} />
-                  <span>LOGIC & CODE</span>
+              <div className="hero-art" ref={spotlight} aria-hidden="true">
+                <div className="hero-art-caption">
+                  <span>HELLO, WE’RE YOUR CREATIVE PARTNERS.</span>
                   <i />
                 </div>
-                <div className="floating-chip chip-design">
-                  <PenTool size={17} />
-                  <span>DESIGN & FEELING</span>
-                  <i />
-                </div>
-                <div className="bot-shadow" />
-                <span className="art-caption">
-                  YOUR IDEA. OUR NEXT ADVENTURE.
-                </span>
+              </div>
+            </div>
+            <div className="hero-proof">
+              <div>
+                <span>兄 / ENGINEERING</span>
+                <strong>
+                  11<small>年の実務経験</small>
+                </strong>
+              </div>
+              <div>
+                <span>弟 / DESIGN</span>
+                <strong>
+                  3<small>年の実務経験</small>
+                </strong>
+              </div>
+              <div>
+                <span>ONE TEAM</span>
+                <strong className="proof-team">
+                  企画から運用まで<small>窓口ひとつで、一貫して伴走</small>
+                </strong>
               </div>
             </div>
             <div className="hero-next" inert aria-hidden="true">
@@ -442,14 +495,134 @@ export default function Portfolio() {
             </div>
           </section>
         </div>
-        <div className="statement-strip">
-          <span>GOOD IDEAS.</span>
-          <span className="strip-star">✳</span>
-          <span>GREAT TEAMWORK.</span>
-          <span className="strip-star">✳</span>
-          <span>BETTER EXPERIENCES.</span>
-          <span className="strip-star">✳</span>
+        <div className="hero-cta-band">
+          <AnimatedLink
+            href="#contact"
+            dark
+            tag="まだアイデア段階でも、大丈夫！"
+          >
+            メールでプロジェクトを相談する
+          </AnimatedLink>
+          <AnimatedLink href="#services" tag="必要なところから、柔軟に対応">
+            サービス・対応できること
+          </AnimatedLink>
         </div>
+        <section
+          className="concerns-section section"
+          aria-labelledby="concerns-title"
+        >
+          <div className="concerns-heading reveal">
+            <span className="eyebrow">YOUR CHALLENGES</span>
+            <h2 id="concerns-title">こんなお悩みはありませんか？</h2>
+            <p>その「どうしよう」を、私たちと一緒にほどいていきましょう。</p>
+          </div>
+          <div className="concern-grid">
+            {[
+              [
+                "アイデアはある。",
+                "でも、何から始めよう？",
+                "はじめてご依頼する方",
+                "要件整理や技術選定から相談して、実現への道筋をつくりたい。",
+                "planning",
+              ],
+              [
+                "デザインも開発も、",
+                "まとめて任せたい。",
+                "制作パートナーをお探しの方",
+                "別々の依頼先とのやりとりを減らし、一貫した品質でつくりたい。",
+                "team",
+              ],
+              [
+                "今の仕組みを、",
+                "もっと使いやすく。",
+                "改善・効率化を目指す方",
+                "サイトや業務システム、AI活用で、日々の仕事をもっと軽やかにしたい。",
+                "improve",
+              ],
+            ].map(([first, second, tag, text, type], i) => (
+              <article
+                className={`concern-card reveal concern-${type}`}
+                key={type}
+              >
+                <div
+                  className={`concern-photo concern-photo-${i}`}
+                  role="img"
+                  aria-label={
+                    [
+                      "オフィスでアイデアを考える人のイメージ",
+                      "制作方針を話し合うチームのイメージ",
+                      "仕事の改善を検討する人のイメージ",
+                    ][i]
+                  }
+                >
+                  <h3>
+                    {first}
+                    <br />
+                    <em>{second}</em>
+                  </h3>
+                </div>
+                <div className="concern-body">
+                  <span>{tag}</span>
+                  <p>{text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="solution-arrow" aria-hidden="true" />
+          <div className="solution-banner reveal">
+            <Image
+              src="/images/teamwork.png"
+              alt="青とオレンジのパズルをつなぐ、ふたりのロボット"
+              fill
+              sizes="(max-width: 760px) 100vw, 1000px"
+            />
+            <div>
+              <span>DESIGN × TECHNOLOGY</span>
+              <h2>
+                大穂兄弟なら、
+                <br />
+                <em>一緒にカタチにできます。</em>
+              </h2>
+            </div>
+          </div>
+          <p className="solution-intro">
+            兄が要件整理と開発、弟がデザインを担当。
+            <br className="mobile-only" />
+            想いも仕様も揃えて、ゴールまで伴走します。
+          </p>
+          <div className="solution-benefits">
+            {[
+              [
+                "01",
+                "窓口はひとつ。",
+                "やりとりは、スムーズに。",
+                "企画・デザイン・開発をまとめて相談",
+              ],
+              [
+                "02",
+                "得意をつないで、",
+                "使いやすい体験に。",
+                "美しさと、運用しやすさを両立",
+              ],
+              [
+                "03",
+                "つくったその先も、",
+                "長く使えるものづくり。",
+                "保守性・拡張性を大切に設計",
+              ],
+            ].map(([n, title, line, sub]) => (
+              <div key={n}>
+                <span>{n}</span>
+                <h3>
+                  {title}
+                  <br />
+                  {line}
+                </h3>
+                <p>{sub}</p>
+              </div>
+            ))}
+          </div>
+        </section>
         <section id="about" className="section about-section">
           <div className="section-heading reveal">
             <Label>01 — ABOUT US</Label>
@@ -825,7 +998,7 @@ export default function Portfolio() {
             ))}
           </div>
         </section>
-        <section className="section faq-section">
+        <section id="faq" className="section faq-section">
           <div className="section-heading reveal">
             <Label>05 — FAQ</Label>
             <h2>
@@ -860,7 +1033,12 @@ export default function Portfolio() {
         </section>
         <section id="contact" className="contact-section">
           <div className="contact-decoration" aria-hidden="true">
-            ✳
+            <Image
+              src="/images/teamwork.png"
+              alt=""
+              fill
+              sizes="(max-width:760px) 100vw, 700px"
+            />
           </div>
           <div className="contact-content reveal">
             <Label>LET’S MAKE SOMETHING GREAT</Label>
@@ -912,17 +1090,14 @@ export default function Portfolio() {
               </span>
             )}
           </div>
-          <div className="contact-bot">
-            <div className="contact-bubble">いっしょに、ワクワクしよう。</div>
-            <Robot small waving />
-          </div>
         </section>
       </main>
       <footer className="footer">
         <div className="footer-top">
           <a href="#" className="wordmark">
-            brothers<span className="logo-dot">✳</span>
-            <span className="brand-jp">大穂兄弟</span>
+            <span className="brand-name">
+              大穂兄弟<span>OHO BROTHERS</span>
+            </span>
           </a>
           <p>兄弟の力で、アイデアをカタチに。</p>
           <a href="#" className="back-top" aria-label="ページの先頭へ">
@@ -978,14 +1153,12 @@ export default function Portfolio() {
                   onClick={() => {
                     setWork(null);
                     setContact(false);
-                    document
-                      .querySelector("#contact")
-                      ?.scrollIntoView({
-                        behavior: matchMedia("(prefers-reduced-motion: reduce)")
-                          .matches
-                          ? "instant"
-                          : "smooth",
-                      });
+                    document.querySelector("#contact")?.scrollIntoView({
+                      behavior: matchMedia("(prefers-reduced-motion: reduce)")
+                        .matches
+                        ? "instant"
+                        : "smooth",
+                    });
                   }}
                 >
                   このイメージについて相談する
