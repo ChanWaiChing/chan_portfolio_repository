@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
 test("profile, navigation, scroll effect and page health", async ({
   page,
   isMobile,
@@ -53,14 +54,16 @@ test("profile, navigation, scroll effect and page health", async ({
   ).toBeGreaterThan(300);
   expect(errors).toEqual([]);
 });
-test("concept details, FAQ, consultation draft and keyboard dismissal", async ({
+test("portfolio details, FAQ, consultation draft and keyboard dismissal", async ({
   page,
 }) => {
   await page.goto("/");
   await page
-    .getByRole("button", { name: "想いが伝わる、ブランドサイト。 詳細を見る" })
+    .getByRole("button", {
+      name: "Webマーケティング事業のサービス紹介サイト 詳細を見る",
+    })
     .click();
-  await expect(page.getByRole("dialog")).toContainText("自主制作コンセプト");
+  await expect(page.getByRole("dialog")).toContainText("LANCERS PORTFOLIO");
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.getByRole("button", { name: /費用や制作期間/ }).click();
@@ -100,28 +103,35 @@ test("reduced motion keeps content accessible and disables effects", async ({
   ).toBe(true);
 });
 
-test("category filters preserve project identity and show matching concepts", async ({
+test("category filters preserve the uploaded project information", async ({
   page,
 }) => {
   await page.goto("/");
   const controls = page.getByRole("group", {
     name: "ポートフォリオのカテゴリ",
   });
-  await controls.getByRole("button", { name: /Webシステム/ }).click();
-  await expect(page.locator(".work-card")).toHaveCount(1);
-  await expect(page.locator(".work-card")).toContainText(
-    "毎日の業務を、もっとシンプルに。",
-  );
-  await page.locator(".work-card").click();
-  await expect(page.getByRole("dialog")).toContainText("ダッシュボード");
-  await page.keyboard.press("Escape");
-  await controls.getByRole("button", { name: /アプリ/ }).click();
-  await expect(page.locator(".work-card")).toHaveCount(1);
-  await expect(page.locator(".work-card")).toContainText(
-    "手のひらから、心地よい体験を。",
-  );
-  await controls.getByRole("button", { name: /すべて/ }).click();
+  await expect(page.locator(".work-card")).toHaveCount(15);
+  await controls.getByRole("button", { name: /採用/ }).click();
   await expect(page.locator(".work-card")).toHaveCount(3);
+  await page
+    .getByRole("button", {
+      name: "企業理念と社員の声を伝える新卒採用サイト 詳細を見る",
+    })
+    .click();
+  await expect(page.getByRole("dialog")).toContainText(
+    "企業理念・社員の声・選考情報",
+  );
+  await page.keyboard.press("Escape");
+  await controls.getByRole("button", { name: /医療・薬局/ }).click();
+  await expect(page.locator(".work-card")).toHaveCount(2);
+  await expect(page.locator(".works-grid")).toContainText(
+    "健康相談・オンライン服薬指導",
+  );
+  await controls.getByRole("button", { name: /ブランド・LP/ }).click();
+  await expect(page.locator(".work-card")).toHaveCount(5);
+  await expect(page.locator(".works-grid")).toContainText("タニカのあまざけ");
+  await controls.getByRole("button", { name: /すべて/ }).click();
+  await expect(page.locator(".work-card")).toHaveCount(15);
 });
 
 test("contact channels use supplied identifiers and support copying", async ({
@@ -176,6 +186,44 @@ test("desktop portfolio hover reveals the project label", async ({
   const card = page.locator(".work-card").first();
   await card.hover();
   await expect(card.locator(".project-hover-label")).toBeVisible();
-  await expect(page.locator(".custom-cursor")).toHaveAttribute("data-active", "true");
+  await expect(page.locator(".custom-cursor")).toHaveAttribute(
+    "data-active",
+    "true",
+  );
   await expect(page.locator(".custom-cursor")).toHaveCSS("opacity", "1");
+});
+
+test("each main section includes a human and robot illustration", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const sections = page.locator("main section:not(.hero)");
+  expect(await sections.count()).toBeGreaterThan(7);
+  for (const section of await sections.all())
+    await expect(section.locator("[data-human-robot=true] img")).toHaveCount(1);
+  await expect(page.locator(".hero-photograph > img")).toHaveAttribute(
+    "src",
+    /young-brothers/,
+  );
+});
+
+test("text contrast passes automated accessibility checks", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await page.evaluate(() => document.fonts.ready);
+  const result = await new AxeBuilder({ page })
+    .withRules(["color-contrast"])
+    .analyze();
+  expect(
+    result.violations.map((v) => ({
+      id: v.id,
+      nodes: v.nodes.map((n) => ({
+        target: n.target,
+        summary: n.failureSummary,
+      })),
+    })),
+  ).toEqual([]);
 });

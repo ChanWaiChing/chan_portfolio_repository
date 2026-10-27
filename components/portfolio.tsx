@@ -23,6 +23,9 @@ import { site } from "@/lib/site";
 import { HeroMedia } from "./hero-media";
 import { ContactChannels } from "./contact-channels";
 import { usePageMotion, useGalleryMotion } from "./motion-system";
+import { projects as works, projectCategories } from "@/lib/projects";
+import { ProjectCover } from "./project-cover";
+import { SectionCompanions } from "./section-companions";
 const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false });
 const LivingMascots = dynamic(() => import("./living-mascots"), { ssr: false });
 const nav = [
@@ -75,35 +78,6 @@ const services = [
     text: "生成AIの活用から、公開後の運用・改善まで。日々の仕事をもっと軽やかにする、新しい選択肢をご提案します。",
     tags: ["AI・生成AI", "運用保守", "継続改善"],
     icon: Sparkles,
-  },
-];
-const works = [
-  {
-    category: "WEB DESIGN",
-    title: "想いが伝わる、ブランドサイト。",
-    desc: "余白とタイポグラフィで世界観を表現する、コーポレートサイトの制作イメージです。",
-    type: "brand",
-    tag: "Webサイト / LP",
-    name: "mori.",
-    sub: "暮らしに、ひと呼吸の余白を。",
-  },
-  {
-    category: "WEB APPLICATION",
-    title: "毎日の業務を、もっとシンプルに。",
-    desc: "情報を一画面にまとめ、次にすべきことが見える業務ダッシュボードの制作イメージです。",
-    type: "dashboard",
-    tag: "業務システム",
-    name: "flow",
-    sub: "おかえりなさい。今日も、いい一日を。",
-  },
-  {
-    category: "UI / UX DESIGN",
-    title: "手のひらから、心地よい体験を。",
-    desc: "迷わず使える導線と、親しみやすいインターフェースを持つモバイルアプリの制作イメージです。",
-    type: "mobile",
-    tag: "モバイルアプリ",
-    name: "日々、",
-    sub: "小さないいこと、見つけよう。",
   },
 ];
 const faqs = [
@@ -285,7 +259,7 @@ export default function Portfolio() {
           </a>
           <a href="#works" className="header-pill pill-blue">
             <span>
-              制作イメージを見る<small>Web・システム・モバイル</small>
+              ポートフォリオを見る<small>Web・システム・モバイル</small>
             </span>
             <ChevronRight size={17} />
           </a>
@@ -534,8 +508,8 @@ export default function Portfolio() {
           <div className="solution-arrow" aria-hidden="true" />
           <div className="solution-banner reveal">
             <Image
-              src="/images/teamwork.png"
-              alt="青とオレンジのパズルをつなぐ、ふたりのロボット"
+              src="/images/human-robot-team.png"
+              alt="若いクリエイターと、色とりどりの髪を持つロボット"
               fill
               sizes="(max-width: 760px) 100vw, 1000px"
             />
@@ -585,6 +559,7 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
+          <SectionCompanions message="アイデアの整理から、ふたりで伴走します。" />
         </section>
         <section id="about" className="section about-section">
           <div className="section-heading reveal">
@@ -689,6 +664,7 @@ export default function Portfolio() {
               ONE GREAT TEAM.
             </span>
           </div>
+          <SectionCompanions message="ちがう得意が、ひとつのチームになる。" />
         </section>
         <section id="services" className="section services-section">
           <div className="section-heading horizontal reveal">
@@ -734,6 +710,7 @@ export default function Portfolio() {
               </article>
             ))}
           </div>
+          <SectionCompanions message="デザインと開発を、ひとつの窓口で。" />
         </section>
         <section className="skills-section" aria-label="対応技術とツール">
           <div className="skills-label">
@@ -768,23 +745,24 @@ export default function Portfolio() {
           <p className="toolbox-note">
             ツールや技術は、目的に合わせて選定します。
           </p>
+          <SectionCompanions message="技術は、想いを形にするために。" />
         </section>
         <section id="works" className="section works-section">
           <div className="section-heading horizontal reveal">
             <div>
-              <Label>03 — POSSIBILITIES</Label>
+              <Label>03 — SELECTED WORKS</Label>
               <h2>
-                つくれるものは、
+                さまざまな事業に、
                 <br />
-                ひとつじゃない。
+                それぞれの最適解を。
               </h2>
             </div>
             <div className="works-note">
-              <span className="outline-pill">PORTFOLIO / DESIGN CONCEPTS</span>
+              <span className="outline-pill">LANCERS PORTFOLIO</span>
               <p>
-                ご相談のきっかけになる、制作イメージ。
+                Web制作・デザインのポートフォリオ。
                 <br />
-                ※掲載内容は自主制作のコンセプトです。
+                企業・採用・医療・ブランドの分野からご覧いただけます。
               </p>
             </div>
           </div>
@@ -793,12 +771,7 @@ export default function Portfolio() {
             role="group"
             aria-label="ポートフォリオのカテゴリ"
           >
-            {[
-              ["ALL", "すべて"],
-              ["WEB DESIGN", "Webサイト / LP"],
-              ["WEB APPLICATION", "Webシステム"],
-              ["UI / UX DESIGN", "アプリ / UI・UX"],
-            ].map(([value, label]) => (
+            {projectCategories.map(([value, label]) => (
               <button
                 key={value}
                 aria-pressed={category === value}
@@ -817,7 +790,7 @@ export default function Portfolio() {
             {category === "ALL"
               ? works.length
               : works.filter((w) => w.category === category).length}
-            件の制作イメージ
+            件のポートフォリオ
           </p>
           <div className="works-grid" key={category}>
             {works
@@ -827,127 +800,31 @@ export default function Portfolio() {
               )
               .map(({ item, i }) => (
                 <button
-                  className={`work-card reveal work-${item.type}`}
-                  key={item.type}
+                  className={`work-card reveal work-${item.accent}`}
+                  key={item.id}
                   onClick={() => setWork(i)}
                   data-cursor="VIEW"
                   aria-label={`${item.title} 詳細を見る`}
                 >
                   <div className="work-preview">
-                    {item.type === "brand" ? (
-                      <div className="brand-mock">
-                        <div className="mock-nav">
-                          <b>mori.</b>
-                          <span>ABOUT　 COLLECTION　 JOURNAL</span>
-                        </div>
-                        <div className="brand-visual">
-                          <div className="vase vase-one" />
-                          <div className="vase vase-two" />
-                          <span>
-                            less, but
-                            <br />
-                            <em>meaningful.</em>
-                          </span>
-                        </div>
-                        <div className="mock-bottom">
-                          暮らしに、ひと呼吸の余白を。
-                          <ArrowUpRight size={12} />
-                        </div>
-                      </div>
-                    ) : item.type === "dashboard" ? (
-                      <div className="dashboard-mock">
-                        <aside>
-                          <b>f.</b>
-                          <i />
-                          <i />
-                          <i />
-                          <i />
-                        </aside>
-                        <div className="dash-main">
-                          <div className="dash-nav">
-                            Overview <span>●</span>
-                          </div>
-                          <small>Good morning, team ☀</small>
-                          <div className="dash-stats">
-                            <div>
-                              進行中のプロジェクト
-                              <b>
-                                12 <small>+ 3</small>
-                              </b>
-                            </div>
-                            <div>
-                              今月の達成率
-                              <b>
-                                86<small>%</small>
-                              </b>
-                            </div>
-                          </div>
-                          <div className="dash-chart">
-                            <span>PROJECT ACTIVITY</span>
-                            <div className="bars">
-                              {[
-                                35, 56, 43, 70, 59, 85, 68, 95, 79, 90, 72, 100,
-                              ].map((h, j) => (
-                                <i key={j} style={{ height: `${h}%` }} />
-                              ))}
-                            </div>
-                          </div>
-                          <div className="dash-task">
-                            <i />
-                            ウェブサイトのデザインレビュー<span>進行中</span>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="mobile-mock">
-                        <span className="mobile-flower">✳</span>
-                        <div className="phone">
-                          <div className="phone-island" />
-                          <div className="phone-time">
-                            9:41 <span>● ▰</span>
-                          </div>
-                          <div className="phone-content">
-                            <span>GOOD MORNING</span>
-                            <h4>
-                              今日を、
-                              <br />
-                              ちょっと豊かに。
-                            </h4>
-                            <div className="phone-art">
-                              <span>☀</span>
-                              <div />
-                              <i />
-                            </div>
-                            <p>今日の小さな発見</p>
-                            <div className="phone-task">
-                              公園でひとやすみ。<span>↗</span>
-                            </div>
-                            <div className="phone-tabs">⌂　♡　＋　◷</div>
-                          </div>
-                        </div>
-                        <span className="mobile-caption">
-                          small moments,
-                          <br />
-                          <em>big happiness.</em>
-                        </span>
-                      </div>
-                    )}
+                    <ProjectCover project={item} />
                     <span className="project-hover-label">
-                      EXPLORE PROJECT <ArrowUpRight size={16} />
+                      VIEW PROJECT <ArrowUpRight size={16} />
                     </span>
                     <span className="work-view">
                       <ArrowUpRight size={20} />
                     </span>
                   </div>
                   <div className="work-meta">
-                    <span>{item.category}</span>
-                    <span>CONCEPT / 0{i + 1}</span>
+                    <span>{item.tag}</span>
+                    <span>PROJECT {String(i + 1).padStart(2, "0")}</span>
                   </div>
                   <h3>{item.title}</h3>
-                  <span className="work-tag">{item.tag}</span>
+                  <p className="work-description">{item.desc}</p>
                 </button>
               ))}
           </div>
+          <SectionCompanions message="一つひとつの想いを、伝わる体験に。" />
         </section>
         <section id="packages" className="section packages-section">
           <div className="section-heading horizontal reveal">
@@ -1012,6 +889,7 @@ export default function Portfolio() {
             Lancersでプロフィール・公開パッケージを見る{" "}
             <ArrowUpRight size={16} />
           </a>
+          <SectionCompanions message="必要なところから、気軽にご相談ください。" />
         </section>
         <section id="process" className="section process-section">
           <div className="section-heading reveal">
@@ -1063,6 +941,7 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
+          <SectionCompanions message="つくったその先も、一緒に育てる。" />
         </section>
         <section id="faq" className="section faq-section">
           <div className="section-heading reveal">
@@ -1096,11 +975,12 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
+          <SectionCompanions message="小さな疑問から、どうぞお気軽に。" />
         </section>
         <section id="contact" className="contact-section">
           <div className="contact-decoration" aria-hidden="true">
             <Image
-              src="/images/teamwork.png"
+              src="/images/human-robot-team.png"
               alt=""
               fill
               sizes="(max-width:760px) 100vw, 700px"
@@ -1157,9 +1037,11 @@ export default function Portfolio() {
             )}
           </div>
           <ContactChannels />
+          <SectionCompanions message="あなたの次の一歩を、私たちと。" />
         </section>
       </main>
       <footer className="footer">
+        <SectionCompanions compact message="兄弟の力で、アイデアをカタチに。" />
         <div className="footer-top">
           <a href="#" className="wordmark">
             <span className="brand-name">
@@ -1205,16 +1087,39 @@ export default function Portfolio() {
             </button>
             {work !== null ? (
               <>
-                <Label>DESIGN CONCEPT / 0{work + 1}</Label>
+                <Label>
+                  LANCERS PORTFOLIO / {String(work + 1).padStart(2, "0")}
+                </Label>
                 <h2 id="modal-title">{works[work].title}</h2>
                 <p>{works[work].desc}</p>
-                <div className="concept-detail">
-                  <span>{works[work].name}</span>
-                  <p>{works[work].sub}</p>
+                <div className="project-detail-cover">
+                  <ProjectCover project={works[work]} large />
                 </div>
+                <dl className="project-detail-facts">
+                  <div>
+                    <dt>掲載名・分野</dt>
+                    <dd>{works[work].name}</dd>
+                  </div>
+                  <div>
+                    <dt>カテゴリー</dt>
+                    <dd>{works[work].tag}</dd>
+                  </div>
+                  <div>
+                    <dt>情報元</dt>
+                    <dd>Lancers掲載ポートフォリオ</dd>
+                  </div>
+                </dl>
                 <p className="modal-note">
-                  こちらは制作の方向性を示す自主制作コンセプトです。クライアント実績や稼働中のサービスではありません。ご希望に合わせて、企画・設計からご提案します。
+                  詳しい制作内容や対応範囲は、ご相談時にご案内します。
                 </p>
+                <a
+                  className="project-source-link"
+                  href={site.profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Lancersで掲載情報を見る <ArrowUpRight size={15} />
+                </a>
                 <button
                   className="text-button"
                   onClick={() => {
@@ -1228,7 +1133,7 @@ export default function Portfolio() {
                     });
                   }}
                 >
-                  このイメージについて相談する
+                  このような制作について相談する
                   <ArrowRight size={17} />
                 </button>
               </>

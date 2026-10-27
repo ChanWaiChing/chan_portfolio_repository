@@ -11,6 +11,11 @@ export function Robot({ small = false, waving = false }: Props) {
       <div className="robot-ear ear-left" />
       <div className="robot-ear ear-right" />
       <div className="robot-head">
+        <div className="robot-hair">
+          <i />
+          <i />
+          <i />
+        </div>
         <div className="robot-face">
           <i className="eye" />
           <i className="eye" />
@@ -22,7 +27,7 @@ export function Robot({ small = false, waving = false }: Props) {
       </div>
       <div className="robot-neck" />
       <div className="robot-body">
-        <span className="robot-heart">✦</span>
+        <span className="robot-heart">⌘</span>
         <span className="robot-dot" />
       </div>
       <div className="robot-arm arm-left" />

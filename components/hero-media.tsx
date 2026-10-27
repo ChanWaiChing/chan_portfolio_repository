@@ -28,8 +28,8 @@ export function HeroMedia() {
         className={`hero-photograph ${playing ? "hero-media-has-video" : ""}`}
       >
         <Image
-          src="/images/brothers-studio.png"
-          alt="明るいスタジオでアイデアを話し合う2人の男性。兄弟のチームワークを表現したイメージ。"
+          src="/images/young-brothers.png"
+          alt="25歳と21歳をイメージした若いクリエイター2人が、明るいスタジオで協力するイメージ。"
           fill
           sizes="100vw"
           preload
@@ -40,7 +40,7 @@ export function HeroMedia() {
             {["one", "two"].map((person) => (
               <div className={`hero-human hero-human-${person}`} key={person}>
                 <Image
-                  src="/images/brothers-studio.png"
+                  src="/images/young-brothers.png"
                   alt=""
                   fill
                   sizes="100vw"
@@ -54,7 +54,7 @@ export function HeroMedia() {
           <video
             ref={video}
             className="hero-video"
-            poster="/images/brothers-studio.png"
+            poster="/images/young-brothers.png"
             src={site.heroVideoUrl}
             muted
             loop

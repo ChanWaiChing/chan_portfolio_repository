@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./reference-theme.css";
 import "./cinematic.css";
+import "./contrast-theme.css";
 
 export const metadata: Metadata = {
   title: "大穂兄弟 | BROTHERS — 兄弟の力で、アイデアをカタチに。",
