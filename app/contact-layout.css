@@ -1,5 +1,5 @@
-/* One clear reading order: contact artwork and information, then the form. */
-#contact .contact-layout { display: flex; flex-direction: column; align-items: stretch; gap: 32px; max-width: 860px; margin: 0 auto; }
+/* Information and form sit side by side, then stack on small screens. */
+#contact .contact-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.2fr); align-items: start; gap: 32px; max-width: 1160px; margin: 0 auto; }
 #contact .contact-overview { width: 100%; border: 1px solid #d6e5f3; border-radius: 22px; background: linear-gradient(135deg, #f3faff, #eaf4fc); }
 #contact .contact-overview > img { display: block; width: 100%; height: auto; max-height: none; object-fit: contain; border-radius: 21px 21px 0 0; }
 .contact-overview-copy { padding: 30px 32px; }
@@ -7,7 +7,25 @@
 #contact .contact-overview p { margin: 0 0 20px; font-size: 13px; line-height: 2; }
 #contact .contact-overview-copy > a { display: inline-flex; align-items: center; gap: 10px; color: #126fb2; font-size: 13px; font-weight: 700; margin-bottom: 20px; }
 #contact .contact-overview .contact-method-note { padding-top: 18px; margin-bottom: 0; font-size: 11px; }
-#contact .contact-form { width: 100%; padding: 36px; border-radius: 22px; box-shadow: 0 8px 30px #1d476d08; }
+#contact .contact-form { width: 100%; min-width: 0; padding: 32px; border-radius: 22px; box-shadow: 0 8px 30px #1d476d08; }
+.contact-method-list { margin: 25px 0; }
+.contact-method-list > h4 { font-size: 19px; color: #244d73; margin-bottom: 10px; }
+#contact .contact-method-list > .contact-method-intro { font-size: 11px; margin-bottom: 17px; color: #627e96; }
+.contact-method-list > ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.contact-method { --method-color: #dd6a22; --method-tint: #fff0e5; display: flex; align-items: center; gap: 11px; padding: 13px 11px; border: 1px solid #dce7f2; border-radius: 11px; background: #ffffffd9; min-width: 0; }
+.method-chatwork { --method-color: #e83c4a; --method-tint: #ffedf0; }
+.method-discord { --method-color: #5865f2; --method-tint: #eef0ff; }
+.method-telegram { --method-color: #229ed9; --method-tint: #e8f6ff; }
+.contact-method-icon { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; color: var(--method-color); background: var(--method-tint); border-radius: 11px; }
+.contact-method-value { display: grid; min-width: 0; gap: 4px; flex: 1; }
+.contact-method-value > span { font: 700 10px/1.5 "DM Sans Variable", sans-serif; color: #758da3; }
+.contact-method-value > a, .contact-method-value > strong { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #284e70; line-height: 1.6; font-weight: 600; overflow-wrap: anywhere; }
+.contact-method-value > a:hover { color: var(--method-color); text-decoration: underline; }
+.contact-method-value > a > svg { flex-shrink: 0; }
+.contact-method-copy { display: grid; place-items: center; flex-shrink: 0; width: 30px; height: 34px; border-radius: 7px; color: var(--method-color); background: var(--method-tint); }
+.contact-method-copy:hover { filter: brightness(.95); }
+.discord-contact-help { display: block; margin: 14px 0 0; color: #6c839c; font-size: 10px; line-height: 1.9; }
+.contact-method-status { display: block; margin-top: 8px; font-size: 10px; line-height: 1.8; color: #268275; }
 .contact-color-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 24px; }
 .contact-color-links > a, .footer-circle-links > a { --icon-color: #2779cc; --icon-tint: #eaf3ff; }
 .contact-color-links > a { display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid color-mix(in srgb, var(--icon-color) 25%, white); border-radius: 50%; color: var(--icon-color); background: var(--icon-tint); transition: transform .2s, background .2s; }
@@ -19,7 +37,7 @@
 .footer-circle-links > a { color: var(--icon-color); background: var(--icon-tint); border-color: color-mix(in srgb, var(--icon-color) 23%, white); }
 .contact-color-links > a:hover, .footer-circle-links > a:hover { color: var(--icon-color); background: color-mix(in srgb, var(--icon-color) 17%, white); transform: translateY(-2px); }
 @media (max-width: 760px) {
-  #contact .contact-layout { gap: 24px; }
+  #contact .contact-layout { grid-template-columns: 1fr; gap: 24px; }
   .contact-overview-copy { padding: 25px 23px; }
   #contact .contact-overview h3 { font-size: 26px; }
   #contact .contact-overview p { font-size: 12px; }

@@ -138,3 +138,23 @@ test("workflow links select packages, tool motion pauses, and footer navigation 
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(page.getByRole("button", { name: "スキルアニメーションを再生" })).toBeDisabled();
 });
+
+test("contact methods copy exact IDs and the FAQ bot guides the accordion", async ({ page }) => {
+  await page.addInitScript(() => {
+    const writes: string[] = [];
+    Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: async (value: string) => { writes.push(value); } } });
+    (window as Window & { contactClipboardWrites?: string[] }).contactClipboardWrites = writes;
+  });
+  await page.goto("/");
+  const methods = [["Mail", "cbnbc07@gmail.com"], ["Chatwork", "3htt4mii70cg8"], ["Discord", "shiner715."], ["Telegram", "@shiningstar1997"]];
+  for (const [label, value] of methods) {
+    await expect(page.locator(".contact-method-list")).toContainText(value);
+    await page.getByRole("button", { name: new RegExp(`^${label}の`) }).click();
+    expect(await page.evaluate(() => (window as Window & { contactClipboardWrites?: string[] }).contactClipboardWrites?.at(-1))).toBe(value);
+  }
+  await expect(page.locator(".faq-guide-item")).toHaveCount(8);
+  await expect(page.locator(".faq-guide-bot")).toBeVisible();
+  await page.locator("#faq-question-7").click();
+  await expect(page.locator("#faq-answer-7")).toBeVisible();
+  await expect(page.locator("#faq-answer-0")).toBeHidden();
+});

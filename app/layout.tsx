@@ -8,6 +8,7 @@ import "./hero-scenes.css";
 import "./workflow-footer.css";
 import "./brother-introductions.css";
 import "./contact-layout.css";
+import "./faq-guide.css";
 
 export const metadata: Metadata = {
   title: "大穂兄弟 | BROTHERS — 兄弟の力で、アイデアをカタチに。",

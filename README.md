@@ -10,7 +10,7 @@ Next.js 16.4.3 / React 19.3.1 / TypeScript。Noto Sans JP・DM Sansはローカ�
 3. 私たちの強み：課題に応える3つの特徴
 4. サービスパッケージ：20件のサンプル、カテゴリ絞り込み、6件ずつのページ切り替え、詳細ダイアログ
 5. ポートフォリオ：30件の架空コンセプト、カテゴリ・キーワード検索、9件ずつのページ切り替え、詳細ダイアログ
-6. FAQ：アコーディオン
+6. FAQ：相談時の疑問に答える8項目のQ/Aアコーディオンとボットガイド
 7. お問い合わせ：入力検証、確認、メールアプリへの引き継ぎ、コピー
 8. フッター：クリーム色の有機的な柄、縦書きの屋号、丸いリンク、ピル型のセクションナビゲーション
 
@@ -31,7 +31,9 @@ Next.js 16.4.3 / React 19.3.1 / TypeScript。Noto Sans JP・DM Sansはローカ�
 
 ## お問い合わせ
 
-連絡先の案内パネルを上、フォームを下にした縦並びです。案内パネルの画像は `lib/site.ts` の `contactImage`（src・width・height・alt）で指定できます。お問い合わせとフッターのリンクアイコンは、役割別に色分けしています。レイアウトは `app/contact-layout.css` です。
+PCでは連絡先情報とフォームを横並びにし、スマートフォンでは縦に並びます。案内パネルの画像は `lib/site.ts` の `contactImage`（src・width・height・alt）で指定できます。Mail・Chatwork・Discord・Telegramの情報は同ファイルの `contactMethods` で管理し、各窓口に色付きアイコンとコピーボタンを表示します。レイアウトは `app/contact-layout.css` です。
+
+Mailは `cbnbc07@gmail.com`、Chatworkは `3htt4mii70cg8`、Discordは末尾のピリオドを含む `shiner715.`、Telegramは `@shiningstar1997` です。Discordはユーザー名をコピーしてアプリの「フレンドに追加」から検索する形式です。数値のユーザーIDがないため、架空のプロフィールURLは作成していません。
 
 現在は仮の画像 `public/images/contact-placeholder.webp`（1920×640）を表示しています。後でこのファイルを差し替えるか、`contactImage.src` を変更してください。サイズが変わる場合は `width`・`height`・`alt` も更新します。
 
@@ -42,6 +44,9 @@ Next.js 16.4.3 / React 19.3.1 / TypeScript。Noto Sans JP・DM Sansはローカ�
 ## 編集するファイル
 
 - `components/portfolio.tsx`：セクション、カタログ操作、詳細ダイアログ、FAQ、フォーム
+- `components/contact-methods.tsx`：4つの連絡先、色付きアイコン、リンク・コピー操作
+- `components/faq-section.tsx`：8つの相談向けFAQ、Q/A表示、ボットの案内
+- `app/faq-guide.css`：FAQのレイアウトと吹き出し。https://aishift.com/ の質問を起点に説明する構成を参考に、当サイトのサービス向けに独自の質問・回答を作成
 - `components/brother-introductions.tsx`：兄・弟の紹介。横長ビジュアルとボットの吹き出しで、それぞれの専門性・経験年数・得意分野を紹介
 - `app/brother-introductions.css`：紹介パネル、話し手のボット、吹き出し、スマートフォンでの縦並び
 - `components/hero-showcase.tsx`：ヒーロータブと自動切り替え
