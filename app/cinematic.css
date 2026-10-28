@@ -548,7 +548,7 @@ body {
 }
 .design-cross {
   color: #e99cc8;
-  font-family: Arial, sans-serif;
+  font-family: var(--sans);
 }
 .illustration-star {
   color: #b996d3;

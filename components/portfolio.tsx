@@ -17,6 +17,8 @@ import {
   Layers3,
   Sparkles,
   ChevronRight,
+  Asterisk,
+  MousePointer2,
 } from "lucide-react";
 import { Robot } from "./robot";
 import { site } from "@/lib/site";
@@ -27,6 +29,8 @@ import { projects as works, projectCategories } from "@/lib/projects";
 import { ProjectCover } from "./project-cover";
 import { SectionCompanions } from "./section-companions";
 import { TeamPortrait } from "./team-portrait";
+import { SkillGlyph } from "./skill-glyph";
+import { scenes } from "@/lib/visuals";
 const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false });
 const LivingMascots = dynamic(() => import("./living-mascots"), { ssr: false });
 const nav = [
@@ -213,6 +217,11 @@ export default function Portfolio() {
   };
   return (
     <>
+      <div className="dreamscape" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+      </div>
       <div className="custom-cursor" ref={cursor} aria-hidden="true">
         <span>
           VIEW
@@ -456,26 +465,9 @@ export default function Portfolio() {
                   key={copy}
                   aria-hidden={copy === 1}
                 >
-                  {skills.map((s, i) => (
+                  {skills.map((s) => (
                     <span key={s}>
-                      <i>
-                        {
-                          [
-                            "↗",
-                            "⚛",
-                            "TS",
-                            "⌘",
-                            "3D",
-                            "◈",
-                            "W",
-                            "✳",
-                            "↗",
-                            "✧",
-                            "G",
-                            "C",
-                          ][i]
-                        }
-                      </i>
+                      <SkillGlyph skill={s} />
                       {s}
                       <b>·</b>
                     </span>
@@ -487,7 +479,10 @@ export default function Portfolio() {
           <p className="toolbox-note">
             ツールや技術は、目的に合わせて選定します。
           </p>
-          <SectionCompanions message="技術は、想いを形にするために。" />
+          <SectionCompanions
+            variant="solo"
+            message="技術は、想いを形にするために。"
+          />
         </section>
         <section id="works" className="section works-section">
           <div className="section-heading horizontal reveal">
@@ -566,7 +561,10 @@ export default function Portfolio() {
                 </button>
               ))}
           </div>
-          <SectionCompanions message="一つひとつの想いを、伝わる体験に。" />
+          <SectionCompanions
+            variant="duo"
+            message="一つひとつの想いを、伝わる体験に。"
+          />
         </section>
         <section id="services" className="section services-section">
           <div className="section-heading horizontal reveal">
@@ -612,7 +610,10 @@ export default function Portfolio() {
               </article>
             ))}
           </div>
-          <SectionCompanions message="デザインと開発を、ひとつの窓口で。" />
+          <SectionCompanions
+            variant="solo"
+            message="デザインと開発を、ひとつの窓口で。"
+          />
         </section>
         <section id="packages" className="section packages-section">
           <div className="section-heading horizontal reveal">
@@ -648,7 +649,10 @@ export default function Portfolio() {
             Lancersでプロフィール・公開パッケージを見る{" "}
             <ArrowUpRight size={16} />
           </a>
-          <SectionCompanions message="必要なところから、気軽にご相談ください。" />
+          <SectionCompanions
+            variant="duo"
+            message="必要なところから、気軽にご相談ください。"
+          />
         </section>
         <section
           className="concerns-section section"
@@ -714,8 +718,8 @@ export default function Portfolio() {
           <div className="solution-arrow" aria-hidden="true" />
           <div className="solution-banner reveal">
             <Image
-              src="/images/four-person-team.png"
-              alt="参照画像の4人と、色とりどりの髪を持つロボット"
+              src={scenes.trio.src}
+              alt={scenes.trio.alt}
               fill
               sizes="(max-width: 760px) 100vw, 1000px"
             />
@@ -765,7 +769,10 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-          <SectionCompanions message="アイデアの整理から、ふたりで伴走します。" />
+          <SectionCompanions
+            variant="trio"
+            message="アイデアの整理から、ふたりで伴走します。"
+          />
         </section>
         <section id="process" className="section process-section">
           <div className="section-heading reveal">
@@ -832,7 +839,10 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-          <SectionCompanions message="つくったその先も、一緒に育てる。" />
+          <SectionCompanions
+            variant="trio"
+            message="つくったその先も、一緒に育てる。"
+          />
         </section>
         <section id="about" className="section about-section">
           <div className="section-heading reveal">
@@ -868,7 +878,9 @@ export default function Portfolio() {
                     }
                   </pre>
                 </div>
-                <span className="illustration-star">✦</span>
+                <span className="illustration-star">
+                  <Sparkles size={34} />
+                </span>
               </div>
               <div className="profile-title">
                 <h3>考える、つなぐ、つくる。</h3>
@@ -897,14 +909,11 @@ export default function Portfolio() {
               <div className="profile-illustration designer-illustration">
                 <div className="design-square" />
                 <div className="design-circle" />
-                <div className="design-cross">✳</div>
+                <div className="design-cross">
+                  <Asterisk size={88} strokeWidth={1.35} />
+                </div>
                 <div className="design-pointer">
-                  <svg viewBox="0 0 24 30">
-                    <path
-                      d="M2 2v23l7-7 7 10 5-3-7-10 9-2Z"
-                      fill="currentColor"
-                    />
-                  </svg>
+                  <MousePointer2 size={23} />
                   <span>Designer</span>
                 </div>
               </div>
@@ -926,7 +935,9 @@ export default function Portfolio() {
             </div>
           </div>
           <div className="about-footnote reveal">
-            <span>✦</span>
+            <span>
+              <Sparkles size={26} />
+            </span>
             <p>
               好きなものは、ふたりとも「ドラゴンボール」。
               <br />
@@ -938,7 +949,10 @@ export default function Portfolio() {
               ONE GREAT TEAM.
             </span>
           </div>
-          <SectionCompanions message="ちがう得意が、ひとつのチームになる。" />
+          <SectionCompanions
+            variant="quartet"
+            message="ちがう得意が、ひとつのチームになる。"
+          />
         </section>
         <section id="faq" className="section faq-section">
           <div className="section-heading reveal">
@@ -972,17 +986,12 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-          <SectionCompanions message="小さな疑問から、どうぞお気軽に。" />
+          <SectionCompanions
+            variant="solo"
+            message="小さな疑問から、どうぞお気軽に。"
+          />
         </section>
         <section id="contact" className="contact-section">
-          <div className="contact-decoration" aria-hidden="true">
-            <Image
-              src="/images/four-person-team.png"
-              alt=""
-              fill
-              sizes="(max-width:760px) 100vw, 700px"
-            />
-          </div>
           <div className="contact-content reveal">
             <Label>LET’S MAKE SOMETHING GREAT</Label>
             <h2>
@@ -1025,7 +1034,7 @@ export default function Portfolio() {
                 setCopyError(false);
               }}
             >
-              相談内容をまとめてから送る ↗
+              相談内容をまとめてから送る <ArrowUpRight size={14} />
             </button>
             {!site.contactUrl && (
               <span className="contact-setup-note">
@@ -1034,11 +1043,18 @@ export default function Portfolio() {
             )}
           </div>
           <ContactChannels />
-          <SectionCompanions message="あなたの次の一歩を、私たちと。" />
+          <SectionCompanions
+            variant="duo"
+            message="あなたの次の一歩を、私たちと。"
+          />
         </section>
       </main>
       <footer className="footer">
-        <SectionCompanions compact message="兄弟の力で、アイデアをカタチに。" />
+        <SectionCompanions
+          compact
+          variant="duo"
+          message="兄弟の力で、アイデアをカタチに。"
+        />
         <div className="footer-top">
           <a href="#" className="wordmark">
             <span className="brand-name">

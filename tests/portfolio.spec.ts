@@ -160,6 +160,11 @@ test("contact channels use supplied identifiers and support copying", async ({
   await expect(
     page.getByRole("link", { name: /Lancersでプロフィール/ }),
   ).toHaveAttribute("href", "https://www.lancers.jp/profile/Ryuji_0524_Xp");
+  await page
+    .getByRole("group", { name: "ご相談のテーマ" })
+    .getByRole("button", { name: "UI / UX", exact: true })
+    .click();
+  await page.locator("#contact-timing").fill("相談して決めたい");
   await page.locator("#contact-name").fill("山田 太郎");
   await page.locator("#contact-email").fill("taro@example.com");
   await page
@@ -172,6 +177,8 @@ test("contact channels use supplied identifiers and support copying", async ({
   expect(draft).toContain("山田 太郎");
   expect(draft).toContain("taro@example.com");
   expect(draft).toContain("新しいウェブサービスを相談したいです。");
+  expect(draft).toContain("【ご相談のテーマ】UI / UX");
+  expect(draft).toContain("【ご希望の時期】相談して決めたい");
 });
 
 test("desktop portfolio hover reveals the project label", async ({
@@ -204,7 +211,7 @@ test("each main section includes a human and robot illustration", async ({
     await expect(section.locator("[data-human-robot=true] img")).toHaveCount(1);
   await expect(page.locator(".hero-photograph > img")).toHaveAttribute(
     "src",
-    /four-person-team/,
+    /dream-four/,
   );
 });
 
@@ -299,4 +306,45 @@ test("contact form validates and prepares an email draft without posting", async
   await expect(page.locator("#contact-message")).toHaveValue(
     "フォームの表示確認用です。",
   );
+});
+
+test("the page presents distinct one, two, three and four-person scenes", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  for (const count of [1, 2, 3, 4]) {
+    const figure = page
+      .locator(`.section-companions[data-people="${count}"]`)
+      .first();
+    await figure.scrollIntoViewIfNeeded();
+    const img = figure.locator("img");
+    await expect(img).toBeVisible();
+    await expect
+      .poll(() => img.evaluate((e) => (e as HTMLImageElement).naturalWidth))
+      .toBeGreaterThan(0);
+  }
+});
+
+test("modern typography and vector skill icons are loaded", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.evaluate(() => document.fonts.ready);
+  await expect(page.locator("body")).toHaveCSS(
+    "font-family",
+    /Manrope Variable/,
+  );
+  await expect(page.locator("body")).toHaveCSS(
+    "font-family",
+    /Zen Kaku Gothic New/,
+  );
+  await expect(
+    page.locator(".marquee-group").first().locator(".skill-glyph svg"),
+  ).toHaveCount(12);
+  expect(
+    await page.evaluate(() =>
+      document.fonts.check('700 16px "Zen Kaku Gothic New"', "相談"),
+    ),
+  ).toBe(true);
 });

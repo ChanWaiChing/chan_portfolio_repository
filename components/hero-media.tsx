@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import { site } from "@/lib/site";
+import { scenes } from "@/lib/visuals";
 export function HeroMedia() {
   const video = useRef<HTMLVideoElement>(null);
   const [failed, setFailed] = useState(false);
@@ -29,8 +30,8 @@ export function HeroMedia() {
         className={`hero-photograph ${playing ? "hero-media-has-video" : ""}`}
       >
         <Image
-          src="/images/four-person-team.png"
-          alt="参照画像の4人全員が、元の並び順で登場するチームビジュアル。"
+          src={scenes.quartet.src}
+          alt={scenes.quartet.alt}
           fill
           sizes="100vw"
           preload
@@ -41,7 +42,7 @@ export function HeroMedia() {
             {["one", "two", "three", "four"].map((person) => (
               <div className={`hero-human hero-human-${person}`} key={person}>
                 <Image
-                  src="/images/four-person-team.png"
+                  src={scenes.quartet.src}
                   alt=""
                   fill
                   sizes="100vw"
@@ -55,7 +56,7 @@ export function HeroMedia() {
           <video
             ref={video}
             className="hero-video"
-            poster="/images/four-person-team.png"
+            poster={scenes.quartet.src}
             src={site.heroVideoUrl}
             muted
             loop

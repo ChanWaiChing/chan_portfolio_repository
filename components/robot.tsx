@@ -1,3 +1,4 @@
+import { Code2 } from "lucide-react";
 type Props = { small?: boolean; waving?: boolean };
 export function Robot({ small = false, waving = false }: Props) {
   return (
@@ -27,7 +28,9 @@ export function Robot({ small = false, waving = false }: Props) {
       </div>
       <div className="robot-neck" />
       <div className="robot-body">
-        <span className="robot-heart">⌘</span>
+        <span className="robot-heart">
+          <Code2 size={23} />
+        </span>
         <span className="robot-dot" />
       </div>
       <div className="robot-arm arm-left" />

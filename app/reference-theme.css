@@ -66,7 +66,7 @@ select:focus-visible {
   white-space: nowrap;
 }
 .brand-name > span {
-  font-family: "DM Sans Variable", sans-serif;
+  font-family: var(--font-latin, "Manrope Variable"), sans-serif;
   font-size: 9px;
   letter-spacing: 2.2px;
   font-weight: 700;
@@ -842,7 +842,7 @@ select:focus-visible {
 }
 .design-cross {
   color: #2674d0;
-  font-family: Arial, sans-serif;
+  font-family: var(--sans);
 }
 .design-pointer {
   color: #d47a21;

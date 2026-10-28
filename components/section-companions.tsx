@@ -1,16 +1,22 @@
 import Image from "next/image";
 import { Sparkles } from "lucide-react";
+import { scenes, type SceneVariant } from "@/lib/visuals";
 export function SectionCompanions({
   message = "人のアイデアに、テクノロジーの可能性を。",
   compact = false,
+  variant = "quartet",
 }: {
   message?: string;
   compact?: boolean;
+  variant?: SceneVariant;
 }) {
+  const scene = scenes[variant];
   return (
     <figure
-      className={`section-companions ${compact ? "companions-compact" : ""}`}
+      className={`section-companions companions-${variant} ${compact ? "companions-compact" : ""}`}
       data-human-robot="true"
+      data-people={scene.people}
+      data-scene={variant}
     >
       <figcaption>
         <span>
@@ -20,10 +26,10 @@ export function SectionCompanions({
       </figcaption>
       <div className="companions-picture">
         <Image
-          src="/images/four-person-team.png"
-          alt="参照画像の4人全員と、カラフルな髪のロボットのイメージ"
+          src={scene.src}
+          alt={scene.alt}
           fill
-          sizes="(max-width:760px) 180px, 330px"
+          sizes="(max-width:760px) 190px, 460px"
         />
       </div>
     </figure>
