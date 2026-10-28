@@ -263,7 +263,7 @@ export default function Portfolio() {
             <span>
               デザインから開発まで<small>ふたりの専門性で、一貫して対応</small>
             </span>
-            <ChevronRight size={17} />
+            <ChevronRight size={18} />
           </a>
           <a href="#contact" className="header-pill pill-orange">
             <span className="header-mini-bot">
@@ -272,7 +272,7 @@ export default function Portfolio() {
             <span>
               プロジェクトのご相談<small>アイデアの段階から、お気軽に</small>
             </span>
-            <ArrowUpRight size={18} />
+            <ChevronRight size={18} />
           </a>
           <a href="#works" className="header-pill pill-blue">
             <span className="header-mini-bot">
@@ -281,7 +281,7 @@ export default function Portfolio() {
             <span>
               ポートフォリオを見る<small>Web・システム・モバイル</small>
             </span>
-            <ChevronRight size={17} />
+            <ChevronRight size={18} />
           </a>
         </div>
         <nav className="desktop-nav" aria-label="メインナビゲーション">

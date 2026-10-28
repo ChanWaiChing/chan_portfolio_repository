@@ -213,3 +213,5 @@ Latest previews: [desktop](docs/previews/immersive-desktop.png) · [mobile](docs
 ### Three-character mascot family
 
 The three header actions now each begin with their own transparent robot: pearl blue (seated, swept hair), coral Spark (standing, flame-like hair and a heart light), and mint (round hovering body and curled hair). The hero uses the same trio with the existing GSAP motion and reduced-motion fallback. `Robot` accepts an explicit `variant` while preserving the existing `warm` prop for section artwork. All three actions remain visible on tablet; phones keep the compact contact action with its mascot.
+
+The header actions share one raised card design with teal, coral and indigo color tokens. Hover and keyboard focus reveal a softly blurred, rotating seven-color conic halo outside the button; an opaque inner surface preserves text contrast. Reduced-motion users receive a static halo. Previews: [default](docs/previews/spectrum-header.png) · [hover](docs/previews/spectrum-header-hover.png).
