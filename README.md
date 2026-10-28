@@ -38,6 +38,8 @@ Next.js 16.4.3 / React 19.3.1 / TypeScript。Noto Sans JP・DM Sansはローカ�
 ## 編集するファイル
 
 - `components/portfolio.tsx`：セクション、カタログ操作、詳細ダイアログ、FAQ、フォーム
+- `components/brother-introductions.tsx`：兄・弟の紹介。横長ビジュアルとボットの吹き出しで、それぞれの専門性・経験年数・得意分野を紹介
+- `app/brother-introductions.css`：紹介パネル、話し手のボット、吹き出し、スマートフォンでの縦並び
 - `components/hero-showcase.tsx`：ヒーロータブと自動切り替え
 - `components/skill-workflows.tsx`：3枚のフローカード、2重リングのツールアニメーションと停止・再生
 - `components/pattern-footer.tsx`：縦書きブランド、便利なリンク、下部ナビゲーション

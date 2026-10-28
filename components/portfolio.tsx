@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Code2, Copy, Layers3, Menu, Minus, PenTool, Plus, Search, Sparkles, X } from "lucide-react";
 import { HeroShowcase } from "./hero-showcase";
+import { BrotherIntroductions } from "./brother-introductions";
 import { SkillWorkflows } from "./skill-workflows";
 import { PatternFooter } from "./pattern-footer";
 import { BotMascot, botVariants, type BotVariant } from "./bot-mascot";
@@ -121,20 +122,7 @@ export default function Portfolio() {
     <main id="main">
       <section id="introduction" aria-label="はじめに"><HeroShowcase />
         <div className="content-section introduction-copy"><Heading label="INTRODUCTION" title="考える兄と、描く弟。" text="ひとりでは届かないところへ、ふたりなら。ITコンサルティング・開発とデザイン、それぞれの専門性をつなぐクリエイティブチームです。" />
-          <div className="brothers-grid">
-            <article className="brother-card brother-engineer">
-              <div className="brother-card-top"><span className="brother-role"><Code2 size={18} />ENGINEERING</span><span className="brother-order">THE OLDER BROTHER / 兄</span></div>
-              <div className="brother-identity"><div><span className="brother-specialty">ITコンサルタント・フルスタックエンジニア</span><h3>考える、つなぐ、<br />つくる。</h3></div><BotMascot variant="ocean" className="brother-avatar" /></div>
-              <p>11年の実務経験をもとに、課題の整理から設計・開発・運用まで。事業と技術をつなぎます。</p>
-              <div className="brother-card-bottom"><span className="brother-experience"><strong>11</strong><span>YEARS<br />実務経験</span></span><ul><li>要件定義</li><li>設計・開発</li><li>運用改善</li></ul></div>
-            </article>
-            <article className="brother-card brother-designer">
-              <div className="brother-card-top"><span className="brother-role"><PenTool size={18} />DESIGN</span><span className="brother-order">THE YOUNGER BROTHER / 弟</span></div>
-              <div className="brother-identity"><div><span className="brother-specialty">デザイナー・UI / UXデザイン</span><h3>想いを、伝わる<br />デザインに。</h3></div><BotMascot variant="sunset" className="brother-avatar" /></div>
-              <p>3年の実務経験をもとに、ブランドと使う人の気持ちに寄り添う、心地よい体験を考えます。</p>
-              <div className="brother-card-bottom"><span className="brother-experience"><strong>3</strong><span>YEARS<br />実務経験</span></span><ul><li>UI / UX</li><li>Webデザイン</li><li>Figma</li></ul></div>
-            </article>
-          </div>
+          <BrotherIntroductions />
         </div>
       </section>
       <section className="content-section content-pale" id="services"><Heading label="SERVICES & SKILLS" title="企画から、つくったその先まで。" text="必要なところから、柔軟に。デザインと技術をひとつの窓口で相談できます。" />
