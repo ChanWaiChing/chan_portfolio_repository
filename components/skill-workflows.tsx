@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ArrowRight, ClipboardList, Code2, FileInput, FileText, Globe2, Layers3, Pause, PenTool, Play, Send, Sparkles } from "lucide-react";
 import { BotMascot } from "./bot-mascot";
 
@@ -31,6 +31,13 @@ const innerTools = [["iOS", "iOS", "#25292f"], ["Android", "A", "#36a86b"], ["AP
 export function SkillWorkflows({ onSelectCategory }: { onSelectCategory: (category: string) => void }) {
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const universe = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
+    if (universe.current) observer.observe(universe.current);
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     const media = matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setReducedMotion(media.matches);
@@ -48,10 +55,10 @@ export function SkillWorkflows({ onSelectCategory }: { onSelectCategory: (catego
       <div className="workflow-outcome"><span>{workflow.category} / 活用イメージ</span><h4>{workflow.title}</h4><span className="workflow-detail">関連するパッケージを見る<ArrowRight size={17} /></span></div>
     </a>)}</div>
     <div className="workflow-all"><a href="#packages" onClick={() => onSelectCategory("すべて")}>すべてのパッケージを見る<ArrowRight size={20} /></a></div>
-    <div className="skill-tool-universe" data-paused={paused || reducedMotion}>
+    <div ref={universe} className="skill-tool-universe" data-paused={paused || reducedMotion} data-offscreen={!visible}>
       <div className="skill-universe-copy"><span>DESIGN × ENGINEERING × AI</span><h3>アイデアに合わせて、<br />スキルを自在に。</h3><p>ひとつの技術に縛られず、目的から考える。<br />デザインと開発、AIの得意を組み合わせて、<br />使いやすい仕組みを一緒につくります。</p><ul>{[...outerTools, ...innerTools].map(([name]) => <li key={name}>{name}</li>)}</ul><small>技術・ツールは要件と運用体制に合わせて選定します。</small></div>
       <div className="skill-orbit-stage" aria-hidden="true">
-        {[outerTools, innerTools].map((tools, ring) => <div key={ring} className={`skill-orbit-ring orbit-ring-${ring}`} style={{ "--orbit-count": tools.length } as CSSProperties}>{tools.map(([name, mark, color], index) => <div className="skill-orbit-spoke" key={name} style={{ "--orbit-index": index } as CSSProperties}><div className="skill-tool-badge"><strong style={{ color }}>{mark}</strong><span>{name}</span></div></div>)}</div>)}
+        {[outerTools, innerTools].map((tools, ring) => <div key={ring} className={`skill-orbit-ring orbit-ring-${ring}`} style={{ "--orbit-count": tools.length } as CSSProperties}>{tools.map(([name, , color], index) => <div className="skill-orbit-spoke" key={name} style={{ "--orbit-index": index } as CSSProperties}><div className="skill-tool-badge"><strong style={{ color }}>{name}</strong></div></div>)}</div>)}
         <BotMascot variant="mint" className="skill-orbit-bot" />
       </div>
       <button className="skill-motion-control" type="button" disabled={reducedMotion} aria-pressed={paused || reducedMotion} aria-label={paused || reducedMotion ? "スキルアニメーションを再生" : "スキルアニメーションを停止"} onClick={() => setPaused(!paused)}>{paused || reducedMotion ? <Play size={15} /> : <Pause size={15} />}<span>{reducedMotion ? "動きを抑えています" : paused ? "アニメーションを再生" : "アニメーションを停止"}</span></button>

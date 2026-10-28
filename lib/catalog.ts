@@ -36,6 +36,19 @@ export const servicePackages: ServicePackage[] = packageSeeds.map(([title, categ
 export type PortfolioItem = {
   id: string; title: string; brand: string; category: Category;
   description: string; technologies: string[]; accent: string; kind: "website" | "dashboard" | "mobile";
+  challenge: string; approach: string; validation: string;
+};
+const conceptBriefs: Record<Category, [string, string, string]> = {
+  "Web制作": ["サービスの魅力が伝わりにくく、必要な情報を探す手間がかかる。", "閲覧する人の目的を整理し、情報の優先順位とお問い合わせまでの導線を設計。", "スマートフォンでの読みやすさ、主要ページへの到達、キーボード操作を確認する想定です。"],
+  "デザイン": ["画面や媒体によって見た目が異なり、操作の意味が伝わりにくい。", "利用シーンとユーザーフローから、色・文字・コンポーネントのルールをそろえる。", "主要タスクをプロトタイプで試し、迷いやすい箇所と文字の視認性を確認する想定です。"],
+  "システム開発": ["情報が複数のシートに分かれ、状況把握や引き継ぎに時間がかかる。", "業務フローと権限を整理し、必要な情報をひとつの画面に集約。", "入力・検索・更新の流れ、例外処理、権限ごとの表示を確認する想定です。"],
+  "AI・業務改善": ["繰り返す情報整理に時間を取られ、判断に使う情報がそろわない。", "入力資料を整理し、AIの草案作成と人の確認をつなぐワークフローを検討。", "元資料との整合性、確認手順、誤った出力への対応を小さく検証する想定です。"],
+  "コンサルティング": ["改善したいことはあるが、取り組む順序と必要な体制が決まっていない。", "課題・制約・運用体制を整理し、優先順位と段階的な実行計画を作成。", "目的に対する実現性、費用と運用の負担、次の判断に必要な条件を確認する想定です。"],
+};
+const featuredBriefs: Record<string, [string, string, string]> = {
+  "mori.": ["暮らしのブランドらしい穏やかさと、商品を探しやすい構成を両立したい。", "余白を活かすビジュアルと、商品・ブランドストーリーの二つの入口を設計。", "モバイルでの商品発見から詳細閲覧までを試すコンセプトです。実際の成果数値はありません。"],
+  "flow": ["担当者ごとの進捗が分散し、確認待ちのタスクを見落としやすい。", "担当・期限・状態をまとめ、例外や遅延に気づける一覧と絞り込みを設計。", "管理者と担当者の主要操作を、架空データで検証する画面コンセプトです。"],
+  "日々、": ["記録を続けたいが、毎日の入力が負担になる。", "短い入力フローと、振り返りやすい日付別の記録画面を試作。", "片手操作、入力の中断と再開、文字サイズを確認するUIコンセプトです。"],
 };
 const workSeeds: [string, string, Category][] = [
   ["mori.", "暮らしに余白をつくるブランドサイト", "Web制作"],
@@ -75,4 +88,7 @@ export const portfolioItems: PortfolioItem[] = workSeeds.map(([brand, title, cat
   technologies: category === "デザイン" ? ["Figma", "UI / UX"] : category === "AI・業務改善" ? ["Python", "AIワークフロー"] : category === "コンサルティング" ? ["要件定義", "業務設計"] : ["Next.js", "TypeScript"],
   accent: ["blue", "teal", "orange", "violet", "green"][i % 5],
   kind: category === "システム開発" || category === "AI・業務改善" ? "dashboard" : category === "デザイン" ? "mobile" : "website",
+  challenge: (featuredBriefs[brand] || conceptBriefs[category])[0],
+  approach: (featuredBriefs[brand] || conceptBriefs[category])[1],
+  validation: (featuredBriefs[brand] || conceptBriefs[category])[2],
 }));

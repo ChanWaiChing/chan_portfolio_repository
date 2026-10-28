@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start --hostname 0.0.0.0",
     "typecheck": "tsc --noEmit",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:contact": "node --test tests/contact-route.test.cjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",

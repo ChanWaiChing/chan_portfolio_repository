@@ -31,7 +31,7 @@ test("all 20 sample packages are reachable, filterable and open for consultation
   await section.getByRole("button", { name: "Web制作", exact: true }).click();
   await expect(section.locator(".package-card")).toHaveCount(5);
   await expect(section.locator(".catalog-summary")).toContainText("5件中 1〜5件");
-  const opener = section.getByRole("button", { name: "プランの詳細を見る" }).first();
+  const opener = section.getByRole("button", { name: /プランの詳細を見る/ }).first();
   await opener.click();
   await expect(page.getByRole("dialog")).toContainText("正式な費用・納期は個別にご相談");
   await page.keyboard.press("Escape");
@@ -70,11 +70,10 @@ test("FAQ and contact validation, mail draft and edit invalidation", async ({ pa
   await page.getByRole("button", { name: "内容を確認する" }).click();
   await expect(page.locator("#contact-review")).toHaveCount(0);
   await page.getByLabel("お名前").fill("テスト 太郎");
-  await page.getByLabel("メールアドレス", { exact: false }).fill("test@example.com");
+  await page.getByRole("textbox", { name: "メールアドレス 必須" }).fill("test@example.com");
   await page.getByLabel("会社名・屋号").fill("サンプル株式会社");
   await page.getByLabel("相談したいこと").selectOption("AI活用 / 業務改善");
   await page.getByLabel("ご相談内容").fill("日々の集計作業を効率化したいです。");
-  await page.getByRole("checkbox").check();
   await page.getByRole("button", { name: "内容を確認する" }).click();
   const review = page.locator("#contact-review");
   await expect(review).toBeVisible();
@@ -101,8 +100,12 @@ test("hero keyboard controls and reduced motion", async ({ page }) => {
 });
 
 test("four hero images cycle every four seconds and can be paused", async ({ page }) => {
-  await page.clock.install();
+  await page.clock.install({ time: new Date("2026-10-29T00:00:00Z") });
+  await page.clock.pauseAt(new Date("2026-10-29T00:00:01Z"));
   await page.goto("/");
+  await page.getByRole("tab", { name: /01 トータルサポート/ }).click();
+  await page.getByRole("button", { name: "自動切替を再生" }).click();
+  await expect(page.locator(".reference-hero")).toHaveAttribute("data-playing", "true");
   const frames = page.locator(".hero-photo-layer");
   await expect(frames).toHaveCount(4);
   await expect(frames.nth(0)).toHaveAttribute("data-active", "true");
@@ -157,4 +160,45 @@ test("contact methods copy exact IDs and the FAQ bot guides the accordion", asyn
   await page.locator("#faq-question-7").click();
   await expect(page.locator("#faq-answer-7")).toBeVisible();
   await expect(page.locator("#faq-answer-0")).toBeHidden();
+});
+
+test("catalog URL restores filters, search and pagination after reload", async ({ page }) => {
+  await page.goto("/?package=Web%E5%88%B6%E4%BD%9C&work=%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3&q=Figma#works");
+  await expect(page.locator("#packages .package-card")).toHaveCount(5);
+  await expect(page.locator("#works .portfolio-card")).toHaveCount(7);
+  await expect(page.getByRole("searchbox")).toHaveValue("Figma");
+  await page.reload();
+  await expect(page.locator("#works").getByRole("button", { name: "デザイン", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await page.goto("/?pp=4&wp=4");
+  await expect(page.locator("#packages .package-card")).toHaveCount(2);
+  await expect(page.locator("#works .portfolio-card")).toHaveCount(3);
+});
+
+test("dialogs isolate the background and focus returns to the opener", async ({ page, isMobile }) => {
+  await page.goto("/");
+  const opener = page.locator(".selected-work button").first();
+  await opener.click();
+  await expect(page.locator("main")).toHaveAttribute("inert", "");
+  await page.keyboard.press("Escape");
+  await expect(opener).toBeFocused();
+  await expect(page.locator("main")).not.toHaveAttribute("inert");
+  if (isMobile) {
+    await page.getByRole("button", { name: "メニューを開く" }).click();
+    await expect(page.locator("main")).toHaveAttribute("inert", "");
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("button", { name: "メニューを開く" })).toBeFocused();
+  }
+});
+
+test("hero stops outside the viewport and all small layouts fit", async ({ page }) => {
+  await page.goto("/");
+  await page.locator("#contact").scrollIntoViewIfNeeded();
+  await expect(page.locator(".reference-hero")).toHaveAttribute("data-playing", "false");
+  for (const width of [320, 390, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
+  await page.setViewportSize({ width: 390, height: 3000 });
+  await page.setViewportSize({ width: 390, height: 844 });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

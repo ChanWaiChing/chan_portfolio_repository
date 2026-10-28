@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, Check, Copy, Gamepad2, Mail, MessagesSquare, Send } from "lucide-react";
 import { contactMethods } from "@/lib/site";
 
@@ -9,6 +9,11 @@ const icons = { mail: Mail, chatwork: MessagesSquare, discord: Gamepad2, telegra
 export function ContactMethods() {
   const [copied, setCopied] = useState("");
   const [status, setStatus] = useState("");
+  useEffect(() => {
+    if (!copied) return;
+    const timer = setTimeout(() => { setCopied(""); setStatus(""); }, 3000);
+    return () => clearTimeout(timer);
+  }, [copied]);
   return <div className="contact-method-list">
     <h4>連絡先情報</h4>
     <p className="contact-method-intro">ご都合のよい窓口から、お気軽にご相談ください。</p>

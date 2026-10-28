@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import "./component-theme.css";
-import "./brand-theme.css";
-import "./catalog.css";
-import "./modern-cards.css";
-import "./hero-scenes.css";
-import "./workflow-footer.css";
-import "./brother-introductions.css";
-import "./contact-layout.css";
-import "./faq-guide.css";
+import "./site.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001"),
+  twitter: { card: "summary_large_image" },
   title: "大穂兄弟 | BROTHERS — 兄弟の力で、アイデアをカタチに。",
   description:
     "ITコンサルタント・フルスタックエンジニアの兄と、デザイナーの弟。企画からデザイン、開発、運用まで。兄弟のチームワークで、あなたのアイデアをカタチにします。",

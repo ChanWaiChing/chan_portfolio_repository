@@ -9,10 +9,10 @@ export function PatternFooter() {
     <div className="footer-vertical-lockup"><div className="footer-vertical-copy"><p>考える兄と、描く弟。<br />ふたりの得意で、あなたの次の一歩を。</p><a href="#introduction" className="footer-vertical-wordmark">大穂兄弟</a><p>想いをつなぐ、<br />デザインとテクノロジー。</p><span>OHO BROTHERS</span></div></div>
     <BotTeam className="pattern-footer-bots" />
     <div className="footer-circle-links" aria-label="便利なリンク">
-      <a className="icon-link-blue" href="#services" aria-label="サービス・スキル"><Layers3 size={19} /></a>
-      <a className="icon-link-orange" href="#works" aria-label="ポートフォリオ"><BriefcaseBusiness size={19} /></a>
-      <a className="icon-link-purple" href="#contact" aria-label="お問い合わせフォーム"><MessageCircle size={19} /></a>
-      <a className="icon-link-green" href={site.contactUrl} aria-label="メールでお問い合わせ"><Mail size={19} /></a>
+      <a className="icon-link-blue" href="#services"><Layers3 size={19} />サービス</a>
+      <a className="icon-link-orange" href="#works"><BriefcaseBusiness size={19} />制作例</a>
+      <a className="icon-link-purple" href="#contact"><MessageCircle size={19} />お問い合わせ</a>
+      <a className="icon-link-green" href={site.contactUrl}><Mail size={19} />メール</a>
     </div>
     <p className="pattern-copyright">© {new Date().getFullYear()} 大穂兄弟 / OHO BROTHERS. All Rights Reserved.</p>
     <p className="pattern-sample-note">パッケージ・ポートフォリオは仮のサンプルです。</p>

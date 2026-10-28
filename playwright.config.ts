@@ -1,12 +1,16 @@
 import { defineConfig, devices } from "@playwright/test";
+import { existsSync } from "node:fs";
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || "http://localhost:3001";
+const chrome = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 export default defineConfig({
   testDir: "./tests",
+  testMatch: "**/*.spec.ts",
   fullyParallel: true,
   workers: 2,
   use: {
-    baseURL: "http://127.0.0.1:3000",
+    baseURL,
     launchOptions: {
-      executablePath: process.env.CHROMIUM_PATH || "/usr/bin/chromium",
+      executablePath: process.env.CHROMIUM_PATH || (existsSync(chrome) ? chrome : undefined),
       args: ["--no-sandbox", "--enable-unsafe-swiftshader"],
     },
   },
@@ -24,8 +28,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "npm run start",
-    url: "http://127.0.0.1:3000",
+    command: "npm run start -- --port 3001",
+    url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 30000,
   },
