@@ -4,22 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Code2, Copy, Layers3, Menu, Minus, PenTool, Plus, Search, Sparkles, X } from "lucide-react";
 import { HeroShowcase } from "./hero-showcase";
-import { BotMascot, BotTeam, botVariants, type BotVariant } from "./bot-mascot";
+import { SkillWorkflows } from "./skill-workflows";
+import { PatternFooter } from "./pattern-footer";
+import { BotMascot, botVariants, type BotVariant } from "./bot-mascot";
 import { categories, portfolioItems, servicePackages, type PortfolioItem, type ServicePackage } from "@/lib/catalog";
 import { site } from "@/lib/site";
 
 const navigation = [["はじめに", "introduction"], ["サービス・スキル", "services"], ["私たちの強み", "strengths"], ["パッケージ", "packages"], ["ポートフォリオ", "works"], ["よくあるご質問", "faq"]];
-const skills = [
-  { title: "Webフロントエンド制作", text: "Next.js・Reactで、情報が伝わるサイトと使いやすい画面をつくります。", category: "Web制作" },
-  { title: "TypeScriptによる設計", text: "型と構造を整理し、変更しやすく長く育てられるコードを考えます。", category: "システム開発" },
-  { title: "バックエンド・API開発", text: "Node.jsで、画面とデータをつなぐ仕組みや業務に合うAPIを設計します。", category: "システム開発" },
-  { title: "Python・業務自動化", text: "繰り返す入力や集計を見直し、日々の作業を軽くする仕組みを考えます。", category: "AI・業務改善" },
-  { title: "UI・UXデザイン", text: "Figmaで利用者の動きと目的を整理し、迷わず使える体験を形にします。", category: "デザイン" },
-  { title: "WordPress・CMS構築", text: "お知らせや記事を更新しやすい、運用に合わせたサイトをつくります。", category: "Web制作" },
-  { title: "モバイルアプリ制作", text: "iOS・Androidの利用シーンに合わせて、手のひらで使いやすい画面を設計します。", category: "システム開発" },
-  { title: "生成AIの活用・連携", text: "AIに任せる作業と人が確認する範囲を整理し、実務への活用を考えます。", category: "AI・業務改善" },
-  { title: "要件定義・技術選定", text: "事業の目的と運用体制から、必要な機能と実現するための道筋を整理します。", category: "コンサルティング" },
-];
 const scope = [
   { icon: Layers3, title: "ITコンサルティング", en: "PLAN", text: "事業や業務の「こうしたい」を整理し、要件定義・技術選定から実現の道筋を描きます。", tags: ["課題整理", "要件定義", "技術選定"] },
   { icon: PenTool, title: "デザイン・UI / UX", en: "DESIGN", text: "見た目の美しさと使いやすさを一緒に考え、ブランドと利用者に合う体験を設計します。", tags: ["Web・LP", "アプリUI", "ブランド設計"] },
@@ -148,14 +139,7 @@ export default function Portfolio() {
       </section>
       <section className="content-section content-pale" id="services"><Heading label="SERVICES & SKILLS" title="企画から、つくったその先まで。" text="必要なところから、柔軟に。デザインと技術をひとつの窓口で相談できます。" />
         <div className="scope-grid">{scope.map(({ icon: Icon, en, title, text, tags }, i) => <article className="scope-card" key={en}><div className="scope-top"><span>0{i + 1} / {en}</span><Icon size={29} /></div><h3>{title}</h3><p>{text}</p><ul>{tags.map(tag => <li key={tag}>{tag}</li>)}</ul></article>)}</div>
-        <div className="skill-introduction" aria-labelledby="skills-title">
-          <div className="skill-intro-heading"><span>SKILL INTRODUCTION</span><h3 id="skills-title">目的に合わせて、最適な選択を。</h3><p>企画からデザイン、開発、改善まで。ふたりのスキルをつないでお手伝いします。</p></div>
-          <div className="skill-intro-grid">{skills.map((skill, index) => <a key={skill.title} href="#packages" className={`skill-intro-card skill-accent-${index % 4}`} onClick={() => { setPackageCategory(skill.category); setPackagePage(1); }}>
-            <div className="skill-intro-top"><span className="skill-index">{String(index + 1).padStart(2, "0")}</span><h4>{skill.title}</h4><span className="skill-dash" aria-hidden="true" /></div>
-            <p>{skill.text}</p>
-          </a>)}</div>
-          <div className="skill-intro-action"><a className="catalog-cta" href="#packages">スキルを活かしたサービスを見る<ArrowRight size={17} /></a><p>各カードから、関連するパッケージをご覧いただけます。</p></div>
-        </div>
+        <SkillWorkflows onSelectCategory={(category) => { setPackageCategory(category); setPackagePage(1); }} />
       </section>
       <section className="content-section" id="strengths"><Heading label="WHY BROTHERS" title="得意をつなぐ。それが、私たちの強み。" text="こんなお悩みはありませんか？ その「どうしよう」から、一緒に考えます。" />
         <div className="strength-grid">{[
@@ -196,7 +180,7 @@ export default function Portfolio() {
         </div>
       </section>
     </main>
-    <footer className="content-footer"><BotTeam className="footer-bots" /><div className="content-footer-top"><a href="#introduction" className="wordmark"><span className="brand-name">大穂兄弟<span>OHO BROTHERS</span></span></a><p>兄弟の力で、アイデアをカタチに。</p><a href="#introduction">ページの先頭へ ↑</a></div><nav aria-label="フッターナビゲーション">{[...navigation, ["お問い合わせ", "contact"]].map(([label, id]) => <a key={id} href={`#${id}`}>{label}</a>)}</nav><div className="content-footer-bottom"><span>パッケージ・ポートフォリオは仮のサンプルです。</span><span>© {new Date().getFullYear()} 大穂兄弟 / BROTHERS</span></div></footer>
+    <PatternFooter />
     {detail && <div className="catalog-backdrop" onClick={event => { if (event.target === event.currentTarget) setDetail(null); }}><div className="catalog-dialog" ref={dialog} role="dialog" aria-modal="true" aria-labelledby="catalog-dialog-title"><button className="catalog-dialog-close" aria-label="閉じる" onClick={() => setDetail(null)}><X size={22} /></button><span className="dialog-eyebrow">{detail.kind === "package" ? "SERVICE PACKAGE" : "DESIGN CONCEPT"} / SAMPLE</span><h2 id="catalog-dialog-title">{detail.item.title}</h2><p>{detail.item.description}</p>{detail.kind === "work" ? <><WorkVisual item={detail.item} /><p className="dialog-tags">{detail.item.technologies.join(" / ")}</p></> : <><ul className="dialog-deliverables">{detail.item.deliverables.map(value => <li key={value}><Check size={16} />{value}</li>)}</ul><div className="dialog-price">参考：¥{detail.item.price.toLocaleString("ja-JP")}〜（税込） / {detail.item.duration}</div></>}<p className="dialog-notice">{detail.kind === "work" ? "架空の自主制作コンセプトです。実在のクライアントや納品実績ではありません。" : "内容・金額・期間は仮の表示例です。正式な費用・納期は個別にご相談のうえ決定します。"}</p><button className="catalog-cta" onClick={() => consult(detail.item.title)}>この内容について相談する<ArrowRight size={18} /></button></div></div>}
   </div>;
 }

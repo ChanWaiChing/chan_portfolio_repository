@@ -5,10 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
-  { label: "トータルサポート", title: ["兄弟の力で、", "アイデアをカタチに。"], subtitle: "デザインも、開発も。その先の運用まで。", text: "考える兄と、描く弟。ふたりの専門性で、あなたの「つくりたい」を、一緒に。", image: "/images/heroes/team.webp", alt: "OHO BROTHERSのスタジオで、4人のメンバーと4体のロボットが共同制作するイメージ", destination: "contact" },
-  { label: "ITコンサルティング", title: ["その課題に、", "進むべき道筋を。"], subtitle: "事業の想いを、実現できる計画へ。", text: "現状の整理から要件定義、技術選定まで。何から始めるか、一緒に考えます。", image: "/images/heroes/brothers.webp", alt: "OHO BROTHERSのスタジオで、2人の男性と2体のロボットがアイデアを検討するイメージ", destination: "services" },
-  { label: "デザイン・開発", title: ["伝わるデザイン。", "使いやすい仕組み。"], subtitle: "見た目と、その中の体験まで。", text: "Webサイト、業務システム、モバイルアプリ。デザインと開発をひとつのチームで。", image: "/images/heroes/couple-one.webp", alt: "紺色の服の男性とボブヘアの女性が、2体のロボットと共創するOHO BROTHERSのイメージ", destination: "works" },
-  { label: "AI活用・運用改善", title: ["つくった先の、", "可能性を広げる。"], subtitle: "日々の仕事を、もっと軽やかに。", text: "生成AIの活用から、公開後の保守・改善まで。長く使える仕組みを一緒に育てます。", image: "/images/heroes/couple-two.webp", alt: "ベージュの服の男性とロングヘアの女性が、2体のロボットと協力するOHO BROTHERSのイメージ", destination: "services" },
+  { label: "トータルサポート", title: ["兄弟の力で、", "アイデアをカタチに。"], subtitle: "デザインも、開発も。その先の運用まで。", text: "考える兄と、描く弟。ふたりの専門性で、あなたの「つくりたい」を、一緒に。", image: "/images/heroes/team-natural.webp", alt: "OHO BROTHERSのスタジオで、4人のメンバーと4体のロボットが共同制作するイメージ", destination: "contact" },
+  { label: "ITコンサルティング", title: ["その課題に、", "進むべき道筋を。"], subtitle: "事業の想いを、実現できる計画へ。", text: "現状の整理から要件定義、技術選定まで。何から始めるか、一緒に考えます。", image: "/images/heroes/brothers-natural.webp", alt: "OHO BROTHERSのスタジオで、2人の男性と2体のロボットがアイデアを検討するイメージ", destination: "services" },
+  { label: "デザイン・開発", title: ["伝わるデザイン。", "使いやすい仕組み。"], subtitle: "見た目と、その中の体験まで。", text: "Webサイト、業務システム、モバイルアプリ。デザインと開発をひとつのチームで。", image: "/images/heroes/couple-one-natural.webp", alt: "紺色の服の男性とボブヘアの女性が、2体のロボットと共創するOHO BROTHERSのイメージ", destination: "works" },
+  { label: "AI活用・運用改善", title: ["つくった先の、", "可能性を広げる。"], subtitle: "日々の仕事を、もっと軽やかに。", text: "生成AIの活用から、公開後の保守・改善まで。長く使える仕組みを一緒に育てます。", image: "/images/heroes/couple-two-natural.webp", alt: "ベージュの服の男性とロングヘアの女性が、2体のロボットと協力するOHO BROTHERSのイメージ", destination: "services" },
 ];
 
 const SLIDE_INTERVAL_MS = 4000;

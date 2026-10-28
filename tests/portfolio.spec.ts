@@ -123,3 +123,18 @@ test("four hero images cycle every four seconds and can be paused", async ({ pag
   await page.clock.runFor(4000);
   await expect(frames.nth(1)).toHaveAttribute("data-active", "true");
 });
+
+test("workflow links select packages, tool motion pauses, and footer navigation works", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator(".workflow-card")).toHaveCount(3);
+  await page.getByRole("link", { name: /想いを整理して、使いやすいWebサイトへ/ }).click();
+  await expect(page.locator("#packages").getByRole("button", { name: "Web制作", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "スキルアニメーションを停止" }).click();
+  await expect(page.locator(".skill-tool-universe")).toHaveAttribute("data-paused", "true");
+  await expect(page.locator(".skill-orbit-ring").first()).toHaveCSS("animation-play-state", "paused");
+  await page.getByRole("button", { name: "スキルアニメーションを再生" }).click();
+  await expect(page.locator(".skill-tool-universe")).toHaveAttribute("data-paused", "false");
+  await expect(page.getByRole("contentinfo").getByRole("link", { name: "ページの先頭へ" })).toHaveAttribute("href", "#introduction");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.getByRole("button", { name: "スキルアニメーションを再生" })).toBeDisabled();
+});
