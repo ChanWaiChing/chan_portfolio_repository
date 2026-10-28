@@ -20,8 +20,8 @@ export function SectionCompanions({
       </figcaption>
       <div className="companions-picture">
         <Image
-          src="/images/human-robot-team.png"
-          alt="若いクリエイター2人と、カラフルな髪のロボットのイメージ"
+          src="/images/four-person-team.png"
+          alt="参照画像の4人全員と、カラフルな髪のロボットのイメージ"
           fill
           sizes="(max-width:760px) 180px, 330px"
         />

@@ -88,9 +88,9 @@ export function usePageMotion(
           .to(
             ".hero-photograph",
             {
-              scale: 1.24,
-              xPercent: -3,
-              rotation: -0.8,
+              scale: 1.035,
+              xPercent: -1,
+              rotation: -0.3,
               ease: "none",
               duration: 1,
             },
@@ -137,26 +137,18 @@ export function usePageMotion(
             },
             0.5,
           );
-        gsap.to(".hero-human-one", {
-          y: -2.5,
-          scaleY: 1.008,
-          rotation: 0.08,
-          transformOrigin: "55% 80%",
-          duration: 3.5,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
-        gsap.to(".hero-human-two", {
-          y: -3,
-          scaleY: 1.006,
-          rotation: -0.08,
-          transformOrigin: "80% 80%",
-          duration: 4.1,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          delay: 0.7,
+        gsap.utils.toArray<HTMLElement>(".hero-human").forEach((person, i) => {
+          gsap.to(person, {
+            y: -1.2 - (i % 2) * 0.4,
+            scaleY: 1.004,
+            rotation: i % 2 ? 0.035 : -0.035,
+            transformOrigin: `${20 + i * 20}% 80%`,
+            duration: 3.6 + i * 0.3,
+            delay: i * 0.35,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
         });
         gsap.to(".light-ribbon-one", {
           rotate: 24,
@@ -260,7 +252,8 @@ export function usePageMotion(
           const pointer = (event: PointerEvent) => {
             cursorX(event.clientX);
             cursorY(event.clientY);
-            if (cursorRef.current) cursorRef.current.dataset.positioned = "true";
+            if (cursorRef.current)
+              cursorRef.current.dataset.positioned = "true";
             if (cursorRef.current)
               cursorRef.current.dataset.active = (
                 event.target as HTMLElement

@@ -204,7 +204,7 @@ test("each main section includes a human and robot illustration", async ({
     await expect(section.locator("[data-human-robot=true] img")).toHaveCount(1);
   await expect(page.locator(".hero-photograph > img")).toHaveAttribute(
     "src",
-    /young-brothers/,
+    /four-person-team/,
   );
 });
 
@@ -226,4 +226,77 @@ test("text contrast passes automated accessibility checks", async ({
       })),
     })),
   ).toEqual([]);
+});
+
+test("four-person hero stays uncropped at the requested viewport sizes", async ({
+  page,
+  isMobile,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const sizes = isMobile ? [375, 390] : [768, 1280, 1440];
+  for (const width of sizes) {
+    await page.setViewportSize({ width, height: isMobile ? 844 : 1000 });
+    await page.goto("/");
+    await page.evaluate(() => document.fonts.ready);
+    const photo = page.locator(".hero-photograph > img");
+    await expect(photo).toHaveCSS("object-fit", "contain");
+    await expect(page.locator(".hero-photograph")).toHaveAttribute(
+      "data-people",
+      "4",
+    );
+    await expect
+      .poll(() => photo.evaluate((e) => (e as HTMLImageElement).naturalWidth))
+      .toBeGreaterThan(0);
+    const bounds = await photo.boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds!.x).toBeGreaterThanOrEqual(0);
+    expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width);
+    await expect(page.locator(".team-portrait")).toHaveAttribute(
+      "data-people",
+      "4",
+    );
+    await expect(page.locator(".team-portrait-person img")).toHaveCount(2);
+    expect(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+    ).toBe(true);
+    await expect(
+      page
+        .locator(".hero-actions")
+        .getByRole("link", { name: "制作実績を見る" }),
+    ).toHaveAttribute("href", "#works");
+  }
+});
+
+test("contact form validates and prepares an email draft without posting", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const submit = page.getByRole("button", {
+    name: "メールアプリを開いて相談する",
+  });
+  await submit.click();
+  await expect(page.locator("#contact-name:invalid")).toHaveCount(1);
+  await page.locator("#contact-name").fill("表示確認 テスト");
+  await page.locator("#contact-email").fill("invalid");
+  await page.locator("#contact-message").fill("フォームの表示確認用です。");
+  expect(
+    await page
+      .locator("#contact-email")
+      .evaluate((e) => (e as HTMLInputElement).validity.valid),
+  ).toBe(false);
+  await page.locator("#contact-email").fill("preview@example.com");
+  const posts: string[] = [];
+  page.on("request", (request) => {
+    if (request.method() === "POST") posts.push(request.url());
+  });
+  await submit.click();
+  await expect(page.locator(".contact-form-status")).toContainText(
+    "メールアプリで内容を確認して送信してください",
+  );
+  expect(posts).toEqual([]);
+  await expect(page.locator("#contact-message")).toHaveValue(
+    "フォームの表示確認用です。",
+  );
 });

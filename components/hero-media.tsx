@@ -25,11 +25,12 @@ export function HeroMedia() {
   return (
     <>
       <div
+        data-people="4"
         className={`hero-photograph ${playing ? "hero-media-has-video" : ""}`}
       >
         <Image
-          src="/images/young-brothers.png"
-          alt="25歳と21歳をイメージした若いクリエイター2人が、明るいスタジオで協力するイメージ。"
+          src="/images/four-person-team.png"
+          alt="参照画像の4人全員が、元の並び順で登場するチームビジュアル。"
           fill
           sizes="100vw"
           preload
@@ -37,10 +38,10 @@ export function HeroMedia() {
         />
         {!site.heroVideoUrl && (
           <div className="hero-human-layers" aria-hidden="true">
-            {["one", "two"].map((person) => (
+            {["one", "two", "three", "four"].map((person) => (
               <div className={`hero-human hero-human-${person}`} key={person}>
                 <Image
-                  src="/images/young-brothers.png"
+                  src="/images/four-person-team.png"
                   alt=""
                   fill
                   sizes="100vw"
@@ -54,7 +55,7 @@ export function HeroMedia() {
           <video
             ref={video}
             className="hero-video"
-            poster="/images/young-brothers.png"
+            poster="/images/four-person-team.png"
             src={site.heroVideoUrl}
             muted
             loop

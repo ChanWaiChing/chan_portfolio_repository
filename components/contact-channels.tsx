@@ -46,7 +46,11 @@ export function ContactChannels() {
     `大穂兄弟 ご担当者様\n\n${message}\n\nお名前：${name}\nメールアドレス：${email}`;
   const send = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(`【ポートフォリオからのご相談】${name}`)}&body=${encodeURIComponent(draft())}`;
+    window.open(
+      `mailto:${site.email}?subject=${encodeURIComponent(`【ポートフォリオからのご相談】${name}`)}&body=${encodeURIComponent(draft())}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
     setFormStatus(
       "メールアプリで内容を確認して送信してください。開かない場合は、相談内容をコピーしてご連絡ください。",
     );

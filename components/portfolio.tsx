@@ -26,6 +26,7 @@ import { usePageMotion, useGalleryMotion } from "./motion-system";
 import { projects as works, projectCategories } from "@/lib/projects";
 import { ProjectCover } from "./project-cover";
 import { SectionCompanions } from "./section-companions";
+import { TeamPortrait } from "./team-portrait";
 const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false });
 const LivingMascots = dynamic(() => import("./living-mascots"), { ssr: false });
 const nav = [
@@ -39,12 +40,14 @@ const skills = [
   "React",
   "TypeScript",
   "Node.js",
-  "Python",
+  "Three.js",
   "Figma",
   "WordPress",
   "UI / UX",
   "iOS / Android",
   "Generative AI",
+  "GSAP",
+  "Canva",
 ];
 const services = [
   {
@@ -354,20 +357,28 @@ export default function Portfolio() {
                     その先の運用まで。
                   </strong>
                 </p>
-                <p>
+                <p className="hero-description">
                   考える兄と、描く弟。
                   <br />
-                  デザインとテクノロジーで、
-                  <br className="mobile-only" />
-                  あなたの「つくりたい」を、一緒に。
+                  企画からデザイン、開発、運用まで。
+                  <br />
+                  あなたの「つくりたい」に伴走します。
                 </p>
-                <AnimatedLink
-                  href="#contact"
-                  dark
-                  tag="アイデア段階でも、お気軽に！"
-                >
-                  私たちに相談する
-                </AnimatedLink>
+                <div className="hero-actions">
+                  <AnimatedLink
+                    href="#works"
+                    tag="分野別に15件の掲載情報を見る"
+                  >
+                    制作実績を見る
+                  </AnimatedLink>
+                  <AnimatedLink
+                    href="#contact"
+                    dark
+                    tag="アイデア段階でも、お気軽に！"
+                  >
+                    制作を相談する
+                  </AnimatedLink>
+                </div>
               </div>
               <div className="hero-art" aria-hidden="true">
                 <div className="hero-art-caption">
@@ -432,18 +443,213 @@ export default function Portfolio() {
             </div>
           </section>
         </div>
-        <div className="hero-cta-band">
-          <AnimatedLink
-            href="#contact"
-            dark
-            tag="まだアイデア段階でも、大丈夫！"
+        <section className="skills-section" aria-label="対応技術とツール">
+          <div className="skills-label">
+            <span>OUR TOOLBOX</span>
+            <p>アイデアに合わせて、最適な選択を。</p>
+          </div>
+          <div className="marquee">
+            <div className="marquee-track">
+              {[0, 1].map((copy) => (
+                <div
+                  className="marquee-group"
+                  key={copy}
+                  aria-hidden={copy === 1}
+                >
+                  {skills.map((s, i) => (
+                    <span key={s}>
+                      <i>
+                        {
+                          [
+                            "↗",
+                            "⚛",
+                            "TS",
+                            "⌘",
+                            "3D",
+                            "◈",
+                            "W",
+                            "✳",
+                            "↗",
+                            "✧",
+                            "G",
+                            "C",
+                          ][i]
+                        }
+                      </i>
+                      {s}
+                      <b>·</b>
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+          <p className="toolbox-note">
+            ツールや技術は、目的に合わせて選定します。
+          </p>
+          <SectionCompanions message="技術は、想いを形にするために。" />
+        </section>
+        <section id="works" className="section works-section">
+          <div className="section-heading horizontal reveal">
+            <div>
+              <Label>01 — SELECTED WORKS</Label>
+              <h2>
+                さまざまな事業に、
+                <br />
+                それぞれの最適解を。
+              </h2>
+            </div>
+            <div className="works-note">
+              <span className="outline-pill">LANCERS PORTFOLIO</span>
+              <p>
+                Web制作・デザインのポートフォリオ。
+                <br />
+                企業・採用・医療・ブランドの分野からご覧いただけます。
+              </p>
+            </div>
+          </div>
+          <div
+            className="portfolio-controls"
+            role="group"
+            aria-label="ポートフォリオのカテゴリ"
           >
-            メールでプロジェクトを相談する
-          </AnimatedLink>
-          <AnimatedLink href="#services" tag="必要なところから、柔軟に対応">
-            サービス・対応できること
-          </AnimatedLink>
-        </div>
+            {projectCategories.map(([value, label]) => (
+              <button
+                key={value}
+                aria-pressed={category === value}
+                onClick={() => setCategory(value)}
+              >
+                {label}
+                <span>
+                  {value === "ALL"
+                    ? works.length
+                    : works.filter((w) => w.category === value).length}
+                </span>
+              </button>
+            ))}
+          </div>
+          <p className="portfolio-count" role="status">
+            {category === "ALL"
+              ? works.length
+              : works.filter((w) => w.category === category).length}
+            件のポートフォリオ
+          </p>
+          <div className="works-grid" key={category}>
+            {works
+              .map((item, i) => ({ item, i }))
+              .filter(
+                ({ item }) => category === "ALL" || item.category === category,
+              )
+              .map(({ item, i }) => (
+                <button
+                  className={`work-card reveal work-${item.accent}`}
+                  key={item.id}
+                  onClick={() => setWork(i)}
+                  data-cursor="VIEW"
+                  aria-label={`${item.title} 詳細を見る`}
+                >
+                  <div className="work-preview">
+                    <ProjectCover project={item} />
+                    <span className="project-hover-label">
+                      VIEW PROJECT <ArrowUpRight size={16} />
+                    </span>
+                    <span className="work-view">
+                      <ArrowUpRight size={20} />
+                    </span>
+                  </div>
+                  <div className="work-meta">
+                    <span>{item.tag}</span>
+                    <span>PROJECT {String(i + 1).padStart(2, "0")}</span>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p className="work-description">{item.desc}</p>
+                </button>
+              ))}
+          </div>
+          <SectionCompanions message="一つひとつの想いを、伝わる体験に。" />
+        </section>
+        <section id="services" className="section services-section">
+          <div className="section-heading horizontal reveal">
+            <div>
+              <Label>02 — WHAT WE DO</Label>
+              <h2>
+                「こんなことできる？」
+                <br />
+                から、はじめよう。
+              </h2>
+            </div>
+            <p>
+              企画からデザイン、開発、運用まで。
+              <br />
+              窓口はひとつ、可能性はいくつも。
+              <br />
+              必要なところから、柔軟にお手伝いします。
+            </p>
+          </div>
+          <div className="services-grid">
+            {services.map(({ n, en, title, text, tags, icon: Icon }) => (
+              <article className="service-card reveal" key={n}>
+                <div className="service-top">
+                  <span>{n}</span>
+                  <Icon size={28} strokeWidth={1.3} />
+                </div>
+                <span className="service-en">{en}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <div className="service-tags">
+                  {tags.map((t) => (
+                    <span key={t}>{t}</span>
+                  ))}
+                </div>
+                <a
+                  href="#contact"
+                  className="service-link"
+                  aria-label={`${en}について相談する`}
+                >
+                  このサービスを相談する
+                  <ArrowUpRight size={17} />
+                </a>
+              </article>
+            ))}
+          </div>
+          <SectionCompanions message="デザインと開発を、ひとつの窓口で。" />
+        </section>
+        <section id="packages" className="section packages-section">
+          <div className="section-heading horizontal reveal">
+            <div>
+              <Label>WORK WITH US</Label>
+              <h2>
+                必要なところから、
+                <br />
+                一緒にはじめましょう。
+              </h2>
+            </div>
+            <p>
+              ご相談内容に合わせて、対応範囲と進め方をご提案。
+              <br />
+              プロフィールの公開パッケージもご覧いただけます。
+            </p>
+          </div>
+          <div className="package-summary">
+            <span>まずは、必要なところから。</span>
+            <p>
+              制作範囲・必要な機能・ご希望の時期をお聞きし、進め方とお見積もりをご提案します。
+            </p>
+            <a href="#contact">
+              制作について相談する <ArrowUpRight size={17} />
+            </a>
+          </div>
+          <a
+            href={site.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="profile-source-link"
+          >
+            Lancersでプロフィール・公開パッケージを見る{" "}
+            <ArrowUpRight size={16} />
+          </a>
+          <SectionCompanions message="必要なところから、気軽にご相談ください。" />
+        </section>
         <section
           className="concerns-section section"
           aria-labelledby="concerns-title"
@@ -508,8 +714,8 @@ export default function Portfolio() {
           <div className="solution-arrow" aria-hidden="true" />
           <div className="solution-banner reveal">
             <Image
-              src="/images/human-robot-team.png"
-              alt="若いクリエイターと、色とりどりの髪を持つロボット"
+              src="/images/four-person-team.png"
+              alt="参照画像の4人と、色とりどりの髪を持つロボット"
               fill
               sizes="(max-width: 760px) 100vw, 1000px"
             />
@@ -561,9 +767,76 @@ export default function Portfolio() {
           </div>
           <SectionCompanions message="アイデアの整理から、ふたりで伴走します。" />
         </section>
+        <section id="process" className="section process-section">
+          <div className="section-heading reveal">
+            <Label>04 — OUR APPROACH</Label>
+            <h2>
+              いいものづくりは、
+              <br />
+              いい対話から。
+            </h2>
+            <p>
+              認識を揃えながら、ひとつずつ、着実に。
+              <br />
+              つくる時間も、つくったその先も大切にします。
+            </p>
+          </div>
+          <ol className="process-stages" aria-label="制作工程">
+            {[
+              "ヒアリング",
+              "要件整理・設計",
+              "デザイン",
+              "開発",
+              "検証",
+              "公開・改善",
+            ].map((stage, i) => (
+              <li key={stage}>
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                {stage}
+              </li>
+            ))}
+          </ol>
+          <div className="process-list">
+            {[
+              [
+                "01",
+                "LISTEN",
+                "まずは、じっくり聞く。",
+                "ご要望だけでなく、その背景にある想いや課題まで。丁寧な対話で、目指すゴールを一緒に見つけます。",
+              ],
+              [
+                "02",
+                "DESIGN & BUILD",
+                "ふたりで、一貫してつくる。",
+                "仕様とデザインの認識を揃え、細部まで丁寧に。品質と納期を大切にしながら、形にしていきます。",
+              ],
+              [
+                "03",
+                "GROW TOGETHER",
+                "その先も、一緒に育てる。",
+                "公開は、次のスタート。保守性・拡張性を考えた設計で、運用や改善まで長く伴走します。",
+              ],
+            ].map(([n, en, title, text]) => (
+              <div className="process-row reveal" key={n}>
+                <span className="process-number">{n}</span>
+                <div>
+                  <span className="process-en">{en}</span>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </div>
+                <ArrowUpRight
+                  className="process-arrow"
+                  size={27}
+                  strokeWidth={1}
+                />
+              </div>
+            ))}
+          </div>
+          <SectionCompanions message="つくったその先も、一緒に育てる。" />
+        </section>
         <section id="about" className="section about-section">
           <div className="section-heading reveal">
-            <Label>01 — ABOUT US</Label>
+            <Label>05 — ABOUT US</Label>
             <h2>
               得意はちがう。
               <br />
@@ -577,6 +850,7 @@ export default function Portfolio() {
               私たち大穂兄弟は、兄弟でつくるクリエイティブチームです。
             </p>
           </div>
+          <TeamPortrait />
           <div className="about-grid reveal">
             <div className="profile-card profile-engineer">
               <div className="profile-top">
@@ -666,286 +940,9 @@ export default function Portfolio() {
           </div>
           <SectionCompanions message="ちがう得意が、ひとつのチームになる。" />
         </section>
-        <section id="services" className="section services-section">
-          <div className="section-heading horizontal reveal">
-            <div>
-              <Label>02 — WHAT WE DO</Label>
-              <h2>
-                「こんなことできる？」
-                <br />
-                から、はじめよう。
-              </h2>
-            </div>
-            <p>
-              企画からデザイン、開発、運用まで。
-              <br />
-              窓口はひとつ、可能性はいくつも。
-              <br />
-              必要なところから、柔軟にお手伝いします。
-            </p>
-          </div>
-          <div className="services-grid">
-            {services.map(({ n, en, title, text, tags, icon: Icon }) => (
-              <article className="service-card reveal" key={n}>
-                <div className="service-top">
-                  <span>{n}</span>
-                  <Icon size={28} strokeWidth={1.3} />
-                </div>
-                <span className="service-en">{en}</span>
-                <h3>{title}</h3>
-                <p>{text}</p>
-                <div className="service-tags">
-                  {tags.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </div>
-                <a
-                  href="#contact"
-                  className="service-link"
-                  aria-label={`${en}について相談する`}
-                >
-                  このサービスを相談する
-                  <ArrowUpRight size={17} />
-                </a>
-              </article>
-            ))}
-          </div>
-          <SectionCompanions message="デザインと開発を、ひとつの窓口で。" />
-        </section>
-        <section className="skills-section" aria-label="対応技術とツール">
-          <div className="skills-label">
-            <span>OUR TOOLBOX</span>
-            <p>アイデアに合わせて、最適な選択を。</p>
-          </div>
-          <div className="marquee">
-            <div className="marquee-track">
-              {[0, 1].map((copy) => (
-                <div
-                  className="marquee-group"
-                  key={copy}
-                  aria-hidden={copy === 1}
-                >
-                  {skills.map((s, i) => (
-                    <span key={s}>
-                      <i>
-                        {
-                          ["↗", "⚛", "TS", "⌘", "Py", "◈", "W", "✳", "↗", "✧"][
-                            i
-                          ]
-                        }
-                      </i>
-                      {s}
-                      <b>·</b>
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-          <p className="toolbox-note">
-            ツールや技術は、目的に合わせて選定します。
-          </p>
-          <SectionCompanions message="技術は、想いを形にするために。" />
-        </section>
-        <section id="works" className="section works-section">
-          <div className="section-heading horizontal reveal">
-            <div>
-              <Label>03 — SELECTED WORKS</Label>
-              <h2>
-                さまざまな事業に、
-                <br />
-                それぞれの最適解を。
-              </h2>
-            </div>
-            <div className="works-note">
-              <span className="outline-pill">LANCERS PORTFOLIO</span>
-              <p>
-                Web制作・デザインのポートフォリオ。
-                <br />
-                企業・採用・医療・ブランドの分野からご覧いただけます。
-              </p>
-            </div>
-          </div>
-          <div
-            className="portfolio-controls"
-            role="group"
-            aria-label="ポートフォリオのカテゴリ"
-          >
-            {projectCategories.map(([value, label]) => (
-              <button
-                key={value}
-                aria-pressed={category === value}
-                onClick={() => setCategory(value)}
-              >
-                {label}
-                <span>
-                  {value === "ALL"
-                    ? works.length
-                    : works.filter((w) => w.category === value).length}
-                </span>
-              </button>
-            ))}
-          </div>
-          <p className="portfolio-count" role="status">
-            {category === "ALL"
-              ? works.length
-              : works.filter((w) => w.category === category).length}
-            件のポートフォリオ
-          </p>
-          <div className="works-grid" key={category}>
-            {works
-              .map((item, i) => ({ item, i }))
-              .filter(
-                ({ item }) => category === "ALL" || item.category === category,
-              )
-              .map(({ item, i }) => (
-                <button
-                  className={`work-card reveal work-${item.accent}`}
-                  key={item.id}
-                  onClick={() => setWork(i)}
-                  data-cursor="VIEW"
-                  aria-label={`${item.title} 詳細を見る`}
-                >
-                  <div className="work-preview">
-                    <ProjectCover project={item} />
-                    <span className="project-hover-label">
-                      VIEW PROJECT <ArrowUpRight size={16} />
-                    </span>
-                    <span className="work-view">
-                      <ArrowUpRight size={20} />
-                    </span>
-                  </div>
-                  <div className="work-meta">
-                    <span>{item.tag}</span>
-                    <span>PROJECT {String(i + 1).padStart(2, "0")}</span>
-                  </div>
-                  <h3>{item.title}</h3>
-                  <p className="work-description">{item.desc}</p>
-                </button>
-              ))}
-          </div>
-          <SectionCompanions message="一つひとつの想いを、伝わる体験に。" />
-        </section>
-        <section id="packages" className="section packages-section">
-          <div className="section-heading horizontal reveal">
-            <div>
-              <Label>WORK WITH US</Label>
-              <h2>
-                必要なところから、
-                <br />
-                一緒にはじめましょう。
-              </h2>
-            </div>
-            <p>
-              ご相談内容に合わせて、対応範囲と進め方をご提案。
-              <br />
-              プロフィールの公開パッケージもご覧いただけます。
-            </p>
-          </div>
-          <div className="package-grid">
-            {[
-              [
-                "01",
-                "WEB & DESIGN",
-                "サイト制作・デザイン",
-                "LP・コーポレートサイト・UI / UXなど。目的を整理し、伝わるデザインから実装まで支援します。",
-                "package-blue",
-              ],
-              [
-                "02",
-                "SYSTEM & APP",
-                "システム・アプリ開発",
-                "Web・業務システムやモバイルアプリ。使いやすさと拡張性を考え、機能を形にします。",
-                "package-pink",
-              ],
-              [
-                "03",
-                "AI & CONSULTING",
-                "AI活用・業務改善",
-                "現状の業務を整理し、技術選定から導入・改善まで。運用を見据えた仕組みづくりをご提案します。",
-                "package-orange",
-              ],
-            ].map(([n, en, title, text, color]) => (
-              <article className={`package-card reveal ${color}`} key={n}>
-                <span>{en}</span>
-                <h3>{title}</h3>
-                <p>{text}</p>
-                <span className="package-price">
-                  個別お見積もり
-                  <small>内容・規模・ご希望の時期に応じてご提案</small>
-                </span>
-                <a href="#contact">
-                  この内容で相談する <ArrowUpRight size={17} />
-                </a>
-              </article>
-            ))}
-          </div>
-          <a
-            href={site.profileUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="profile-source-link"
-          >
-            Lancersでプロフィール・公開パッケージを見る{" "}
-            <ArrowUpRight size={16} />
-          </a>
-          <SectionCompanions message="必要なところから、気軽にご相談ください。" />
-        </section>
-        <section id="process" className="section process-section">
-          <div className="section-heading reveal">
-            <Label>04 — OUR APPROACH</Label>
-            <h2>
-              いいものづくりは、
-              <br />
-              いい対話から。
-            </h2>
-            <p>
-              認識を揃えながら、ひとつずつ、着実に。
-              <br />
-              つくる時間も、つくったその先も大切にします。
-            </p>
-          </div>
-          <div className="process-list">
-            {[
-              [
-                "01",
-                "LISTEN",
-                "まずは、じっくり聞く。",
-                "ご要望だけでなく、その背景にある想いや課題まで。丁寧な対話で、目指すゴールを一緒に見つけます。",
-              ],
-              [
-                "02",
-                "DESIGN & BUILD",
-                "ふたりで、一貫してつくる。",
-                "仕様とデザインの認識を揃え、細部まで丁寧に。品質と納期を大切にしながら、形にしていきます。",
-              ],
-              [
-                "03",
-                "GROW TOGETHER",
-                "その先も、一緒に育てる。",
-                "公開は、次のスタート。保守性・拡張性を考えた設計で、運用や改善まで長く伴走します。",
-              ],
-            ].map(([n, en, title, text]) => (
-              <div className="process-row reveal" key={n}>
-                <span className="process-number">{n}</span>
-                <div>
-                  <span className="process-en">{en}</span>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </div>
-                <ArrowUpRight
-                  className="process-arrow"
-                  size={27}
-                  strokeWidth={1}
-                />
-              </div>
-            ))}
-          </div>
-          <SectionCompanions message="つくったその先も、一緒に育てる。" />
-        </section>
         <section id="faq" className="section faq-section">
           <div className="section-heading reveal">
-            <Label>05 — FAQ</Label>
+            <Label>06 — FAQ</Label>
             <h2>
               気になること、
               <br />
@@ -980,7 +977,7 @@ export default function Portfolio() {
         <section id="contact" className="contact-section">
           <div className="contact-decoration" aria-hidden="true">
             <Image
-              src="/images/human-robot-team.png"
+              src="/images/four-person-team.png"
               alt=""
               fill
               sizes="(max-width:760px) 100vw, 700px"
