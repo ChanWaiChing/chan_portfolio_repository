@@ -1,0 +1,31 @@
+/* One clear reading order: contact artwork and information, then the form. */
+#contact .contact-layout { display: flex; flex-direction: column; align-items: stretch; gap: 32px; max-width: 860px; margin: 0 auto; }
+#contact .contact-overview { width: 100%; border: 1px solid #d6e5f3; border-radius: 22px; background: linear-gradient(135deg, #f3faff, #eaf4fc); }
+#contact .contact-overview > img { display: block; width: 100%; height: auto; max-height: none; object-fit: contain; border-radius: 21px 21px 0 0; }
+.contact-overview-copy { padding: 30px 32px; }
+#contact .contact-overview h3 { margin: 0 0 15px; font-size: 29px; line-height: 1.7; }
+#contact .contact-overview p { margin: 0 0 20px; font-size: 13px; line-height: 2; }
+#contact .contact-overview-copy > a { display: inline-flex; align-items: center; gap: 10px; color: #126fb2; font-size: 13px; font-weight: 700; margin-bottom: 20px; }
+#contact .contact-overview .contact-method-note { padding-top: 18px; margin-bottom: 0; font-size: 11px; }
+#contact .contact-form { width: 100%; padding: 36px; border-radius: 22px; box-shadow: 0 8px 30px #1d476d08; }
+.contact-color-links { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 24px; }
+.contact-color-links > a, .footer-circle-links > a { --icon-color: #2779cc; --icon-tint: #eaf3ff; }
+.contact-color-links > a { display: grid; place-items: center; width: 46px; height: 46px; border: 1px solid color-mix(in srgb, var(--icon-color) 25%, white); border-radius: 50%; color: var(--icon-color); background: var(--icon-tint); transition: transform .2s, background .2s; }
+:is(.contact-color-links, .footer-circle-links) > .icon-link-blue { --icon-color: #2879d6; --icon-tint: #eaf3ff; }
+:is(.contact-color-links, .footer-circle-links) > .icon-link-orange { --icon-color: #d77323; --icon-tint: #fff1e4; }
+:is(.contact-color-links, .footer-circle-links) > .icon-link-purple { --icon-color: #8b55d7; --icon-tint: #f3edff; }
+:is(.contact-color-links, .footer-circle-links) > .icon-link-green { --icon-color: #169b79; --icon-tint: #e8f8f2; }
+:is(.contact-color-links, .footer-circle-links) > .icon-link-github { --icon-color: #3e4665; --icon-tint: #edf0f8; }
+.footer-circle-links > a { color: var(--icon-color); background: var(--icon-tint); border-color: color-mix(in srgb, var(--icon-color) 23%, white); }
+.contact-color-links > a:hover, .footer-circle-links > a:hover { color: var(--icon-color); background: color-mix(in srgb, var(--icon-color) 17%, white); transform: translateY(-2px); }
+@media (max-width: 760px) {
+  #contact .contact-layout { gap: 24px; }
+  .contact-overview-copy { padding: 25px 23px; }
+  #contact .contact-overview h3 { font-size: 26px; }
+  #contact .contact-overview p { font-size: 12px; }
+  #contact .contact-form { padding: 25px 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-color-links > a, .footer-circle-links > a { transition: none; }
+  .contact-color-links > a:hover, .footer-circle-links > a:hover { transform: none; }
+}

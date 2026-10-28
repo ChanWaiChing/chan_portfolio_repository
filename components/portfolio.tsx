@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Code2, Copy, Layers3, Menu, Minus, PenTool, Plus, Search, Sparkles, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Code2, Copy, Github, Layers3, Mail, Menu, MessageCircle, Minus, PenTool, Plus, Search, Sparkles, X } from "lucide-react";
 import { HeroShowcase } from "./hero-showcase";
 import { BrotherIntroductions } from "./brother-introductions";
 import { SkillWorkflows } from "./skill-workflows";
@@ -26,6 +26,15 @@ const faqs = [
   ["公開後の運用や改善もお願いできますか？", "はい。保守・運用、機能追加、使いやすさの改善まで、必要な支援と進め方をご相談いただけます。"],
   ["お問い合わせフォームから直接メールが送信されますか？", "内容を確認した後、ご自身のメールアプリを開いて送信する方式です。サイトからの自動送信や入力内容の保存は行いません。メールアプリが使えない場合は内容をコピーできます。"],
 ];
+
+function ContactQuickLinks() {
+  return <div className="contact-color-links" aria-label="お問い合わせ関連リンク">
+    <a className="icon-link-github" href="https://github.com/ChanWaiChing/chan_portfolio_repository" target="_blank" rel="noreferrer" aria-label="GitHubリポジトリ（新しいタブ）"><Github size={21} /></a>
+    <a className="icon-link-blue" href="#services" aria-label="対応サービス"><Layers3 size={21} /></a>
+    <a className="icon-link-purple" href="#contact-name" aria-label="お問い合わせフォームに入力"><MessageCircle size={21} /></a>
+    <a className="icon-link-orange" href={site.contactUrl} aria-label="メールで相談する"><Mail size={21} /></a>
+  </div>;
+}
 
 function Heading({ label, title, text }: { label: string; title: string; text?: string }) {
   const variants: Record<string, BotVariant> = {
@@ -154,7 +163,7 @@ export default function Portfolio() {
       </section>
       <section className="content-section content-pale" id="faq"><Heading label="FAQ" title="気になること、先にお答えします。" /><div className="content-faq">{faqs.map(([question, answer], i) => <article key={question}><h3><button aria-expanded={faq === i} aria-controls={`faq-answer-${i}`} onClick={() => setFaq(faq === i ? null : i)}><span>Q.</span>{question}{faq === i ? <Minus size={18} /> : <Plus size={18} />}</button></h3><div id={`faq-answer-${i}`} hidden={faq !== i}><p>{answer}</p></div></article>)}</div></section>
       <section className="content-section" id="contact"><Heading label="CONTACT" title="そのアイデア、聞かせてください。" text="まだ、ふんわりした想いでも大丈夫。まずは、今の状況をお聞かせください。" />
-        <div className="contact-layout"><aside className="contact-aside"><Image src="/images/teamwork.png" alt="ふたりのロボットがパズルをつなぐイメージ" width={600} height={400} sizes="(max-width:760px) 100vw, 35vw" /><h3>小さな相談が、<br />次の一歩になる。</h3><p>要件が決まっていなくても、お気軽に。<br />内容を整理するところからご一緒します。</p><a href={site.contactUrl}>メールで直接相談する<ArrowUpRight size={16} /></a><p className="contact-method-note">このフォームはメール作成用です。内容を確認した後、メールアプリで送信してください。入力内容は保存されません。</p></aside>
+        <div className="contact-layout"><aside className="contact-aside contact-overview"><Image src={site.contactImage.src} alt={site.contactImage.alt} width={site.contactImage.width} height={site.contactImage.height} sizes="(max-width: 760px) 100vw, 860px" /><div className="contact-overview-copy"><h3>小さな相談が、<br />次の一歩になる。</h3><p>要件が決まっていなくても、お気軽に。<br />内容を整理するところからご一緒します。</p><a href={site.contactUrl}>メールで直接相談する<ArrowUpRight size={16} /></a><ContactQuickLinks /><p className="contact-method-note">このフォームはメール作成用です。内容を確認した後、メールアプリで送信してください。入力内容は保存されません。</p></div></aside>
           <form className="contact-form" onChange={() => { setReviewed(false); setCopyStatus(""); }} onSubmit={event => { event.preventDefault(); setReviewed(true); setCopyStatus(""); requestAnimationFrame(() => document.getElementById("contact-review")?.focus()); }}>
             <div className="form-row"><label htmlFor="contact-name">お名前 <span>必須</span></label><input id="contact-name" autoComplete="name" required maxLength={100} placeholder="山田 太郎" value={name} onChange={event => setName(event.target.value)} /></div>
             <div className="form-row"><label htmlFor="contact-email">メールアドレス <span>必須</span></label><input id="contact-email" type="email" autoComplete="email" required maxLength={200} placeholder="hello@example.com" value={email} onChange={event => setEmail(event.target.value)} /></div>
