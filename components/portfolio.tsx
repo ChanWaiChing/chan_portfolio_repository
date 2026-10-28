@@ -130,7 +130,20 @@ export default function Portfolio() {
     <main id="main">
       <section id="introduction" aria-label="はじめに"><HeroShowcase />
         <div className="content-section introduction-copy"><Heading label="INTRODUCTION" title="考える兄と、描く弟。" text="ひとりでは届かないところへ、ふたりなら。ITコンサルティング・開発とデザイン、それぞれの専門性をつなぐクリエイティブチームです。" />
-          <div className="brothers-grid"><article><Code2 size={26} /><span>ENGINEERING / 兄</span><h3>考える、つなぐ、つくる。</h3><p>11年の実務経験をもとに、課題の整理から設計・開発・運用まで。事業と技術をつなぎます。</p></article><article><PenTool size={26} /><span>DESIGN / 弟</span><h3>想いを、伝わるデザインに。</h3><p>3年の実務経験をもとに、ブランドと使う人の気持ちに寄り添う、心地よい体験を考えます。</p></article></div>
+          <div className="brothers-grid">
+            <article className="brother-card brother-engineer">
+              <div className="brother-card-top"><span className="brother-role"><Code2 size={18} />ENGINEERING</span><span className="brother-order">THE OLDER BROTHER / 兄</span></div>
+              <div className="brother-identity"><div><span className="brother-specialty">ITコンサルタント・フルスタックエンジニア</span><h3>考える、つなぐ、<br />つくる。</h3></div><BotMascot variant="ocean" className="brother-avatar" /></div>
+              <p>11年の実務経験をもとに、課題の整理から設計・開発・運用まで。事業と技術をつなぎます。</p>
+              <div className="brother-card-bottom"><span className="brother-experience"><strong>11</strong><span>YEARS<br />実務経験</span></span><ul><li>要件定義</li><li>設計・開発</li><li>運用改善</li></ul></div>
+            </article>
+            <article className="brother-card brother-designer">
+              <div className="brother-card-top"><span className="brother-role"><PenTool size={18} />DESIGN</span><span className="brother-order">THE YOUNGER BROTHER / 弟</span></div>
+              <div className="brother-identity"><div><span className="brother-specialty">デザイナー・UI / UXデザイン</span><h3>想いを、伝わる<br />デザインに。</h3></div><BotMascot variant="sunset" className="brother-avatar" /></div>
+              <p>3年の実務経験をもとに、ブランドと使う人の気持ちに寄り添う、心地よい体験を考えます。</p>
+              <div className="brother-card-bottom"><span className="brother-experience"><strong>3</strong><span>YEARS<br />実務経験</span></span><ul><li>UI / UX</li><li>Webデザイン</li><li>Figma</li></ul></div>
+            </article>
+          </div>
         </div>
       </section>
       <section className="content-section content-pale" id="services"><Heading label="SERVICES & SKILLS" title="企画から、つくったその先まで。" text="必要なところから、柔軟に。デザインと技術をひとつの窓口で相談できます。" />
@@ -156,14 +169,14 @@ export default function Portfolio() {
         <p className="sample-notice"><Sparkles size={17} />掲載中の20件は仮のサンプルです。金額・期間・内容は表示例で、正式なお見積もりではありません。</p>
         <div className="catalog-filters" role="group" aria-label="パッケージのカテゴリ">{categories.map(category => <button type="button" key={category} aria-pressed={packageCategory === category} onClick={() => { setPackageCategory(category); setPackagePage(1); }}>{category}</button>)}</div>
         <p className="catalog-summary" ref={resultSummary} tabIndex={-1} aria-live="polite">{filteredPackages.length}件中 {(packagePage - 1) * 6 + 1}〜{Math.min(packagePage * 6, filteredPackages.length)}件を表示 <span>全20パッケージ / SAMPLE</span></p>
-        <div className="package-grid">{filteredPackages.slice((packagePage - 1) * 6, packagePage * 6).map((item, i) => <article className={`package-card package-tone-${i % 3}`} key={item.id}><div className="catalog-card-meta"><span>{item.category}</span><b>SAMPLE {item.id.slice(-2)}</b></div><h3>{item.title}</h3><p>{item.description}</p><ul>{item.deliverables.map(deliverable => <li key={deliverable}><Check size={15} />{deliverable}</li>)}</ul><div className="package-price"><small>参考表示・税込</small><strong>¥{item.price.toLocaleString("ja-JP")}<span>〜</span></strong><span>想定期間：{item.duration}</span></div><button className="catalog-outline-button" onClick={() => setDetail({ kind: "package", item })}>プランの詳細を見る<ArrowRight size={17} /></button></article>)}</div>
+        <div className="package-grid">{filteredPackages.slice((packagePage - 1) * 6, packagePage * 6).map((item, i) => <article className={`package-card luminous-card package-tone-${i % 3}`} key={item.id}><div className="catalog-card-meta"><span>{item.category}</span><b>SAMPLE {item.id.slice(-2)}</b></div><h3>{item.title}</h3><p>{item.description}</p><ul>{item.deliverables.map(deliverable => <li key={deliverable}><Check size={15} />{deliverable}</li>)}</ul><div className="package-price"><small>参考表示・税込</small><strong>¥{item.price.toLocaleString("ja-JP")}<span>〜</span></strong><span>想定期間：{item.duration}</span></div><button className="catalog-outline-button" onClick={() => setDetail({ kind: "package", item })}>プランの詳細を見る<ArrowRight size={17} /></button></article>)}</div>
         <Pagination page={packagePage} total={filteredPackages.length} size={6} onChange={changePackagePage} label="パッケージのページ切り替え" />
       </section>
       <section className="content-section" id="works"><Heading label="PORTFOLIO" title="つくれるものは、ひとつじゃない。" text="ご相談のきっかけになる、デザインと開発の制作イメージをご紹介します。" />
         <p className="sample-notice">30件すべて架空のサンプル・制作コンセプトです。実在のクライアントや納品実績ではありません。</p>
         <div className="work-toolbar"><div className="catalog-filters" role="group" aria-label="ポートフォリオのカテゴリ">{categories.map(category => <button type="button" key={category} aria-pressed={workCategory === category} onClick={() => { setWorkCategory(category); setWorkPage(1); }}>{category}</button>)}</div><label className="catalog-search"><Search size={17} /><input type="search" aria-label="ポートフォリオを検索" placeholder="キーワードで探す" value={query} onChange={event => { setQuery(event.target.value); setWorkPage(1); }} /></label></div>
         <p className="catalog-summary" ref={workSummary} tabIndex={-1} aria-live="polite">{filteredWorks.length ? `${filteredWorks.length}件中 ${(workPage - 1) * 9 + 1}〜${Math.min(workPage * 9, filteredWorks.length)}件を表示` : "該当する制作イメージはありません"}<span>全30アイテム / SAMPLE</span></p>
-        <div className="portfolio-grid">{filteredWorks.slice((workPage - 1) * 9, workPage * 9).map(item => <article className="portfolio-card" key={item.id}><button onClick={() => setDetail({ kind: "work", item })} aria-label={`${item.title} 詳細を見る`}><WorkVisual item={item} /><div className="portfolio-card-body"><div className="catalog-card-meta"><span>{item.category}</span><b>SAMPLE</b></div><h3>{item.title}</h3><p>{item.technologies.join(" / ")}</p><span className="portfolio-detail-link">制作イメージを見る<ArrowUpRight size={18} /></span></div></button></article>)}</div>
+        <div className="portfolio-grid">{filteredWorks.slice((workPage - 1) * 9, workPage * 9).map(item => <article className="portfolio-card luminous-card" key={item.id}><button onClick={() => setDetail({ kind: "work", item })} aria-label={`${item.title} 詳細を見る`}><WorkVisual item={item} /><div className="portfolio-card-body"><div className="catalog-card-meta"><span>{item.category}</span><b>SAMPLE</b></div><h3>{item.title}</h3><p>{item.technologies.join(" / ")}</p><span className="portfolio-detail-link">制作イメージを見る<ArrowUpRight size={18} /></span></div></button></article>)}</div>
         {!filteredWorks.length && <div className="catalog-empty"><Search size={28} /><p>別のキーワードやカテゴリでお試しください。</p><button className="catalog-outline-button" onClick={() => { setQuery(""); setWorkCategory("すべて"); setWorkPage(1); }}>検索条件をリセット</button></div>}
         <Pagination page={workPage} total={filteredWorks.length} size={9} onChange={changeWorkPage} label="ポートフォリオのページ切り替え" />
       </section>
