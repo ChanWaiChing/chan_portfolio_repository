@@ -9,7 +9,7 @@
 - Three.js 0.186.1（WebGLシェーダーによるスクロール切り替え）
 - GSAP 3.15 / ScrollTrigger（ヒーロー・スクロール演出・マーキー・カード・ボタン）
 - CSSアニメーション / Lucideアイコン
-- Manrope Variable / Zen Kaku Gothic New（ローカル配信。Google Fontsへの接続不要）
+- Outfit Variable / Noto Sans JP Variable（ローカル配信。Google Fontsへの接続不要）
 - Playwright（PC / モバイルの操作テスト）
 
 Node.js 20.9以上が必要です。この環境ではNode.js 24で検証しました。
@@ -179,7 +179,7 @@ GSAPコンテキスト・ScrollTrigger・DOMイベント・WebGLリソースは�
 | 3人  | ![3人でムードボードを確認](public/images/dream-trio.png)        | 課題と解決・制作工程              |
 
 - 画像と人数・代替テキストの対応は `lib/visuals.ts` に集約。`SectionCompanions` の `variant` で切り替えます。
-- 和文は Zen Kaku Gothic New、英数字は Manrope Variable。旧Noto Sans JP / DM Sansの依存と読み込みを置き換えました。
+- 和文は Noto Sans JP Variable、英数字は Outfit Variable。以前のManrope / Zen Kaku Gothic Newの依存と読み込みを置き換えました。
 - スキル・サービス・装飾・ボタンはLucideのアウトラインSVGへ統一。`components/skill-glyph.tsx` にスキルアイコンを集約し、装飾の絵文字を置き換えました。
 - 配色・日本語の余白・Bento（ベントー）型の情報整理・細い線・ソフトなガラス感を使った日本語の編集的なUIを採用。
 - コバルト・アイリス・ティール・コーラルをアクセントにし、本文の濃色とフォームの読みやすさを維持。光のリボン、オーロラ状の背景、淡い粒子を加えています。
@@ -199,3 +199,13 @@ GSAPコンテキスト・ScrollTrigger・DOMイベント・WebGLリソースは�
 - [問い合わせ・スマートフォン](docs/previews/modern-contact-mobile.png)
 
 元の実績サムネイルや販売パッケージ価格の未提供という制約は従来どおりです。実績の案件概要カバーと公開プロフィールへのリンクを維持しています。
+
+### Immersive visual renewal
+
+The first view and chapter illustrations now share soft masked edges with their surrounding surfaces, replacing the framed-photo treatment. Chapter artwork is larger, while tonal backgrounds and gradient thresholds separate sections. The navigation uses flat, tinted action cards and an Explore grid menu. Self-hosted **Noto Sans JP Variable** and **Outfit Variable** are used for Japanese and Latin typography, including section headings and subtitles.
+
+`public/images/mascot-pearl.png` and `public/images/mascot-sunset.png` are transparent, reference-matched pearl-shell mascots. The same asset appears in the header, hero, and every chapter, with a warm color variation. GSAP animates the hero companions; the Three.js hero atmosphere remains in place. The former box-shaped Three.js mascots have been replaced to maintain visual consistency with the photographic scenes.
+
+`components/meteor-trail.tsx` renders a bounded, pointer-driven comet trail on one non-interactive canvas. It only runs with a fine mouse pointer, stops drawing once trails fade, and disables itself when reduced motion is requested. Touch devices retain their native interaction.
+
+Latest previews: [desktop](docs/previews/immersive-desktop.png) · [mobile](docs/previews/immersive-mobile.png) · [toolbox](docs/previews/immersive-toolbox.png).

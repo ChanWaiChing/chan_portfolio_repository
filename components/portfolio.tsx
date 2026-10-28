@@ -9,7 +9,7 @@ import {
   Check,
   Copy,
   X,
-  Menu,
+  Grid2X2,
   Plus,
   Minus,
   Code2,
@@ -20,6 +20,7 @@ import {
   Asterisk,
   MousePointer2,
 } from "lucide-react";
+import { MeteorTrail } from "./meteor-trail";
 import { Robot } from "./robot";
 import { site } from "@/lib/site";
 import { HeroMedia } from "./hero-media";
@@ -217,6 +218,7 @@ export default function Portfolio() {
   };
   return (
     <>
+      <MeteorTrail />
       <div className="dreamscape" aria-hidden="true">
         <i />
         <i />
@@ -292,7 +294,8 @@ export default function Portfolio() {
           aria-controls="mobile-menu"
           onClick={() => setMenu(!menu)}
         >
-          {menu ? <X /> : <Menu />}
+          {menu ? <X /> : <Grid2X2 />}
+          <span className="menu-caption">{menu ? "CLOSE" : "EXPLORE"}</span>
         </button>
       </header>
       {menu && (

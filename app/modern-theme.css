@@ -1,6 +1,6 @@
 :root {
-  --font-latin: "Manrope Variable";
-  --font-jp: "Zen Kaku Gothic New";
+  --font-latin: "Outfit Variable";
+  --font-jp: "Noto Sans JP Variable";
   --sans: var(--font-latin), var(--font-jp), sans-serif;
   --brand-ink: #18264d;
   --brand-blue: #3154eb;

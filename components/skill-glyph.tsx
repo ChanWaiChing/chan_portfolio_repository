@@ -1,33 +1,33 @@
 import {
   Atom,
-  Braces,
+  CodeXml,
   FileCode2,
-  Server,
-  Box,
+  Network,
+  Cuboid,
   Figma,
-  PanelsTopLeft,
-  Shapes,
+  Blocks,
+  Component,
   Smartphone,
-  BrainCircuit,
-  Waves,
-  Palette,
+  Cpu,
+  Spline,
+  SwatchBook,
 } from "lucide-react";
 const icons: Record<string, typeof Atom> = {
-  "Next.js": Braces,
+  "Next.js": CodeXml,
   React: Atom,
   TypeScript: FileCode2,
-  "Node.js": Server,
-  "Three.js": Box,
+  "Node.js": Network,
+  "Three.js": Cuboid,
   Figma,
-  WordPress: PanelsTopLeft,
-  "UI / UX": Shapes,
+  WordPress: Blocks,
+  "UI / UX": Component,
   "iOS / Android": Smartphone,
-  "Generative AI": BrainCircuit,
-  GSAP: Waves,
-  Canva: Palette,
+  "Generative AI": Cpu,
+  GSAP: Spline,
+  Canva: SwatchBook,
 };
 export function SkillGlyph({ skill }: { skill: string }) {
-  const Icon = icons[skill] || Shapes;
+  const Icon = icons[skill] || Component;
   return (
     <span className="skill-glyph" aria-hidden="true">
       <Icon size={23} strokeWidth={1.65} />

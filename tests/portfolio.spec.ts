@@ -208,7 +208,9 @@ test("each main section includes a human and robot illustration", async ({
   const sections = page.locator("main section:not(.hero)");
   expect(await sections.count()).toBeGreaterThan(7);
   for (const section of await sections.all())
-    await expect(section.locator("[data-human-robot=true] img")).toHaveCount(1);
+    await expect(
+      section.locator("[data-human-robot=true] .companions-picture img"),
+    ).toHaveCount(1);
   await expect(page.locator(".hero-photograph > img")).toHaveAttribute(
     "src",
     /dream-four/,
@@ -318,7 +320,7 @@ test("the page presents distinct one, two, three and four-person scenes", async 
       .locator(`.section-companions[data-people="${count}"]`)
       .first();
     await figure.scrollIntoViewIfNeeded();
-    const img = figure.locator("img");
+    const img = figure.locator(".companions-picture img");
     await expect(img).toBeVisible();
     await expect
       .poll(() => img.evaluate((e) => (e as HTMLImageElement).naturalWidth))
@@ -333,18 +335,46 @@ test("modern typography and vector skill icons are loaded", async ({
   await page.evaluate(() => document.fonts.ready);
   await expect(page.locator("body")).toHaveCSS(
     "font-family",
-    /Manrope Variable/,
+    /Outfit Variable/,
   );
   await expect(page.locator("body")).toHaveCSS(
     "font-family",
-    /Zen Kaku Gothic New/,
+    /Noto Sans JP Variable/,
   );
   await expect(
     page.locator(".marquee-group").first().locator(".skill-glyph svg"),
   ).toHaveCount(12);
   expect(
     await page.evaluate(() =>
-      document.fonts.check('700 16px "Zen Kaku Gothic New"', "相談"),
+      document.fonts.check('700 16px "Noto Sans JP Variable"', "相談"),
     ),
   ).toBe(true);
+});
+
+test("meteor trail follows a mouse and turns off for reduced motion", async ({
+  page,
+  isMobile,
+}) => {
+  await page.goto("/");
+  const trail = page.locator(".meteor-trail");
+  if (isMobile) {
+    await expect(trail).toBeHidden();
+    return;
+  }
+  await expect(trail).toHaveAttribute("data-active", "true");
+  await page.mouse.move(400, 300);
+  await page.mouse.move(700, 450, { steps: 20 });
+  const painted = await trail.evaluate((e) => {
+    const c = e as HTMLCanvasElement;
+    const pixels = c
+      .getContext("2d")!
+      .getImageData(0, 0, c.width, c.height).data;
+    for (let i = 3; i < pixels.length; i += 4) if (pixels[i] > 0) return true;
+    return false;
+  });
+  expect(painted).toBe(true);
+  await expect(trail).toHaveCSS("pointer-events", "none");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(trail).toHaveAttribute("data-active", "false");
+  await expect(trail).toBeHidden();
 });

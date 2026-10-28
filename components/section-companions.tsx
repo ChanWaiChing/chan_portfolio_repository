@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Robot } from "./robot";
 import { Sparkles } from "lucide-react";
 import { scenes, type SceneVariant } from "@/lib/visuals";
 export function SectionCompanions({
@@ -23,13 +24,16 @@ export function SectionCompanions({
           <Sparkles size={15} /> HUMAN IDEAS × ROBOT MAGIC
         </span>
         <p>{message}</p>
+        <div className="companion-mascot">
+          <Robot small warm={variant === "solo" || variant === "trio"} />
+        </div>
       </figcaption>
       <div className="companions-picture">
         <Image
           src={scene.src}
           alt={scene.alt}
           fill
-          sizes="(max-width:760px) 190px, 460px"
+          sizes="(max-width:760px) 100vw, 65vw"
         />
       </div>
     </figure>

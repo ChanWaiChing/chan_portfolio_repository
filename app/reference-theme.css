@@ -66,7 +66,7 @@ select:focus-visible {
   white-space: nowrap;
 }
 .brand-name > span {
-  font-family: var(--font-latin, "Manrope Variable"), sans-serif;
+  font-family: var(--font-latin, "Outfit Variable"), sans-serif;
   font-size: 9px;
   letter-spacing: 2.2px;
   font-weight: 700;

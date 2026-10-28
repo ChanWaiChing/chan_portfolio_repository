@@ -1,42 +1,20 @@
-import { Code2 } from "lucide-react";
-type Props = { small?: boolean; waving?: boolean };
-export function Robot({ small = false, waving = false }: Props) {
+import Image from "next/image";
+type Props = { small?: boolean; waving?: boolean; warm?: boolean };
+/** One pearl-shell mascot shared by navigation, section art and the hero. */
+export function Robot({ small = false, waving = false, warm = false }: Props) {
   return (
     <div
-      className={`robot ${small ? "robot-small" : ""} ${waving ? "robot-wave" : ""}`}
+      className={`robot ${small ? "robot-small" : ""} ${waving ? "robot-wave" : ""} ${warm ? "robot-warm" : ""}`}
       aria-hidden="true"
     >
-      <div className="robot-antenna">
-        <i />
-      </div>
-      <div className="robot-ear ear-left" />
-      <div className="robot-ear ear-right" />
-      <div className="robot-head">
-        <div className="robot-hair">
-          <i />
-          <i />
-          <i />
-        </div>
-        <div className="robot-face">
-          <i className="eye" />
-          <i className="eye" />
-          <span className="robot-smile" />
-          <b className="cheek cheek-left" />
-          <b className="cheek cheek-right" />
-        </div>
-        <span className="head-shine" />
-      </div>
-      <div className="robot-neck" />
-      <div className="robot-body">
-        <span className="robot-heart">
-          <Code2 size={23} />
-        </span>
-        <span className="robot-dot" />
-      </div>
-      <div className="robot-arm arm-left" />
-      <div className="robot-arm arm-right" />
-      <div className="robot-foot foot-left" />
-      <div className="robot-foot foot-right" />
+      <Image
+        className="robot-render"
+        src={warm ? "/images/mascot-sunset.png" : "/images/mascot-pearl.png"}
+        alt=""
+        width={240}
+        height={240}
+        sizes={small ? "95px" : "150px"}
+      />
     </div>
   );
 }
