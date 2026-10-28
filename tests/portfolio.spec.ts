@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-test("profile, navigation, scroll effect and page health", async ({
+test("profile, navigation, hero tabs and page health", async ({
   page,
   isMobile,
 }) => {
@@ -33,22 +33,14 @@ test("profile, navigation, scroll effect and page health", async ({
   await expect(
     page.locator("#contact").getByRole("link", { name: "プロジェクトを相談する" }),
   ).toHaveAttribute("href", "mailto:cbnbc07@gmail.com");
-  await page.evaluate(() => scrollTo(0, 400));
-  await expect
-    .poll(() =>
-      page
-        .locator(".hero-track")
-        .evaluate((e) =>
-          Number(getComputedStyle(e).getPropertyValue("--hero-progress")),
-        ),
-    )
-    .toBeGreaterThan(0.5);
-  await expect(page.locator(".hero-canvas")).toHaveCount(1);
-  expect(
-    await page
-      .locator(".hero-canvas")
-      .evaluate((e) => (e as HTMLCanvasElement).width),
-  ).toBeGreaterThan(300);
+  await page.getByRole("tab", { name: /02 ITコンサルティング/ }).click();
+  await expect(page.getByRole("tabpanel")).toContainText("進むべき道筋を。");
+  await page.keyboard.press("ArrowRight");
+  await expect(page.getByRole("tab", { name: /03 デザイン・開発/ })).toBeFocused();
+  await expect(page.getByRole("tabpanel")).toContainText("使いやすい仕組み。");
+  await page.keyboard.press("Home");
+  await expect(page.getByRole("tab", { name: /01 トータルサポート/ })).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByRole("button", { name: "自動切替を再生" })).toBeVisible();
   expect(errors).toEqual([]);
 });
 test("concept details, FAQ, consultation draft and keyboard dismissal", async ({
@@ -82,7 +74,9 @@ test("reduced motion keeps content accessible and disables effects", async ({
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await expect(page.locator(".hero-next")).toBeHidden();
+  await expect(page.getByRole("button", { name: "自動切替を再生" })).toBeDisabled();
+  await page.getByRole("tab", { name: /04 AI活用・運用改善/ }).click();
+  await expect(page.getByRole("tabpanel")).toContainText("可能性を広げる。");
   await expect(page.locator(".marquee-track")).toHaveCSS(
     "animation-name",
     "none",

@@ -1,11 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import {
   ArrowUpRight,
   ArrowRight,
-  ArrowDown,
   Check,
   Copy,
   X,
@@ -19,8 +17,8 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Robot } from "./robot";
+import { HeroShowcase } from "./hero-showcase";
 import { site } from "@/lib/site";
-const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false });
 const nav = [
   ["私たちについて", "about"],
   ["できること", "services"],
@@ -160,50 +158,10 @@ export default function Portfolio() {
   const [copyError, setCopyError] = useState(false);
   const [topic, setTopic] = useState("Webサイト制作");
   const [message, setMessage] = useState("");
-  const cursor = useRef<HTMLDivElement>(null);
-  const heroTrack = useRef<HTMLDivElement>(null);
-  const spotlight = useRef<HTMLDivElement>(null);
   const opener = useRef<HTMLElement | null>(null);
   const dialog = useRef<HTMLDivElement>(null);
   const modal = work !== null || contact;
   useEffect(() => {
-    const move = (e: PointerEvent) => {
-      if (cursor.current) {
-        cursor.current.style.transform = `translate3d(${e.clientX}px,${e.clientY}px,0)`;
-        const hovered = (e.target as HTMLElement).closest("[data-cursor]");
-        cursor.current.dataset.active = hovered ? "true" : "false";
-      }
-      if (spotlight.current)
-        spotlight.current.style.transform = `translate3d(${(e.clientX / innerWidth - 0.5) * 18}px,${(e.clientY / innerHeight - 0.5) * 18}px,0)`;
-    };
-    const updateHero = () => {
-      const track = heroTrack.current;
-      if (!track) return;
-      const p = matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? 0
-        : Math.max(0, Math.min(1, -track.getBoundingClientRect().top / 450));
-      track.style.setProperty("--hero-progress", String(p));
-      const intro = track.querySelector<HTMLElement>(".hero-copy");
-      const next = track.querySelector<HTMLElement>(".hero-next");
-      if (intro) {
-        intro.inert = p > 0.65;
-        intro.setAttribute("aria-hidden", String(p > 0.65));
-      }
-      if (next) {
-        next.inert = p < 0.65;
-        next.setAttribute("aria-hidden", String(p < 0.65));
-      }
-      track.style.setProperty(
-        "--intro-opacity",
-        String(Math.max(0, 1 - p * 2.5)),
-      );
-      track.style.setProperty(
-        "--next-opacity",
-        String(Math.max(0, (p - 0.45) / 0.55)),
-      );
-    };
-    window.addEventListener("scroll", updateHero, { passive: true });
-    updateHero();
     const reveals = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver(
       (entries) =>
@@ -216,10 +174,7 @@ export default function Portfolio() {
       { threshold: 0.08 },
     );
     reveals.forEach((item) => observer.observe(item));
-    document.addEventListener("pointermove", move, { passive: true });
     return () => {
-      document.removeEventListener("pointermove", move);
-      window.removeEventListener("scroll", updateHero);
       observer.disconnect();
     };
   }, []);
@@ -282,12 +237,6 @@ export default function Portfolio() {
   };
   return (
     <>
-      <div className="custom-cursor" ref={cursor} aria-hidden="true">
-        <span>
-          VIEW
-          <ArrowUpRight size={12} />
-        </span>
-      </div>
       <a href="#main" className="skip-link">
         本文へスキップ
       </a>
@@ -324,15 +273,22 @@ export default function Portfolio() {
             <ChevronRight size={17} />
           </a>
           <a href="#contact" className="header-pill pill-orange">
+            <span className="header-mini-bot"><Robot small /></span>
             <span>
               プロジェクトのご相談<small>アイデアの段階から、お気軽に</small>
             </span>
             <ArrowUpRight size={18} />
           </a>
           <a href="#works" className="header-pill pill-blue">
+            <span className="header-mini-bot"><Robot small /></span>
             <span>
               制作イメージを見る<small>Web・システム・モバイル</small>
             </span>
+            <ChevronRight size={17} />
+          </a>
+          <a href="#services" className="header-pill pill-navy">
+            <span className="header-mini-bot"><Robot small /></span>
+            <span>AI活用・業務改善<small>仕組みを、もっと使いやすく</small></span>
             <ChevronRight size={17} />
           </a>
         </div>
@@ -374,139 +330,7 @@ export default function Portfolio() {
         </nav>
       )}
       <main id="main">
-        <div className="hero-track" ref={heroTrack}>
-          <section className="hero" aria-labelledby="hero-title">
-            <div className="hero-photograph">
-              <Image
-                src="/images/studio-hero.png"
-                alt="明るいスタジオと、青とオレンジの小さなロボット。クリエイティブなものづくりを表現したイメージ。"
-                fill
-                sizes="100vw"
-                preload
-                quality={90}
-              />
-            </div>
-            <div className="hero-shader">
-              <HeroScene />
-            </div>
-            <div className="hero-topline">
-              <span>DESIGN × TECHNOLOGY × BROTHERHOOD</span>
-              <span>
-                <i className="status-dot" /> ご相談受付中
-              </span>
-            </div>
-            <div className="hero-content">
-              <div className="hero-copy">
-                <div className="hero-kicker">
-                  <span className="little-star">
-                    <Sparkles size={16} />
-                  </span>{" "}
-                  ITコンサル × フルスタック × デザイン
-                </div>
-                <h1 id="hero-title">
-                  兄弟の力で、
-                  <br />
-                  アイデアを
-                  <br />
-                  <span className="hero-emphasis">カタチに。</span>
-                </h1>
-                <p className="hero-subtitle">
-                  <strong>
-                    デザインも、開発も。
-                    <br />
-                    その先の運用まで。
-                  </strong>
-                </p>
-                <p>
-                  考える兄と、描く弟。
-                  <br />
-                  デザインとテクノロジーで、
-                  <br className="mobile-only" />
-                  あなたの「つくりたい」を、一緒に。
-                </p>
-                <AnimatedLink
-                  href="#contact"
-                  dark
-                  tag="アイデア段階でも、お気軽に！"
-                >
-                  私たちに相談する
-                </AnimatedLink>
-              </div>
-              <div className="hero-art" ref={spotlight} aria-hidden="true">
-                <div className="hero-art-caption">
-                  <span>HELLO, WE’RE YOUR CREATIVE PARTNERS.</span>
-                  <i />
-                </div>
-              </div>
-            </div>
-            <div className="hero-proof">
-              <div>
-                <span>兄 / ENGINEERING</span>
-                <strong>
-                  11<small>年の実務経験</small>
-                </strong>
-              </div>
-              <div>
-                <span>弟 / DESIGN</span>
-                <strong>
-                  3<small>年の実務経験</small>
-                </strong>
-              </div>
-              <div>
-                <span>ONE TEAM</span>
-                <strong className="proof-team">
-                  企画から運用まで<small>窓口ひとつで、一貫して伴走</small>
-                </strong>
-              </div>
-            </div>
-            <div className="hero-next" inert aria-hidden="true">
-              <span>DESIGN × DEVELOPMENT</span>
-              <h2>
-                想いをつなぐ。
-                <br />
-                可能性が、動き出す。
-              </h2>
-              <p>
-                デザインと開発がひとつのチームに。
-                <br />
-                ふたりの得意で、あなたの次の一歩を。
-              </p>
-              <a href="#about" className="next-scroll">
-                私たちについて <ArrowDown size={18} />
-              </a>
-            </div>
-            <div className="hero-bottom">
-              <a href="#about" className="scroll-link">
-                <span className="scroll-circle">
-                  <ArrowDown size={16} />
-                </span>
-                SCROLL TO EXPLORE
-              </a>
-              <span className="hero-note">
-                ふたりの得意が、
-                <br />
-                あなたの可能性になる。
-              </span>
-              <span className="hero-coordinate">
-                CREATIVE PARTNERS
-                <br />
-                DESIGN + DEVELOPMENT
-              </span>
-            </div>
-          </section>
-        </div>
-        <div className="hero-cta-band">
-          <AnimatedLink
-            href="#contact"
-            dark
-            tag="まだアイデア段階でも、大丈夫！"
-          >
-            メールでプロジェクトを相談する
-          </AnimatedLink>
-          <AnimatedLink href="#services" tag="必要なところから、柔軟に対応">
-            サービス・対応できること
-          </AnimatedLink>
-        </div>
+        <HeroShowcase />
         <section
           className="concerns-section section"
           aria-labelledby="concerns-title"
