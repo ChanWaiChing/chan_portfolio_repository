@@ -33,6 +33,8 @@ Next.js 16.4.3 / React 19.3.1 / TypeScript。Noto Sans JP・DM Sansはローカ�
 
 連絡先の案内パネルを上、フォームを下にした縦並びです。案内パネルの画像は `lib/site.ts` の `contactImage`（src・width・height・alt）で指定できます。お問い合わせとフッターのリンクアイコンは、役割別に色分けしています。レイアウトは `app/contact-layout.css` です。
 
+現在は仮の画像 `public/images/contact-placeholder.webp`（1920×640）を表示しています。後でこのファイルを差し替えるか、`contactImage.src` を変更してください。サイズが変わる場合は `width`・`height`・`alt` も更新します。
+
 フォームはメール作成用で、サーバーから自動送信しません。お名前・メールアドレス・相談内容と確認チェックを入力し、「内容を確認する」でプレビューを表示します。「メールアプリで送る」から宛先 `cbnbc07@gmail.com` のメールを開き、利用者が送信します。コピーにも対応しています。入力内容は保存されません。
 
 主要な直接問い合わせリンクは `lib/site.ts` の `contactUrl`、またはビルド前の `NEXT_PUBLIC_CONTACT_URL` で変更できます。フォームの宛先・本文は `components/portfolio.tsx` で変更します。自動送信を導入する場合は別途サーバー側の送信処理・サービス設定が必要です。
