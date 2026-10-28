@@ -42,12 +42,12 @@ Next.js 16.4.3 / React 19.3.1 / TypeScript。Noto Sans JP・DM Sansはローカ�
 - `components/skill-workflows.tsx`：3枚のフローカード、2重リングのツールアニメーションと停止・再生
 - `components/pattern-footer.tsx`：縦書きブランド、便利なリンク、下部ナビゲーション
 - `app/hero-scenes.css`：ヒーローのクロスフェード、穏やかな拡大・移動、4秒の進捗表示
-- `app/workflow-footer.css`：ワークフロー・スキルリング・パターン付きフッター
+- `app/workflow-footer.css`：ワークフロー・スキルリング・淡いブルーのグラデーション付きフッター
 - `components/bot-mascot.tsx`：アップロードされた4種類のボットを表示する共通コンポーネント
 - `lib/catalog.ts`：20件のパッケージと30件の制作イメージ
 - `app/catalog.css`：本文・カタログ・フォームのレスポンシブスタイル
 - `app/modern-cards.css`：兄弟紹介・パッケージ・ポートフォリオのカード。余白、角丸、サムネイル、実務経験の表示と7色の外周グロー
-- `app/webmarks-theme.css`：ヘッダーとヒーローのスタイル
+- `app/brand-theme.css`：ヘッダーとヒーローのスタイル
 - `public/images/`：オリジナルのイメージ画像
 
 ## 4枚のブランドヒーロー

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./reference-theme.css";
-import "./webmarks-theme.css";
+import "./component-theme.css";
+import "./brand-theme.css";
 import "./catalog.css";
 import "./modern-cards.css";
 import "./hero-scenes.css";
