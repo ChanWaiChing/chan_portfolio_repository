@@ -266,12 +266,18 @@ export default function Portfolio() {
             <ChevronRight size={17} />
           </a>
           <a href="#contact" className="header-pill pill-orange">
+            <span className="header-mini-bot">
+              <Robot small variant="sunset" />
+            </span>
             <span>
               プロジェクトのご相談<small>アイデアの段階から、お気軽に</small>
             </span>
             <ArrowUpRight size={18} />
           </a>
           <a href="#works" className="header-pill pill-blue">
+            <span className="header-mini-bot">
+              <Robot small variant="mint" />
+            </span>
             <span>
               ポートフォリオを見る<small>Web・システム・モバイル</small>
             </span>

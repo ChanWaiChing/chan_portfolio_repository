@@ -38,7 +38,8 @@ export default function LivingMascots() {
   return (
     <div ref={root} className="living-mascots" aria-hidden="true">
       <Robot small waving />
-      <Robot small warm />
+      <Robot small variant="sunset" />
+      <Robot small variant="mint" />
     </div>
   );
 }

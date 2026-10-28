@@ -209,3 +209,7 @@ The first view and chapter illustrations now share soft masked edges with their 
 `components/meteor-trail.tsx` renders a bounded, pointer-driven comet trail on one non-interactive canvas. It only runs with a fine mouse pointer, stops drawing once trails fade, and disables itself when reduced motion is requested. Touch devices retain their native interaction.
 
 Latest previews: [desktop](docs/previews/immersive-desktop.png) · [mobile](docs/previews/immersive-mobile.png) · [toolbox](docs/previews/immersive-toolbox.png).
+
+### Three-character mascot family
+
+The three header actions now each begin with their own transparent robot: pearl blue (seated, swept hair), coral Spark (standing, flame-like hair and a heart light), and mint (round hovering body and curled hair). The hero uses the same trio with the existing GSAP motion and reduced-motion fallback. `Robot` accepts an explicit `variant` while preserving the existing `warm` prop for section artwork. All three actions remain visible on tablet; phones keep the compact contact action with its mascot.
