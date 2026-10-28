@@ -9,7 +9,7 @@ import {
   Check,
   Copy,
   X,
-  Grid2X2,
+  Menu,
   Plus,
   Minus,
   Code2,
@@ -17,27 +17,14 @@ import {
   Layers3,
   Sparkles,
   ChevronRight,
-  Asterisk,
-  MousePointer2,
 } from "lucide-react";
-import { MeteorTrail } from "./meteor-trail";
 import { Robot } from "./robot";
 import { site } from "@/lib/site";
-import { HeroMedia } from "./hero-media";
-import { ContactChannels } from "./contact-channels";
-import { usePageMotion, useGalleryMotion } from "./motion-system";
-import { projects as works, projectCategories } from "@/lib/projects";
-import { ProjectCover } from "./project-cover";
-import { SectionCompanions } from "./section-companions";
-import { TeamPortrait } from "./team-portrait";
-import { SkillGlyph } from "./skill-glyph";
-import { scenes } from "@/lib/visuals";
 const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false });
-const LivingMascots = dynamic(() => import("./living-mascots"), { ssr: false });
 const nav = [
   ["私たちについて", "about"],
   ["できること", "services"],
-  ["ポートフォリオ", "works"],
+  ["制作イメージ", "works"],
   ["大切にすること", "process"],
 ];
 const skills = [
@@ -45,14 +32,12 @@ const skills = [
   "React",
   "TypeScript",
   "Node.js",
-  "Three.js",
+  "Python",
   "Figma",
   "WordPress",
   "UI / UX",
   "iOS / Android",
   "Generative AI",
-  "GSAP",
-  "Canva",
 ];
 const services = [
   {
@@ -86,6 +71,35 @@ const services = [
     text: "生成AIの活用から、公開後の運用・改善まで。日々の仕事をもっと軽やかにする、新しい選択肢をご提案します。",
     tags: ["AI・生成AI", "運用保守", "継続改善"],
     icon: Sparkles,
+  },
+];
+const works = [
+  {
+    category: "WEB DESIGN",
+    title: "想いが伝わる、ブランドサイト。",
+    desc: "余白とタイポグラフィで世界観を表現する、コーポレートサイトの制作イメージです。",
+    type: "brand",
+    tag: "Webサイト / LP",
+    name: "mori.",
+    sub: "暮らしに、ひと呼吸の余白を。",
+  },
+  {
+    category: "WEB APPLICATION",
+    title: "毎日の業務を、もっとシンプルに。",
+    desc: "情報を一画面にまとめ、次にすべきことが見える業務ダッシュボードの制作イメージです。",
+    type: "dashboard",
+    tag: "業務システム",
+    name: "flow",
+    sub: "おかえりなさい。今日も、いい一日を。",
+  },
+  {
+    category: "UI / UX DESIGN",
+    title: "手のひらから、心地よい体験を。",
+    desc: "迷わず使える導線と、親しみやすいインターフェースを持つモバイルアプリの制作イメージです。",
+    type: "mobile",
+    tag: "モバイルアプリ",
+    name: "日々、",
+    sub: "小さないいこと、見つけよう。",
   },
 ];
 const faqs = [
@@ -133,17 +147,12 @@ function AnimatedLink({
     >
       <span>{children}</span>
       <ArrowUpRight size={18} />
-      {tag && (
-        <span className="button-tag" aria-hidden="true">
-          {tag}
-        </span>
-      )}
+      {tag && <span className="button-tag" aria-hidden="true">{tag}</span>}
     </a>
   );
 }
 export default function Portfolio() {
   const [menu, setMenu] = useState(false);
-  const [category, setCategory] = useState("ALL");
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
   const [work, setWork] = useState<number | null>(null);
   const [contact, setContact] = useState(false);
@@ -157,8 +166,63 @@ export default function Portfolio() {
   const opener = useRef<HTMLElement | null>(null);
   const dialog = useRef<HTMLDivElement>(null);
   const modal = work !== null || contact;
-  usePageMotion(heroTrack, spotlight, cursor);
-  useGalleryMotion(category);
+  useEffect(() => {
+    const move = (e: PointerEvent) => {
+      if (cursor.current) {
+        cursor.current.style.transform = `translate3d(${e.clientX}px,${e.clientY}px,0)`;
+        const hovered = (e.target as HTMLElement).closest("[data-cursor]");
+        cursor.current.dataset.active = hovered ? "true" : "false";
+      }
+      if (spotlight.current)
+        spotlight.current.style.transform = `translate3d(${(e.clientX / innerWidth - 0.5) * 18}px,${(e.clientY / innerHeight - 0.5) * 18}px,0)`;
+    };
+    const updateHero = () => {
+      const track = heroTrack.current;
+      if (!track) return;
+      const p = matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? 0
+        : Math.max(0, Math.min(1, -track.getBoundingClientRect().top / 450));
+      track.style.setProperty("--hero-progress", String(p));
+      const intro = track.querySelector<HTMLElement>(".hero-copy");
+      const next = track.querySelector<HTMLElement>(".hero-next");
+      if (intro) {
+        intro.inert = p > 0.65;
+        intro.setAttribute("aria-hidden", String(p > 0.65));
+      }
+      if (next) {
+        next.inert = p < 0.65;
+        next.setAttribute("aria-hidden", String(p < 0.65));
+      }
+      track.style.setProperty(
+        "--intro-opacity",
+        String(Math.max(0, 1 - p * 2.5)),
+      );
+      track.style.setProperty(
+        "--next-opacity",
+        String(Math.max(0, (p - 0.45) / 0.55)),
+      );
+    };
+    window.addEventListener("scroll", updateHero, { passive: true });
+    updateHero();
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        }),
+      { threshold: 0.08 },
+    );
+    reveals.forEach((item) => observer.observe(item));
+    document.addEventListener("pointermove", move, { passive: true });
+    return () => {
+      document.removeEventListener("pointermove", move);
+      window.removeEventListener("scroll", updateHero);
+      observer.disconnect();
+    };
+  }, []);
   useEffect(() => {
     if (!modal && !menu) return;
     opener.current = document.activeElement as HTMLElement;
@@ -218,12 +282,6 @@ export default function Portfolio() {
   };
   return (
     <>
-      <MeteorTrail />
-      <div className="dreamscape" aria-hidden="true">
-        <i />
-        <i />
-        <i />
-      </div>
       <div className="custom-cursor" ref={cursor} aria-hidden="true">
         <span>
           VIEW
@@ -263,25 +321,19 @@ export default function Portfolio() {
             <span>
               デザインから開発まで<small>ふたりの専門性で、一貫して対応</small>
             </span>
-            <ChevronRight size={18} />
+            <ChevronRight size={17} />
           </a>
           <a href="#contact" className="header-pill pill-orange">
-            <span className="header-mini-bot">
-              <Robot small variant="sunset" />
-            </span>
             <span>
               プロジェクトのご相談<small>アイデアの段階から、お気軽に</small>
             </span>
-            <ChevronRight size={18} />
+            <ArrowUpRight size={18} />
           </a>
           <a href="#works" className="header-pill pill-blue">
-            <span className="header-mini-bot">
-              <Robot small variant="mint" />
-            </span>
             <span>
-              ポートフォリオを見る<small>Web・システム・モバイル</small>
+              制作イメージを見る<small>Web・システム・モバイル</small>
             </span>
-            <ChevronRight size={18} />
+            <ChevronRight size={17} />
           </a>
         </div>
         <nav className="desktop-nav" aria-label="メインナビゲーション">
@@ -300,8 +352,7 @@ export default function Portfolio() {
           aria-controls="mobile-menu"
           onClick={() => setMenu(!menu)}
         >
-          {menu ? <X /> : <Grid2X2 />}
-          <span className="menu-caption">{menu ? "CLOSE" : "EXPLORE"}</span>
+          {menu ? <X /> : <Menu />}
         </button>
       </header>
       {menu && (
@@ -325,24 +376,15 @@ export default function Portfolio() {
       <main id="main">
         <div className="hero-track" ref={heroTrack}>
           <section className="hero" aria-labelledby="hero-title">
-            <div className="hero-media-drift" ref={spotlight}>
-              <HeroMedia />
-            </div>
-            <div className="ethereal-field" aria-hidden="true">
-              <div className="ether-core" />
-              <div className="ether-light light-ribbon-one" />
-              <div className="ether-light light-ribbon-two" />
-              <div className="light-specks">
-                {Array.from({ length: 14 }, (_, i) => (
-                  <i key={i} style={{ "--i": i } as React.CSSProperties} />
-                ))}
-              </div>
-            </div>
-            <div className="hero-mascots">
-              <LivingMascots />
-              <span className="hero-mascot-caption">
-                つくるって、ワクワクする。
-              </span>
+            <div className="hero-photograph">
+              <Image
+                src="/images/studio-hero.png"
+                alt="明るいスタジオと、青とオレンジの小さなロボット。クリエイティブなものづくりを表現したイメージ。"
+                fill
+                sizes="100vw"
+                preload
+                quality={90}
+              />
             </div>
             <div className="hero-shader">
               <HeroScene />
@@ -375,30 +417,22 @@ export default function Portfolio() {
                     その先の運用まで。
                   </strong>
                 </p>
-                <p className="hero-description">
+                <p>
                   考える兄と、描く弟。
                   <br />
-                  企画からデザイン、開発、運用まで。
-                  <br />
-                  あなたの「つくりたい」に伴走します。
+                  デザインとテクノロジーで、
+                  <br className="mobile-only" />
+                  あなたの「つくりたい」を、一緒に。
                 </p>
-                <div className="hero-actions">
-                  <AnimatedLink
-                    href="#works"
-                    tag="分野別に15件の掲載情報を見る"
-                  >
-                    制作実績を見る
-                  </AnimatedLink>
-                  <AnimatedLink
-                    href="#contact"
-                    dark
-                    tag="アイデア段階でも、お気軽に！"
-                  >
-                    制作を相談する
-                  </AnimatedLink>
-                </div>
+                <AnimatedLink
+                  href="#contact"
+                  dark
+                  tag="アイデア段階でも、お気軽に！"
+                >
+                  私たちに相談する
+                </AnimatedLink>
               </div>
-              <div className="hero-art" aria-hidden="true">
+              <div className="hero-art" ref={spotlight} aria-hidden="true">
                 <div className="hero-art-caption">
                   <span>HELLO, WE’RE YOUR CREATIVE PARTNERS.</span>
                   <i />
@@ -426,7 +460,7 @@ export default function Portfolio() {
               </div>
             </div>
             <div className="hero-next" inert aria-hidden="true">
-              <span>IMAGINATION BECOMES REAL.</span>
+              <span>DESIGN × DEVELOPMENT</span>
               <h2>
                 想いをつなぐ。
                 <br />
@@ -461,208 +495,18 @@ export default function Portfolio() {
             </div>
           </section>
         </div>
-        <section className="skills-section" aria-label="対応技術とツール">
-          <div className="skills-label">
-            <span>OUR TOOLBOX</span>
-            <p>アイデアに合わせて、最適な選択を。</p>
-          </div>
-          <div className="marquee">
-            <div className="marquee-track">
-              {[0, 1].map((copy) => (
-                <div
-                  className="marquee-group"
-                  key={copy}
-                  aria-hidden={copy === 1}
-                >
-                  {skills.map((s) => (
-                    <span key={s}>
-                      <SkillGlyph skill={s} />
-                      {s}
-                      <b>·</b>
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-          <p className="toolbox-note">
-            ツールや技術は、目的に合わせて選定します。
-          </p>
-          <SectionCompanions
-            variant="solo"
-            message="技術は、想いを形にするために。"
-          />
-        </section>
-        <section id="works" className="section works-section">
-          <div className="section-heading horizontal reveal">
-            <div>
-              <Label>01 — SELECTED WORKS</Label>
-              <h2>
-                さまざまな事業に、
-                <br />
-                それぞれの最適解を。
-              </h2>
-            </div>
-            <div className="works-note">
-              <span className="outline-pill">LANCERS PORTFOLIO</span>
-              <p>
-                Web制作・デザインのポートフォリオ。
-                <br />
-                企業・採用・医療・ブランドの分野からご覧いただけます。
-              </p>
-            </div>
-          </div>
-          <div
-            className="portfolio-controls"
-            role="group"
-            aria-label="ポートフォリオのカテゴリ"
+        <div className="hero-cta-band">
+          <AnimatedLink
+            href="#contact"
+            dark
+            tag="まだアイデア段階でも、大丈夫！"
           >
-            {projectCategories.map(([value, label]) => (
-              <button
-                key={value}
-                aria-pressed={category === value}
-                onClick={() => setCategory(value)}
-              >
-                {label}
-                <span>
-                  {value === "ALL"
-                    ? works.length
-                    : works.filter((w) => w.category === value).length}
-                </span>
-              </button>
-            ))}
-          </div>
-          <p className="portfolio-count" role="status">
-            {category === "ALL"
-              ? works.length
-              : works.filter((w) => w.category === category).length}
-            件のポートフォリオ
-          </p>
-          <div className="works-grid" key={category}>
-            {works
-              .map((item, i) => ({ item, i }))
-              .filter(
-                ({ item }) => category === "ALL" || item.category === category,
-              )
-              .map(({ item, i }) => (
-                <button
-                  className={`work-card reveal work-${item.accent}`}
-                  key={item.id}
-                  onClick={() => setWork(i)}
-                  data-cursor="VIEW"
-                  aria-label={`${item.title} 詳細を見る`}
-                >
-                  <div className="work-preview">
-                    <ProjectCover project={item} />
-                    <span className="project-hover-label">
-                      VIEW PROJECT <ArrowUpRight size={16} />
-                    </span>
-                    <span className="work-view">
-                      <ArrowUpRight size={20} />
-                    </span>
-                  </div>
-                  <div className="work-meta">
-                    <span>{item.tag}</span>
-                    <span>PROJECT {String(i + 1).padStart(2, "0")}</span>
-                  </div>
-                  <h3>{item.title}</h3>
-                  <p className="work-description">{item.desc}</p>
-                </button>
-              ))}
-          </div>
-          <SectionCompanions
-            variant="duo"
-            message="一つひとつの想いを、伝わる体験に。"
-          />
-        </section>
-        <section id="services" className="section services-section">
-          <div className="section-heading horizontal reveal">
-            <div>
-              <Label>02 — WHAT WE DO</Label>
-              <h2>
-                「こんなことできる？」
-                <br />
-                から、はじめよう。
-              </h2>
-            </div>
-            <p>
-              企画からデザイン、開発、運用まで。
-              <br />
-              窓口はひとつ、可能性はいくつも。
-              <br />
-              必要なところから、柔軟にお手伝いします。
-            </p>
-          </div>
-          <div className="services-grid">
-            {services.map(({ n, en, title, text, tags, icon: Icon }) => (
-              <article className="service-card reveal" key={n}>
-                <div className="service-top">
-                  <span>{n}</span>
-                  <Icon size={28} strokeWidth={1.3} />
-                </div>
-                <span className="service-en">{en}</span>
-                <h3>{title}</h3>
-                <p>{text}</p>
-                <div className="service-tags">
-                  {tags.map((t) => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </div>
-                <a
-                  href="#contact"
-                  className="service-link"
-                  aria-label={`${en}について相談する`}
-                >
-                  このサービスを相談する
-                  <ArrowUpRight size={17} />
-                </a>
-              </article>
-            ))}
-          </div>
-          <SectionCompanions
-            variant="solo"
-            message="デザインと開発を、ひとつの窓口で。"
-          />
-        </section>
-        <section id="packages" className="section packages-section">
-          <div className="section-heading horizontal reveal">
-            <div>
-              <Label>WORK WITH US</Label>
-              <h2>
-                必要なところから、
-                <br />
-                一緒にはじめましょう。
-              </h2>
-            </div>
-            <p>
-              ご相談内容に合わせて、対応範囲と進め方をご提案。
-              <br />
-              プロフィールの公開パッケージもご覧いただけます。
-            </p>
-          </div>
-          <div className="package-summary">
-            <span>まずは、必要なところから。</span>
-            <p>
-              制作範囲・必要な機能・ご希望の時期をお聞きし、進め方とお見積もりをご提案します。
-            </p>
-            <a href="#contact">
-              制作について相談する <ArrowUpRight size={17} />
-            </a>
-          </div>
-          <a
-            href={site.profileUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="profile-source-link"
-          >
-            Lancersでプロフィール・公開パッケージを見る{" "}
-            <ArrowUpRight size={16} />
-          </a>
-          <SectionCompanions
-            variant="duo"
-            message="必要なところから、気軽にご相談ください。"
-          />
-        </section>
+            メールでプロジェクトを相談する
+          </AnimatedLink>
+          <AnimatedLink href="#services" tag="必要なところから、柔軟に対応">
+            サービス・対応できること
+          </AnimatedLink>
+        </div>
         <section
           className="concerns-section section"
           aria-labelledby="concerns-title"
@@ -727,8 +571,8 @@ export default function Portfolio() {
           <div className="solution-arrow" aria-hidden="true" />
           <div className="solution-banner reveal">
             <Image
-              src={scenes.trio.src}
-              alt={scenes.trio.alt}
+              src="/images/teamwork.png"
+              alt="青とオレンジのパズルをつなぐ、ふたりのロボット"
               fill
               sizes="(max-width: 760px) 100vw, 1000px"
             />
@@ -778,10 +622,330 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-          <SectionCompanions
-            variant="trio"
-            message="アイデアの整理から、ふたりで伴走します。"
-          />
+        </section>
+        <section id="about" className="section about-section">
+          <div className="section-heading reveal">
+            <Label>01 — ABOUT US</Label>
+            <h2>
+              得意はちがう。
+              <br />
+              目指すゴールは、同じ。
+            </h2>
+            <p>
+              ひとりでは届かないところへ、ふたりなら。
+              <br />
+              それぞれの専門性をつなぎ、想いを形にしていく。
+              <br />
+              私たち大穂兄弟は、兄弟でつくるクリエイティブチームです。
+            </p>
+          </div>
+          <div className="about-grid reveal">
+            <div className="profile-card profile-engineer">
+              <div className="profile-top">
+                <span>THE OLDER BROTHER</span>
+                <Code2 size={24} />
+              </div>
+              <div className="profile-illustration engineer-illustration">
+                <div className="abstract-window">
+                  <span />
+                  <span />
+                  <span />
+                  <pre>
+                    {
+                      "< ideas >\n  logic × technology\n  return possibilities;\n</ ideas >"
+                    }
+                  </pre>
+                </div>
+                <span className="illustration-star">✦</span>
+              </div>
+              <div className="profile-title">
+                <h3>考える、つなぐ、つくる。</h3>
+                <span>
+                  11<span>YEARS</span>
+                </span>
+              </div>
+              <h4>兄 / ITコンサルタント・フルスタックエンジニア</h4>
+              <p>
+                事業の課題を整理し、最適な技術で解決へ。要件定義から開発、導入後の改善まで、全体を見渡して伴走します。
+              </p>
+              <div className="profile-tags">
+                <span>戦略・要件定義</span>
+                <span>システム開発</span>
+                <span>ディレクション</span>
+              </div>
+            </div>
+            <div className="profile-connect" aria-hidden="true">
+              &
+            </div>
+            <div className="profile-card profile-designer">
+              <div className="profile-top">
+                <span>THE YOUNGER BROTHER</span>
+                <PenTool size={24} />
+              </div>
+              <div className="profile-illustration designer-illustration">
+                <div className="design-square" />
+                <div className="design-circle" />
+                <div className="design-cross">✳</div>
+                <div className="design-pointer">
+                  <svg viewBox="0 0 24 30">
+                    <path
+                      d="M2 2v23l7-7 7 10 5-3-7-10 9-2Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <span>Designer</span>
+                </div>
+              </div>
+              <div className="profile-title">
+                <h3>感じる、描く、伝える。</h3>
+                <span>
+                  3<span>YEARS</span>
+                </span>
+              </div>
+              <h4>弟 / デザイナー</h4>
+              <p>
+                想いや目的を、伝わるビジュアルに。Figma・Canvaを活用し、美しさと使いやすさを両立するデザインを届けます。
+              </p>
+              <div className="profile-tags">
+                <span>UI / UXデザイン</span>
+                <span>Figma</span>
+                <span>Canva</span>
+              </div>
+            </div>
+          </div>
+          <div className="about-footnote reveal">
+            <span>✦</span>
+            <p>
+              好きなものは、ふたりとも「ドラゴンボール」。
+              <br />
+              個性はそれぞれ。チームワークは、息ぴったりです。
+            </p>
+            <span className="footnote-en">
+              DIFFERENT SKILLS.
+              <br />
+              ONE GREAT TEAM.
+            </span>
+          </div>
+        </section>
+        <section id="services" className="section services-section">
+          <div className="section-heading horizontal reveal">
+            <div>
+              <Label>02 — WHAT WE DO</Label>
+              <h2>
+                「こんなことできる？」
+                <br />
+                から、はじめよう。
+              </h2>
+            </div>
+            <p>
+              企画からデザイン、開発、運用まで。
+              <br />
+              窓口はひとつ、可能性はいくつも。
+              <br />
+              必要なところから、柔軟にお手伝いします。
+            </p>
+          </div>
+          <div className="services-grid">
+            {services.map(({ n, en, title, text, tags, icon: Icon }) => (
+              <article className="service-card reveal" key={n}>
+                <div className="service-top">
+                  <span>{n}</span>
+                  <Icon size={28} strokeWidth={1.3} />
+                </div>
+                <span className="service-en">{en}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <div className="service-tags">
+                  {tags.map((t) => (
+                    <span key={t}>{t}</span>
+                  ))}
+                </div>
+                <a
+                  href="#contact"
+                  className="service-link"
+                  aria-label={`${en}について相談する`}
+                >
+                  このサービスを相談する
+                  <ArrowUpRight size={17} />
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="skills-section" aria-label="対応技術とツール">
+          <div className="skills-label">
+            <span>OUR TOOLBOX</span>
+            <p>アイデアに合わせて、最適な選択を。</p>
+          </div>
+          <div className="marquee">
+            <div className="marquee-track">
+              {[0, 1].map((copy) => (
+                <div
+                  className="marquee-group"
+                  key={copy}
+                  aria-hidden={copy === 1}
+                >
+                  {skills.map((s, i) => (
+                    <span key={s}>
+                      <i>
+                        {
+                          ["↗", "⚛", "TS", "⌘", "Py", "◈", "W", "✳", "↗", "✧"][
+                            i
+                          ]
+                        }
+                      </i>
+                      {s}
+                      <b>·</b>
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+          <p className="toolbox-note">
+            ツールや技術は、目的に合わせて選定します。
+          </p>
+        </section>
+        <section id="works" className="section works-section">
+          <div className="section-heading horizontal reveal">
+            <div>
+              <Label>03 — POSSIBILITIES</Label>
+              <h2>
+                つくれるものは、
+                <br />
+                ひとつじゃない。
+              </h2>
+            </div>
+            <div className="works-note">
+              <span className="outline-pill">DESIGN CONCEPTS</span>
+              <p>
+                ご相談のきっかけになる、制作イメージ。
+                <br />
+                ※掲載内容は自主制作のコンセプトです。
+              </p>
+            </div>
+          </div>
+          <div className="works-grid">
+            {works.map((item, i) => (
+              <button
+                className={`work-card reveal work-${item.type}`}
+                key={item.type}
+                onClick={() => setWork(i)}
+                data-cursor="VIEW"
+                aria-label={`${item.title} 詳細を見る`}
+              >
+                <div className="work-preview">
+                  {item.type === "brand" ? (
+                    <div className="brand-mock">
+                      <div className="mock-nav">
+                        <b>mori.</b>
+                        <span>ABOUT　 COLLECTION　 JOURNAL</span>
+                      </div>
+                      <div className="brand-visual">
+                        <div className="vase vase-one" />
+                        <div className="vase vase-two" />
+                        <span>
+                          less, but
+                          <br />
+                          <em>meaningful.</em>
+                        </span>
+                      </div>
+                      <div className="mock-bottom">
+                        暮らしに、ひと呼吸の余白を。
+                        <ArrowUpRight size={12} />
+                      </div>
+                    </div>
+                  ) : item.type === "dashboard" ? (
+                    <div className="dashboard-mock">
+                      <aside>
+                        <b>f.</b>
+                        <i />
+                        <i />
+                        <i />
+                        <i />
+                      </aside>
+                      <div className="dash-main">
+                        <div className="dash-nav">
+                          Overview <span>●</span>
+                        </div>
+                        <small>Good morning, team ☀</small>
+                        <div className="dash-stats">
+                          <div>
+                            進行中のプロジェクト
+                            <b>
+                              12 <small>+ 3</small>
+                            </b>
+                          </div>
+                          <div>
+                            今月の達成率
+                            <b>
+                              86<small>%</small>
+                            </b>
+                          </div>
+                        </div>
+                        <div className="dash-chart">
+                          <span>PROJECT ACTIVITY</span>
+                          <div className="bars">
+                            {[
+                              35, 56, 43, 70, 59, 85, 68, 95, 79, 90, 72, 100,
+                            ].map((h, j) => (
+                              <i key={j} style={{ height: `${h}%` }} />
+                            ))}
+                          </div>
+                        </div>
+                        <div className="dash-task">
+                          <i />
+                          ウェブサイトのデザインレビュー<span>進行中</span>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="mobile-mock">
+                      <span className="mobile-flower">✳</span>
+                      <div className="phone">
+                        <div className="phone-island" />
+                        <div className="phone-time">
+                          9:41 <span>● ▰</span>
+                        </div>
+                        <div className="phone-content">
+                          <span>GOOD MORNING</span>
+                          <h4>
+                            今日を、
+                            <br />
+                            ちょっと豊かに。
+                          </h4>
+                          <div className="phone-art">
+                            <span>☀</span>
+                            <div />
+                            <i />
+                          </div>
+                          <p>今日の小さな発見</p>
+                          <div className="phone-task">
+                            公園でひとやすみ。<span>↗</span>
+                          </div>
+                          <div className="phone-tabs">⌂　♡　＋　◷</div>
+                        </div>
+                      </div>
+                      <span className="mobile-caption">
+                        small moments,
+                        <br />
+                        <em>big happiness.</em>
+                      </span>
+                    </div>
+                  )}
+                  <span className="work-view">
+                    <ArrowUpRight size={20} />
+                  </span>
+                </div>
+                <div className="work-meta">
+                  <span>{item.category}</span>
+                  <span>CONCEPT / 0{i + 1}</span>
+                </div>
+                <h3>{item.title}</h3>
+                <span className="work-tag">{item.tag}</span>
+              </button>
+            ))}
+          </div>
         </section>
         <section id="process" className="section process-section">
           <div className="section-heading reveal">
@@ -797,21 +961,6 @@ export default function Portfolio() {
               つくる時間も、つくったその先も大切にします。
             </p>
           </div>
-          <ol className="process-stages" aria-label="制作工程">
-            {[
-              "ヒアリング",
-              "要件整理・設計",
-              "デザイン",
-              "開発",
-              "検証",
-              "公開・改善",
-            ].map((stage, i) => (
-              <li key={stage}>
-                <span>{String(i + 1).padStart(2, "0")}</span>
-                {stage}
-              </li>
-            ))}
-          </ol>
           <div className="process-list">
             {[
               [
@@ -848,124 +997,10 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-          <SectionCompanions
-            variant="trio"
-            message="つくったその先も、一緒に育てる。"
-          />
-        </section>
-        <section id="about" className="section about-section">
-          <div className="section-heading reveal">
-            <Label>05 — ABOUT US</Label>
-            <h2>
-              得意はちがう。
-              <br />
-              目指すゴールは、同じ。
-            </h2>
-            <p>
-              ひとりでは届かないところへ、ふたりなら。
-              <br />
-              それぞれの専門性をつなぎ、想いを形にしていく。
-              <br />
-              私たち大穂兄弟は、兄弟でつくるクリエイティブチームです。
-            </p>
-          </div>
-          <TeamPortrait />
-          <div className="about-grid reveal">
-            <div className="profile-card profile-engineer">
-              <div className="profile-top">
-                <span>THE OLDER BROTHER</span>
-                <Code2 size={24} />
-              </div>
-              <div className="profile-illustration engineer-illustration">
-                <div className="abstract-window">
-                  <span />
-                  <span />
-                  <span />
-                  <pre>
-                    {
-                      "< ideas >\n  logic × technology\n  return possibilities;\n</ ideas >"
-                    }
-                  </pre>
-                </div>
-                <span className="illustration-star">
-                  <Sparkles size={34} />
-                </span>
-              </div>
-              <div className="profile-title">
-                <h3>考える、つなぐ、つくる。</h3>
-                <span>
-                  11<span>YEARS</span>
-                </span>
-              </div>
-              <h4>兄 / ITコンサルタント・フルスタックエンジニア</h4>
-              <p>
-                事業の課題を整理し、最適な技術で解決へ。要件定義から開発、導入後の改善まで、全体を見渡して伴走します。
-              </p>
-              <div className="profile-tags">
-                <span>戦略・要件定義</span>
-                <span>システム開発</span>
-                <span>ディレクション</span>
-              </div>
-            </div>
-            <div className="profile-connect" aria-hidden="true">
-              &
-            </div>
-            <div className="profile-card profile-designer">
-              <div className="profile-top">
-                <span>THE YOUNGER BROTHER</span>
-                <PenTool size={24} />
-              </div>
-              <div className="profile-illustration designer-illustration">
-                <div className="design-square" />
-                <div className="design-circle" />
-                <div className="design-cross">
-                  <Asterisk size={88} strokeWidth={1.35} />
-                </div>
-                <div className="design-pointer">
-                  <MousePointer2 size={23} />
-                  <span>Designer</span>
-                </div>
-              </div>
-              <div className="profile-title">
-                <h3>感じる、描く、伝える。</h3>
-                <span>
-                  3<span>YEARS</span>
-                </span>
-              </div>
-              <h4>弟 / デザイナー</h4>
-              <p>
-                想いや目的を、伝わるビジュアルに。Figma・Canvaを活用し、美しさと使いやすさを両立するデザインを届けます。
-              </p>
-              <div className="profile-tags">
-                <span>UI / UXデザイン</span>
-                <span>Figma</span>
-                <span>Canva</span>
-              </div>
-            </div>
-          </div>
-          <div className="about-footnote reveal">
-            <span>
-              <Sparkles size={26} />
-            </span>
-            <p>
-              好きなものは、ふたりとも「ドラゴンボール」。
-              <br />
-              個性はそれぞれ。チームワークは、息ぴったりです。
-            </p>
-            <span className="footnote-en">
-              DIFFERENT SKILLS.
-              <br />
-              ONE GREAT TEAM.
-            </span>
-          </div>
-          <SectionCompanions
-            variant="quartet"
-            message="ちがう得意が、ひとつのチームになる。"
-          />
         </section>
         <section id="faq" className="section faq-section">
           <div className="section-heading reveal">
-            <Label>06 — FAQ</Label>
+            <Label>05 — FAQ</Label>
             <h2>
               気になること、
               <br />
@@ -995,12 +1030,16 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-          <SectionCompanions
-            variant="solo"
-            message="小さな疑問から、どうぞお気軽に。"
-          />
         </section>
         <section id="contact" className="contact-section">
+          <div className="contact-decoration" aria-hidden="true">
+            <Image
+              src="/images/teamwork.png"
+              alt=""
+              fill
+              sizes="(max-width:760px) 100vw, 700px"
+            />
+          </div>
           <div className="contact-content reveal">
             <Label>LET’S MAKE SOMETHING GREAT</Label>
             <h2>
@@ -1043,7 +1082,7 @@ export default function Portfolio() {
                 setCopyError(false);
               }}
             >
-              相談内容をまとめてから送る <ArrowUpRight size={14} />
+              相談内容をまとめてから送る ↗
             </button>
             {!site.contactUrl && (
               <span className="contact-setup-note">
@@ -1051,19 +1090,9 @@ export default function Portfolio() {
               </span>
             )}
           </div>
-          <ContactChannels />
-          <SectionCompanions
-            variant="duo"
-            message="あなたの次の一歩を、私たちと。"
-          />
         </section>
       </main>
       <footer className="footer">
-        <SectionCompanions
-          compact
-          variant="duo"
-          message="兄弟の力で、アイデアをカタチに。"
-        />
         <div className="footer-top">
           <a href="#" className="wordmark">
             <span className="brand-name">
@@ -1109,39 +1138,16 @@ export default function Portfolio() {
             </button>
             {work !== null ? (
               <>
-                <Label>
-                  LANCERS PORTFOLIO / {String(work + 1).padStart(2, "0")}
-                </Label>
+                <Label>DESIGN CONCEPT / 0{work + 1}</Label>
                 <h2 id="modal-title">{works[work].title}</h2>
                 <p>{works[work].desc}</p>
-                <div className="project-detail-cover">
-                  <ProjectCover project={works[work]} large />
+                <div className="concept-detail">
+                  <span>{works[work].name}</span>
+                  <p>{works[work].sub}</p>
                 </div>
-                <dl className="project-detail-facts">
-                  <div>
-                    <dt>掲載名・分野</dt>
-                    <dd>{works[work].name}</dd>
-                  </div>
-                  <div>
-                    <dt>カテゴリー</dt>
-                    <dd>{works[work].tag}</dd>
-                  </div>
-                  <div>
-                    <dt>情報元</dt>
-                    <dd>Lancers掲載ポートフォリオ</dd>
-                  </div>
-                </dl>
                 <p className="modal-note">
-                  詳しい制作内容や対応範囲は、ご相談時にご案内します。
+                  こちらは制作の方向性を示す自主制作コンセプトです。クライアント実績や稼働中のサービスではありません。ご希望に合わせて、企画・設計からご提案します。
                 </p>
-                <a
-                  className="project-source-link"
-                  href={site.profileUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Lancersで掲載情報を見る <ArrowUpRight size={15} />
-                </a>
                 <button
                   className="text-button"
                   onClick={() => {
@@ -1155,7 +1161,7 @@ export default function Portfolio() {
                     });
                   }}
                 >
-                  このような制作について相談する
+                  このイメージについて相談する
                   <ArrowRight size={17} />
                 </button>
               </>

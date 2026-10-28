@@ -1,37 +1,34 @@
-import Image from "next/image";
-type Props = {
-  small?: boolean;
-  waving?: boolean;
-  warm?: boolean;
-  variant?: "pearl" | "sunset" | "mint";
-};
-const robotArt = {
-  pearl: "/images/mascot-pearl.png",
-  sunset: "/images/mascot-spark.png",
-  mint: "/images/mascot-mint.png",
-};
-/** Three related characters, each with its own silhouette and color palette. */
-export function Robot({
-  small = false,
-  waving = false,
-  warm = false,
-  variant,
-}: Props) {
-  const character = variant ?? (warm ? "sunset" : "pearl");
+type Props = { small?: boolean; waving?: boolean };
+export function Robot({ small = false, waving = false }: Props) {
   return (
     <div
-      className={`robot ${small ? "robot-small" : ""} ${waving ? "robot-wave" : ""} ${warm ? "robot-warm" : ""}`}
-      data-robot={character}
+      className={`robot ${small ? "robot-small" : ""} ${waving ? "robot-wave" : ""}`}
       aria-hidden="true"
     >
-      <Image
-        className="robot-render"
-        src={robotArt[character]}
-        alt=""
-        width={240}
-        height={240}
-        sizes={small ? "95px" : "150px"}
-      />
+      <div className="robot-antenna">
+        <i />
+      </div>
+      <div className="robot-ear ear-left" />
+      <div className="robot-ear ear-right" />
+      <div className="robot-head">
+        <div className="robot-face">
+          <i className="eye" />
+          <i className="eye" />
+          <span className="robot-smile" />
+          <b className="cheek cheek-left" />
+          <b className="cheek cheek-right" />
+        </div>
+        <span className="head-shine" />
+      </div>
+      <div className="robot-neck" />
+      <div className="robot-body">
+        <span className="robot-heart">✦</span>
+        <span className="robot-dot" />
+      </div>
+      <div className="robot-arm arm-left" />
+      <div className="robot-arm arm-right" />
+      <div className="robot-foot foot-left" />
+      <div className="robot-foot foot-right" />
     </div>
   );
 }

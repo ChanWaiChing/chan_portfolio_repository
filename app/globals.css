@@ -1,4 +1,4 @@
-@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/dm-sans";
 @import "@fontsource-variable/noto-sans-jp";
 :root {
   --paper: #eef1f6;
@@ -7,7 +7,7 @@
   --line: #d1d6df;
   --lime: #86acee;
   --green: #21314c;
-  --sans: "Outfit Variable", "Noto Sans JP Variable", sans-serif;
+  --sans: "DM Sans Variable", "Noto Sans JP Variable", sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -410,7 +410,7 @@ a svg {
 }
 .bot-bubble span {
   display: block;
-  font-family: var(--font-latin, "Outfit Variable"), sans-serif;
+  font-family: "DM Sans Variable", sans-serif;
   font-size: 8px;
   font-weight: 500;
   letter-spacing: 1.1px;
@@ -1215,7 +1215,7 @@ a svg {
   padding: 10px 14px;
 }
 .mock-nav b {
-  font-family: var(--font-latin, "Outfit Variable"), sans-serif;
+  font-family: Georgia, serif;
   font-size: 17px;
   font-weight: 400;
 }
@@ -1235,7 +1235,7 @@ a svg {
   top: 22px;
   left: 17px;
   z-index: 3;
-  font-family: var(--font-latin, "Outfit Variable"), sans-serif;
+  font-family: Georgia, serif;
   font-size: 25px;
   line-height: 1.15;
   letter-spacing: -1px;
@@ -1551,7 +1551,7 @@ a svg {
   right: 12px;
   bottom: 32px;
   font-size: 13px;
-  font-family: var(--font-latin, "Outfit Variable"), sans-serif;
+  font-family: Georgia, serif;
   line-height: 1.5;
   transform: rotate(-6deg);
 }
@@ -1635,7 +1635,7 @@ a svg {
   line-height: 1.8;
 }
 .faq-q {
-  font-family: var(--font-latin, "Outfit Variable"), sans-serif;
+  font-family: Georgia, serif;
   font-size: 19px;
   flex-shrink: 0;
 }
@@ -1866,7 +1866,7 @@ a svg {
 }
 .concept-detail > span {
   font-size: 54px;
-  font-family: var(--font-latin, "Outfit Variable"), sans-serif;
+  font-family: Georgia, serif;
 }
 .concept-detail > p {
   font-size: 12px;

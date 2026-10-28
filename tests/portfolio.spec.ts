@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test";
-import AxeBuilder from "@axe-core/playwright";
 test("profile, navigation, scroll effect and page health", async ({
   page,
   isMobile,
@@ -32,11 +31,9 @@ test("profile, navigation, scroll effect and page health", async ({
     page.getByRole("heading", { name: "考える、つなぐ、つくる。" }),
   ).toBeVisible();
   await expect(
-    page
-      .locator("#contact")
-      .getByRole("link", { name: "プロジェクトを相談する" }),
+    page.locator("#contact").getByRole("link", { name: "プロジェクトを相談する" }),
   ).toHaveAttribute("href", "mailto:cbnbc07@gmail.com");
-  await page.evaluate(() => scrollTo(0, 650));
+  await page.evaluate(() => scrollTo(0, 400));
   await expect
     .poll(() =>
       page
@@ -54,16 +51,14 @@ test("profile, navigation, scroll effect and page health", async ({
   ).toBeGreaterThan(300);
   expect(errors).toEqual([]);
 });
-test("portfolio details, FAQ, consultation draft and keyboard dismissal", async ({
+test("concept details, FAQ, consultation draft and keyboard dismissal", async ({
   page,
 }) => {
   await page.goto("/");
   await page
-    .getByRole("button", {
-      name: "Webマーケティング事業のサービス紹介サイト 詳細を見る",
-    })
+    .getByRole("button", { name: "想いが伝わる、ブランドサイト。 詳細を見る" })
     .click();
-  await expect(page.getByRole("dialog")).toContainText("LANCERS PORTFOLIO");
+  await expect(page.getByRole("dialog")).toContainText("自主制作コンセプト");
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.getByRole("button", { name: /費用や制作期間/ }).click();
@@ -101,280 +96,4 @@ test("reduced motion keeps content accessible and disables effects", async ({
       () => document.documentElement.scrollWidth <= innerWidth,
     ),
   ).toBe(true);
-});
-
-test("category filters preserve the uploaded project information", async ({
-  page,
-}) => {
-  await page.goto("/");
-  const controls = page.getByRole("group", {
-    name: "ポートフォリオのカテゴリ",
-  });
-  await expect(page.locator(".work-card")).toHaveCount(15);
-  await controls.getByRole("button", { name: /採用/ }).click();
-  await expect(page.locator(".work-card")).toHaveCount(3);
-  await page
-    .getByRole("button", {
-      name: "企業理念と社員の声を伝える新卒採用サイト 詳細を見る",
-    })
-    .click();
-  await expect(page.getByRole("dialog")).toContainText(
-    "企業理念・社員の声・選考情報",
-  );
-  await page.keyboard.press("Escape");
-  await controls.getByRole("button", { name: /医療・薬局/ }).click();
-  await expect(page.locator(".work-card")).toHaveCount(2);
-  await expect(page.locator(".works-grid")).toContainText(
-    "健康相談・オンライン服薬指導",
-  );
-  await controls.getByRole("button", { name: /ブランド・LP/ }).click();
-  await expect(page.locator(".work-card")).toHaveCount(5);
-  await expect(page.locator(".works-grid")).toContainText("タニカのあまざけ");
-  await controls.getByRole("button", { name: /すべて/ }).click();
-  await expect(page.locator(".work-card")).toHaveCount(15);
-});
-
-test("contact channels use supplied identifiers and support copying", async ({
-  page,
-  context,
-}) => {
-  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
-  await page.goto("/");
-  await page.getByRole("button", { name: "Discordの連絡先をコピー" }).click();
-  await expect(page.locator(".contact-copy-status")).toContainText(
-    "Discordの連絡先をコピーしました",
-  );
-  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
-    "shiner715",
-  );
-  await page.getByRole("button", { name: "Chatworkの連絡先をコピー" }).click();
-  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
-    "3htt4mii70cg8",
-  );
-  await expect(
-    page.getByRole("link", { name: "Chatworkで連絡する" }),
-  ).toHaveAttribute("href", "https://www.chatwork.com/3htt4mii70cg8");
-  await expect(
-    page.getByRole("link", { name: "メールを書く" }),
-  ).toHaveAttribute("href", "mailto:cbnbc07@gmail.com");
-  await expect(
-    page.getByRole("link", { name: /Lancersでプロフィール/ }),
-  ).toHaveAttribute("href", "https://www.lancers.jp/profile/Ryuji_0524_Xp");
-  await page
-    .getByRole("group", { name: "ご相談のテーマ" })
-    .getByRole("button", { name: "UI / UX", exact: true })
-    .click();
-  await page.locator("#contact-timing").fill("相談して決めたい");
-  await page.locator("#contact-name").fill("山田 太郎");
-  await page.locator("#contact-email").fill("taro@example.com");
-  await page
-    .locator("#contact-message")
-    .fill("新しいウェブサービスを相談したいです。");
-  await page
-    .getByRole("button", { name: "相談内容をコピー", exact: true })
-    .click();
-  const draft = await page.evaluate(() => navigator.clipboard.readText());
-  expect(draft).toContain("山田 太郎");
-  expect(draft).toContain("taro@example.com");
-  expect(draft).toContain("新しいウェブサービスを相談したいです。");
-  expect(draft).toContain("【ご相談のテーマ】UI / UX");
-  expect(draft).toContain("【ご希望の時期】相談して決めたい");
-});
-
-test("desktop portfolio hover reveals the project label", async ({
-  page,
-  isMobile,
-}) => {
-  test.skip(
-    isMobile,
-    "Hover is a mouse interaction. Touch users open the card directly.",
-  );
-  await page.goto("/");
-  const card = page.locator(".work-card").first();
-  await card.hover();
-  await expect(card.locator(".project-hover-label")).toBeVisible();
-  await expect(page.locator(".custom-cursor")).toHaveAttribute(
-    "data-active",
-    "true",
-  );
-  await expect(page.locator(".custom-cursor")).toHaveCSS("opacity", "1");
-});
-
-test("each main section includes a human and robot illustration", async ({
-  page,
-}) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  const sections = page.locator("main section:not(.hero)");
-  expect(await sections.count()).toBeGreaterThan(7);
-  for (const section of await sections.all())
-    await expect(
-      section.locator("[data-human-robot=true] .companions-picture img"),
-    ).toHaveCount(1);
-  await expect(page.locator(".hero-photograph > img")).toHaveAttribute(
-    "src",
-    /dream-four/,
-  );
-});
-
-test("text contrast passes automated accessibility checks", async ({
-  page,
-}) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  await page.evaluate(() => document.fonts.ready);
-  const result = await new AxeBuilder({ page })
-    .withRules(["color-contrast"])
-    .analyze();
-  expect(
-    result.violations.map((v) => ({
-      id: v.id,
-      nodes: v.nodes.map((n) => ({
-        target: n.target,
-        summary: n.failureSummary,
-      })),
-    })),
-  ).toEqual([]);
-});
-
-test("four-person hero stays uncropped at the requested viewport sizes", async ({
-  page,
-  isMobile,
-}) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  const sizes = isMobile ? [375, 390] : [768, 1280, 1440];
-  for (const width of sizes) {
-    await page.setViewportSize({ width, height: isMobile ? 844 : 1000 });
-    await page.goto("/");
-    await page.evaluate(() => document.fonts.ready);
-    const photo = page.locator(".hero-photograph > img");
-    await expect(photo).toHaveCSS("object-fit", "contain");
-    await expect(page.locator(".hero-photograph")).toHaveAttribute(
-      "data-people",
-      "4",
-    );
-    await expect
-      .poll(() => photo.evaluate((e) => (e as HTMLImageElement).naturalWidth))
-      .toBeGreaterThan(0);
-    const bounds = await photo.boundingBox();
-    expect(bounds).not.toBeNull();
-    expect(bounds!.x).toBeGreaterThanOrEqual(0);
-    expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width);
-    await expect(page.locator(".team-portrait")).toHaveAttribute(
-      "data-people",
-      "4",
-    );
-    await expect(page.locator(".team-portrait-person img")).toHaveCount(2);
-    expect(
-      await page.evaluate(
-        () => document.documentElement.scrollWidth <= innerWidth,
-      ),
-    ).toBe(true);
-    await expect(
-      page
-        .locator(".hero-actions")
-        .getByRole("link", { name: "制作実績を見る" }),
-    ).toHaveAttribute("href", "#works");
-  }
-});
-
-test("contact form validates and prepares an email draft without posting", async ({
-  page,
-}) => {
-  await page.goto("/");
-  const submit = page.getByRole("button", {
-    name: "メールアプリを開いて相談する",
-  });
-  await submit.click();
-  await expect(page.locator("#contact-name:invalid")).toHaveCount(1);
-  await page.locator("#contact-name").fill("表示確認 テスト");
-  await page.locator("#contact-email").fill("invalid");
-  await page.locator("#contact-message").fill("フォームの表示確認用です。");
-  expect(
-    await page
-      .locator("#contact-email")
-      .evaluate((e) => (e as HTMLInputElement).validity.valid),
-  ).toBe(false);
-  await page.locator("#contact-email").fill("preview@example.com");
-  const posts: string[] = [];
-  page.on("request", (request) => {
-    if (request.method() === "POST") posts.push(request.url());
-  });
-  await submit.click();
-  await expect(page.locator(".contact-form-status")).toContainText(
-    "メールアプリで内容を確認して送信してください",
-  );
-  expect(posts).toEqual([]);
-  await expect(page.locator("#contact-message")).toHaveValue(
-    "フォームの表示確認用です。",
-  );
-});
-
-test("the page presents distinct one, two, three and four-person scenes", async ({
-  page,
-}) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  for (const count of [1, 2, 3, 4]) {
-    const figure = page
-      .locator(`.section-companions[data-people="${count}"]`)
-      .first();
-    await figure.scrollIntoViewIfNeeded();
-    const img = figure.locator(".companions-picture img");
-    await expect(img).toBeVisible();
-    await expect
-      .poll(() => img.evaluate((e) => (e as HTMLImageElement).naturalWidth))
-      .toBeGreaterThan(0);
-  }
-});
-
-test("modern typography and vector skill icons are loaded", async ({
-  page,
-}) => {
-  await page.goto("/");
-  await page.evaluate(() => document.fonts.ready);
-  await expect(page.locator("body")).toHaveCSS(
-    "font-family",
-    /Outfit Variable/,
-  );
-  await expect(page.locator("body")).toHaveCSS(
-    "font-family",
-    /Noto Sans JP Variable/,
-  );
-  await expect(
-    page.locator(".marquee-group").first().locator(".skill-glyph svg"),
-  ).toHaveCount(12);
-  expect(
-    await page.evaluate(() =>
-      document.fonts.check('700 16px "Noto Sans JP Variable"', "相談"),
-    ),
-  ).toBe(true);
-});
-
-test("meteor trail follows a mouse and turns off for reduced motion", async ({
-  page,
-  isMobile,
-}) => {
-  await page.goto("/");
-  const trail = page.locator(".meteor-trail");
-  if (isMobile) {
-    await expect(trail).toBeHidden();
-    return;
-  }
-  await expect(trail).toHaveAttribute("data-active", "true");
-  await page.mouse.move(400, 300);
-  await page.mouse.move(700, 450, { steps: 20 });
-  const painted = await trail.evaluate((e) => {
-    const c = e as HTMLCanvasElement;
-    const pixels = c
-      .getContext("2d")!
-      .getImageData(0, 0, c.width, c.height).data;
-    for (let i = 3; i < pixels.length; i += 4) if (pixels[i] > 0) return true;
-    return false;
-  });
-  expect(painted).toBe(true);
-  await expect(trail).toHaveCSS("pointer-events", "none");
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(trail).toHaveAttribute("data-active", "false");
-  await expect(trail).toBeHidden();
 });

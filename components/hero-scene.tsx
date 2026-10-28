@@ -36,21 +36,13 @@ export default function HeroScene() {
       transparent: true,
       uniforms,
       vertexShader: `varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}`,
-      fragmentShader: `precision mediump float;
-      varying vec2 vUv; uniform float uTime; uniform float uScroll; uniform vec2 uMouse; uniform float uAspect;
-      void main(){
-        vec2 p=vUv-vec2(.75,.48);p.x*=uAspect;p-=uMouse*.04;
-        float r=length(p);float a=atan(p.y,p.x);
-        float core=exp(-r*5.);float halo=exp(-abs(r-(.2+sin(uTime*.4)*.035))*24.);
-        float ray=pow(abs(sin(a*7.+uTime*.12)),22.)*exp(-r*3.)*smoothstep(.02,.2,r);
-        float ribbon=exp(-abs(p.y-sin(p.x*3.+uTime*.28)*.14)*27.)*exp(-r*1.7);
-        vec3 cyan=vec3(.32,.83,1.);vec3 violet=vec3(.66,.43,1.);vec3 pink=vec3(1.,.59,.76);
-        vec3 spectrum=mix(cyan,violet,.5+.5*sin(a*2.+uTime*.23));spectrum=mix(spectrum,pink,.3+.2*sin(uTime*.3));
-        float glow=core*.09+halo*.22+ray*.3+ribbon*.18;
-        float wipe=(1.-smoothstep(uScroll*2.4-.04,uScroll*2.4+.08,r))*smoothstep(.12,.9,uScroll);
-        vec3 color=mix(spectrum,vec3(.93,.94,1.),wipe);
-        gl_FragColor=vec4(color,clamp(glow+wipe*.92,0.,.96));
-      }`,
+      fragmentShader: `precision mediump float; varying vec2 vUv; uniform float uTime; uniform float uScroll; uniform vec2 uMouse; uniform float uAspect;
+      void main(){vec2 p=vUv-vec2(.74,.52);p.x*=uAspect;p-=uMouse*.035;
+      float a=atan(p.y,p.x);float r=length(p);float wave=sin(a*3.+uTime*.35+uScroll*5.)*.025+cos(a*5.-uTime*.2)*.012;
+      float radius=.29+wave+uScroll*2.2;float shape=1.-smoothstep(radius-.002,radius+.004,r);
+      vec3 lime=vec3(.88,.95,1.);vec3 mint=vec3(.58,.77,.98);float shade=clamp((p.x+p.y)*1.15+.45,0.,1.);
+      vec3 color=mix(lime,mint,shade*.65);float bands=sin((r+sin(a*2.+uTime*.2)*.025)*100.-uScroll*12.);color+=bands*.008;
+      gl_FragColor=vec4(color,shape*smoothstep(.02,.8,uScroll));}`,
     });
     const geometry = new THREE.PlaneGeometry(2, 2);
     scene.add(new THREE.Mesh(geometry, material));
@@ -75,11 +67,8 @@ export default function HeroScene() {
       progress = Math.max(
         0,
         Math.min(
-          ((document.querySelector(".site-header")?.getBoundingClientRect()
-            .height ?? 0) -
-            (element.closest(".hero-track")?.getBoundingClientRect().top ??
-              0)) /
-            900,
+          -(element.closest(".hero-track")?.getBoundingClientRect().top ?? 0) /
+            450,
           1,
         ),
       );
@@ -88,11 +77,11 @@ export default function HeroScene() {
       visible = entry.isIntersecting;
     });
     visibility.observe(element);
-    const startedAt = performance.now();
+    const clock = new THREE.Clock();
     const render = () => {
       frame = requestAnimationFrame(render);
       if (!visible || document.hidden) return;
-      uniforms.uTime.value = (performance.now() - startedAt) / 1000;
+      uniforms.uTime.value = clock.getElapsedTime();
       uniforms.uScroll.value += (progress - uniforms.uScroll.value) * 0.065;
       renderer.render(scene, camera);
     };
