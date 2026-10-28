@@ -1,0 +1,48 @@
+/* Keep the complete branded scene visible; captions remain real, readable text. */
+.reference-hero-stage.hero-scene-stage { min-height: 0; aspect-ratio: auto; background: #f1f7ff; }
+.hero-photo-deck { position: relative; width: 100%; aspect-ratio: 3 / 1; overflow: hidden; isolation: isolate; background: #edf5ff; }
+.hero-photo-layer { position: absolute; inset: 0; opacity: 0; transform: scale(1.035) translateX(8px); transition: opacity .85s ease-in-out, transform 1.4s ease-out; pointer-events: none; }
+.hero-photo-layer[data-active="true"] { opacity: 1; transform: scale(1); z-index: 1; }
+.hero-photo-layer img { object-fit: contain; object-position: center; }
+.hero-scene-caption { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: center; gap: 35px; padding: 28px 3.2%; border-top: 1px solid #d5e5f4; background: linear-gradient(120deg, #fff, #eff6ff); }
+.hero-scene-caption .reference-hero-copy { width: 100%; padding: 0; }
+.hero-scene-caption .reference-hero-kicker { margin-bottom: 12px; }
+.hero-scene-caption h1 { font-size: clamp(27px, 2.7vw, 43px); font-weight: 800; line-height: 1.5; letter-spacing: -.04em; }
+.hero-scene-caption h1 br { display: none; }
+.hero-scene-caption .reference-hero-subtitle { max-width: none; font-size: 16px; margin-top: 12px; }
+.hero-scene-caption .reference-hero-description { width: 100%; max-width: 610px; font-size: 12px; line-height: 1.9; margin-top: 8px; }
+.hero-scene-caption .reference-hero-link { margin-top: 15px; font-size: 12px; }
+.hero-scene-caption .reference-hero-proof { position: static; width: 100%; margin: 0; grid-template-columns: 1fr 1fr; gap: 10px; }
+.hero-scene-caption .reference-hero-proof > div { padding: 16px; background: #fff; border: 1px solid #d0e3f4; border-radius: 12px; box-shadow: 0 4px 14px #22517c09; }
+.hero-scene-caption .reference-hero-proof > div:last-child { grid-column: 1 / -1; }
+.hero-scene-caption .reference-hero-proof > div > span { color: #527ca6; }
+.hero-scene-caption .reference-hero-proof strong { color: #1c72be; font-size: 35px; }
+.hero-scene-caption .reference-hero-proof small { color: #355f83; }
+.hero-scene-caption .reference-hero-proof .proof-message { margin: 0; font-size: 17px; }
+.hero-scene-caption .proof-message small { display: inline-block; margin-left: 10px; }
+.reference-hero-tabs > button { position: relative; overflow: hidden; }
+.reference-hero[data-playing="true"] .reference-hero-tabs > button[aria-selected="true"]::after { content: ""; position: absolute; bottom: 0; left: 0; height: 3px; width: 100%; background: #8be0ff; transform-origin: left; animation: hero-scene-progress 4s linear infinite; }
+@keyframes hero-scene-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (max-width: 960px) {
+  .hero-scene-caption { grid-template-columns: 1fr; gap: 24px; padding: 28px 5%; }
+  .hero-scene-caption h1 { font-size: 34px; }
+  .hero-scene-caption .reference-hero-proof { grid-template-columns: 1fr 1fr 1.4fr; }
+  .hero-scene-caption .reference-hero-proof > div:last-child { grid-column: auto; }
+  .hero-scene-caption .proof-message small { display: block; margin-left: 0; }
+}
+@media (max-width: 760px) {
+  .hero-scene-caption { padding: 22px 20px; gap: 22px; }
+  .hero-scene-caption h1 { font-size: clamp(25px, 6.7vw, 34px); }
+  .hero-scene-caption h1 br { display: block; }
+  .hero-scene-caption .reference-hero-subtitle { font-size: 13px; margin-top: 10px; }
+  .hero-scene-caption .reference-hero-description { font-size: 11px; }
+  .hero-scene-caption .reference-hero-proof > div { padding: 10px 8px; border-radius: 8px; }
+  .hero-scene-caption .reference-hero-proof strong { font-size: 29px; }
+  .hero-scene-caption .reference-hero-proof small { font-size: 8px; }
+  .hero-scene-caption .reference-hero-proof .proof-message { font-size: 11px; margin-top: 7px; }
+  .hero-scene-caption .proof-message small { font-size: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo-layer { transition: none; transform: none; }
+  .reference-hero[data-playing="true"] .reference-hero-tabs > button[aria-selected="true"]::after { animation: none; }
+}

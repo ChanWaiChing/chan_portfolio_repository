@@ -99,3 +99,27 @@ test("hero keyboard controls and reduced motion", async ({ page }) => {
   await expect(page.getByRole("tabpanel")).toContainText("可能性を広げる。");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+test("four hero images cycle every four seconds and can be paused", async ({ page }) => {
+  await page.clock.install();
+  await page.goto("/");
+  const frames = page.locator(".hero-photo-layer");
+  await expect(frames).toHaveCount(4);
+  await expect(frames.nth(0)).toHaveAttribute("data-active", "true");
+  await page.clock.runFor(3999);
+  await expect(frames.nth(0)).toHaveAttribute("data-active", "true");
+  await page.clock.runFor(1);
+  await expect(frames.nth(1)).toHaveAttribute("data-active", "true");
+  await page.clock.runFor(4000);
+  await expect(frames.nth(2)).toHaveAttribute("data-active", "true");
+  await page.clock.runFor(4000);
+  await expect(frames.nth(3)).toHaveAttribute("data-active", "true");
+  await page.clock.runFor(4000);
+  await expect(frames.nth(0)).toHaveAttribute("data-active", "true");
+  await page.getByRole("button", { name: "自動切替を停止" }).click();
+  await page.clock.runFor(8000);
+  await expect(frames.nth(0)).toHaveAttribute("data-active", "true");
+  await page.getByRole("button", { name: "自動切替を再生" }).click();
+  await page.clock.runFor(4000);
+  await expect(frames.nth(1)).toHaveAttribute("data-active", "true");
+});

@@ -1,16 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { BotTeam } from "./bot-mascot";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronRight, Pause, Play } from "lucide-react";
 
 const slides = [
-  { label: "トータルサポート", title: ["兄弟の力で、", "アイデアをカタチに。"], subtitle: "デザインも、開発も。その先の運用まで。", text: "考える兄と、描く弟。ふたりの専門性で、あなたの「つくりたい」を、一緒に。", image: "/images/studio-hero.png", destination: "contact" },
-  { label: "ITコンサルティング", title: ["その課題に、", "進むべき道筋を。"], subtitle: "事業の想いを、実現できる計画へ。", text: "現状の整理から要件定義、技術選定まで。何から始めるか、一緒に考えます。", image: "/images/studio-hero.png", destination: "services" },
-  { label: "デザイン・開発", title: ["伝わるデザイン。", "使いやすい仕組み。"], subtitle: "見た目と、その中の体験まで。", text: "Webサイト、業務システム、モバイルアプリ。デザインと開発をひとつのチームで。", image: "/images/teamwork.png", destination: "works" },
-  { label: "AI活用・運用改善", title: ["つくった先の、", "可能性を広げる。"], subtitle: "日々の仕事を、もっと軽やかに。", text: "生成AIの活用から、公開後の保守・改善まで。長く使える仕組みを一緒に育てます。", image: "/images/studio-hero.png", destination: "services" },
+  { label: "トータルサポート", title: ["兄弟の力で、", "アイデアをカタチに。"], subtitle: "デザインも、開発も。その先の運用まで。", text: "考える兄と、描く弟。ふたりの専門性で、あなたの「つくりたい」を、一緒に。", image: "/images/heroes/team.webp", alt: "OHO BROTHERSのスタジオで、4人のメンバーと4体のロボットが共同制作するイメージ", destination: "contact" },
+  { label: "ITコンサルティング", title: ["その課題に、", "進むべき道筋を。"], subtitle: "事業の想いを、実現できる計画へ。", text: "現状の整理から要件定義、技術選定まで。何から始めるか、一緒に考えます。", image: "/images/heroes/brothers.webp", alt: "OHO BROTHERSのスタジオで、2人の男性と2体のロボットがアイデアを検討するイメージ", destination: "services" },
+  { label: "デザイン・開発", title: ["伝わるデザイン。", "使いやすい仕組み。"], subtitle: "見た目と、その中の体験まで。", text: "Webサイト、業務システム、モバイルアプリ。デザインと開発をひとつのチームで。", image: "/images/heroes/couple-one.webp", alt: "紺色の服の男性とボブヘアの女性が、2体のロボットと共創するOHO BROTHERSのイメージ", destination: "works" },
+  { label: "AI活用・運用改善", title: ["つくった先の、", "可能性を広げる。"], subtitle: "日々の仕事を、もっと軽やかに。", text: "生成AIの活用から、公開後の保守・改善まで。長く使える仕組みを一緒に育てます。", image: "/images/heroes/couple-two.webp", alt: "ベージュの服の男性とロングヘアの女性が、2体のロボットと協力するOHO BROTHERSのイメージ", destination: "services" },
 ];
+
+const SLIDE_INTERVAL_MS = 4000;
 
 export function HeroShowcase() {
   const [active, setActive] = useState(0);
@@ -32,7 +33,7 @@ export function HeroShowcase() {
     const timer = window.setInterval(() => {
       if (!document.hidden && document.body.style.overflow !== "hidden")
         setActive((current) => (current + 1) % slides.length);
-    }, 8000);
+    }, SLIDE_INTERVAL_MS);
     return () => window.clearInterval(timer);
   }, [paused, reducedMotion]);
 
@@ -41,14 +42,19 @@ export function HeroShowcase() {
       ITコンサルティング × デザイン × システム開発
       <span>アイデアから、事業の次の一歩まで。</span>
     </div>
-    <section className="reference-hero" aria-label="大穂兄弟のサービス">
-      <div className="reference-hero-stage" id="hero-panel" role="tabpanel"
+    <section className="reference-hero" aria-label="大穂兄弟のサービス" data-playing={!paused && !reducedMotion}>
+      <div className="reference-hero-stage hero-scene-stage" id="hero-panel" role="tabpanel"
         aria-labelledby={`hero-tab-${active}`} tabIndex={0}
         onFocusCapture={() => setPaused(true)} data-slide={active}>
-        <div className="reference-hero-image" aria-hidden="true">
-          <Image src={slide.image} alt="" fill sizes="(max-width: 1672px) 100vw, 1672px"
-            preload={active === 0} quality={90} />
+        <div className="hero-photo-deck">
+          {slides.map((item, index) => <div className="hero-photo-layer" key={item.image}
+            data-active={index === active} aria-hidden={index !== active}>
+            <Image src={item.image} alt={item.alt} fill
+              sizes="(max-width: 1672px) 100vw, 1672px"
+              preload={index === 0} loading={index === 0 ? undefined : "eager"} />
+          </div>)}
         </div>
+        <div className="hero-scene-caption">
         <div className="reference-hero-copy">
           <p className="reference-hero-kicker">
             <span>DESIGN × TECHNOLOGY</span>
@@ -61,15 +67,11 @@ export function HeroShowcase() {
             {active === 0 ? "私たちに相談する" : "詳しく見る"}<ArrowRight size={19} />
           </a>
         </div>
-        <div className="hero-partner-badge">
-          <span>YOUR CREATIVE PARTNER</span><strong>考える兄 × 描く弟</strong>
-          <span>企画から運用まで、ひとつのチームで。</span>
-        </div>
-        <BotTeam pair className="hero-bots" />
         <div className="reference-hero-proof">
           <div><span>ENGINEERING</span><strong>11<small>年の実務経験</small></strong></div>
           <div><span>DESIGN</span><strong>3<small>年の実務経験</small></strong></div>
           <div><span>ONE TEAM</span><strong className="proof-message">企画から運用まで<small>窓口ひとつで、一貫して伴走</small></strong></div>
+        </div>
         </div>
       </div>
       <div className="reference-hero-actions">

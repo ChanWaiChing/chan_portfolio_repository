@@ -4,6 +4,7 @@ import "./reference-theme.css";
 import "./webmarks-theme.css";
 import "./catalog.css";
 import "./modern-cards.css";
+import "./hero-scenes.css";
 
 export const metadata: Metadata = {
   title: "大穂兄弟 | BROTHERS — 兄弟の力で、アイデアをカタチに。",
