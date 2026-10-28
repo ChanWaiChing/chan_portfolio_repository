@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { BotTeam } from "./bot-mascot";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronRight, Pause, Play } from "lucide-react";
 
@@ -64,6 +65,7 @@ export function HeroShowcase() {
           <span>YOUR CREATIVE PARTNER</span><strong>考える兄 × 描く弟</strong>
           <span>企画から運用まで、ひとつのチームで。</span>
         </div>
+        <BotTeam pair className="hero-bots" />
         <div className="reference-hero-proof">
           <div><span>ENGINEERING</span><strong>11<small>年の実務経験</small></strong></div>
           <div><span>DESIGN</span><strong>3<small>年の実務経験</small></strong></div>
