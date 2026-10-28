@@ -52,9 +52,9 @@ Next.js 16.4.3 / React 19.3.1 / TypeScript。Noto Sans JP・DM Sansはローカ�
 
 ## 4枚のブランドヒーロー
 
-`public/images/heroes/` に1920×640のWebPを配置しています。現在の表示には `-natural` 版を使用します。
+`public/images/heroes/` の先頭には、アップロードされた画像をそのまま使った `ai-first-view.webp`（1774×887）を表示します。元PNGと同じ画素の可逆圧縮WebPです。残り3枚には1920×640の `-natural` 版を使用します。ヒーローの表示枠は2:1で固定し、画像全体を切り取らず表示するため、切り替え時にページが上下しません。
 
-- `team-natural.webp`：4人と4体。コード確認、素材見本、模型、iPhoneのアプリ確認
+- `ai-first-view.webp`：アップロード画像「AIとともに、もっと速く、もっと良いものを。」。男性2人と2体のロボット
 - `brothers-natural.webp`：男性2人と2体。ホワイトボードとMacBookでの作業
 - `couple-one-natural.webp`：最初のカップルと2体。ワイヤーフレーム確認とコーヒーの受け渡し
 - `couple-two-natural.webp`：別のカップルと2体。iPhoneのテストと付箋でのストーリーボード整理
