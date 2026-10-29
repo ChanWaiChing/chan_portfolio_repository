@@ -38,7 +38,7 @@ test("bot-colored badges and primary controls retain readable contrast", async (
   for (const ratio of ratios) expect(ratio).toBeGreaterThanOrEqual(4.5);
 });
 
-test("section images load, surfaces remain opaque, and the footer scene is not cropped", async ({ page }) => {
+test("section images load, surfaces remain opaque, and the footer scene is not cropped", async ({ page, isMobile }) => {
   await page.goto("/");
   const canvas = page.locator(".reading-layout");
   await expect(canvas).toHaveCSS("background-image", /serene-courtyard/);
@@ -60,14 +60,15 @@ test("section images load, surfaces remain opaque, and the footer scene is not c
   await expect(page.locator(".contact-form")).toHaveCSS("background-image", /calm-inquiry/);
   await expect(page.locator(".contact-time-intro")).toContainText("本来の仕事に、向き合う時間をつくる。");
   const scene = await page.locator(".footer-scene").boundingBox();
-  expect(scene!.width / scene!.height).toBeCloseTo(3, 1);
+  expect(scene!.width / scene!.height).toBeCloseTo(isMobile ? 1122/1402 : 3, 1);
   const artwork = page.locator(".footer-scene img");
   await expect(artwork).toHaveCount(1);
   await artwork.scrollIntoViewIfNeeded();
   await artwork.evaluate((img: HTMLImageElement) => img.decode());
   await expect(artwork).toHaveAttribute("alt", /お客様のために、時間をつくる。/);
   await expect(artwork).toHaveCSS("object-fit", "contain");
-  await expect(page.locator(".footer-scene > :not(img)")).toHaveCount(0);
+  await expect(page.locator(".footer-scene picture")).toHaveCount(1);
+  expect(await artwork.evaluate((img:HTMLImageElement)=>img.currentSrc)).toContain(isMobile ? "footer-mobile-ja" : "footer-original-ja");
   await expect(page.locator(".footer-scene")).toHaveCSS("background-image", "none");
   const footer = await page.locator(".pattern-footer").boundingBox();
   expect(scene!.x).toBeGreaterThan(footer!.x);

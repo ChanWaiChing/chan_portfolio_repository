@@ -4,6 +4,7 @@ import Image from "next/image";
 import { BotMascot } from "./bot-mascot";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Pause, Play } from "lucide-react";
+import { useMotionGate } from "./use-motion-gate";
 
 type HeroSlide = { label: string; title: string[]; phase: string; note: string; steps: string[]; image?: string; alt?: string };
 const slides: HeroSlide[] = [
@@ -16,6 +17,7 @@ const slides: HeroSlide[] = [
 const SLIDE_INTERVAL_MS = 4000;
 
 export function HeroShowcase() {
+  const motionAllowed = useMotionGate();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -39,20 +41,20 @@ export function HeroShowcase() {
   }, []);
 
   useEffect(() => {
-    if (paused || reducedMotion || !visible) return;
+    if (paused || reducedMotion || !visible || !motionAllowed) return;
     const timer = window.setInterval(() => {
       if (!document.hidden && document.body.style.overflow !== "hidden")
         setActive((current) => (current + 1) % slides.length);
     }, SLIDE_INTERVAL_MS);
     return () => window.clearInterval(timer);
-  }, [paused, reducedMotion, visible]);
+  }, [paused, reducedMotion, visible, motionAllowed]);
 
   return <>
     <div className="site-intro">
       小さなチームのための、デザインと開発
       <span>アイデアから、事業の次の一歩まで。</span>
     </div>
-    <section ref={stage} className="reference-hero" aria-label="大穂兄弟のサービス" data-playing={!paused && !reducedMotion && visible} data-border-motion={!paused && !reducedMotion && visible}>
+    <section ref={stage} className="reference-hero" aria-label="大穂兄弟のサービス" data-playing={!paused && !reducedMotion && visible && motionAllowed} data-border-motion={!paused && !reducedMotion && visible && motionAllowed}>
       <div className="hero-primary-copy"><p className="eyebrow">大穂兄弟のデザインと開発</p><h1 id="hero-title">デザインと開発を、<br /><span>ひとつのチームで。</span></h1><p>更新しにくいサイト、手作業の転記、使いづらい管理画面。中小企業・小さなチームの困りごとを、企画・デザイン・開発から公開後の改善まで一緒に解決します。</p><div className="hero-primary-actions"><a className="catalog-cta" href="#contact">プロジェクトを相談する<ArrowRight size={18} /></a><a className="catalog-outline-button" href="#selected-work">制作イメージを見る<ArrowRight size={18} /></a></div><p className="hero-experience">開発・情報技術相談 11年 <span>×</span> デザイン 3年</p></div>
       <div className="reference-hero-stage hero-scene-stage" id="hero-panel" role="tabpanel"
         aria-labelledby={`hero-tab-${active}`} tabIndex={0}
@@ -73,7 +75,7 @@ export function HeroShowcase() {
           onFocusCapture={() => setPaused(true)}>
           {slides.map((item, index) => <button key={item.label}
             ref={(element) => { tabs.current[index] = element; }}
-            id={`hero-tab-${index}`} role="tab" aria-controls="hero-panel"
+            id={`hero-tab-${index}`} role="tab" aria-controls="hero-panel" aria-label={`0${index + 1} ${item.label}`}
             aria-selected={active === index} tabIndex={active === index ? 0 : -1}
             onClick={() => { setActive(index); setPaused(true); }}
             onKeyDown={(event) => {
@@ -88,15 +90,15 @@ export function HeroShowcase() {
               setPaused(true);
               tabs.current[next]?.focus();
             }}>
-            <span>0{index + 1}</span><strong>{item.label}</strong>
+            <span>0{index + 1}</span><strong><span className="hero-tab-full">{item.label}</span><span className="hero-tab-short" aria-hidden="true">{["総合サポート", "企画・技術相談", "デザイン・開発", "人工知能・改善"][index]}</span></strong>
           </button>)}
         </div>
         <button className="hero-motion-toggle"
           aria-label={paused || reducedMotion ? "自動切替を再生" : "自動切替を停止"}
-          aria-pressed={paused || reducedMotion} disabled={reducedMotion}
+          aria-pressed={paused || reducedMotion || !motionAllowed} disabled={reducedMotion || !motionAllowed}
           onClick={() => setPaused(!paused)}>
           {paused || reducedMotion ? <Play size={16} /> : <Pause size={16} />}
-          <span>{reducedMotion ? "動きを抑えています" : paused ? "動きを再生" : "動きを停止"}</span>
+          <span>{!motionAllowed ? "演出を停止しています" : reducedMotion ? "動きを抑えています" : paused ? "動きを再生" : "動きを停止"}</span>
         </button>
       </div>
     </section>

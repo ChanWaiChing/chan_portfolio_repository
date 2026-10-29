@@ -13,6 +13,8 @@ export function SiteMotion() {
   const [fine, setFine] = useState(false);
   const canvas = useRef<HTMLCanvasElement>(null);
 
+  useEffect(() => { window.dispatchEvent(new CustomEvent("oho-motion-change",{detail:enabled})); },[enabled]);
+
   useEffect(() => {
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
     const pointer = matchMedia("(hover: hover) and (pointer: fine)");
