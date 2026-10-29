@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 
-test("brothers and bot skill introduction are visible without expanding a panel",async({page})=>{
+test("professional profile and bot skill introduction are visible without expanding a panel",async({page})=>{
   await page.goto("/");
-  await expect(page.locator(".brother-intro-panel")).toHaveCount(2);
-  await expect(page.locator(".brother-intro-panel").first()).toBeVisible();
-  await expect(page.locator(".narrator-bot")).toHaveCount(2);
-  await expect(page.locator(".brand-story")).toBeVisible();
+  await expect(page.locator(".professional-profile")).toBeVisible();
+  await expect(page.locator(".profile-guide .bot-ocean")).toHaveCount(1);
+  await expect(page.locator(".brother-intro-panel")).toHaveCount(0);
+  await expect(page.locator(".profile-biography")).toContainText("ボストン大学");
   await expect(page.locator(".workflow-skills")).toBeVisible();
   expect(await page.locator(".workflow-skills").evaluate(e=>Boolean(e.closest("details")))).toBe(false);
   await page.locator(".skill-tool-universe").scrollIntoViewIfNeeded();

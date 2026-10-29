@@ -14,9 +14,9 @@ import { PackageThumbnail } from "./package-thumbnail";
 import { PackagePlanDetails } from "./package-plan-details";
 import { CategoryFilters } from "./category-filters";
 import { HeroShowcase } from "./hero-showcase";
-import { BrandStory, ContactExpectations, ServiceEntrances, WorkingProcess } from "./brand-story";
+import { ContactExpectations, ServiceEntrances, WorkingProcess } from "./brand-story";
 import { ConceptDemo } from "./concept-demo";
-import { BrotherIntroductions } from "./brother-introductions";
+import { ProfessionalProfile } from "./professional-profile";
 import { SkillWorkflows } from "./skill-workflows";
 import { PatternFooter } from "./pattern-footer";
 import { ContactForm } from "./contact-form";
@@ -134,8 +134,8 @@ export default function Portfolio({ directSend = false }: { directSend?: boolean
     <main id="main">
       <section id="introduction" aria-label="はじめに"><HeroShowcase />
         <div className="content-section selected-work" id="selected-work"><Heading label="操作できる制作例" title="触ってわかる、3つの制作デモ。" text="商品検索・チーム管理・記録の三つの自主制作デモ。画面を触りながら、設計と実装の考え方をご確認ください。" /><EvidenceNotes /><p className="mobile-gallery-hint">横にスワイプして、三つのデモをご覧いただけます。 →</p><div className="portfolio-grid">{demoItems.map(item => <article className="portfolio-card luminous-card" key={item.id}><button onClick={() => { trackInteraction("concept_open", { id: item.id }); setDetail({ kind: "work", item }); }} aria-label={`${item.title} コンセプト詳細`}><WorkVisual item={item} /><div className="portfolio-card-body"><span className="eyebrow">{item.category} / 制作例</span><h3>{item.title}</h3><span className="portfolio-detail-link">デモと設計意図を見る<ArrowUpRight size={18} /></span></div></button></article>)}</div><a className="text-link" href="#works">制作実績を見る<ArrowRight size={17} /></a></div>
-        <div className="content-section introduction-copy"><Heading label="私たちについて" title="考える兄と、描く弟。" text="大穂兄弟。技術とデザインを、ひとつのチームで相談できます。" />
-          <BrandStory /><BrotherIntroductions />
+        <div className="content-section introduction-copy"><Heading label="プロフィール" title="事業を読み解き、世界へつなぐ。" text="経済学と投資・戦略の経験をもとに、多様なチームと新たな価値の創出を目指しています。" />
+          <ProfessionalProfile />
         </div>
       </section>
       <section className="content-section content-pale" id="services"><Heading label="サービスと技術" title="今の課題から、入口を選ぶ。" text="中小企業・小さなチームのウェブサイトと業務の仕組みづくり。必要なところから一緒に考えます。" />

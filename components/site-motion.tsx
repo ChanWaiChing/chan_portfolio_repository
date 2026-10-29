@@ -5,7 +5,7 @@ import { Pause, Play, Sparkles } from "lucide-react";
 
 const colors = ["#ff577c", "#ffad57", "#ffe17b", "#72ddb2", "#62ccff", "#8998ff", "#cb8cff"];
 const effects: Record<string, string> = { "selected-work": "rise", services: "slide", strengths: "steps", packages: "scale", works: "glide", faq: "unfold", contact: "settle", footer: "curtain" };
-const targets = ".content-heading,.faq-guide-heading,.brand-story,.brother-intro-panel,.service-entrance,.workflow-card,.working-process > li,.package-card,#works .portfolio-card,.faq-guide-item,.contact-layout,.contact-followup,.footer-closing,.footer-scene";
+const targets = ".content-heading,.faq-guide-heading,.brand-story,.brother-intro-panel,.professional-profile,.service-entrance,.workflow-card,.working-process > li,.package-card,#works .portfolio-card,.faq-guide-item,.contact-layout,.contact-followup,.footer-closing,.footer-scene";
 
 export function SiteMotion() {
   const [enabled, setEnabled] = useState(true);

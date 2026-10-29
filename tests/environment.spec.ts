@@ -63,12 +63,15 @@ test("section images load, surfaces remain opaque, and the footer scene is not c
         const channel = parseInt(hex.slice(i, i + 2), 16) / 255 * opacity;
         return channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4;
       }).reduce((sum, value, index) => sum + value * [.2126, .7152, .0722][index], 0);
-      return (luminance(veil, alpha) + .05) / (luminance(ink) + .05);
+      const foreground=luminance(ink);
+      const ratio=(background:number)=>(Math.max(background,foreground)+.05)/(Math.min(background,foreground)+.05);
+      const whitePixel=[0,2,4].map(i=>Math.round(parseInt(veil.slice(i,i+2),16)*alpha+255*(1-alpha)).toString(16).padStart(2,"0")).join("");
+      return Math.min(ratio(luminance(veil,alpha)),ratio(luminance(whitePixel)));
     });
     expect(contrast).toBeGreaterThanOrEqual(4.5);
   }
-  await expect(page.locator(".package-card").first()).toHaveCSS("background-color", "rgb(228, 237, 248)");
-  await expect(page.locator(".contact-form")).toHaveCSS("background-color", "rgb(231, 240, 237)");
+  await expect(page.locator(".package-card").first()).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(page.locator(".contact-form")).toHaveCSS("background-color", "rgb(255, 255, 255)");
   await expect(page.locator(".contact-form")).toHaveCSS("background-image", /calm-inquiry/);
   await expect(page.locator(".contact-time-intro")).toContainText("本来の仕事に、向き合う時間をつくる。");
   const scene = await page.locator(".footer-scene").boundingBox();

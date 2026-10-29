@@ -7,7 +7,7 @@ import { ArrowRight, Pause, Play } from "lucide-react";
 
 type HeroSlide = { label: string; title: string[]; phase: string; note: string; steps: string[]; image?: string; alt?: string };
 const slides: HeroSlide[] = [
-  { label: "トータルサポート", title: ["考える兄と、", "描く弟。"], phase: "ひとつのチーム", note: "課題から、ひとつのチームで。", steps: ["目的を整理", "体験を設計", "仕組みを実装"] },
+  { label: "トータルサポート", title: ["事業の可能性を、", "世界へ。"], phase: "ひとつのチーム", note: "課題から、ひとつのチームで。", steps: ["目的を整理", "体験を設計", "仕組みを実装"] },
   { label: "情報技術コンサルティング", title: ["その課題に、", "進むべき道筋を。"], image: "/images/heroes/consulting-human-led.webp", alt: "二人の男性が図面と端末を使って企画を進め、二体の小さなボットが付箋とアイデアで支える制作イメージ", phase: "企画・設計", note: "何をつくるか、一緒に決める。", steps: ["課題・制約", "優先順位", "実行する計画"] },
   { label: "デザイン・開発", title: ["伝わるデザイン。", "使いやすい仕組み。"], image: "/images/heroes/design-human-led.webp", alt: "女性が紙の設計案を説明し、男性がパソコンを操作するかたわら、二体のボットが配色と資料を補助する制作イメージ", phase: "デザインと開発", note: "使う人と、運用する人のために。", steps: ["情報と導線", "操作できる試作", "デザインと実装"] },
   { label: "人工知能活用・運用改善", title: ["つくった先の、", "可能性を広げる。"], image: "/images/heroes/improvement-human-led.webp", alt: "男女が端末とチェックリストで改善を検討し、二体の小さなボットが材料と発想を補助する制作イメージ", phase: "改善・運用", note: "必要なところから、小さく改善。", steps: ["現状を確認", "改善を試す", "運用に引き継ぐ"] },
@@ -53,7 +53,7 @@ export function HeroShowcase() {
       <span>アイデアから、事業の次の一歩まで。</span>
     </div>
     <section ref={stage} className="reference-hero" aria-label="大穂兄弟のサービス" data-playing={!paused && !reducedMotion && visible} data-border-motion={!paused && !reducedMotion && visible}>
-      <div className="hero-primary-copy"><p className="eyebrow">大穂兄弟のデザインと開発</p><h1 id="hero-title">デザインと開発を、<br /><span>ひとつのチームで。</span></h1><p>更新しにくいサイト、手作業の転記、使いづらい管理画面。中小企業・小さなチームの困りごとを、企画・デザイン・開発から公開後の改善まで一緒に解決します。</p><div className="hero-primary-actions"><a className="catalog-cta" href="#contact">プロジェクトを相談する<ArrowRight size={18} /></a><a className="catalog-outline-button" href="#selected-work">制作イメージを見る<ArrowRight size={18} /></a></div><p className="hero-experience">開発・情報技術相談 11年 <span>×</span> デザイン 3年</p></div>
+      <div className="hero-primary-copy"><p className="eyebrow">大穂兄弟のデザインと開発</p><h1 id="hero-title">デザインと開発を、<br /><span>ひとつのチームで。</span></h1><p>更新しにくいサイト、手作業の転記、使いづらい管理画面。中小企業・小さなチームの困りごとを、企画・デザイン・開発から公開後の改善まで一緒に解決します。</p><div className="hero-primary-actions"><a className="catalog-cta" href="#contact">プロジェクトを相談する<ArrowRight size={18} /></a><a className="catalog-outline-button" href="#selected-work">制作イメージを見る<ArrowRight size={18} /></a></div><p className="hero-experience">事業分析 <span>×</span> グローバルな視点</p></div>
       <div className="reference-hero-stage hero-scene-stage" id="hero-panel" role="tabpanel"
         aria-labelledby={`hero-tab-${active}`} tabIndex={0}
         onFocusCapture={() => setPaused(true)} data-slide={active}>

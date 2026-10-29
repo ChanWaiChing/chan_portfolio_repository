@@ -22,7 +22,7 @@ const process = [
   ["公開・引き継ぎ", "使い始める準備と、その先の改善を整理。", "引き継ぐもの", "操作方法 / 更新手順 / 保守の相談事項"],
 ];
 export function WorkingProcess() {
-  return <><ol className="working-process">{process.map(([title, text, label, output], index) => { const Icon = [MessageCircle, ClipboardCheck, MousePointer2, Rocket][index]; return <li key={title}><div className="process-step-top"><span>0{index + 1}</span><Icon size={24} aria-hidden="true" /></div><h3>{title}</h3><p>{text}</p><small>{label}</small><strong>{output}</strong></li>; })}</ol><div className="collaboration-note"><BotMascot variant="ocean" /><div><span className="eyebrow">技術ガイドからのご案内</span><h3>認識をそろえるために、途中も共有。</h3><p>兄が実現性と保守性、弟が情報の伝わり方と使いやすさを確認します。ご要望が変わった場合は、費用・納期への影響を整理してから進めます。保守や機能追加は、制作費とは別に範囲を相談します。</p></div></div></>;
+  return <><ol className="working-process">{process.map(([title, text, label, output], index) => { const Icon = [MessageCircle, ClipboardCheck, MousePointer2, Rocket][index]; return <li key={title}><div className="process-step-top"><span>0{index + 1}</span><Icon size={24} aria-hidden="true" /></div><h3>{title}</h3><p>{text}</p><small>{label}</small><strong>{output}</strong></li>; })}</ol><div className="collaboration-note"><BotMascot variant="ocean" /><div><span className="eyebrow">技術ガイドからのご案内</span><h3>認識をそろえるために、途中も共有。</h3><p>実現性・保守性と、情報の伝わり方・使いやすさを確認します。ご要望が変わった場合は、費用・納期への影響を整理してから進めます。保守や機能追加は、制作費とは別に範囲を相談します。</p></div></div></>;
 }
 
 export function ContactExpectations() {

@@ -1,17 +1,18 @@
 import {test,expect} from '@playwright/test';
 
-test('four bot palettes repeat consistently through cards and selected tabs',async({page})=>{
+test('blue cyan and violet palettes repeat consistently through cards and selected tabs',async({page})=>{
  await page.goto('/');
  const cards=page.locator('#packages .package-card');
  const colors=await cards.evaluateAll(els=>els.map(el=>getComputedStyle(el).backgroundColor));
  expect(new Set(colors.slice(0,4)).size).toBe(4);
- expect(colors.slice(0,4)).toEqual(['rgb(228, 237, 248)','rgb(247, 233, 226)','rgb(246, 232, 237)','rgb(224, 240, 233)']);
+ expect(colors.slice(0,4)).toEqual(['rgb(255, 255, 255)','rgb(240, 249, 255)','rgb(244, 242, 255)','rgb(237, 245, 255)']);
  expect(colors.slice(4,8)).toEqual(colors.slice(0,4));
  for(let i=0;i<4;i++){
   await page.getByRole('tab').nth(i).click();
   const tab=page.getByRole('tab').nth(i);
   await expect(tab).toHaveAttribute('aria-selected','true');
-  await expect(tab).toHaveCSS('background-color',['rgb(204, 221, 244)','rgb(242, 208, 217)','rgb(239, 208, 220)','rgb(194, 228, 213)'][i]);
+  await expect(tab).toHaveCSS('color','rgb(255, 255, 255)');
+  await expect(tab).toHaveCSS('background-image',/linear-gradient/);
  }
 });
 
