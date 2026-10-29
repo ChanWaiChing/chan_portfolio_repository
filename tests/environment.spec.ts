@@ -67,8 +67,8 @@ test("section images load, surfaces remain opaque, and the footer scene is not c
     });
     expect(contrast).toBeGreaterThanOrEqual(4.5);
   }
-  await expect(page.locator(".package-card").first()).toHaveCSS("background-color", "rgb(223, 230, 240)");
-  await expect(page.locator(".contact-form")).toHaveCSS("background-color", "rgb(224, 230, 237)");
+  await expect(page.locator(".package-card").first()).toHaveCSS("background-color", "rgb(228, 237, 248)");
+  await expect(page.locator(".contact-form")).toHaveCSS("background-color", "rgb(231, 240, 237)");
   await expect(page.locator(".contact-form")).toHaveCSS("background-image", /calm-inquiry/);
   await expect(page.locator(".contact-time-intro")).toContainText("本来の仕事に、向き合う時間をつくる。");
   const scene = await page.locator(".footer-scene").boundingBox();

@@ -1,0 +1,100 @@
+/* Four mascot hair palettes: vivid identity, quiet surfaces, dark readable ink. */
+:root {
+ --paper: #e6e9ef; --surface: #f0edf6; --ink: #233447; --muted: #405265;
+ --accent: #355b9d; --cta: #4159a7; --line: #bdcbd9; --pale: #dce6f2;
+ --bot-blue: #284e8b; --bot-violet: #653b91; --bot-peach: #8f4554; --bot-mint: #1f6257;
+ --ocean-hair: #26bfe6; --ocean-violet: #8d56e8;
+ --sunset-gold: #f5bd49; --sunset-magenta: #e34a91;
+ --peach-coral: #ef8979; --peach-rose: #eea1c5;
+ --mint-hair: #56d4ae; --mint-lavender: #bea0e8;
+}
+.portfolio-site { --tone-ink: #284e8b; --tone-surface: #e4edf8; --tone-tint: #ccddf4; --tone-border: #aebfe0; --tone-top: #3d5eb3; --tone-bottom: #514ca2; --tone-edge: #293f7f; --tone-hair: var(--ocean-hair); --tone-pair: var(--ocean-violet); }
+.site-header { background: #e4eaf5f2; border-color: #bbc8e0; }
+.mobile-nav { background: linear-gradient(145deg,#e4edf8,#ebe4f5 65%,#e0f0e9); }
+.site-intro,#introduction .site-intro { background: linear-gradient(90deg,#d6e8f5,#e7dff5,#f1e0e7,#daf0e7); color: #304a69; }
+.portfolio-site :is(.content-heading,.faq-guide-heading) > span,.portfolio-site .eyebrow,.portfolio-site .dialog-eyebrow { color: #3a5593; }
+.desktop-nav a[aria-current],.desktop-nav a:hover { color: #514399; border-color: #7762c4; }
+.portfolio-site .hero-primary-copy h1 > span { color: #534b9d; }
+
+/* A shared edge color keeps the differently tinted photographs connected. */
+#introduction { --environment-veil: #deebf6e8; }
+#selected-work { --environment-veil: #f2e7e6e8; }
+.introduction-copy { --environment-veil: #f0e6eee8; }
+#services { --environment-veil: #dfedf5e8; }
+#strengths { --environment-veil: #f3e8e2e8; }
+#packages { --environment-veil: #ede5f5e8; }
+#works { --environment-veil: #e1edf7e8; }
+#faq { --environment-veil: #deeee6e8; }
+#contact { --environment-veil: #e2eeebe8; }
+.reference-hero::before,#selected-work::before,.introduction-copy::before,#services::before,#strengths::before,#packages::before,#works::before,#faq::before,#contact::before {
+ background-image: linear-gradient(90deg,#e6e9ef8c,var(--environment-veil) 24%,var(--environment-veil) 76%,#e6e9ef8c),var(--environment-image);
+}
+.hero-brand-scene { background: radial-gradient(ellipse at 20% 20%,#c6e8f4,transparent 62%),linear-gradient(135deg,#e3eafa,#e7def4 72%,#dcefe8); }
+.hero-scene-caption,.scene-steps > span,.hero-photo-support,.hero-image-label { background: #e2e8f6; border-color: #b7c6e0; }
+.scene-orbit-line { border-color: #8f7bca4d; }
+
+/* Every fourth container repeats a complete, internally consistent bot palette. */
+.portfolio-site :is(.package-card,.portfolio-card,.scope-card,.service-entrance,.working-process > li,.workflow-card,.package-plan,.contact-platform,.reference-hero-tabs > button,.catalog-filters > button) {
+ --tone-ink: #284e8b; --tone-surface: #e4edf8; --tone-tint: #ccddf4; --tone-border: #aebfe0; --tone-top: #3d5eb3; --tone-bottom: #514ca2; --tone-edge: #293f7f; --tone-hair: var(--ocean-hair); --tone-pair: var(--ocean-violet);
+}
+.portfolio-site :is(.package-card,.portfolio-card,.scope-card,.service-entrance,.working-process > li,.workflow-card,.package-plan,.contact-platform,.reference-hero-tabs > button,.catalog-filters > button):nth-child(4n+2) {
+ --tone-ink: #88374d; --tone-surface: #f7e9e2; --tone-tint: #f2d0d9; --tone-border: #dbb6c2; --tone-top: #ad3b68; --tone-bottom: #9d3e4e; --tone-edge: #763044; --tone-hair: var(--sunset-gold); --tone-pair: var(--sunset-magenta);
+}
+.portfolio-site :is(.package-card,.portfolio-card,.scope-card,.service-entrance,.working-process > li,.workflow-card,.package-plan,.contact-platform,.reference-hero-tabs > button,.catalog-filters > button):nth-child(4n+3) {
+ --tone-ink: #8f4554; --tone-surface: #f6e8ed; --tone-tint: #efd0dc; --tone-border: #d7b2c4; --tone-top: #a44c64; --tone-bottom: #914653; --tone-edge: #733447; --tone-hair: var(--peach-coral); --tone-pair: var(--peach-rose);
+}
+.portfolio-site :is(.package-card,.portfolio-card,.scope-card,.service-entrance,.working-process > li,.workflow-card,.package-plan,.contact-platform,.reference-hero-tabs > button,.catalog-filters > button):nth-child(4n+4) {
+ --tone-ink: #1f6257; --tone-surface: #e0f0e9; --tone-tint: #c2e4d5; --tone-border: #a3cbbd; --tone-top: #287363; --tone-bottom: #286359; --tone-edge: #1c4b43; --tone-hair: var(--mint-hair); --tone-pair: var(--mint-lavender);
+}
+.portfolio-site :is(.package-card,.portfolio-card,.scope-card,.service-entrance,.working-process > li,.workflow-card,.package-plan) { --card-accent: var(--tone-ink); background: var(--tone-surface); border-color: var(--tone-border); border-top: 2px solid color-mix(in srgb,var(--tone-hair) 65%,var(--tone-border)); }
+.portfolio-site .service-overview { --service-color: var(--tone-ink); background: linear-gradient(145deg,var(--tone-surface),color-mix(in srgb,var(--tone-surface) 78%,white)); border-color: var(--tone-border); }
+.portfolio-site .service-icon { color: var(--tone-ink); background: color-mix(in srgb,var(--tone-tint) 60%,white); border-color: var(--tone-border); box-shadow: 0 5px 18px color-mix(in srgb,var(--tone-hair) 16%,transparent); }
+.portfolio-site .service-overview > .eyebrow,.portfolio-site .process-step-top,.portfolio-site .workflow-detail { color: var(--tone-ink); }
+.portfolio-site .working-process > li .process-step-top > span { background: var(--tone-tint); color: var(--tone-ink); border-color: var(--tone-border); }
+.portfolio-site :is(.package-card,.portfolio-card) .catalog-card-meta > span { background: var(--tone-tint); color: var(--tone-ink); }
+.portfolio-site .portfolio-detail-link { color: var(--tone-ink); }
+#services .workflow-diagram { background: color-mix(in srgb,var(--tone-tint) 65%,var(--tone-surface)); }
+.portfolio-site .workflow-diagram li { background: color-mix(in srgb,var(--tone-surface) 65%,white); border-color: var(--tone-border); }
+
+/* Deep hair-derived shades carry white action text; color stays vivid at the edges. */
+.portfolio-site :is(.catalog-cta,.header-contact,.contact-submit) { --button-edge: var(--tone-edge); color: #fff; background: linear-gradient(135deg,var(--tone-top),var(--tone-bottom)); border-color: var(--tone-edge); }
+.portfolio-site :is(.catalog-cta,.header-contact,.contact-submit):hover { background: linear-gradient(135deg,var(--tone-bottom),var(--tone-edge)); }
+.portfolio-site :is(.catalog-outline-button,.catalog-search,.catalog-pagination button,.hero-motion-toggle,.skill-motion-control,.workflow-all > a) { color: var(--tone-ink); background: var(--tone-surface); border-color: var(--tone-border); --button-edge: var(--tone-border); }
+.portfolio-site .catalog-outline-button:hover { background: var(--tone-tint); }
+.portfolio-site .catalog-filters > button { color: var(--tone-ink); background: var(--tone-surface); border-color: var(--tone-border); --button-edge: var(--tone-border); }
+.portfolio-site .catalog-filters > button:hover:not([aria-pressed="true"]) { background: var(--tone-tint); }
+.portfolio-site .catalog-filters > button[aria-pressed="true"],.portfolio-site .catalog-pagination button[aria-current="page"] { color: #fff; background: var(--tone-top); border-color: var(--tone-edge); --button-edge: var(--tone-edge); }
+.portfolio-site .category-count { color: #fff; background: var(--tone-ink); border-color: var(--tone-surface); }
+.portfolio-site .catalog-filters > button[aria-pressed="true"] .category-count { color: var(--tone-ink); background: var(--tone-surface); border-color: var(--tone-top); }
+.portfolio-site .reference-hero-tabs > button { --tab-star: var(--tone-hair); color: var(--tone-ink); background: var(--tone-surface); border-color: var(--tone-border); }
+.portfolio-site .reference-hero-tabs > button[aria-selected="true"] { color: var(--tone-ink); background: var(--tone-tint); border-color: var(--tone-ink); box-shadow: 0 3px 0 var(--tone-border),0 0 0 1px var(--tone-hair); }
+.portfolio-site .reference-hero-tabs > button > span { background: var(--tone-ink); color: #fff; }
+.portfolio-site .reference-hero-tabs > button > strong { color: var(--tone-ink); }
+
+.portfolio-site .intro-engineer { background: linear-gradient(140deg,#e3edf9,#e8e2f5); border-color: #b6bce0; }
+.portfolio-site .intro-designer { background: linear-gradient(140deg,#f6e9df,#f2e0ea); border-color: #d8b5c5; }
+.intro-engineer .brother-intro-meta > span,.intro-engineer .brother-intro-specialty { color: #344d96; }
+.intro-designer .brother-intro-meta > span,.intro-designer .brother-intro-specialty { color: #943f5c; }
+.portfolio-site .bot-speech,.portfolio-site .brother-intro-tags > li { background: #f2edf7; border-color: #c4bfd9; }
+.portfolio-site :is(.evidence-notes,.collaboration-note,.sample-notice) { background: linear-gradient(110deg,#e3ebf8,#e9e1f4); border-color: #c0bfdf; color: #3d4c6b; }
+#services .skill-tool-universe { background: linear-gradient(130deg,#d9edf5,#e8def5 50%,#d9eee3); border-color: #b5c4d9; }
+.portfolio-site .skill-tool-badge { background: #edf0f7; border-color: #bfc8e0; }
+.portfolio-site .faq-guide-item,#faq .faq-bot-speech { background: #e0f0e9; border-color: #a3cbbd; }
+.portfolio-site .faq-guide-q,.portfolio-site .faq-guide-a { color: #24665a; }
+.portfolio-site .faq-guide-toggle { background: #c6e3d8; color: #275f56; }
+#contact .contact-overview { background: #e1eee9; border-color: #a7c9be; }
+.portfolio-site .contact-brand-scene { background: linear-gradient(120deg,#d4eadf,#e4dbf1); }
+.portfolio-site .contact-platform > :is(a,button) { color: var(--tone-ink); background: var(--tone-surface); border-color: var(--tone-border); }
+.portfolio-site .contact-form { background-color: #e7f0ed; background-image: linear-gradient(#e7f0eded,#e7f0edf5),url('/images/environments/calm-inquiry.webp'); border-color: #afc9c0; --tone-top: #287363; --tone-bottom: #286359; --tone-edge: #1c4b43; }
+.portfolio-site .contact-time-intro { background-image: linear-gradient(100deg,#deeee7f5,#e8e0f1dc 65%,#e4e8ef88),url('/images/environments/calm-inquiry.webp'); border-color: #b9c8cf; }
+.portfolio-site .contact-time-intro > span { color: #37645d; }
+.portfolio-site .form-row > :is(input,textarea,select) { background: #f0f4f2; border-color: #adc5bd; }
+.portfolio-site .contact-privacy > summary { background: #d7e7df; }
+.portfolio-site .package-price,.portfolio-site .package-entry-scope,.portfolio-site .catalog-dialog .dialog-notice { background: #e5e8f6; color: #344b75; border-color: #bbc5df; }
+.portfolio-site .catalog-dialog { background: #edf0f7; border-color: #b9c4df; }
+.portfolio-site .pattern-footer { background: linear-gradient(180deg,var(--paper),#e4e0ee 45%,#dceae4); }
+.portfolio-site .footer-invitation { background: linear-gradient(135deg,#f4e7e1,#eee0ef); border-color: #d3bac9; --tone-top: #a44c64; --tone-bottom: #914653; --tone-edge: #733447; }
+.portfolio-site :is(.footer-circle-links a,.footer-nav-pill) { background: #e8eaf4; border-color: #bdc5dc; }
+.portfolio-site .footer-top-pill { background: #66549b; }
+.portfolio-site .footer-vertical-copy { color: #324d6a; }
+.site-motion-toggle { color: #3c518d; background: #e2e9f6ed; border-color: #b5c3df; }
