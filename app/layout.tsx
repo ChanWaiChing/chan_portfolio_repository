@@ -22,7 +22,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ja">
-      <head><link rel="preload" href="/fonts/yuji-boku-title.ttf" as="font" type="font/ttf" crossOrigin="anonymous" /><link rel="preload" href="/fonts/yuji-boku-brand.ttf" as="font" type="font/ttf" crossOrigin="anonymous" /></head>
+      <head><link rel="preload" href="/fonts/shippori-mincho-headings.ttf" as="font" type="font/ttf" crossOrigin="anonymous" /><link rel="preload" href="/fonts/yuji-boku-brand.ttf" as="font" type="font/ttf" crossOrigin="anonymous" /></head>
       <body>{children}<SiteMotion /></body>
     </html>
   );

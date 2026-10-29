@@ -1305,3 +1305,74 @@ button:disabled { box-shadow: inset 0 1px 0 #fff8,0 1px 0 var(--button-edge); tr
 @media(max-width:1099px) { .brand-symbol { width: 42px; height: 42px; } .brand-name { font-size: 29px; } }
 @media(max-width:760px) { .wordmark { gap: 8px; } .brand-symbol { display: block; width: 35px; height: 35px; } .brand-name { font-size: 26px; } .brand-name > span { font-size: 10px; letter-spacing: .08em; margin-top: 2px; } }
 @media(max-width:400px) { .brand-symbol { width: 30px; height: 30px; } .brand-name { font-size: 24px; } .brand-name > span { font-size: 9px; } .wordmark { gap: 6px; } }
+
+/* Larger Japanese editorial titles, with one consistent Mincho hierarchy. */
+@font-face { font-family: "Oho Classic Mincho"; src: url('/fonts/shippori-mincho-headings.ttf') format('truetype'); font-style: normal; font-weight: 600; font-display: swap; }
+:root { --heading-serif: "Oho Classic Mincho","Yu Mincho","Hiragino Mincho ProN",serif; }
+.portfolio-site :is(h1,h2,h3,h4,h5,h6) { font-family: var(--heading-serif); font-weight: 600; line-height: 1.65; letter-spacing: .025em; overflow-wrap: anywhere; }
+.portfolio-site h2 { font-size: clamp(32px,3.1vw,46px); }
+.portfolio-site h3 { font-size: clamp(24px,2.2vw,32px); }
+.portfolio-site h4 { font-size: clamp(20px,1.8vw,25px); }
+.portfolio-site :is(h5,h6) { font-size: 20px; }
+.portfolio-site .hero-primary-copy h1 { font-family: var(--heading-serif); font-size: clamp(40px,3.7vw,52px); line-height: 1.4; letter-spacing: .05em; font-feature-settings: "vert" 1,"vrt2" 1; }
+.portfolio-site :is(.content-heading,.faq-guide-heading) h2 { font-size: clamp(34px,3.3vw,48px); margin-block: 16px 20px; }
+.portfolio-site :is(.eyebrow,.content-heading > span,.faq-guide-heading > span,.workflow-heading > span,.skill-universe-copy > span,.dialog-eyebrow,.scene-phase,.brother-intro-specialty,.workflow-outcome > span:first-child,.brother-visual-label > span,.contact-time-intro > span) { font-family: var(--heading-serif); font-size: 17px; font-weight: 600; line-height: 1.8; letter-spacing: .06em; }
+.portfolio-site :is(.hero-brand-scene > strong,.contact-brand-scene strong,.brother-visual-label strong,.faq-bot-speech strong) { font-family: var(--heading-serif); font-size: clamp(23px,2.2vw,30px); font-weight: 600; line-height: 1.7; }
+.portfolio-site .reference-hero-tabs strong { font-family: var(--heading-serif); font-size: 15px; line-height: 1.7; }
+.portfolio-site .hero-scene-caption h2 { font-size: 24px; }
+.portfolio-site .brother-intro-content h3 { font-size: clamp(34px,3.3vw,48px); }
+.portfolio-site :is(.workflow-heading,.skill-universe-copy,.brand-story) h3 { font-size: clamp(30px,3vw,40px); }
+.portfolio-site .service-overview h3 { font-size: clamp(26px,2.3vw,32px); }
+.portfolio-site .workflow-outcome h4 { font-size: clamp(24px,2.1vw,29px); }
+#packages .package-card h3,#works .portfolio-card h3 { font-family: var(--heading-serif); font-size: clamp(21px,1.65vw,25px); line-height: 1.65; }
+.portfolio-site .catalog-card-meta { flex-wrap: wrap; gap: 8px; }
+.portfolio-site .catalog-card-meta > span { font-family: var(--heading-serif); font-weight: 600; font-size: 15px; }
+.portfolio-site .working-process h3 { font-size: 24px; }
+.portfolio-site .faq-guide-item h3 > button { font-family: var(--heading-serif); font-size: 20px; font-weight: 600; line-height: 1.8; }
+.portfolio-site .catalog-dialog h2 { font-family: var(--heading-serif); font-size: clamp(28px,3vw,40px); }
+.portfolio-site .catalog-dialog h3 { font-size: 25px; }
+.portfolio-site .catalog-dialog h4 { font-size: 22px; }
+.portfolio-site .demo-products h4 { font-size: 20px; }
+.portfolio-site .footer-invitation h2 { font-size: clamp(30px,2.8vw,40px); }
+.portfolio-site .footer-vertical-wordmark { font-family: var(--heading-serif); font-size: 38px; }
+.portfolio-site .contact-time-intro h3 { font-size: clamp(27px,2.4vw,34px); }
+.portfolio-site .contact-expectations h4 { font-size: 23px; }
+@media(max-width:1099px) and (min-width:761px) { .portfolio-site .hero-primary-copy h1 { font-size: 39px; } .portfolio-site .reference-hero-tabs strong { font-size: 13px; } }
+@media(max-width:760px) {
+ .portfolio-site h2 { font-size: 30px; }
+ .portfolio-site h3 { font-size: 26px; }
+ .portfolio-site h4 { font-size: 22px; }
+ .portfolio-site .hero-primary-copy h1 { font-size: clamp(29px,8.3vw,37px); line-height: 1.45; }
+ .portfolio-site :is(.content-heading,.faq-guide-heading) h2 { font-size: clamp(29px,7.8vw,36px); }
+ .portfolio-site :is(.eyebrow,.content-heading > span,.faq-guide-heading > span,.workflow-heading > span,.skill-universe-copy > span,.dialog-eyebrow,.scene-phase,.brother-intro-specialty,.workflow-outcome > span:first-child,.brother-visual-label > span,.contact-time-intro > span) { font-size: 15px; letter-spacing: .03em; }
+ .portfolio-site .hero-primary-copy > .eyebrow { font-size: 13px; }
+ .portfolio-site .reference-hero-tabs strong { font-size: 13px; }
+ .portfolio-site .hero-scene-caption h2 { font-size: 21px; }
+ .portfolio-site .brother-intro-content h3 { font-size: 35px; }
+ .portfolio-site :is(.workflow-heading,.skill-universe-copy,.brand-story) h3 { font-size: 31px; }
+ .portfolio-site .service-overview h3 { font-size: 28px; }
+ .portfolio-site .workflow-outcome h4 { font-size: 25px; }
+ #packages .package-card h3 { font-size: 24px; }
+ #works .portfolio-card h3 { font-size: 19px; }
+ .portfolio-site .catalog-card-meta > span { font-size: 14px; }
+ .portfolio-site .working-process h3 { font-size: 22px; }
+ .portfolio-site .faq-guide-item h3 > button { font-size: 18px; }
+ .portfolio-site .catalog-dialog h2 { font-size: 29px; }
+ .portfolio-site .catalog-dialog h3 { font-size: 24px; }
+ .portfolio-site .catalog-dialog h4 { font-size: 21px; }
+ .portfolio-site .footer-invitation h2 { font-size: clamp(26px,6.6vw,32px); }
+ .portfolio-site .footer-vertical-wordmark { font-size: 34px; }
+ .portfolio-site .contact-time-intro h3 { font-size: 27px; }
+ .portfolio-site .contact-expectations h4 { font-size: 22px; }
+}
+
+/* Give the enlarged lettering room without splitting short Japanese phrases. */
+.portfolio-site .service-overview h3 { font-size: clamp(26px,2.1vw,30px); }
+.hero-scene-stage .hero-photo-deck { min-height: 450px; }
+.hero-brand-scene .scene-phase { position: static; align-self: flex-start; margin-bottom: 12px; }
+.hero-brand-scene .scene-brothers { margin-top: 0; }
+.hero-brand-scene > strong { text-align: center; text-wrap: balance; }
+@media(max-width:760px) {
+ .portfolio-site .service-overview h3 { font-size: 28px; }
+ .hero-scene-stage .hero-photo-deck { min-height: 450px; }
+}

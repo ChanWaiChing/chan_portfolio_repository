@@ -1,14 +1,14 @@
 import { test, expect } from "@playwright/test";
 
-test("hero title is vertical brush text with a loaded local font", async ({ page }) => {
+test("hero title is vertical Mincho text with a loaded local font", async ({ page }) => {
   await page.goto("/");
   const heading = page.getByRole("heading", { level: 1 });
   await expect(heading).toContainText("デザインと開発を");
   await expect(heading).toHaveCSS("writing-mode", "vertical-rl");
-  await expect(heading).toHaveCSS("font-family", /Oho Brush Title/);
+  await expect(heading).toHaveCSS("font-family", /Oho Classic Mincho/);
   const loaded = await page.evaluate(async () => {
-    await document.fonts.load('40px "Oho Brush Title"');
-    return document.fonts.check('40px "Oho Brush Title"');
+    await document.fonts.load('600 40px "Oho Classic Mincho"');
+    return document.fonts.check('600 40px "Oho Classic Mincho"');
   });
   expect(loaded).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
