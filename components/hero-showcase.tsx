@@ -52,8 +52,8 @@ export function HeroShowcase() {
       小さなチームのための、デザインと開発
       <span>アイデアから、事業の次の一歩まで。</span>
     </div>
-    <section ref={stage} className="reference-hero" aria-label="大穂兄弟のサービス" data-playing={!paused && !reducedMotion && visible} data-border-motion={!reducedMotion && visible}>
-      <div className="hero-primary-copy"><p className="eyebrow">大穂兄弟のデザインと開発</p><h1 id="hero-title">デザインと開発を、<br /><span>ひとつのチームで。</span></h1><p>中小企業・小さなチームのウェブサイトと業務システムを、企画から公開後の改善まで。考える兄と描く弟が、事業の次の一歩を一緒につくります。</p><div className="hero-primary-actions"><a className="catalog-cta" href="#contact">プロジェクトを相談する<ArrowRight size={18} /></a><a className="catalog-outline-button" href="#selected-work">制作イメージを見る<ArrowRight size={18} /></a></div><p className="hero-experience">開発・情報技術相談 11年 <span>×</span> デザイン 3年</p></div>
+    <section ref={stage} className="reference-hero" aria-label="大穂兄弟のサービス" data-playing={!paused && !reducedMotion && visible} data-border-motion={!paused && !reducedMotion && visible}>
+      <div className="hero-primary-copy"><p className="eyebrow">大穂兄弟のデザインと開発</p><h1 id="hero-title">デザインと開発を、<br /><span>ひとつのチームで。</span></h1><p>更新しにくいサイト、手作業の転記、使いづらい管理画面。中小企業・小さなチームの困りごとを、企画・デザイン・開発から公開後の改善まで一緒に解決します。</p><div className="hero-primary-actions"><a className="catalog-cta" href="#contact">プロジェクトを相談する<ArrowRight size={18} /></a><a className="catalog-outline-button" href="#selected-work">制作イメージを見る<ArrowRight size={18} /></a></div><p className="hero-experience">開発・情報技術相談 11年 <span>×</span> デザイン 3年</p></div>
       <div className="reference-hero-stage hero-scene-stage" id="hero-panel" role="tabpanel"
         aria-labelledby={`hero-tab-${active}`} tabIndex={0}
         onFocusCapture={() => setPaused(true)} data-slide={active}>
@@ -96,7 +96,7 @@ export function HeroShowcase() {
           aria-pressed={paused || reducedMotion} disabled={reducedMotion}
           onClick={() => setPaused(!paused)}>
           {paused || reducedMotion ? <Play size={16} /> : <Pause size={16} />}
-          <span>{reducedMotion ? "手動切替" : paused ? "再生" : "停止"}</span>
+          <span>{reducedMotion ? "動きを抑えています" : paused ? "動きを再生" : "動きを停止"}</span>
         </button>
       </div>
     </section>

@@ -6,8 +6,7 @@ const links = [["はじめに", "introduction"], ["サービス", "services"], [
 
 export function PatternFooter() {
   return <footer className="pattern-footer">
-    <div className="footer-vertical-lockup"><div className="footer-vertical-copy"><p>考える兄と、描く弟。<br />ふたりの得意で、あなたの次の一歩を。</p><a href="#introduction" className="footer-vertical-wordmark">大穂兄弟</a><p>想いをつなぐ、<br />デザインとテクノロジー。</p><span>デザインと開発</span></div></div>
-    <BotTeam className="pattern-footer-bots" />
+    <div className="footer-closing"><div className="footer-vertical-lockup"><div className="footer-vertical-copy"><p>考える兄と、描く弟。<br />ふたりで、次の一歩へ。</p><a href="#introduction" className="footer-vertical-wordmark">大穂兄弟</a><p>想いをつなぐ、<br />デザインとテクノロジー。</p><span>デザインと開発</span></div></div><div className="footer-invitation"><span className="eyebrow">次の一歩をご一緒に</span><h2>お困りごとを、<br />ひとつ聞かせてください。</h2><p>つくる内容が決まっていなくても大丈夫。<br />必要なことと、進める順番から整理します。</p><a href="#contact" className="catalog-cta">相談内容を伝える<ArrowUpRight size={17} /></a><BotTeam className="pattern-footer-bots" pair /></div></div>
     <div className="footer-circle-links" aria-label="便利なリンク">
       <a className="icon-link-blue" href="#services"><Layers3 size={19} />サービス</a>
       <a className="icon-link-orange" href="#works"><BriefcaseBusiness size={19} />制作例</a>

@@ -19,6 +19,7 @@ const { mkdirSync, existsSync } = require('node:fs');
     }
     for (const section of ['.selected-work', '.brother-intro-panel', '.service-entrances', '.workflow-skills', '#strengths', '#packages .catalog-filters', '#contact', '.pattern-footer']) {
       if (section === '.workflow-skills') await page.locator('.capability-details').evaluate(element => { element.open = true; });
+      if (section === '.brother-intro-panel') await page.locator('.team-details').evaluate(element => { element.open = true; });
       const element = page.locator(section).first();
       await element.scrollIntoViewIfNeeded();
       await element.screenshot({ path: `test-results/review/${name}-${section.replace(/^[.#]/, '')}.png`, style: '.site-header { visibility: hidden; }' });

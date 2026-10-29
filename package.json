@@ -8,7 +8,9 @@
     "start": "next start --hostname 0.0.0.0",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "test:contact": "node --test tests/contact-route.test.cjs"
+    "test:contact": "node --test tests/contact-route.test.cjs",
+    "test:events": "node --test tests/events-route.test.cjs",
+    "analytics:report": "node scripts/summarize-events.cjs"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",

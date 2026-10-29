@@ -1,25 +1,42 @@
 import { test, expect } from "@playwright/test";
 
-test("all package thumbnails load across pagination without cropping", async ({ page }) => {
-  test.setTimeout(90000);
+test("inquiry measurement excludes form values and counts the first interaction once",async({page})=>{
+  const events: Record<string,unknown>[]=[];
+  await page.route("**/api/events",async route=>{events.push(route.request().postDataJSON());await route.fulfill({status:204});});
   await page.goto("/");
-  const section = page.locator("#packages");
-  const sources = new Set<string>();
-  for (const [index, count] of [6,6,6,2].entries()) {
-    await section.getByRole("navigation", { name: "パッケージのページ切り替え" }).getByRole("button", { name: `${index + 1}ページ目` }).click();
-    const images = section.locator(".package-thumbnail img");
-    await expect(images).toHaveCount(count);
-    for (const img of await images.all()) {
-      await expect(img).toHaveAttribute("loading", "lazy");
-      await img.scrollIntoViewIfNeeded();
-      await img.evaluate((image: HTMLImageElement) => image.decode());
-      expect(await img.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
-      await expect(img).toHaveCSS("object-fit", "contain");
-      sources.add((await img.getAttribute("src"))!);
-    }
+  await page.getByLabel("お名前").fill("非公開の入力");
+  await page.getByRole("textbox",{name:"メールアドレス 必須"}).fill("private@example.com");
+  await page.locator(".package-card button").first().click();
+  await expect.poll(()=>events.some(e=>e.name==="package_open")).toBe(true);
+  expect(events.filter(e=>e.name==="contact_started")).toHaveLength(1);
+  expect(JSON.stringify(events)).not.toContain("private@example.com");
+  expect(JSON.stringify(events)).not.toContain("非公開の入力");
+  for(const event of events)expect(Object.keys(event).every(key=>["name","id"].includes(key))).toBe(true);
+});
+
+test("tracking opt-out is respected and hero pause stops border motion",async({page})=>{
+  await page.addInitScript(()=>Object.defineProperty(navigator,"doNotTrack",{value:"1",configurable:true}));
+  const requests:string[]=[];page.on("request",r=>{if(r.url().endsWith("/api/events"))requests.push(r.url());});
+  await page.goto("/");
+  await page.getByRole("button",{name:"自動切替を停止"}).click();
+  await expect(page.locator(".reference-hero")).toHaveAttribute("data-border-motion","false");
+  expect(await page.locator("#hero-tab-0").evaluate(e=>getComputedStyle(e,"::after").animationPlayState)).toBe("paused");
+  await page.locator(".package-card button").first().click();
+  expect(requests).toHaveLength(0);
+});
+
+test("all package artwork stays distinct and reachable across pagination", async ({ page }) => {
+  await page.goto("/");
+  const section=page.locator("#packages");
+  const titles=new Set<string>();
+  for(const [index,count] of [6,6,6,2].entries()) {
+    await section.getByRole("navigation",{name:"パッケージのページ切り替え"}).getByRole("button",{name:`${index+1}ページ目`}).click();
+    await expect(section.locator(".catalog-artwork")).toHaveCount(count);
+    await expect(section.locator(".package-entry-scope")).toHaveCount(count);
+    for(const title of await section.locator(".artwork-caption").allTextContents())titles.add(title);
   }
-  expect(sources.size).toBe(20);
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(titles.size).toBe(20);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 
 test("section order, navigation and page health", async ({ page, isMobile }) => {
@@ -123,14 +140,14 @@ test("FAQ and contact validation, mail draft and edit invalidation", async ({ pa
   await page.goto("/");
   await page.getByRole("button", { name: /費用や制作期間/ }).click();
   await expect(page.locator("#faq-answer-2")).toBeVisible();
-  await page.getByRole("button", { name: "内容を確認する" }).click();
+  await page.getByRole("button", { name: "メールで相談する" }).click();
   await expect(page.locator("#contact-review")).toHaveCount(0);
   await page.getByLabel("お名前").fill("テスト 太郎");
   await page.getByRole("textbox", { name: "メールアドレス 必須" }).fill("test@example.com");
   await page.getByLabel("会社名・屋号").fill("サンプル株式会社");
   await page.getByLabel("相談したいこと").selectOption("人工知能活用 / 業務改善");
   await page.getByLabel("ご相談内容").fill("日々の集計作業を効率化したいです。");
-  await page.getByRole("button", { name: "内容を確認する" }).click();
+  await page.getByRole("button", { name: "メールで相談する" }).click();
   const review = page.locator("#contact-review");
   await expect(review).toBeVisible();
   await expect(review).toContainText("まだ送信されていません");

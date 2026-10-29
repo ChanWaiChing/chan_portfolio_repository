@@ -9,7 +9,7 @@ const workflows = [
   { category: "ウェブ制作", title: "想いを整理して、使いやすいウェブサイトへ。", steps: [
     { title: "ヒアリング・要件を整理", icon: ClipboardList, color: "green" },
     { title: "フィグマで画面をデザイン", icon: PenTool, color: "pink" },
-    { title: "ネクストでサイトを実装", icon: Globe2, color: "yellow" },
+    { title: "高速なサイトを実装", icon: Globe2, color: "yellow" },
   ] },
   { category: "システム開発", title: "情報をつなぎ、日々の業務をもっと軽やかに。", steps: [
     { title: "フォームにデータを入力", icon: FileInput, color: "blue" },
@@ -25,7 +25,7 @@ const workflows = [
 const outerTools = [
   { name: "ネクスト", icon: "nextdotjs", color: "#182d40" }, { name: "リアクト", icon: "react", color: "#147b9a" }, { name: "タイプスクリプト", icon: "typescript", color: "#3178c6" },
   { name: "フィグマ", icon: "figma", color: "#8553c8" }, { name: "パイソン", icon: "python", color: "#3572a5" }, { name: "ワードプレス", icon: "wordpress", color: "#21759b" },
-  { name: "ノード", icon: "nodedotjs", color: "#48833d" }, { name: "画面・体験設計", icon: "ui", color: "#b14d87" },
+  { name: "サーバー側開発", icon: "nodedotjs", color: "#48833d" }, { name: "画面と使い心地の設計", icon: "ui", color: "#b14d87" },
 ] as const;
 const innerTools = [
   { name: "アイオーエス", icon: "apple", color: "#253546" }, { name: "アンドロイド", icon: "android", color: "#32875c" }, { name: "外部連携", icon: "api", color: "#5e5ca6" },

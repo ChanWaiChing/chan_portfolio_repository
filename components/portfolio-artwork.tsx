@@ -1,0 +1,14 @@
+import type { PortfolioItem } from "@/lib/catalog";
+
+export function PortfolioArtwork({ item }: { item: PortfolioItem }) {
+  const phone=item.kind==="mobile";
+  return <div className={`catalog-visual visual-${item.accent} visual-${item.kind}`} aria-hidden="true"><svg viewBox="0 0 360 240" className="portfolio-artwork" focusable="false">
+    <rect x={phone?111:26} y="22" width={phone?138:308} height="192" rx={phone?23:12} fill="#ffffffee" stroke="#ffffff" strokeWidth={phone?5:1}/>
+    {phone ? <><rect x="164" y="29" width="32" height="4" rx="2" fill="#d0ccd5"/><text x="127" y="65" className="art-brand" fontSize="24">{item.brand}</text><rect x="124" y="82" width="111" height="76" rx="12" fill="var(--visual-tint)"/><text x="134" y="101" fontSize="8" className="art-text">今日のきもち</text><text x="134" y="123" fontSize="14" className="art-brand">晴れやか</text><circle cx="218" cy="136" r="10" fill="var(--visual-pop)"/><path d="M133 174h76m-76 8h49" stroke="var(--visual-ink)" strokeOpacity=".2" strokeWidth="3"/><path d="M133 198h8m34 0h8m34 0h8" stroke="var(--visual-ink)" strokeWidth="3" strokeLinecap="round"/></> : <>
+      <path d="M27 45h306" stroke="#e6e9ef"/>{[39,47,55].map(x=><circle key={x} cx={x} cy="34" r="2" fill="#c2cbdb"/>)}<text x="180" y="37" textAnchor="middle" fontSize="7" className="art-text">制作イメージ</text>
+      <text x="45" y="65" fontSize="6" className="art-text">{item.kind==="dashboard"?"今日のチームの仕事":"暮らしに、少しの余白を。"}</text><text x="45" y="95" fontSize="27" className="art-brand">{item.brand}</text>
+      {item.kind==="dashboard" ? <>{["進行中","完了","達成率"].map((label,i)=><g key={label}><rect x={45+i*91} y="106" width="83" height="40" rx="7" fill="var(--visual-tint)"/><text x={54+i*91} y="119" fontSize="6" className="art-text">{label}</text><text x={54+i*91} y="137" fontSize="15" className="art-brand">{["12","28","70％"][i]}</text></g>)}<rect x="45" y="154" width="265" height="43" rx="6" fill="var(--visual-tint)"/>{[18,29,24,35,22,32,38].map((height,i)=><rect key={i} x={57+i*35} y={194-height} width="23" height={height} rx="3" fill={i%3===2?"var(--visual-pop)":"var(--visual-ink)"} opacity={i%2?.5:.85}/>)}</> : <><path d="M45 115h94m-94 9h67" stroke="var(--visual-ink)" strokeOpacity=".22" strokeWidth="3"/><rect x="199" y="62" width="112" height="113" rx="48" fill="var(--visual-tint)"/><path d="M218 96q0-7 7-7h23q7 0 7 7v40q0 20-18 20t-19-20z" fill="var(--visual-ink)"/><ellipse cx="237" cy="90" rx="18" ry="4" fill="#ffffff66"/><path d="M264 132q0-25 18-25t18 25v24h-36z" fill="var(--visual-pop)"/>{[0,1,2].map(i=><rect key={i} x={45+i*24} y="168" width="18" height="21" rx="4" fill={["var(--visual-tint)","var(--visual-pop)","var(--visual-ink)"][i]}/>)}<text x="123" y="182" fontSize="7" className="art-text">使いやすさを、日常へ。</text></>}
+    </>}
+    <text x="27" y="231" fontSize="7" className="art-text">自主制作 / {item.id.slice(-2)}</text>
+  </svg></div>;
+}

@@ -55,7 +55,7 @@ const workSeeds: [string, string, Category][] = [
 export const portfolioItems: PortfolioItem[] = workSeeds.map(([brand, title, category], i) => ({
   id: `work-${String(i + 1).padStart(2, "0")}`, brand, title, category,
   description: `架空の「${brand}」を題材にした、${category}の制作イメージです。目的と利用シーンを整理し、わかりやすい導線と使いやすさを検討したサンプルです。`,
-  technologies: category === "デザイン" ? ["フィグマ", "画面・体験設計"] : category === "人工知能・業務改善" ? ["パイソン", "人工知能ワークフロー"] : category === "コンサルティング" ? ["要件定義", "業務設計"] : ["ネクスト", "タイプスクリプト"],
+  technologies: category === "デザイン" ? ["フィグマ", "画面と使い心地の設計"] : category === "人工知能・業務改善" ? ["パイソン", "人工知能ワークフロー"] : category === "コンサルティング" ? ["要件定義", "業務設計"] : ["ネクスト", "タイプスクリプト"],
   accent: ["blue", "teal", "orange", "violet", "green"][i % 5],
   kind: category === "システム開発" || category === "人工知能・業務改善" ? "dashboard" : category === "デザイン" ? "mobile" : "website",
   challenge: (featuredBriefs[brand] || conceptBriefs[category])[0],
