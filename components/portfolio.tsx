@@ -122,7 +122,7 @@ export default function Portfolio({ directSend = false }: { directSend?: boolean
   return <div className="portfolio-site">
     <a className="skip-link" href="#main">本文へスキップ</a>
     <header className="site-header">
-      <a href="#introduction" className="wordmark" aria-label="大穂兄弟 BROTHERS トップ"><svg className="brand-symbol" viewBox="0 0 80 30" aria-hidden="true"><path d="M5 23C15 23 17 5 27 5S38 24 47 24 58 8 67 8" fill="none" stroke="#1767d4" strokeWidth="5" strokeLinecap="round" /><path d="M22 24C32 24 34 7 44 7S56 24 65 24 73 15 76 12" fill="none" stroke="#f27725" strokeWidth="4" strokeLinecap="round" /></svg><span className="brand-name">大穂兄弟<span>OHO BROTHERS</span></span></a>
+      <a href="#introduction" className="wordmark" aria-label="大穂兄弟 BROTHERS トップ"><svg className="brand-symbol" viewBox="0 0 80 30" aria-hidden="true"><path d="M5 23C15 23 17 5 27 5S38 24 47 24 58 8 67 8" fill="none" stroke="#527878" strokeWidth="5" strokeLinecap="round" /><path d="M22 24C32 24 34 7 44 7S56 24 65 24 73 15 76 12" fill="none" stroke="#a38c6e" strokeWidth="4" strokeLinecap="round" /></svg><span className="brand-name">大穂兄弟<span>OHO BROTHERS</span></span></a>
       <nav className="desktop-nav" aria-label="メインナビゲーション">{navigation.map(([label, id]) => <a key={id} href={`#${id}`} aria-current={activeSection === id ? "location" : undefined}>{label}</a>)}</nav>
       <a className="header-contact catalog-cta" href="#contact">相談する<ArrowUpRight size={16} /></a>
       <button className="menu-toggle" aria-label={menu ? "メニューを閉じる" : "メニューを開く"} aria-expanded={menu} aria-controls="mobile-menu" onClick={() => setMenu(!menu)}>{menu ? <X /> : <Menu />}</button>
