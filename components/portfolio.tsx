@@ -41,7 +41,7 @@ function WorkVisual({ item }: { item: PortfolioItem }) {
   return <div className={`catalog-visual visual-${item.accent} visual-${item.kind}`} aria-hidden="true">
     <div className="visual-window"><div className="visual-chrome"><i /><i /><i /><span>制作イメージ</span></div>
       <div className="visual-content"><small>{item.category === "デザイン" ? "毎日を、少しずつ心地よく。" : "次の一歩を、使いやすく。"}</small><strong>{item.brand}</strong>
-        {item.kind === "dashboard" ? <div className="visual-chart">{[35, 65, 48, 86, 57, 95, 76].map((height, i) => <i key={i} style={{ height: `${height}%` }} />)}</div> : <><span className="visual-line" /><span className="visual-line short" /><div className="visual-shapes"><i /><b /><em /></div></>}
+        {item.kind === "dashboard" ? <><div className="visual-metrics"><span>進行中<b>12</b></span><span>完了<b>28</b></span><span>達成率<b>70<small>％</small></b></span></div><div className="visual-chart">{[35, 65, 48, 86, 57, 95, 76].map((height, i) => <i key={i} style={{ height: `${height}%` }} />)}</div></> : item.kind === "mobile" ? <><div className="visual-day"><span>今日のきもち</span><b>晴れやか</b><i>✦</i></div><div className="visual-app-nav"><span>⌂</span><span>＋</span><span>♡</span></div></> : <><span className="visual-line" /><span className="visual-line short" /><div className="visual-product-scene"><i /><b /><em /></div><div className="visual-product-strip"><i /><i /><i /><span>暮らしに、彩りを。</span></div></>}
       </div>
     </div><span className="visual-caption">制作例 / {item.id.slice(-2)}</span>
   </div>;
