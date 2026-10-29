@@ -1,4 +1,4 @@
-const names=new Set(["contact_intent","contact_started","contact_draft_ready","contact_mail_open","contact_provider_accepted","contact_failed","concept_open","package_open","service_browse"]);
+const names=new Set(["contact_intent","contact_started","contact_draft_ready","contact_mail_open","contact_provider_accepted","contact_failed","portfolio_open","concept_open","package_open","service_browse"]);
 const categories=new Set(["すべて","ウェブ制作","デザイン","システム開発","人工知能・業務改善","コンサルティング"]);
 // Bounded per-instance volume guard; no IPs, user agents, form fields or cookies are collected.
 let windowStart=0, count=0;

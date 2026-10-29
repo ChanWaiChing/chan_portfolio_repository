@@ -2,7 +2,7 @@ import { ArrowUp, ArrowUpRight, BriefcaseBusiness, Layers3, Mail, MessageCircle 
 import { BotTeam } from "./bot-mascot";
 import { site } from "@/lib/site";
 
-const links = [["はじめに", "introduction"], ["サービス", "services"], ["進め方", "strengths"], ["パッケージ", "packages"], ["制作コンセプト", "works"], ["よくあるご質問", "faq"]];
+const links = [["はじめに", "introduction"], ["サービス", "services"], ["進め方", "strengths"], ["パッケージ", "packages"], ["制作実績", "works"], ["よくあるご質問", "faq"]];
 
 export function PatternFooter() {
   return <footer className="pattern-footer">
@@ -14,7 +14,7 @@ export function PatternFooter() {
       <a className="icon-link-green" href={site.contactUrl}><Mail size={19} />メール</a>
     </div>
     <p className="pattern-copyright">© {new Date().getFullYear()} 大穂兄弟. 無断転載を禁じます。</p>
-    <p className="pattern-sample-note">パッケージ料金は税別です。ポートフォリオは架空の制作コンセプトです。</p>
+    <p className="pattern-sample-note">パッケージ料金は税別です。三つの操作できる制作デモは架空の自主制作です。</p>
     <div className="footer-bottom-bar"><nav className="footer-nav-pill" aria-label="フッターナビゲーション">{links.map(([label, id]) => <a key={id} href={`#${id}`}>{label}</a>)}<a className="footer-contact-pill" href="#contact">相談する<ArrowUpRight size={16} /></a></nav><a className="footer-top-pill" href="#introduction" aria-label="ページの先頭へ"><ArrowUp size={18} /></a></div>
   </footer>;
 }

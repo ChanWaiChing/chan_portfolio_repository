@@ -902,3 +902,6 @@ button:disabled { box-shadow: inset 0 1px 0 #fff8,0 1px 0 var(--button-edge); tr
     background: linear-gradient(180deg,var(--paper) 0,var(--section-wash) 64px,var(--section-wash) calc(100% - 64px),var(--paper) 100%);
   }
 }
+
+/* Real project previews preserve the captured desktop composition. */
+.project-thumbnail{position:relative;width:100%;flex:none;aspect-ratio:8/5;overflow:hidden;background:#edf2f6;border-bottom:1px solid #dce5ec}.project-thumbnail img{transition:transform .45s ease}.portfolio-card button:hover .project-thumbnail img{transform:scale(1.035)}.project-preview{border:1px solid #dce5ec;border-radius:18px;margin:24px 0}.project-visit{margin:20px 0;width:100%;justify-content:center}.portfolio-card-body>p{line-height:1.8}@media(prefers-reduced-motion:reduce){.project-thumbnail img{transition:none}.portfolio-card button:hover .project-thumbnail img{transform:none}}

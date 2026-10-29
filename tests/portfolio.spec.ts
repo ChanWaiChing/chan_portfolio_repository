@@ -103,25 +103,25 @@ test("all 20 published packages are reachable, filterable and open for consultat
   await expect(page.getByLabel("相談したいこと")).toHaveValue("ワードプレス制作・成長支援");
 });
 
-test("all 30 sample works are reachable with search, empty state and details", async ({ page }) => {
+test("all 18 supplied projects are reachable with search, empty state and details", async ({ page }) => {
   await page.goto("/");
   const section = page.locator("#works");
   const pagination = section.getByRole("navigation", { name: "ポートフォリオのページ切り替え" });
-  for (const [index, count] of [9, 9, 9, 3].entries()) {
+  for (const [index, count] of [9, 9].entries()) {
     await pagination.getByRole("button", { name: `${index + 1}ページ目` }).click();
     await expect(section.locator(".portfolio-card")).toHaveCount(count);
   }
-  await page.getByRole("searchbox", { name: "ポートフォリオを検索" }).fill("ながれ");
+  await page.getByRole("searchbox", { name: "ポートフォリオを検索" }).fill("ワコール");
   await expect(section.locator(".portfolio-card")).toHaveCount(1);
   await section.locator(".portfolio-card button").click();
-  await expect(page.getByRole("dialog")).toContainText("架空の自主制作コンセプト");
+  await expect(page.getByRole("dialog").getByRole("link", {name: "公開サイトを見る（新しいタブ）"})).toHaveAttribute("href", "https://www.wacoal.jp");
   await page.keyboard.press("Escape");
   await page.getByRole("searchbox").fill("no-such-example-999");
   await expect(section.locator(".catalog-empty")).toBeVisible();
   await section.getByRole("button", { name: "検索条件をリセット" }).click();
-  await expect(section.locator(".catalog-summary")).toContainText("30件中 1〜9件");
-  await section.locator('.catalog-filters button[data-category="デザイン"]').click();
-  await expect(section.locator(".portfolio-card")).toHaveCount(7);
+  await expect(section.locator(".catalog-summary")).toContainText("18件中 1〜9件");
+  await section.locator('.catalog-filters button[data-category="ウェブサイト"]').click();
+  await expect(section.locator(".portfolio-card")).toHaveCount(6);
 });
 
 test("package prices and plan scopes match the supplied documents", async ({ page }) => {
@@ -260,15 +260,15 @@ test("contact platform icons open the correct channels without displaying IDs", 
 });
 
 test("catalog URL restores filters, search and pagination after reload", async ({ page }) => {
-  await page.goto("/?package=Web%E5%88%B6%E4%BD%9C&work=%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3&q=%E3%83%95%E3%82%A3%E3%82%B0%E3%83%9E#works");
+  await page.goto("/?package=Web%E5%88%B6%E4%BD%9C&work=%E3%82%A6%E3%82%A7%E3%83%96%E3%82%B5%E3%82%A4%E3%83%88&q=%E3%83%AF%E3%82%B3%E3%83%BC%E3%83%AB#works");
   await expect(page.locator("#packages .package-card")).toHaveCount(6);
-  await expect(page.locator("#works .portfolio-card")).toHaveCount(7);
-  await expect(page.getByRole("searchbox")).toHaveValue("フィグマ");
+  await expect(page.locator("#works .portfolio-card")).toHaveCount(1);
+  await expect(page.getByRole("searchbox")).toHaveValue("ワコール");
   await page.reload();
-  await expect(page.locator("#works").locator('.catalog-filters button[data-category="デザイン"]')).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#works").locator('.catalog-filters button[data-category="ウェブサイト"]')).toHaveAttribute("aria-pressed", "true");
   await page.goto("/?pp=4&wp=4");
   await expect(page.locator("#packages .package-card")).toHaveCount(2);
-  await expect(page.locator("#works .portfolio-card")).toHaveCount(3);
+  await expect(page.locator("#works .portfolio-card")).toHaveCount(9);
 });
 
 test("dialogs isolate the background and focus returns to the opener", async ({ page, isMobile }) => {
@@ -344,7 +344,7 @@ test("service entry points preselect consultation topics and explain contact han
 
 test("category counts are attached to centered filter buttons", async ({ page }) => {
   await page.goto("/");
-  for (const [id, counts] of [["packages", [20,8,1,5,3,3]], ["works", [30,9,7,6,4,4]]] as const) {
+  for (const [id, counts] of [["packages", [20,8,1,5,3,3]], ["works", [18,6,9,3]]] as const) {
     const section = page.locator(`#${id}`);
     const buttons = section.locator(".catalog-filters button");
     for (let index=0; index<counts.length; index++) {
@@ -383,3 +383,5 @@ test("hero keeps the first brand scene and uses three human-led images", async (
     expect(decodeURIComponent(src || "")).toContain("human-led.webp");
   }
 });
+
+ test("published projects have unique links and load their real previews", async ({page})=>{test.setTimeout(90000);await page.goto("/");const section=page.locator("#works");const links=new Set<string>();for(let n=1;n<=2;n++){await section.getByRole("navigation").getByRole("button",{name:`${n}ページ目`}).click();for(let i=0;i<9;i++){const card=section.locator(".portfolio-card").nth(i);await card.scrollIntoViewIfNeeded();await card.locator("img").evaluate((img:HTMLImageElement)=>img.decode());await card.getByRole("button").click();const dialog=page.getByRole("dialog");const link=dialog.getByRole("link",{name:"公開サイトを見る（新しいタブ）"});links.add((await link.getAttribute("href"))!);await expect(dialog.locator(".concept-brief")).toHaveCount(0);await expect(link).toHaveAttribute("rel","noopener noreferrer");await page.keyboard.press("Escape");}}expect(links.size).toBe(18);expect([...links].filter(x=>x.includes("tanica.jp"))).toHaveLength(1);});

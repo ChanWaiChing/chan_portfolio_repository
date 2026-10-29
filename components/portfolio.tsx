@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import { portfolioItems, portfolioCategories, type PortfolioProject } from "@/lib/projects";
 import { useEffect, useRef, useState } from "react";
 import { trackInteraction } from "@/lib/interaction-events";
 import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Code2, Layers3, Menu, PenTool, Search, Sparkles, X } from "lucide-react";
@@ -20,7 +22,7 @@ import { ContactForm } from "./contact-form";
 import { ContactMethods } from "./contact-methods";
 import { FaqSection } from "./faq-section";
 import { BotMascot } from "./bot-mascot";
-import { categories, portfolioItems, servicePackages, type PortfolioItem, type ServicePackage } from "@/lib/catalog";
+import { categories, demoItems, servicePackages, type PortfolioItem, type ServicePackage } from "@/lib/catalog";
 
 const navigation = [["はじめに", "introduction"], ["サービス・スキル", "services"], ["進め方", "strengths"], ["パッケージ", "packages"], ["ポートフォリオ", "works"], ["よくあるご質問", "faq"]];
 const scope = [
@@ -50,7 +52,7 @@ export default function Portfolio({ directSend = false }: { directSend?: boolean
   const [query, setQuery] = useState("");
   const [packagePage, setPackagePage] = useState(1);
   const [workPage, setWorkPage] = useState(1);
-  const [detail, setDetail] = useState<{ kind: "package"; item: ServicePackage } | { kind: "work"; item: PortfolioItem } | null>(null);
+  const [detail, setDetail] = useState<{ kind: "package"; item: ServicePackage } | { kind: "work"; item: PortfolioItem } | { kind: "project"; item: PortfolioProject } | null>(null);
   const [topic, setTopic] = useState("まずは相談したい");
   const [activeSection, setActiveSection] = useState("introduction");
   const [catalogReady, setCatalogReady] = useState(false);
@@ -62,7 +64,7 @@ export default function Portfolio({ directSend = false }: { directSend?: boolean
   useEffect(() => {
     const read = () => {
       const params = new URLSearchParams(location.search);
-      const category = (key: string) => { const value = params.get(key); const aliases: Record<string,string> = { "Web制作": "ウェブ制作", "AI・業務改善": "人工知能・業務改善" }; return categories.find(item => item === (aliases[value || ""] || value)) || "すべて"; };
+      const category = (key: string) => { const value = params.get(key); const aliases: Record<string,string> = { "Web制作": "ウェブ制作", "AI・業務改善": "人工知能・業務改善" }; return (key === "work" ? portfolioCategories : categories).find(item => item === (aliases[value || ""] || value)) || "すべて"; };
       const page = (key: string) => Math.max(1, Math.min(100, Math.floor(Number(params.get(key))) || 1));
       setPackageCategory(category("package")); setWorkCategory(category("work"));
       setQuery((params.get("q") || "").slice(0, 100));
@@ -107,7 +109,7 @@ export default function Portfolio({ directSend = false }: { directSend?: boolean
   }, [detail, menu]);
 
   const filteredPackages = servicePackages.filter(item => packageCategory === "すべて" || item.category === packageCategory);
-  const filteredWorks = portfolioItems.filter(item => (workCategory === "すべて" || item.category === workCategory) && `${item.title} ${item.brand} ${item.technologies.join(" ")}`.toLowerCase().includes(query.trim().toLowerCase()));
+  const filteredWorks = portfolioItems.filter(item => (workCategory === "すべて" || item.category === workCategory) && `${item.title} ${item.description} ${item.technologies.join(" ")}`.toLowerCase().includes(query.trim().toLowerCase()));
   useEffect(() => { setPackagePage(page => Math.min(page, Math.max(1, Math.ceil(filteredPackages.length / 6)))); setWorkPage(page => Math.min(page, Math.max(1, Math.ceil(filteredWorks.length / 9)))); }, [filteredPackages.length, filteredWorks.length]);
   const changePackagePage = (page: number) => { setPackagePage(page); resultSummary.current?.focus(); };
   const changeWorkPage = (page: number) => { setWorkPage(page); workSummary.current?.focus(); };
@@ -130,7 +132,7 @@ export default function Portfolio({ directSend = false }: { directSend?: boolean
     {menu && <nav className="mobile-nav" ref={menuRef} id="mobile-menu" aria-label="モバイルナビゲーション">{[...navigation, ["お問い合わせ", "contact"]].map(([label, id], i) => <a href={`#${id}`} key={id} onClick={() => setMenu(false)}><span>0{i + 1}</span>{label}<ArrowUpRight /></a>)}<button onClick={() => setMenu(false)}>メニューを閉じる <X size={16} /></button></nav>}
     <main id="main">
       <section id="introduction" aria-label="はじめに"><HeroShowcase />
-        <div className="content-section selected-work" id="selected-work"><Heading label="操作できる制作例" title="触ってわかる、3つの制作デモ。" text="商品検索・チーム管理・記録の三つの自主制作デモ。画面を触りながら、設計と実装の考え方をご確認ください。" /><EvidenceNotes /><p className="mobile-gallery-hint">横にスワイプして、三つのデモをご覧いただけます。 →</p><div className="portfolio-grid">{portfolioItems.slice(0, 3).map(item => <article className="portfolio-card luminous-card" key={item.id}><button onClick={() => { trackInteraction("concept_open", { id: item.id }); setDetail({ kind: "work", item }); }} aria-label={`${item.title} コンセプト詳細`}><WorkVisual item={item} /><div className="portfolio-card-body"><span className="eyebrow">{item.category} / 制作例</span><h3>{item.title}</h3><span className="portfolio-detail-link">デモと設計意図を見る<ArrowUpRight size={18} /></span></div></button></article>)}</div><a className="text-link" href="#works">すべての制作イメージを見る<ArrowRight size={17} /></a></div>
+        <div className="content-section selected-work" id="selected-work"><Heading label="操作できる制作例" title="触ってわかる、3つの制作デモ。" text="商品検索・チーム管理・記録の三つの自主制作デモ。画面を触りながら、設計と実装の考え方をご確認ください。" /><EvidenceNotes /><p className="mobile-gallery-hint">横にスワイプして、三つのデモをご覧いただけます。 →</p><div className="portfolio-grid">{demoItems.map(item => <article className="portfolio-card luminous-card" key={item.id}><button onClick={() => { trackInteraction("concept_open", { id: item.id }); setDetail({ kind: "work", item }); }} aria-label={`${item.title} コンセプト詳細`}><WorkVisual item={item} /><div className="portfolio-card-body"><span className="eyebrow">{item.category} / 制作例</span><h3>{item.title}</h3><span className="portfolio-detail-link">デモと設計意図を見る<ArrowUpRight size={18} /></span></div></button></article>)}</div><a className="text-link" href="#works">制作実績を見る<ArrowRight size={17} /></a></div>
         <div className="content-section introduction-copy"><Heading label="私たちについて" title="考える兄と、描く弟。" text="大穂兄弟。技術とデザインを、ひとつのチームで相談できます。" />
           <BrandStory /><BrotherIntroductions />
         </div>
@@ -147,11 +149,11 @@ export default function Portfolio({ directSend = false }: { directSend?: boolean
         <div className="package-grid">{filteredPackages.slice((packagePage - 1) * 6, packagePage * 6).map((item, i) => <article className={`package-card luminous-card package-tone-${i % 3}`} key={item.id}><PackageThumbnail item={item} /><div className="catalog-card-meta"><span>{item.category}</span><b>{item.plans.length === 4 ? "制作メニュー" : "三つのプラン"}</b></div><h3>{item.title}</h3><p>{item.description}</p><details className="package-inclusions"><summary>対応内容を見る</summary><ul>{item.deliverables.map(deliverable => <li key={deliverable}><Check size={15} />{deliverable}</li>)}</ul></details><div className="package-price"><small>{item.plans.length === 4 ? "単体制作の目安・税別" : "ベーシック・税別"}</small><strong>¥{item.price.toLocaleString("ja-JP")}<span>〜</span></strong><span>制作期間：{item.duration}</span></div><PackageScope item={item} /><button className="catalog-outline-button" aria-label={`${item.title} プランの詳細を見る`} onClick={() => { trackInteraction("package_open", { id:item.id }); setDetail({ kind: "package", item }); }}>プランの詳細を見る<ArrowRight size={17} /></button></article>)}</div>
         <Pagination page={packagePage} total={filteredPackages.length} size={6} onChange={changePackagePage} label="パッケージのページ切り替え" />
       </section>
-      <section className="content-section" id="works"><Heading label="制作コンセプト" title="つくれるものは、ひとつじゃない。" text="ご相談のきっかけになる、デザインと開発の制作イメージをご紹介します。" />
-        <p className="sample-notice">{portfolioItems.length}件すべて架空のサンプル・制作コンセプトです。実在のクライアントや納品実績ではありません。</p>
-        <div className="work-toolbar"><CategoryFilters items={portfolioItems} selected={workCategory} label="ポートフォリオのカテゴリ" onChange={category => { setWorkCategory(category); setWorkPage(1); }} /><label className="catalog-search"><Search size={17} /><input type="search" aria-label="ポートフォリオを検索" placeholder="キーワードで探す" value={query} onChange={event => { setQuery(event.target.value); setWorkPage(1); }} /></label></div>
-        <p className="catalog-summary" ref={workSummary} tabIndex={-1} aria-live="polite">{filteredWorks.length ? `${filteredWorks.length}件中 ${(workPage - 1) * 9 + 1}〜${Math.min(workPage * 9, filteredWorks.length)}件を表示` : "該当する制作イメージはありません"}<span>全{portfolioItems.length}アイテム / サンプル</span></p>
-        <div className="portfolio-grid">{filteredWorks.slice((workPage - 1) * 9, workPage * 9).map(item => <article className="portfolio-card luminous-card" key={item.id}><button onClick={() => { trackInteraction("concept_open", { id: item.id }); setDetail({ kind: "work", item }); }} aria-label={`${item.title} 詳細を見る`}><WorkVisual item={item} /><div className="portfolio-card-body"><div className="catalog-card-meta"><span>{item.category}</span><b>サンプル</b></div><h3>{item.title}</h3><p>{item.technologies.join(" / ")}</p><span className="portfolio-detail-link">制作イメージを見る<ArrowUpRight size={18} /></span></div></button></article>)}</div>
+      <section className="content-section" id="works"><Heading label="制作実績" title="さまざまな事業に、伝わる体験を。" text="これまでに制作したウェブサイトや紹介ページをご覧いただけます。" />
+        <p className="sample-notice">{portfolioItems.length}件の制作実績をご紹介します。各詳細から公開サイトをご覧いただけます。</p>
+        <div className="work-toolbar"><CategoryFilters options={portfolioCategories} items={portfolioItems} selected={workCategory} label="ポートフォリオのカテゴリ" onChange={category => { setWorkCategory(category); setWorkPage(1); }} /><label className="catalog-search"><Search size={17} /><input type="search" aria-label="ポートフォリオを検索" placeholder="キーワードで探す" value={query} onChange={event => { setQuery(event.target.value); setWorkPage(1); }} /></label></div>
+        <p className="catalog-summary" ref={workSummary} tabIndex={-1} aria-live="polite">{filteredWorks.length ? `${filteredWorks.length}件中 ${(workPage - 1) * 9 + 1}〜${Math.min(workPage * 9, filteredWorks.length)}件を表示` : "該当する制作実績はありません"}<span>全{portfolioItems.length}件の制作実績</span></p>
+        <div className="portfolio-grid">{filteredWorks.slice((workPage - 1) * 9, workPage * 9).map(item => <article className="portfolio-card luminous-card" key={item.id}><button onClick={() => { trackInteraction("portfolio_open", { id: item.id }); setDetail({ kind: "project", item }); }} aria-label={`${item.title} 詳細を見る`}><div className="project-thumbnail"><Image src={item.thumbnail} alt={`${item.title}のサイト画面`} fill sizes="(max-width: 700px) 100vw, 33vw" style={{ objectFit: "cover" }} /></div><div className="portfolio-card-body"><div className="catalog-card-meta"><span>{item.category}</span></div><h3>{item.title}</h3><p>{item.description}</p><span className="portfolio-detail-link">制作実績を見る<ArrowUpRight size={18} /></span></div></button></article>)}</div>
         {!filteredWorks.length && <div className="catalog-empty"><Search size={28} /><p>別のキーワードやカテゴリでお試しください。</p><button className="catalog-outline-button" onClick={() => { setQuery(""); setWorkCategory("すべて"); setWorkPage(1); }}>検索条件をリセット</button></div>}
         <Pagination page={workPage} total={filteredWorks.length} size={9} onChange={changeWorkPage} label="ポートフォリオのページ切り替え" />
       </section>
@@ -163,6 +165,6 @@ export default function Portfolio({ directSend = false }: { directSend?: boolean
       </section>
     </main>
     <PatternFooter />
-    {detail && <div className="catalog-backdrop" onClick={event => { if (event.target === event.currentTarget) setDetail(null); }}><div className="catalog-dialog" ref={dialog} role="dialog" aria-modal="true" aria-labelledby="catalog-dialog-title"><button className="catalog-dialog-close" aria-label="閉じる" onClick={() => setDetail(null)}><X size={22} /></button><span className="dialog-eyebrow">{detail.kind === "package" ? "サービスパッケージ" : "自主制作コンセプト / サンプル"}</span><h2 id="catalog-dialog-title">{detail.item.title}</h2><p>{detail.item.description}</p>{detail.kind === "work" ? <><ConceptDemo key={detail.item.id} brand={detail.item.brand} /><DesignWalkthrough item={detail.item} />{!["もり", "ながれ", "日々、"].includes(detail.item.brand) && <WorkVisual item={detail.item} />}<p className="dialog-tags">{detail.item.technologies.join(" / ")}</p><div className="concept-brief"><h3>想定する課題</h3><p>{detail.item.challenge}</p><h3>設計のアプローチ</h3><p>{detail.item.approach}</p><h3>検証すること</h3><p>{detail.item.validation}</p></div></> : <><ul className="dialog-deliverables">{detail.item.deliverables.map(value => <li key={value}><Check size={16} />{value}</li>)}</ul><PackagePlanDetails item={detail.item} /></>}<p className="dialog-notice">{detail.kind === "work" ? "架空の自主制作コンセプトです。実在のクライアントや納品実績ではありません。" : "掲載資料に基づくご案内です。正式な費用・納期・支援範囲は、お打ち合わせ後のお見積もりで確認します。"}</p><button className="catalog-cta" onClick={() => consult(detail.item.title)}>この内容について相談する<ArrowRight size={18} /></button></div></div>}
+    {detail && <div className="catalog-backdrop" onClick={event => { if (event.target === event.currentTarget) setDetail(null); }}><div className="catalog-dialog" ref={dialog} role="dialog" aria-modal="true" aria-labelledby="catalog-dialog-title"><button className="catalog-dialog-close" aria-label="閉じる" onClick={() => setDetail(null)}><X size={22} /></button><span className="dialog-eyebrow">{detail.kind === "package" ? "サービスパッケージ" : detail.kind === "project" ? "制作実績" : "自主制作コンセプト / サンプル"}</span><h2 id="catalog-dialog-title">{detail.item.title}</h2><p>{detail.item.description}</p>{detail.kind === "project" ? <><div className="project-thumbnail project-preview"><Image src={detail.item.thumbnail} alt={`${detail.item.title}のサイト画面`} fill sizes="(max-width: 700px) 90vw, 700px" style={{ objectFit: "contain" }} /></div>{detail.item.technologies.length > 0 && <p className="dialog-tags">使用技術：{detail.item.technologies.join(" / ")}</p>}<a className="catalog-outline-button project-visit" href={detail.item.url} target="_blank" rel="noopener noreferrer">公開サイトを見る（新しいタブ）<ArrowUpRight size={18} /></a></> : detail.kind === "work" ? <><ConceptDemo key={detail.item.id} brand={detail.item.brand} /><DesignWalkthrough item={detail.item} />{!["もり", "ながれ", "日々、"].includes(detail.item.brand) && <WorkVisual item={detail.item} />}<p className="dialog-tags">{detail.item.technologies.join(" / ")}</p><div className="concept-brief"><h3>想定する課題</h3><p>{detail.item.challenge}</p><h3>設計のアプローチ</h3><p>{detail.item.approach}</p><h3>検証すること</h3><p>{detail.item.validation}</p></div></> : <><ul className="dialog-deliverables">{detail.item.deliverables.map(value => <li key={value}><Check size={16} />{value}</li>)}</ul><PackagePlanDetails item={detail.item} /></>}<p className="dialog-notice">{detail.kind === "work" ? "架空の自主制作コンセプトです。実在のクライアントや納品実績ではありません。" : detail.kind === "project" ? "掲載先の現在の表示は、制作時から変更されている場合があります。" : "掲載資料に基づくご案内です。正式な費用・納期・支援範囲は、お打ち合わせ後のお見積もりで確認します。"}</p><button className="catalog-cta" onClick={() => consult(detail.item.title)}>この内容について相談する<ArrowRight size={18} /></button></div></div>}
   </div>;
 }

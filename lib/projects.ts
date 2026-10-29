@@ -1,159 +1,183 @@
-// Transcribed from the 15 portfolio entries in the user's uploaded Lancers screenshots.
-// No project URLs, dates, prices or implementation technologies were supplied.
-// thumbnail can be set to an original image path once that image file is available.
-export type ProjectCategory =
-  "CORPORATE" | "RECRUITMENT" | "HEALTHCARE" | "BRAND";
-export type Project = {
-  id: string;
-  category: ProjectCategory;
-  title: string;
-  desc: string;
-  name: string;
-  tag: string;
-  accent: "blue" | "teal" | "orange" | "pink" | "violet";
-  thumbnail?: string;
-};
-export const projectCategories = [
-  ["ALL", "すべて"],
-  ["CORPORATE", "企業・サービス"],
-  ["RECRUITMENT", "採用"],
-  ["HEALTHCARE", "医療・薬局"],
-  ["BRAND", "ブランド・LP"],
-] as const;
-export const projects: Project[] = [
+/** Projects supplied by the site owner. No unprovided role, outcome, or stack is inferred. */
+export const portfolioCategories = ["すべて", "ウェブサイト", "ランディングページ", "ウェブアプリ"] as const;
+export type PortfolioProject = { id: string; title: string; description: string; url: string; category: string; thumbnail: string; technologies: string[] };
+export const portfolioItems: PortfolioProject[] = [
   {
-    id: "web-marketing",
-    category: "CORPORATE",
-    name: "WEB MARKETING",
-    title: "Webマーケティング事業のサービス紹介サイト",
-    desc: "Webマーケティング事業の集客を支えるサービス紹介サイトを制作しました。",
-    tag: "サービスサイト",
-    accent: "blue",
+    "id": "work-01",
+    "title": "タイガージム 横浜店",
+    "description": "パーソナルジムの施設・料金・トレーナーを紹介するウェブサイト。",
+    "url": "https://tigergym-yokohama.com",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/work-01.webp",
+    "technologies": []
   },
   {
-    id: "graduate-recruitment",
-    category: "RECRUITMENT",
-    name: "NEW GRADUATES",
-    title: "企業理念と社員の声を伝える新卒採用サイト",
-    desc: "企業理念・社員の声・選考情報を伝える新卒採用サイトを制作しました。",
-    tag: "新卒採用サイト",
-    accent: "teal",
+    "id": "work-02",
+    "title": "埼玉県済生会川口総合病院",
+    "description": "診療科や受診案内、アクセスなどを案内する病院のウェブサイト。",
+    "url": "https://www.saiseikai.gr.jp",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/work-02.webp",
+    "technologies": []
   },
   {
-    id: "creative-company",
-    category: "CORPORATE",
-    name: "CREATIVE COMPANY",
-    title: "クリエイティブ事業・制作実績を紹介する企業サイト",
-    desc: "多彩なクリエイティブ事業と制作実績を紹介する企業サイトを制作しました。",
-    tag: "コーポレートサイト",
-    accent: "orange",
+    "id": "work-03",
+    "title": "ワコール",
+    "description": "商品・ブランド・店舗の情報を案内するウェブサイト。",
+    "url": "https://www.wacoal.jp",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/work-03.webp",
+    "technologies": []
   },
   {
-    id: "dog-kindergarten",
-    category: "BRAND",
-    name: "DOG KINDERGARTEN",
-    title: "犬の社会性と成長を支える幼稚園サイト",
-    desc: "犬の社会性と成長を支える幼稚園サイトを制作しました。",
-    tag: "サービスサイト",
-    accent: "orange",
+    "id": "work-04",
+    "title": "フランフラン",
+    "description": "家具やインテリア雑貨を紹介するオンラインストア。",
+    "url": "https://francfranc.com",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/work-04.webp",
+    "technologies": []
   },
   {
-    id: "saiseikai-recruitment",
-    category: "RECRUITMENT",
-    name: "済生会川口総合病院",
-    title: "済生会川口総合病院 総合採用サイト",
-    desc: "済生会川口総合病院の総合採用サイトを制作しました。",
-    tag: "病院採用サイト",
-    accent: "teal",
+    "id": "work-05",
+    "title": "リューユ",
+    "description": "ドレスやファッションアイテムを紹介する通販サイト。",
+    "url": "https://www.ryuyu.net",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/work-05.webp",
+    "technologies": []
   },
   {
-    id: "layerx",
-    category: "CORPORATE",
-    name: "LayerX",
-    title: "AI・Fintech・SaaS事業のコーポレートサイト",
-    desc: "AI・Fintech・SaaS事業の魅力を伝えるコーポレートサイトを制作しました。",
-    tag: "コーポレートサイト",
-    accent: "violet",
+    "id": "work-06",
+    "title": "ハナヤプロジェクト",
+    "description": "企業情報と採用情報を紹介するウェブサイト。",
+    "url": "https://hanaya-project.co.jp",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/work-06.webp",
+    "technologies": []
   },
   {
-    id: "konyo-management",
-    category: "CORPORATE",
-    name: "金葉マネジメント",
-    title: "外国人向け住まい探し・生活支援の企業サイト",
-    desc: "外国人向けの住まい探しと生活支援を紹介する企業サイトを制作しました。",
-    tag: "不動産・生活支援",
-    accent: "orange",
+    "id": "work-07",
+    "title": "タニカのあまざけ",
+    "description": "商品の特徴や楽しみ方を伝える甘酒の紹介ページ。",
+    "url": "https://tanica.jp/amazake/",
+    "category": "ランディングページ",
+    "thumbnail": "/images/portfolio/work-07.webp",
+    "technologies": []
   },
   {
-    id: "kojima-press",
-    category: "CORPORATE",
-    name: "小島プレス工業",
-    title: "小島プレス工業 コーポレートサイト",
-    desc: "小島プレス工業のコーポレートサイトを構築しました。",
-    tag: "製造業コーポレート",
-    accent: "blue",
+    "id": "work-08",
+    "title": "モグ 雲にのる夢枕",
+    "description": "枕の特徴や使い心地を紹介する商品ページ。",
+    "url": "https://mogus.jp/products/kumo/",
+    "category": "ランディングページ",
+    "thumbnail": "/images/portfolio/work-08.webp",
+    "technologies": []
   },
   {
-    id: "branding-design",
-    category: "BRAND",
-    name: "BRANDING DESIGN",
-    title: "ブランドの世界観を伝えるブランディングデザイン",
-    desc: "ブランディングデザインを制作しました。",
-    tag: "ブランディング",
-    accent: "orange",
+    "id": "work-09",
+    "title": "ユーム",
+    "description": "業務自動化サービスの特徴や活用方法を紹介するページ。",
+    "url": "https://lp.yoom.fun/",
+    "category": "ランディングページ",
+    "thumbnail": "/images/portfolio/work-09.webp",
+    "technologies": []
   },
   {
-    id: "utena",
-    category: "BRAND",
-    name: "utena",
-    title: "化粧品メーカー「ウテナ」公式サイト",
-    desc: "化粧品メーカー「ウテナ」の公式サイトで、ブランド・商品情報を伝えるWeb制作を行いました。",
-    tag: "化粧品・ブランドサイト",
-    accent: "pink",
+    "id": "work-10",
+    "title": "ファンケル スキンパッチ",
+    "description": "肌の測定・カウンセリングサービスを紹介するページ。",
+    "url": "https://www.fancl.co.jp/skinpatch/",
+    "category": "ランディングページ",
+    "thumbnail": "/images/portfolio/work-10.webp",
+    "technologies": []
   },
   {
-    id: "hotakubo-hospital",
-    category: "HEALTHCARE",
-    name: "保田窪整形外科病院",
-    title: "安心感と診療情報の分かりやすさを重視した病院サイト",
-    desc: "整形外科病院の公式サイトで、安心感と診療情報の分かりやすさを重視したWeb制作を行いました。",
-    tag: "整形外科病院サイト",
-    accent: "teal",
+    "id": "work-11",
+    "title": "シフトラ",
+    "description": "シフト作成・管理サービスの特徴を紹介するページ。",
+    "url": "https://aishift.com/",
+    "category": "ランディングページ",
+    "thumbnail": "/images/portfolio/work-11.webp",
+    "technologies": []
   },
   {
-    id: "pharmacy",
-    category: "HEALTHCARE",
-    name: "HEALTHCARE PHARMACY",
-    title: "健康相談・オンライン服薬指導に対応する薬局サイト",
-    desc: "健康相談・オンライン服薬指導に対応する薬局サイトを制作しました。",
-    tag: "薬局・ヘルスケア",
-    accent: "pink",
+    "id": "work-12",
+    "title": "ききょうがおか",
+    "description": "整体・整骨院の施術や施設を紹介するページ。",
+    "url": "https://kikyougaoka.com/",
+    "category": "ランディングページ",
+    "thumbnail": "/images/portfolio/work-12.webp",
+    "technologies": []
   },
   {
-    id: "tanica-amazake",
-    category: "BRAND",
-    name: "タニカのあまざけ",
-    title: "タニカのあまざけ 商品紹介LP",
-    desc: "「タニカのあまざけ」の商品紹介LP制作に携わりました。",
-    tag: "食品・商品紹介LP",
-    accent: "orange",
+    "id": "work-13",
+    "title": "みかげ小児歯科・矯正歯科クリニック",
+    "description": "小児矯正の相談について案内するページ。",
+    "url": "https://www.mikage-dc.com/pediatric_lp",
+    "category": "ランディングページ",
+    "thumbnail": "/images/portfolio/work-13.webp",
+    "technologies": []
   },
   {
-    id: "wacoal",
-    category: "BRAND",
-    name: "WACOAL",
-    title: "ワコール公式Webサイトの構築・運用",
-    desc: "ワコール公式Webサイトの構築・運用を行いました。",
-    tag: "ブランドサイト・運用",
-    accent: "pink",
+    "id": "work-14",
+    "title": "きれい総合研究所",
+    "description": "サービス紹介ページのプレビュー。",
+    "url": "https://remmier-test.com/preview/lp/kirei",
+    "category": "ランディングページ",
+    "thumbnail": "/images/portfolio/work-14.webp",
+    "technologies": []
   },
   {
-    id: "creer-plus",
-    category: "RECRUITMENT",
-    name: "Creer+",
-    title: "Creer+ 採用サイト制作サービスサイト",
-    desc: "Creer+の採用サイト制作サービスサイトを制作しました。",
-    tag: "採用サービスサイト",
-    accent: "teal",
+    "id": "work-15",
+    "title": "任天堂",
+    "description": "ゲームや製品に関する情報を紹介するページ。",
+    "url": "https://www.nintendo.com/",
+    "category": "ランディングページ",
+    "thumbnail": "/images/portfolio/work-15.webp",
+    "technologies": []
   },
+  {
+    "id": "work-16",
+    "title": "パウパーク",
+    "description": "犬の幼稚園のサービスや施設を紹介するウェブサイト。",
+    "url": "https://pawpark.jp/",
+    "category": "ウェブアプリ",
+    "thumbnail": "/images/portfolio/work-16.webp",
+    "technologies": [
+      "ビュー",
+      "ナクスト",
+      "ノード",
+      "ファイアベース"
+    ]
+  },
+  {
+    "id": "work-17",
+    "title": "ねこねこ薬局",
+    "description": "薬局の取り組みやサービス、店舗を紹介するウェブサイト。",
+    "url": "https://nekoneko-pharmacy.com/",
+    "category": "ウェブアプリ",
+    "thumbnail": "/images/portfolio/work-17.webp",
+    "technologies": [
+      "ビュー",
+      "ナクスト",
+      "ノード",
+      "ファイアベース",
+      "ジーサップ"
+    ]
+  },
+  {
+    "id": "work-18",
+    "title": "フィオラボ",
+    "description": "ヘアケア・スキンケア製品を紹介する企業サイト。",
+    "url": "https://fiolab-corp.jp/",
+    "category": "ウェブアプリ",
+    "thumbnail": "/images/portfolio/work-18.webp",
+    "technologies": [
+      "ビュー",
+      "ナクスト",
+      "ノード",
+      "ファイアベース"
+    ]
+  }
 ];
