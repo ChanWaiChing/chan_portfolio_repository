@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./site.css";
 import { SiteMotion } from "@/components/site-motion";
+import { PageScrollbar } from "@/components/page-scrollbar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001"),
@@ -22,7 +23,8 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ja">
-      <body>{children}<SiteMotion /></body>
+      <head><link rel="preload" href="/fonts/yuji-boku-title.ttf" as="font" type="font/ttf" crossOrigin="anonymous" /></head>
+      <body>{children}<SiteMotion /><PageScrollbar /></body>
     </html>
   );
 }

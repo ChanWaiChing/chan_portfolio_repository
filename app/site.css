@@ -3,6 +3,7 @@
 
 /* Japanese editorial direction: white space, ink typography, restrained blue and tactile controls. */
 :root { --paper: #fbfcfd; --surface: #ffffff; --ink: #173047; --muted: #536879; --accent: #176ba4; --cta: #145178; --line: #dce5eb; --pale: #f0f5f8; --radius: 24px; --shadow: 0 8px 28px #1922350a; --sans: "DM Sans Variable", "Noto Sans JP Variable", sans-serif; }
+@font-face { font-family: "Oho Brush Title"; src: url('/fonts/yuji-boku-title.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 96px; }
 body { margin: 0; color: var(--ink); background: var(--paper); font: 15px/1.9 var(--sans); -webkit-font-smoothing: antialiased; }
@@ -1177,4 +1178,56 @@ button:disabled { box-shadow: inset 0 1px 0 #fff8,0 1px 0 var(--button-edge); tr
 .contact-form { background-size: 100% 100%,100% auto; background-repeat: no-repeat,repeat-y; background-position: center,center top; }
 @media(max-width:760px) {
   #introduction,#selected-work,.introduction-copy,#services,#strengths,#packages,#works,#faq,#contact { background-size: 100% 100%,100% 100%,cover; }
+}
+
+/* A vertical brush-written title anchors the open left side of the hero. */
+.portfolio-site { padding-inline-end: 76px; padding-bottom: 24px; }
+.hero-primary-copy { display: grid; grid-template-columns: max-content minmax(0,1fr); column-gap: 25px; row-gap: 12px; align-items: center; align-content: center; }
+.hero-primary-copy h1 { grid-column: 1; grid-row: 1/5; align-self: center; width: max-content; height: max-content; margin: 0; padding: 9px 0; writing-mode: vertical-rl; text-orientation: upright; white-space: nowrap; font-family: "Oho Brush Title","Yu Mincho",serif; font-size: clamp(33px,3.2vw,46px); font-weight: 400; line-height: 1.38; letter-spacing: .025em; font-feature-settings: "vert" 1,"vrt2" 1; }
+.hero-primary-copy h1 > span { color: #43537c; }
+.hero-primary-copy > p,.hero-primary-copy > .hero-primary-actions { grid-column: 2; }
+.hero-primary-copy > .eyebrow { font-size: 11px; }
+.hero-primary-copy > p:not(.eyebrow):not(.hero-experience) { font-size: 13px; line-height: 2; }
+.hero-primary-copy > .hero-primary-actions { margin-top: 4px; gap: 10px; }
+.hero-primary-copy .hero-primary-actions > a { font-size: 12px; padding: 11px 15px; }
+.hero-primary-copy > .hero-experience { margin-top: 4px; font-size: 11px; }
+
+/* An independent reading rail with a faceted bookmark thumb. */
+.page-scroll-control { position: fixed; right: 9px; top: 50%; transform: translateY(-50%); z-index: 46; width: 57px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; gap: 9px; border: 1px solid #aabacc; border-radius: 28px 28px 18px 18px; background: #dce4edea; box-shadow: 0 8px 24px #1c354022,inset 0 1px 0 #ffffffa1; color: #3b4b73; }
+.scroll-control-label { writing-mode: vertical-rl; text-orientation: upright; font-size: 10px; letter-spacing: .14em; padding: 3px 0; }
+.page-scroll-control > button { display: grid; place-items: center; padding: 0; width: 36px; min-height: 36px; background: #d0daea; border: 1px solid #a8b9cf; border-radius: 50%; box-shadow: 0 2px 0 #acb9cc; }
+.page-scroll-control > button:hover { background: #c4d0e3; }
+.page-scroll-track { position: relative; width: 42px; height: clamp(120px,22vh,240px); flex: none; touch-action: none; cursor: pointer; border-radius: 22px; outline-offset: 1px; }
+.scroll-track-line { position: absolute; top: 0; bottom: 0; left: calc(50% - 3px); width: 6px; border-radius: 99px; background: #b8c4d3; box-shadow: inset 0 1px 3px #31485a24; }
+.scroll-track-progress { position: absolute; top: 0; left: calc(50% - 3px); width: 6px; height: var(--scroll-position); border-radius: 99px; background: linear-gradient(#695681,#697ca8,#6eaaa0,#b19187); }
+.scroll-track-mark { position: absolute; top: var(--mark-position); left: calc(50% - 9px); width: 18px; height: 1px; background: #94a5bd; }
+.scroll-track-thumb { position: absolute; left: calc(50% - 11px); top: clamp(0px,calc(var(--scroll-position) - 17px),calc(100% - 34px)); width: 22px; height: 34px; display: grid; place-items: center; clip-path: polygon(50% 0,100% 24%,100% 76%,50% 100%,0 76%,0 24%); background: linear-gradient(145deg,#a4b4d4,#55668e 46%,#736286); filter: drop-shadow(0 3px 4px #243c5055); }
+.scroll-track-thumb > span { width: 6px; height: 6px; border: 1px solid #e8eef6; transform: rotate(45deg); }
+.page-scroll-track:focus-visible { outline: 2px solid #566792; background: #c6d3e455; }
+.is-dragging .scroll-track-thumb { background: linear-gradient(145deg,#b7c8e6,#626ba0 46%,#896da2); }
+.scroll-control-progress { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.scroll-control-progress > small { margin-left: 2px; font-size: 9px; }
+@media(max-width:1099px) and (min-width:761px) {
+  .hero-primary-copy { column-gap: 18px; }
+  .hero-primary-copy h1 { font-size: 34px; }
+  .hero-primary-copy .hero-primary-actions > a { font-size: 11px; padding-inline: 10px; }
+}
+@media(max-width:760px) {
+  .portfolio-site { padding-inline-end: 0; padding-bottom: 78px; }
+  .hero-primary-copy { grid-template-columns: max-content minmax(0,1fr); gap: 12px 18px; }
+  .hero-primary-copy h1 { font-size: clamp(29px,8.5vw,39px); line-height: 1.35; padding: 0; }
+  .hero-primary-copy > .eyebrow { font-size: 10px; }
+  .hero-primary-copy > p:not(.eyebrow):not(.hero-experience) { font-size: 12px; line-height: 1.95; }
+  .hero-primary-copy .hero-primary-actions { flex-direction: column; align-items: stretch; gap: 9px; }
+  .hero-primary-copy .hero-primary-actions > a { font-size: 11px; padding: 10px; min-height: 44px; }
+  .hero-primary-copy > .hero-experience { font-size: 10px; }
+  .page-scroll-control { top: auto; bottom: 11px; right: 11px; transform: none; width: clamp(150px,calc(100vw - 165px),260px); padding: 5px 7px; flex-direction: row; gap: 4px; border-radius: 22px; }
+  .scroll-control-label,.scroll-control-progress { display: none; }
+  .page-scroll-control > button { width: 33px; min-width: 33px; min-height: 36px; }
+  .page-scroll-control > button > svg { transform: rotate(-90deg); }
+  .page-scroll-track { width: auto; flex: 1; height: 36px; }
+  .scroll-track-line { top: calc(50% - 3px); left: 0; right: 0; bottom: auto; width: auto; height: 6px; }
+  .scroll-track-progress { top: calc(50% - 3px); left: 0; height: 6px; width: var(--scroll-position); background: linear-gradient(90deg,#695681,#697ca8,#6eaaa0,#b19187); }
+  .scroll-track-mark { left: var(--mark-position); top: calc(50% - 7px); width: 1px; height: 14px; }
+  .scroll-track-thumb { top: calc(50% - 11px); left: clamp(0px,calc(var(--scroll-position) - 14px),calc(100% - 28px)); width: 28px; height: 22px; clip-path: polygon(0 50%,24% 0,76% 0,100% 50%,76% 100%,24% 100%); }
 }
