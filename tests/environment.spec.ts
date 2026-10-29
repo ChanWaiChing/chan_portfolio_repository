@@ -41,8 +41,8 @@ test("bot-colored badges and primary controls retain readable contrast", async (
 test("section images load, surfaces remain opaque, and the footer scene is not cropped", async ({ page }) => {
   await page.goto("/");
   const backgrounds = new Set<string>();
-  for (const selector of ["#introduction", "#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact"]) {
-    const style = await page.locator(selector).evaluate(el => getComputedStyle(el).backgroundImage);
+  for (const selector of [".reference-hero", "#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact"]) {
+    const style = await page.locator(selector).evaluate(el => getComputedStyle(el,"::before").backgroundImage);
     expect(style).toContain("/images/environments/");
     for (const match of style.matchAll(/url\("?([^"\)]+)"?\)/g)) backgrounds.add(match[1]);
   }
@@ -81,8 +81,18 @@ test("section images load, surfaces remain opaque, and the footer scene is not c
   await expect(artwork).toHaveCSS("object-fit", "contain");
   await expect(page.locator(".footer-scene > :not(img)")).toHaveCount(0);
   await expect(page.locator(".footer-scene")).toHaveCSS("background-image", "none");
-  const sizing = await page.locator("#packages").evaluate(el => getComputedStyle(el).backgroundSize);
-  expect(sizing).toBe("100% 100%, 100% 100%, cover");
-  await expect(page.locator("#packages")).toHaveCSS("background-attachment", "scroll, scroll, fixed");
+  const photo = await page.locator("#packages").evaluate(el => { const layer=getComputedStyle(el,"::before"); return {blur:layer.filter,mask:layer.maskImage,events:layer.pointerEvents}; });
+  expect(photo.blur).toMatch(/blur\([35]px\)/);
+  expect(photo.mask).toContain("linear-gradient");
+  expect(photo.events).toBe("none");
+  await expect(page.locator("#packages")).toHaveCSS("filter","none");
+  const footer = await page.locator(".pattern-footer").boundingBox();
+  expect(scene!.x).toBeGreaterThan(footer!.x);
+  expect(scene!.x+scene!.width).toBeLessThan(footer!.x+footer!.width);
+  await expect(page.locator(".footer-scene")).toHaveCSS("overflow","hidden");
+  const rail = await page.locator(".page-scroll-control").boundingBox();
+  expect(rail!.x).toBeGreaterThanOrEqual(0);
+  expect(rail!.x).toBeLessThan(20);
+  expect(rail!.x+rail!.width).toBeLessThan(await page.evaluate(()=>innerWidth));
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
