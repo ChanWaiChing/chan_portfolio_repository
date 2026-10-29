@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, Copy } from "lucide-react";
 import { categories, servicePackages } from "@/lib/catalog";
+import { trackInteraction } from "@/lib/interaction-events";
 
 export function ContactForm({ topic, onTopic, directSend }: { topic: string; onTopic: (topic: string) => void; directSend: boolean }) {
   const [name, setName] = useState("");
@@ -22,7 +23,7 @@ export function ContactForm({ topic, onTopic, directSend }: { topic: string; onT
 
   return <form className="contact-form" onChange={() => { setReviewed(false); setStatus(""); setSent(false); requestId.current = ""; }} onSubmit={async event => {
     event.preventDefault();
-    if (!directSend) { setReviewed(true); requestAnimationFrame(() => document.getElementById("contact-review")?.focus()); return; }
+    if (!directSend) { setReviewed(true); trackInteraction("contact_draft_ready"); requestAnimationFrame(() => document.getElementById("contact-review")?.focus()); return; }
     const form = event.currentTarget;
     setSending(true); setStatus("");
     requestId.current ||= crypto.randomUUID();
@@ -30,11 +31,13 @@ export function ContactForm({ topic, onTopic, directSend }: { topic: string; onT
       const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, company, topic, message, website: new FormData(form).get("website"), requestId: requestId.current }) });
       if (!response.ok) throw new Error("send failed");
       setSent(true); setStatus("お問い合わせを受け付けました。送信ありがとうございます。");
+      trackInteraction("contact_provider_accepted");
     } catch { setStatus("送信を確認できませんでした。入力内容は残っています。もう一度お試しいただくか、メールアプリからご連絡ください。"); setReviewed(true); }
     finally { setSending(false); }
   }}>
     <h3>プロジェクトのご相談</h3>
     <p className="form-intro">目的・ご予算・ご希望の時期を、わかる範囲でお知らせください。</p>
+    <details className="contact-privacy"><summary>お問い合わせ情報の取り扱い</summary><p>窓口は大穂兄弟 / OHO BROTHERSです。お名前・連絡先・ご相談内容は、ご相談への対応と連絡のために利用します。</p><p>{directSend ? "フォームはメール送信サービスを経由して窓口へ送ります。サイト独自のデータベースには入力内容を保存しません。" : "現在はメール作成モードです。内容を確認してメールアプリで送信するまで、入力内容は窓口へ送られません。サイトには保存されません。"}</p><p>送信後の内容確認や訂正については、同じ窓口へご連絡ください。</p></details>
     <fieldset disabled={sending || sent}>
       <div className="form-row"><label htmlFor="contact-name">お名前 <span>必須</span></label><input id="contact-name" autoComplete="name" required maxLength={100} placeholder="山田 太郎" value={name} onChange={event => setName(event.target.value)} /></div>
       <div className="form-row"><label htmlFor="contact-email">メールアドレス <span>必須</span></label><input id="contact-email" type="email" autoComplete="email" required maxLength={200} placeholder="hello@example.com" value={email} onChange={event => setEmail(event.target.value)} /></div>

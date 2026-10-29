@@ -46,7 +46,7 @@ export function SkillWorkflows({ onSelectCategory }: { onSelectCategory: (catego
   }, []);
 
   return <div className="workflow-skills" aria-labelledby="skills-title">
-    <div className="workflow-heading"><span>SKILL INTRODUCTION</span><h3 id="skills-title">スキルをつなぐ。<br />できることが、広がる。</h3><p>企画・デザイン・開発から、AIを活かした業務改善まで。<br />あなたの「こうしたい」に合わせて、最適な流れを考えます。</p></div>
+    <div className="workflow-heading"><span>SKILL INTRODUCTION</span><h3 id="skills-title">仕事の流れに、<br />技術を組み合わせる。</h3><p>Web制作・システム開発・AI活用の具体的な組み合わせです。<br />各カードから、関連する制作範囲を確認できます。</p></div>
     <div className="workflow-grid">{workflows.map(workflow => <a className="workflow-card luminous-card" href="#packages" key={workflow.category} onClick={() => onSelectCategory(workflow.category)}>
       <div className="workflow-diagram"><ol>{workflow.steps.map(({ title, icon: Icon, color }, index) => <li key={title}>
         <span className={`workflow-node node-${color}`}><Icon size={23} strokeWidth={1.8} /></span><span>{title}</span>

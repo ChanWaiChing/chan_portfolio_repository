@@ -5,7 +5,7 @@ test("section order, navigation and page health", async ({ page, isMobile }) => 
   page.on("pageerror", error => errors.push(error.message));
   await page.goto("/");
   await expect(page).toHaveTitle(/大穂兄弟/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("兄弟の力で");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("デザインと開発を");
   expect(await page.locator("main > section").evaluateAll(elements => elements.map(element => element.id)))
     .toEqual(["introduction", "services", "strengths", "packages", "works", "faq", "contact"]);
   await page.evaluate(() => document.fonts.ready);
@@ -129,6 +129,7 @@ test("four hero images cycle every four seconds and can be paused", async ({ pag
 
 test("workflow links select packages, tool motion pauses, and footer navigation works", async ({ page }) => {
   await page.goto("/");
+  await page.getByText("対応領域・技術の組み合わせを見る", { exact: true }).click();
   await expect(page.locator(".workflow-card")).toHaveCount(3);
   await page.getByRole("link", { name: /想いを整理して、使いやすいWebサイトへ/ }).click();
   await expect(page.locator("#packages").getByRole("button", { name: "Web制作", exact: true })).toHaveAttribute("aria-pressed", "true");
@@ -201,4 +202,46 @@ test("hero stops outside the viewport and all small layouts fit", async ({ page 
   await page.setViewportSize({ width: 390, height: 3000 });
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test("three selected concepts have usable demos and reset on close", async ({ page }) => {
+  await page.goto("/");
+  const openers = page.locator(".selected-work .portfolio-card button");
+  await openers.nth(0).click();
+  const dialog = page.getByRole("dialog");
+  await dialog.getByRole("button", { name: "布もの", exact: true }).click();
+  await expect(dialog.locator(".demo-products article")).toHaveCount(1);
+  await expect(dialog.locator(".demo-products")).toContainText("リネンクロス");
+  await dialog.getByRole("button", { name: "食器", exact: true }).click();
+  await expect(dialog.locator(".demo-products article")).toHaveCount(2);
+  await page.keyboard.press("Escape");
+  await openers.nth(1).click();
+  await dialog.getByRole("button", { name: "トップページの構成を確認を完了にする", exact: true }).click();
+  await expect(dialog.locator(".demo-progress")).toHaveText("2 / 3 件完了");
+  await dialog.getByRole("checkbox", { name: "未完了だけ表示" }).check();
+  await expect(dialog.locator(".demo-tasks li")).toHaveCount(1);
+  await page.keyboard.press("Escape");
+  await openers.nth(2).click();
+  const add = dialog.getByRole("button", { name: "記録を追加" });
+  await expect(add).toBeDisabled();
+  await dialog.getByLabel("今日の記録").fill("使いやすい画面をつくれました。");
+  await add.click();
+  await expect(dialog.locator(".demo-entries")).toContainText("使いやすい画面をつくれました。");
+  await expect(add).toBeDisabled();
+  await page.keyboard.press("Escape");
+  await openers.nth(2).click();
+  await expect(dialog.locator(".demo-entries li")).toHaveCount(0);
+});
+
+test("service entry points preselect consultation topics and explain contact handling", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator(".service-entrance")).toHaveCount(3);
+  const topics = ["Webサイト制作", "Web・業務システム開発", "AI活用 / 業務改善"];
+  for (let index = 0; index < topics.length; index++) {
+    await page.locator(".service-entrance").nth(index).getByRole("button", { name: "このサービスを相談する" }).click();
+    await expect(page.getByLabel("相談したいこと")).toHaveValue(topics[index]);
+  }
+  await page.getByText("お問い合わせ情報の取り扱い", { exact: true }).click();
+  await expect(page.locator(".contact-privacy")).toContainText("大穂兄弟 / OHO BROTHERS");
+  await expect(page.locator(".contact-expectations")).toContainText("送信だけで契約が成立することはありません");
 });

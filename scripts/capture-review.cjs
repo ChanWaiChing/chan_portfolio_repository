@@ -11,7 +11,8 @@ const { mkdirSync, existsSync } = require('node:fs');
     await page.evaluate(() => document.fonts.ready);
     await page.locator('.hero-motion-toggle').waitFor();
     await page.screenshot({ path: `test-results/review/${name}-hero.png` });
-    for (const section of ['.brother-intro-panel', '.workflow-skills', '#contact', '.pattern-footer']) {
+    for (const section of ['.selected-work', '.brother-intro-panel', '.service-entrances', '.workflow-skills', '#strengths', '#contact', '.pattern-footer']) {
+      if (section === '.workflow-skills') await page.locator('.capability-details').evaluate(element => { element.open = true; });
       const element = page.locator(section).first();
       await element.scrollIntoViewIfNeeded();
       await element.screenshot({ path: `test-results/review/${name}-${section.replace(/^[.#]/, '')}.png`, style: '.site-header { visibility: hidden; }' });

@@ -2,7 +2,7 @@ import { ArrowUp, ArrowUpRight, BriefcaseBusiness, Layers3, Mail, MessageCircle 
 import { BotTeam } from "./bot-mascot";
 import { site } from "@/lib/site";
 
-const links = [["はじめに", "introduction"], ["サービス", "services"], ["私たちの強み", "strengths"], ["パッケージ", "packages"], ["ポートフォリオ", "works"], ["FAQ", "faq"]];
+const links = [["はじめに", "introduction"], ["サービス", "services"], ["進め方", "strengths"], ["パッケージ", "packages"], ["制作コンセプト", "works"], ["FAQ", "faq"]];
 
 export function PatternFooter() {
   return <footer className="pattern-footer">
