@@ -7,9 +7,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 export function PageScrollbar() {
   const [progress, setProgress] = useState(0);
   const [available, setAvailable] = useState(false);
-  const [chapter, setChapter] = useState("はじめに");
-  const [markers, setMarkers] = useState<{label:string;position:number}[]>([]);
-  const compact = false;
+  const [compact, setCompact] = useState(false);
   const [dragging, setDragging] = useState(false);
   const track = useRef<HTMLDivElement>(null);
   const drag = useRef(false);
@@ -21,18 +19,10 @@ export function PageScrollbar() {
       const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
       setAvailable(max > 2 && Boolean(document.getElementById("main")));
       setProgress(max ? Math.round(Math.min(1, Math.max(0, scrollY / max)) * 1000) / 10 : 0);
-      const sections = [...document.querySelectorAll<HTMLElement>("main > section[id]")];
-      const labels: Record<string,string> = { introduction: "はじめに", services: "サービス", strengths: "進め方", packages: "パッケージ", works: "制作実績", faq: "ご質問", contact: "ご相談" };
-      const current = sections.filter(section => section.getBoundingClientRect().top <= innerHeight * .3).at(-1);
-      setChapter(labels[current?.id || "introduction"]);
-      setMarkers(previous => {
-        const next = sections.map(section => ({label:labels[section.id],position:Math.min(100,max ? (section.getBoundingClientRect().top+scrollY)/max*100 : 0)}));
-        return JSON.stringify(previous) === JSON.stringify(next) ? previous : next;
-      });
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const media = matchMedia("(max-width: 760px)");
-    const layout = () => { schedule(); };
+    const layout = () => { setCompact(media.matches); schedule(); };
     layout();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
@@ -53,7 +43,7 @@ export function PageScrollbar() {
   };
   if (!available) return null;
   return <aside className={`page-scroll-control${compact ? " is-compact" : ""}${dragging ? " is-dragging" : ""}`} aria-label="ページを読むためのスクロール操作">
-    <span className="scroll-control-label" title="現在のセクション">{chapter}</span>
+    <span className="scroll-control-label" aria-hidden="true">ページをめくる</span>
     <button type="button" aria-label="先頭までスクロール" onClick={() => seek(0, true)}><ChevronUp size={17} /></button>
     <div ref={track} className="page-scroll-track" role="scrollbar" tabIndex={0} aria-label="ページのスクロール位置" aria-controls="main" aria-orientation={compact ? "horizontal" : "vertical"} aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress} aria-valuetext={`${Math.round(progress)}％`}
       style={{ "--scroll-position": `${progress}%` } as React.CSSProperties}
@@ -75,7 +65,7 @@ export function PageScrollbar() {
       }}>
       <span className="scroll-track-line" aria-hidden="true" />
       <span className="scroll-track-progress" aria-hidden="true" />
-      {markers.map(marker => <span key={marker.label} title={marker.label} className="scroll-track-mark" style={{ "--mark-position": `${marker.position}%` } as React.CSSProperties} aria-hidden="true" />)}
+      {[0, 25, 50, 75, 100].map(value => <span key={value} className="scroll-track-mark" style={{ "--mark-position": `${value}%` } as React.CSSProperties} aria-hidden="true" />)}
       <span className="scroll-track-thumb" aria-hidden="true"><span /></span>
     </div>
     <button type="button" aria-label="末尾までスクロール" onClick={() => seek(1, true)}><ChevronDown size={17} /></button>

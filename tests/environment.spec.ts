@@ -38,40 +38,51 @@ test("bot-colored badges and primary controls retain readable contrast", async (
   for (const ratio of ratios) expect(ratio).toBeGreaterThanOrEqual(4.5);
 });
 
-test("section images load, surfaces remain opaque, and the footer scene is not cropped", async ({ page, isMobile }) => {
+test("section images load, surfaces remain opaque, and the footer scene is not cropped", async ({ page }) => {
   await page.goto("/");
-  const canvas = page.locator(".reading-layout");
-  await expect(canvas).toHaveCSS("background-image", /serene-courtyard/);
-  expect((await page.request.get("/images/environments/serene-courtyard.webp")).ok()).toBe(true);
+  const backgrounds = new Set<string>();
   for (const selector of ["#introduction", "#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact"]) {
-    await expect(page.locator(selector)).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
-    await expect(page.locator(selector)).toHaveCSS("background-image", "none");
+    const style = await page.locator(selector).evaluate(el => getComputedStyle(el).backgroundImage);
+    expect(style).toContain("/images/environments/");
+    for (const match of style.matchAll(/url\("?([^"\)]+)"?\)/g)) backgrounds.add(match[1]);
   }
-  for(const title of await page.locator(".section-title-rail h2").all()) {
-    await expect(title).toHaveCSS("writing-mode", "vertical-rl");
-    await expect(title).toHaveCSS("font-family", /Oho Classic/);
+  expect(backgrounds.size).toBe(9);
+  for (const url of backgrounds) {
+    const response = await page.request.get(url);
+    expect(response.ok()).toBe(true);
+    expect(response.headers()["content-type"]).toContain("image/webp");
   }
-  const rail = await page.locator(".reading-rail").boundingBox();
-  expect(rail!.x).toBe(0);
-  const section = await page.locator("#packages").boundingBox();
-  expect(section!.x).toBeGreaterThanOrEqual(rail!.width);
+  // The darkest possible photograph pixel must still give body copy sufficient contrast.
+  for (const selector of ["#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact"]) {
+    const contrast = await page.locator(selector).evaluate(el => {
+      const style = getComputedStyle(el);
+      const veil = style.getPropertyValue("--environment-veil").trim().slice(1);
+      const ink = style.getPropertyValue("--muted").trim().slice(1);
+      const alpha = parseInt(veil.slice(6, 8), 16) / 255;
+      const luminance = (hex: string, opacity = 1) => [0, 2, 4].map(i => {
+        const channel = parseInt(hex.slice(i, i + 2), 16) / 255 * opacity;
+        return channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4;
+      }).reduce((sum, value, index) => sum + value * [.2126, .7152, .0722][index], 0);
+      return (luminance(veil, alpha) + .05) / (luminance(ink) + .05);
+    });
+    expect(contrast).toBeGreaterThanOrEqual(4.5);
+  }
   await expect(page.locator(".package-card").first()).toHaveCSS("background-color", "rgb(223, 230, 240)");
   await expect(page.locator(".contact-form")).toHaveCSS("background-color", "rgb(224, 230, 237)");
   await expect(page.locator(".contact-form")).toHaveCSS("background-image", /calm-inquiry/);
   await expect(page.locator(".contact-time-intro")).toContainText("本来の仕事に、向き合う時間をつくる。");
   const scene = await page.locator(".footer-scene").boundingBox();
-  expect(scene!.width / scene!.height).toBeCloseTo(isMobile ? 1122/1402 : 3, 1);
+  expect(scene!.width / scene!.height).toBeCloseTo(3, 1);
   const artwork = page.locator(".footer-scene img");
   await expect(artwork).toHaveCount(1);
   await artwork.scrollIntoViewIfNeeded();
   await artwork.evaluate((img: HTMLImageElement) => img.decode());
   await expect(artwork).toHaveAttribute("alt", /お客様のために、時間をつくる。/);
   await expect(artwork).toHaveCSS("object-fit", "contain");
-  await expect(page.locator(".footer-scene picture")).toHaveCount(1);
-  expect(await artwork.evaluate((img:HTMLImageElement)=>img.currentSrc)).toContain(isMobile ? "footer-mobile-ja" : "footer-original-ja");
+  await expect(page.locator(".footer-scene > :not(img)")).toHaveCount(0);
   await expect(page.locator(".footer-scene")).toHaveCSS("background-image", "none");
-  const footer = await page.locator(".pattern-footer").boundingBox();
-  expect(scene!.x).toBeGreaterThan(footer!.x);
-  expect(scene!.x+scene!.width).toBeLessThan(footer!.x+footer!.width);
+  const sizing = await page.locator("#packages").evaluate(el => getComputedStyle(el).backgroundSize);
+  expect(sizing).toBe("100% 100%, 100% 100%, cover");
+  await expect(page.locator("#packages")).toHaveCSS("background-attachment", "scroll, scroll, fixed");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

@@ -1,9 +1,5 @@
 # 大穂兄弟 / OHO BROTHERS
 
-最新のUI調整：携帯画面の本文幅と操作性、短い縦見出し、20件のシンプルなパッケージ表紙、コンパクトな問い合わせ案内、携帯専用フッター画像、演出停止の連動。[変更・素材・検証の記録](docs/ui-refinements.md)。
-
-現在の画面：左側に一体化した読書レール、各章の縦組み明朝見出し、連続する中庭の背景、広めの本文領域、左右を内側に収めたフッター画像。[今回のレイアウト・素材記録](docs/serene-reading-layout.md)。
-
 ホスト版：[大穂兄弟](https://oho-brothers-portfolio.h6wtz8mqjg.chatgpt.site)（一般公開・サインイン不要）。公開状況と更新手順は [ホスティングの記録](docs/deployment.md) を参照してください。
 
 日本語の制作ポートフォリオ。Next.js 16.4.3 / React 19.3.1 / TypeScript。

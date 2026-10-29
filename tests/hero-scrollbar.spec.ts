@@ -18,10 +18,10 @@ test("custom scrollbar supports position seeking and keyboard navigation", async
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   const control = page.getByRole("scrollbar", { name: "ページのスクロール位置" });
-  await expect(control).toHaveAttribute("aria-orientation", "vertical");
+  await expect(control).toHaveAttribute("aria-orientation", isMobile ? "horizontal" : "vertical");
   await expect(control).toHaveAttribute("aria-controls", "main");
   const box = await control.boundingBox();
-  await control.click({ position: { x: box!.width / 2, y: box!.height * .4 } });
+  await control.click({ position: isMobile ? { x: box!.width * .4, y: box!.height / 2 } : { x: box!.width / 2, y: box!.height * .4 } });
   await expect.poll(async () => Number(await control.getAttribute("aria-valuenow"))).toBeGreaterThan(25);
   await expect.poll(async () => Number(await control.getAttribute("aria-valuenow"))).toBeLessThan(55);
   await control.press("End");

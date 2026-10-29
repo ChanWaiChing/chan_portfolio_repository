@@ -7,7 +7,7 @@ test("catalogs have four desktop columns and eight items per page", async ({ pag
     const grid = page.locator(`#${id} .${id === "packages" ? "package" : "portfolio"}-grid`);
     await expect(grid.locator(":scope > article")).toHaveCount(8);
     const columns = await grid.evaluate(el => getComputedStyle(el).gridTemplateColumns.split(" ").length);
-    expect(columns).toBe(isMobile ? 1 : 4);
+    expect(columns).toBe(isMobile ? id === "packages" ? 1 : 2 : 4);
   }
 });
 

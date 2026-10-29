@@ -32,8 +32,7 @@ const scope = [
   { icon: Sparkles, title: "人工知能活用・継続改善", en: "改善・運用", text: "日々の業務の人工知能活用から、公開後の保守・改善まで。つくった先も一緒に考えます。", tags: ["生成系の人工知能", "業務自動化", "運用・改善"] },
 ];
 function Heading({ label, title, text }: { label: string; title: string; text?: string }) {
-  const chapters: Record<string,string> = { "操作できる制作例": "制作デモ", "私たちについて": "私たち", "サービスと技術": "サービス", "ご相談から公開まで": "進め方", "制作パッケージ": "パッケージ", "制作実績": "制作実績", "お問い合わせ": "お問い合わせ" };
-  return <><div className="section-title-rail"><h2>{chapters[label] || label}</h2></div><div className="content-heading"><span>{label}</span><p className="section-message">{title}</p>{text && <p>{text}</p>}</div></>;
+  return <div className="content-heading"><span>{label}</span><h2>{title}</h2>{text && <p>{text}</p>}</div>;
 }
 function Pagination({ page, total, size, onChange, label }: { page: number; total: number; size: number; onChange: (page: number) => void; label: string }) {
   const pages = Math.max(1, Math.ceil(total / size));
@@ -143,7 +142,8 @@ export default function Portfolio({ directSend = false }: { directSend?: boolean
         </details><SkillWorkflows onSelectCategory={(category) => { setPackageCategory(category); setPackagePage(1); trackInteraction("service_browse", { id: category }); }} />
       </section>
       <section className="content-section" id="strengths"><Heading label="ご相談から公開まで" title="進め方が見えると、相談しやすい。" text="ご相談から公開・引き継ぎまで。各段階で確認することをそろえ、認識のずれを減らします。" /><WorkingProcess /></section>
-      <section className="content-section content-pale" id="packages"><Heading label="制作パッケージ" title="具体的な制作範囲を、見てみる。" text="ご希望のカテゴリから、制作範囲とプランをお選びください。料金は税別です。正式なお見積もりはご相談後にご案内します。" />
+      <section className="content-section content-pale" id="packages"><Heading label="制作パッケージ" title="具体的な制作範囲を、見てみる。" text="相談内容をイメージするためのパッケージ一覧です。正式な範囲・費用・期間は、ご相談のあとに決めます。" />
+        <p className="sample-notice"><Sparkles size={17} />{servicePackages.length}のサービスから、ご希望に合う内容をお選びください。価格は税別です。各詳細で料金・制作期間・支援範囲をご確認いただけます。</p>
         <CategoryFilters items={servicePackages} selected={packageCategory} label="パッケージのカテゴリ" onChange={category => { setPackageCategory(category); setPackagePage(1); }} />
         <p className="catalog-summary" ref={resultSummary} tabIndex={-1} aria-live="polite">{filteredPackages.length}件中 {(packagePage - 1) * 8 + 1}〜{Math.min(packagePage * 8, filteredPackages.length)}件を表示 <span>全{servicePackages.length}パッケージ</span></p>
         <div className="package-grid">{filteredPackages.slice((packagePage - 1) * 8, packagePage * 8).map((item, i) => <article className={`package-card luminous-card package-tone-${i % 3}`} key={item.id}><PackageThumbnail item={item} /><div className="catalog-card-meta"><span>{item.category}</span><b>{item.plans.length === 4 ? "制作メニュー" : "三つのプラン"}</b></div><h3>{item.title}</h3><p>{item.description}</p><button className="catalog-outline-button" aria-label={`${item.title} プランの詳細を見る`} onClick={() => { trackInteraction("package_open", { id:item.id }); setDetail({ kind: "package", item }); }}>プランの詳細を見る<ArrowRight size={17} /></button></article>)}</div>
