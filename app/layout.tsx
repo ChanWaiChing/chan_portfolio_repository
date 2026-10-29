@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./site.css";
 import "./bot-palette.css";
 import "./bold-blue.css";
+import "./hero-refresh.css";
 import { SiteMotion } from "@/components/site-motion";
 
 export const metadata: Metadata = {

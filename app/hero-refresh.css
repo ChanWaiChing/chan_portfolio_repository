@@ -1,0 +1,110 @@
+/* A white, open first view. Only the image content remains; outer panels disappear. */
+#introduction { background: #fff; }
+#introduction .site-intro { background: #fff; border-bottom: 1px solid #e8f0f8; color: #36516c; }
+.portfolio-site .reference-hero { background: #fff; border: 0; border-radius: 0; box-shadow: none; max-width: 1520px; padding: 42px 38px 30px; column-gap: 38px; }
+.reference-hero::before,.reference-hero::after { content: none; }
+.portfolio-site .hero-primary-copy { background: transparent; border: 0; box-shadow: none; column-gap: 24px; }
+.portfolio-site .hero-scene-stage { background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+.portfolio-site .hero-brand-scene { color: #07213c; background: #fff; border: 0; }
+.portfolio-site .hero-brand-scene > strong { color: #0b366b; }
+.portfolio-site .hero-brand-scene :is(.scene-phase,.scene-note,.scene-brothers > div > span) { color: #28557c; }
+.portfolio-site .hero-brand-scene .scene-orbit-line { border-color: #9cceed66; box-shadow: none; }
+.portfolio-site .hero-brand-scene .scene-steps > span { background: #fff; border: 0; border-bottom: 2px solid #d5e8f6; border-radius: 0; color: #103b70; }
+.portfolio-site .hero-brand-scene .scene-steps small { color: #1674ba; }
+.portfolio-site .hero-photo-deck { border-radius: 16px; }
+.portfolio-site .hero-scene-caption { border: 0; background: #fff; padding: 22px 8px; text-align: center; }
+.portfolio-site .reference-hero-copy h2 { font-family: "Noto Sans JP Variable",sans-serif; font-size: clamp(23px,2.1vw,30px); font-weight: 750; line-height: 1.65; letter-spacing: .015em; text-align: center; margin: 0; }
+
+/* Heavy modern Japanese lettering with a seven-color aurora inside the glyphs. */
+.portfolio-site .reference-hero .hero-primary-copy h1 { font-family: "Noto Sans JP Variable",sans-serif; font-weight: 900; font-size: clamp(42px,3.65vw,56px); line-height: 1.38; letter-spacing: .025em; padding: 8px 0; color: #1659c4; }
+.portfolio-site .reference-hero .hero-primary-copy h1 > .hero-rainbow-line {
+ display: block; position: relative; font: inherit; writing-mode: inherit; white-space: nowrap;
+ color: #1659c4; -webkit-text-fill-color: transparent;
+ background-image: linear-gradient(160deg,transparent 35%,#ffffff3b 46%,#c9f6ff40 50%,transparent 62%),linear-gradient(180deg,#1455dc,#087e9f,#167b57,#9c6b00,#bc500c,#be286a,#6932c7,#1455dc);
+ background-size: 100% 320%,100% 210%; background-position: 0 -120%,0 0; background-clip: text; -webkit-background-clip: text;
+ filter: drop-shadow(0 0 7px #67cfff55) drop-shadow(0 0 16px #a88aff22);
+ animation: hero-rainbow-aurora 8s ease-in-out infinite;
+}
+.portfolio-site .reference-hero .hero-primary-copy h1 > .hero-rainbow-line:nth-child(2) { animation-delay: -3s; }
+@keyframes hero-rainbow-aurora { 0%,100% { background-position: 0 -120%,0 0; } 50% { background-position: 0 120%,0 100%; } }
+.reference-hero[data-border-motion="false"] .hero-rainbow-line,html:not([data-site-motion="on"]) .hero-rainbow-line { animation-play-state: paused !important; }
+.portfolio-site .hero-primary-copy > .eyebrow { text-align: center; }
+.portfolio-site .hero-primary-actions { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin: 18px auto 8px; gap: 14px; }
+.portfolio-site .hero-primary-actions > a { width: min(100%,280px); min-height: 54px; text-align: center; font-size: 16px; padding: 13px 18px; }
+.portfolio-site .hero-primary-copy > .hero-experience { text-align: center; }
+
+/* Character-led chapter selectors follow the real scene sequence. */
+.portfolio-site .reference-hero-controls { display: block; margin-top: 24px; }
+.portfolio-site .reference-hero-tabs { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; border: 0; }
+.portfolio-site .reference-hero .reference-hero-tabs > button { position: relative; display: flex; align-items: center; justify-content: flex-start; gap: 12px; min-width: 0; min-height: 100px; padding: 12px 16px; border: 1px solid #c7d9ed; border-radius: 18px; color: #173f72; background: #fff; box-shadow: 0 3px 0 #d1deed,0 6px 16px #0b4f9d08; overflow: hidden; text-align: left; }
+.portfolio-site .reference-hero .reference-hero-tabs > button[aria-selected="true"] { color: #123b79; background: linear-gradient(120deg,#edf8ff,#f3efff); border-color: #4385ce; box-shadow: 0 3px 0 #95b4df; }
+.portfolio-site .reference-hero-tabs .hero-selector-bot { display: block; position: relative; width: 68px; min-width: 68px; height: 76px; margin: 0; flex: none; }
+.portfolio-site .reference-hero .reference-hero-tabs > button > .hero-selector-bot { background: transparent; border: 0; box-shadow: none; border-radius: 0; padding: 0; }
+.portfolio-site .reference-hero .reference-hero-tabs > button > .hero-tab-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; width: auto; height: auto; padding: 0; border-radius: 0; background: transparent; color: inherit; }
+.portfolio-site .reference-hero-tabs .hero-tab-number { font: 750 14px/1.3 "Noto Sans JP Variable",sans-serif; letter-spacing: .12em; color: #496e9d; }
+.portfolio-site .reference-hero .reference-hero-tabs strong { font-family: "Noto Sans JP Variable",sans-serif; font-size: 17px; font-weight: 750; line-height: 1.5; color: inherit; text-wrap: balance; }
+.portfolio-site .reference-hero .reference-hero-tabs > button::before { content: none; }
+.portfolio-site .reference-hero .reference-hero-tabs > button::after { content: ""; display: block; position: absolute; left: 16px; right: 16px; bottom: 0; top: auto; width: auto; height: 3px; border-radius: 3px; background: linear-gradient(90deg,#18bde6,#5860e9,#a460e8); offset-path: none; filter: none; opacity: 0; animation: none; transform: scaleX(0); transform-origin: left; }
+.portfolio-site .reference-hero .reference-hero-tabs > button[aria-selected="true"]::after { opacity: 1; animation: hero-selector-progress 4s linear infinite; }
+.portfolio-site .reference-hero[data-border-motion="false"] .reference-hero-tabs > button::after { animation-play-state: paused; }
+@keyframes hero-selector-progress { from {transform: scaleX(0);} to {transform: scaleX(1);} }
+.hero-motion-hint { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.site-motion-toggle { left: 16px; right: auto; bottom: 16px; }
+
+/* Increase reading sizes throughout this single-page site. */
+body { font-size: 17px; }
+.portfolio-site p,.portfolio-site .profile-biography > p { font-size: 17px; line-height: 1.95; }
+.portfolio-site :is(.content-heading,.faq-guide-heading) > p { font-size: 18px; }
+.portfolio-site .hero-primary-copy > p:not(.eyebrow):not(.hero-experience) { font-size: 18px; line-height: 1.95; }
+.portfolio-site .hero-primary-copy > .eyebrow { font-size: 18px; }
+.portfolio-site .hero-primary-copy > .hero-experience { font-size: 15px; }
+.portfolio-site :is(.eyebrow,.content-heading > span,.faq-guide-heading > span,.workflow-heading > span,.skill-universe-copy > span,.dialog-eyebrow,.scene-phase,.brother-intro-specialty,.workflow-outcome > span:first-child) { font-size: 19px; }
+.portfolio-site :is(.content-heading,.faq-guide-heading) h2 { font-size: clamp(38px,3.6vw,54px); }
+#packages .package-card h3,#works .portfolio-card h3 { font-size: clamp(23px,1.9vw,28px); }
+.portfolio-site .catalog-card-meta > span { font-size: 17px; }
+.portfolio-site .catalog-card-meta { gap: 8px; flex-wrap: wrap; }
+.portfolio-site :is(.catalog-cta,.catalog-outline-button,.catalog-filters button,.catalog-pagination button,.form-row > label,.form-row > input,.form-row > textarea,.form-row > select) { font-size: 17px; }
+.portfolio-site .desktop-nav a { font-size: 15px; }
+.portfolio-site small,.portfolio-site .catalog-card-meta > b { font-size: 13px; }
+.portfolio-site .category-count { font-size: 13px; min-width: 24px; height: 24px; }
+.portfolio-site .faq-guide-item h3 > button { font-size: 22px; }
+.portfolio-site .footer-vertical-copy p { font-size: 16px; }
+.portfolio-site .footer-vertical-copy { height: 300px; }
+.portfolio-site .scene-brothers > div > span,.portfolio-site .scene-steps small { font-size: 13px; }
+.portfolio-site .profile-career li p { font-size: 16px; }
+@media(max-width:1100px) { .portfolio-site .reference-hero-tabs { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:760px) {
+ .portfolio-site .reference-hero { padding: 26px 18px 28px; }
+ .portfolio-site .hero-primary-copy { column-gap: 14px; }
+ .portfolio-site .reference-hero .hero-primary-copy h1 { font-size: clamp(29px,8.8vw,38px); line-height: 1.4; }
+ .portfolio-site .reference-hero .hero-primary-copy h1 { grid-column: 1; grid-row: 1/3; }
+ .portfolio-site .hero-primary-copy > .eyebrow { grid-column: 2; grid-row: 1; }
+ .portfolio-site .hero-primary-copy > p:not(.eyebrow):not(.hero-experience) { grid-column: 2; grid-row: 2; }
+ .portfolio-site .hero-primary-copy > .hero-primary-actions { grid-column: 1/-1; grid-row: 3; }
+ .portfolio-site .hero-primary-copy > .hero-experience { grid-column: 1/-1; grid-row: 4; }
+ .portfolio-site .hero-primary-copy > p:not(.eyebrow):not(.hero-experience) { font-size: 16px; line-height: 1.9; }
+ .portfolio-site .hero-primary-copy > .eyebrow { font-size: 15px; }
+ .portfolio-site .hero-primary-copy > .hero-experience { font-size: 14px; }
+ .portfolio-site .hero-primary-actions > a { font-size: 14px; padding: 12px 9px; min-height: 50px; }
+ .portfolio-site .reference-hero-copy h2 { font-size: 23px; }
+ .portfolio-site .reference-hero-tabs { gap: 10px; }
+ .portfolio-site .reference-hero .reference-hero-tabs > button { min-height: 88px; gap: 8px; padding: 9px 8px; border-radius: 14px; }
+ .portfolio-site .reference-hero-tabs .hero-selector-bot { width: 38px; min-width: 38px; height: 48px; }
+ .portfolio-site .reference-hero .reference-hero-tabs strong { font-size: 14px; }
+ .portfolio-site .reference-hero-tabs .hero-tab-number { font-size: 13px; }
+ .portfolio-site .reference-hero .reference-hero-tabs > button::after { left: 8px; right: 8px; }
+ .portfolio-site p,.portfolio-site .profile-biography > p { font-size: 16px; }
+ .portfolio-site :is(.content-heading,.faq-guide-heading) > p { font-size: 17px; }
+ .portfolio-site :is(.eyebrow,.content-heading > span,.faq-guide-heading > span,.workflow-heading > span,.skill-universe-copy > span,.dialog-eyebrow,.scene-phase,.workflow-outcome > span:first-child) { font-size: 17px; }
+ .portfolio-site :is(.content-heading,.faq-guide-heading) h2 { font-size: clamp(33px,8.8vw,40px); }
+ #packages .package-card h3 { font-size: 26px; }
+ #works .portfolio-card h3 { font-size: 21px; }
+ .portfolio-site .catalog-card-meta > span { font-size: 15px; }
+ .portfolio-site :is(.catalog-cta,.catalog-outline-button,.catalog-filters button,.catalog-pagination button,.form-row > label,.form-row > input,.form-row > textarea,.form-row > select) { font-size: 16px; }
+ .portfolio-site .hero-primary-actions > a { font-size: 14px; }
+ .portfolio-site .faq-guide-item h3 > button { font-size: 20px; }
+ .portfolio-site .site-header .header-contact { font-size: 14px; padding: 10px 12px; gap: 7px; }
+ .site-motion-toggle { left: 12px; right: auto; bottom: 12px; font-size: 12px; }
+}
+@media(max-width:400px) { .portfolio-site .site-header .header-contact { font-size: 13px; padding-inline: 10px; } .site-header .header-contact svg { width: 14px; } }
+@media(prefers-reduced-motion:reduce) { .hero-rainbow-line,.portfolio-site .reference-hero .reference-hero-tabs > button::after { animation: none !important; } }

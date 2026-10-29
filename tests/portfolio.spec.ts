@@ -33,7 +33,7 @@ test("tracking opt-out is respected and hero pause stops border motion",async({p
   await page.addInitScript(()=>Object.defineProperty(navigator,"doNotTrack",{value:"1",configurable:true}));
   const requests:string[]=[];page.on("request",r=>{if(r.url().endsWith("/api/events"))requests.push(r.url());});
   await page.goto("/");
-  await page.getByRole("button",{name:"自動切替を停止"}).click();
+  await page.getByRole("button",{name:"演出を停止"}).click();
   await expect(page.locator(".reference-hero")).toHaveAttribute("data-border-motion","false");
   expect(await page.locator("#hero-tab-0").evaluate(e=>getComputedStyle(e,"::after").animationPlayState)).toBe("paused");
   await page.locator(".package-card button").first().click();
@@ -188,8 +188,9 @@ test("FAQ and contact validation, mail draft and edit invalidation", async ({ pa
 test("hero keyboard controls and reduced motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await expect(page.getByRole("button", { name: "自動切替を再生" })).toBeDisabled();
-  await page.getByRole("tab", { name: /02 情報技術コンサルティング/ }).click();
+  await expect(page.locator(".hero-motion-toggle")).toHaveCount(0);
+  await expect(page.locator(".reference-hero")).toHaveAttribute("data-playing","false");
+  await page.getByRole("tab", { name: /02 企画・戦略/ }).click();
   await expect(page.getByRole("tabpanel")).toContainText("進むべき道筋を。");
   await page.keyboard.press("ArrowRight");
   await expect(page.getByRole("tab", { name: /03 デザイン・開発/ })).toBeFocused();
@@ -202,9 +203,9 @@ test("four hero images cycle every four seconds and can be paused", async ({ pag
   await page.clock.install({ time: new Date("2026-10-29T00:00:00Z") });
   await page.clock.pauseAt(new Date("2026-10-29T00:00:01Z"));
   await page.goto("/");
-  await page.getByRole("button", { name: "自動切替を停止" }).click();
-  await page.getByRole("tab", { name: /01 トータルサポート/ }).click();
-  await page.getByRole("button", { name: "自動切替を再生" }).click();
+  await page.getByRole("button", { name: "演出を停止" }).click();
+  await page.getByRole("tab", { name: /01 チーム紹介/ }).click();
+  await page.getByRole("button", { name: "演出を再生" }).click();
   await expect(page.locator(".reference-hero")).toHaveAttribute("data-playing", "true");
   const frames = page.locator(".hero-photo-layer");
   await expect(frames).toHaveCount(4);
@@ -219,10 +220,10 @@ test("four hero images cycle every four seconds and can be paused", async ({ pag
   await expect(frames.nth(3)).toHaveAttribute("data-active", "true");
   await page.clock.runFor(4000);
   await expect(frames.nth(0)).toHaveAttribute("data-active", "true");
-  await page.getByRole("button", { name: "自動切替を停止" }).click();
+  await page.getByRole("button", { name: "演出を停止" }).click();
   await page.clock.runFor(8000);
   await expect(frames.nth(0)).toHaveAttribute("data-active", "true");
-  await page.getByRole("button", { name: "自動切替を再生" }).click();
+  await page.getByRole("button", { name: "演出を再生" }).click();
   await page.clock.runFor(4000);
   await expect(frames.nth(1)).toHaveAttribute("data-active", "true");
 });

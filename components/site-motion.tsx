@@ -12,6 +12,7 @@ export function SiteMotion() {
   const [reduced, setReduced] = useState(true);
   const [fine, setFine] = useState(false);
   const canvas = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {window.dispatchEvent(new CustomEvent("oho-motion-change",{detail:enabled}));},[enabled]);
 
   useEffect(() => {
     const motion = matchMedia("(prefers-reduced-motion: reduce)");

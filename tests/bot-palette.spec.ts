@@ -11,7 +11,7 @@ test('blue cyan and violet palettes repeat consistently through cards and select
   await page.getByRole('tab').nth(i).click();
   const tab=page.getByRole('tab').nth(i);
   await expect(tab).toHaveAttribute('aria-selected','true');
-  await expect(tab).toHaveCSS('color','rgb(255, 255, 255)');
+  await expect(tab).toHaveCSS('color','rgb(18, 59, 121)');
   await expect(tab).toHaveCSS('background-image',/linear-gradient/);
  }
 });

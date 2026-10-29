@@ -41,12 +41,12 @@ test("bot-colored badges and primary controls retain readable contrast", async (
 test("section images load, surfaces remain opaque, and the footer scene is not cropped", async ({ page }) => {
   await page.goto("/");
   const backgrounds = new Set<string>();
-  for (const selector of [".reference-hero", "#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact"]) {
+  for (const selector of ["#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact"]) {
     const style = await page.locator(selector).evaluate(el => getComputedStyle(el,"::before").backgroundImage);
     expect(style).toContain("/images/environments/");
     for (const match of style.matchAll(/url\("?([^"\)]+)"?\)/g)) backgrounds.add(match[1]);
   }
-  expect(backgrounds.size).toBe(9);
+  expect(backgrounds.size).toBe(8);
   for (const url of backgrounds) {
     const response = await page.request.get(url);
     expect(response.ok()).toBe(true);

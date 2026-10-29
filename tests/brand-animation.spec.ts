@@ -5,15 +5,15 @@ test('category selection keeps autoplay and the animated border running',async({
  await page.clock.pauseAt(new Date('2026-10-29T00:00:01Z'));
  await page.goto('/');
  const hero=page.locator('.reference-hero');
- await page.getByRole('tab',{name:/02 情報技術/}).click();
+ await page.getByRole('tab',{name:/02 企画・戦略/}).click();
  await expect(hero).toHaveAttribute('data-playing','true');
  await expect(hero).toHaveAttribute('data-border-motion','true');
  await expect(page.locator('.hero-photo-layer').nth(1)).toHaveAttribute('data-active','true');
  if(!isMobile){const state=await page.locator('.reference-hero-tabs button').nth(1).evaluate(el=>getComputedStyle(el,'::after').animationPlayState);expect(state).toBe('running');}
  await page.clock.runFor(4000);
  await expect(page.locator('.hero-photo-layer').nth(2)).toHaveAttribute('data-active','true');
- await page.getByRole('button',{name:'自動切替を停止'}).click();
- await page.getByRole('tab',{name:/01 トータル/}).click();
+ await page.getByRole('button',{name:'演出を停止'}).click();
+ await page.getByRole('tab',{name:/01 チーム紹介/}).click();
  await expect(hero).toHaveAttribute('data-playing','false');
  await expect(hero).toHaveAttribute('data-border-motion','false');
 });
