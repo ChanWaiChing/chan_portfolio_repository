@@ -8,7 +8,7 @@ export function BotMascot({ variant = "ocean", className = "", priority = false 
   variant?: BotVariant; className?: string; priority?: boolean;
 }) {
   return <span className={`bot-mascot bot-${variant} ${className}`} aria-hidden="true">
-    <Image src={`/images/bots/${variant === "sunset" ? "sunset-presenting" : variant}.webp`} alt="" fill
+    <Image src={`/images/bots/${variant === "sunset" ? "sunset-presenting" : variant}.webp`} alt="" fill style={{ objectFit: "contain" }}
       sizes="(max-width: 760px) 100px, 160px" preload={priority}
       draggable={false} />
   </span>;

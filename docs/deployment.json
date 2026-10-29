@@ -1,0 +1,11 @@
+{
+  "provider": "Sites",
+  "project_id": "appgprj_6ae2ec6af3608191951fdb415c317b46",
+  "url": "https://oho-brothers-portfolio.h6wtz8mqjg.chatgpt.site",
+  "access": "owner-private",
+  "checkout": ".deployment/portfolio",
+  "source_commit": "e1a65798be5142e2a2943c60a8e0e17f6f67e2cb",
+  "version_id": "appgprj_6ae2ec6af3608191951fdb415c317b46~appgver_bee395f53d8481919608c9788de5b496",
+  "deployment_id": "appgdep_6ae2efe854208191ba5af30c89218488",
+  "deployment_status": "succeeded"
+}

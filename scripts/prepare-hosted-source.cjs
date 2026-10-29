@@ -1,0 +1,13 @@
+const fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'..');
+const deployment=JSON.parse(fs.readFileSync(path.join(root,'docs/deployment.json'),'utf8'));
+const target=path.join(root,deployment.checkout);
+const manifest=path.join(target,'.openai/hosting.json');
+if(!fs.existsSync(manifest))throw new Error('Restore the existing Sites checkout before preparing source. Do not register a new project.');
+if(JSON.parse(fs.readFileSync(manifest,'utf8')).project_id!==deployment.project_id)throw new Error('Hosting project mismatch.');
+const real=fs.realpathSync(target),relative=path.relative(root,real);
+if(relative.startsWith('..')||path.isAbsolute(relative))throw new Error('The hosting checkout must stay inside the workspace.');
+for(const folder of ['app','components','lib','public'])fs.cpSync(path.join(root,folder),path.join(real,folder),{recursive:true});
+const layout=path.join(real,'app/layout.tsx');
+fs.writeFileSync(layout,fs.readFileSync(layout,'utf8').replace('http://localhost:3001',deployment.url));
+console.log('Application source prepared. Build, verify, and publish the existing Sites project using the Sites workflow.');
