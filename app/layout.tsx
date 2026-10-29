@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head><link rel="preload" href="/fonts/yuji-boku-title.ttf" as="font" type="font/ttf" crossOrigin="anonymous" /></head>
-      <body>{children}<SiteMotion /><PageScrollbar /></body>
+      <body><div className="reading-layout"><div className="reading-rail"><PageScrollbar /></div><div className="reading-page">{children}</div></div><SiteMotion /></body>
     </html>
   );
 }

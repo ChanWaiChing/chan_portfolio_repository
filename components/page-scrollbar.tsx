@@ -7,7 +7,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 export function PageScrollbar() {
   const [progress, setProgress] = useState(0);
   const [available, setAvailable] = useState(false);
-  const [compact, setCompact] = useState(false);
+  const compact = false;
   const [dragging, setDragging] = useState(false);
   const track = useRef<HTMLDivElement>(null);
   const drag = useRef(false);
@@ -22,7 +22,7 @@ export function PageScrollbar() {
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const media = matchMedia("(max-width: 760px)");
-    const layout = () => { setCompact(media.matches); schedule(); };
+    const layout = () => { schedule(); };
     layout();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);

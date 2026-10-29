@@ -32,7 +32,7 @@ const scope = [
   { icon: Sparkles, title: "人工知能活用・継続改善", en: "改善・運用", text: "日々の業務の人工知能活用から、公開後の保守・改善まで。つくった先も一緒に考えます。", tags: ["生成系の人工知能", "業務自動化", "運用・改善"] },
 ];
 function Heading({ label, title, text }: { label: string; title: string; text?: string }) {
-  return <div className="content-heading"><span>{label}</span><h2>{title}</h2>{text && <p>{text}</p>}</div>;
+  return <><div className="section-title-rail"><h2>{title}</h2></div><div className="content-heading"><span>{label}</span>{text && <p>{text}</p>}</div></>;
 }
 function Pagination({ page, total, size, onChange, label }: { page: number; total: number; size: number; onChange: (page: number) => void; label: string }) {
   const pages = Math.max(1, Math.ceil(total / size));

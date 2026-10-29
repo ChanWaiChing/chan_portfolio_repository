@@ -355,7 +355,7 @@ test("category counts are attached to centered filter buttons", async ({ page })
       await expect(buttons.nth(index).locator(".category-count")).toHaveText(String(counts[index]));
       await expect(buttons.nth(index)).toHaveAttribute("data-count", String(counts[index]));
     }
-    const position = await section.locator(".catalog-filters").evaluate(element => { const rect=element.getBoundingClientRect(), section=element.closest("section")!.getBoundingClientRect(); return { center: rect.x+rect.width/2, content: section.x+section.width/2 }; });
+    const position = await section.locator(".catalog-filters").evaluate(element => { const rect=element.getBoundingClientRect(), parent=element.closest("section")!, section=parent.getBoundingClientRect(), style=getComputedStyle(parent); return { center: rect.x+rect.width/2, content: section.x+parseFloat(style.paddingLeft)+(section.width-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight))/2 }; });
     expect(Math.abs(position.center-position.content)).toBeLessThan(3);
     const badge = await buttons.first().locator(".category-count").evaluate(element => getComputedStyle(element).position);
     expect(badge).toBe("absolute");
