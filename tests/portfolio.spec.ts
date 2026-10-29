@@ -49,7 +49,7 @@ test("all original package thumbnails load across pagination", async ({ page }) 
     await section.getByRole("navigation",{name:"パッケージのページ切り替え"}).getByRole("button",{name:`${index+1}ページ目`}).click();
     const images=section.locator(".package-thumbnail img");
     await expect(images).toHaveCount(count);
-    await expect(section.locator(".package-entry-scope")).toHaveCount(count);
+    await expect(section.locator(".package-entry-scope, .package-price, .package-inclusions")).toHaveCount(0);
     for(const image of await images.all()) {
       await image.scrollIntoViewIfNeeded();
       await image.evaluate((element:HTMLImageElement)=>element.decode());
@@ -145,7 +145,11 @@ test("package prices and plan scopes match the supplied documents", async ({ pag
     for (const [i, price] of expected[index].entries()) {
       await expect(dialog.locator(".package-plan-amount").nth(i)).toContainText(`¥${price.toLocaleString("ja-JP")}`);
     }
-    await expect(dialog).toContainText("税別");
+    await expect(dialog.locator(".package-entry-details .package-price")).toContainText("税別");
+    await expect(dialog.locator(".package-entry-scope")).toHaveCount(1);
+    await expect(dialog.locator(".package-detail-deliverables")).toContainText("対応内容");
+    await dialog.getByText("修正・追加費用の条件", {exact:true}).click();
+    await expect(dialog).toContainText("追加制作・大幅な変更は別途相談");
     await expect(dialog).toContainText("固定の制作期間は記載されていません");
     await expect(dialog).not.toContainText("仮の表示例");
     if (index === 19) {
