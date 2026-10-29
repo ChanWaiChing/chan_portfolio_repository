@@ -701,6 +701,63 @@ button:disabled { box-shadow: inset 0 1px 0 #fff8,0 1px 0 var(--button-edge); tr
   .hero-brand-scene > strong { margin-block: 8px; }
   .scene-note { font-size: 8px; margin-top: 6px; }
 }
+
+/* Four-column catalogs, with complete rows on each eight-item page. */
+#packages .package-grid,#works .portfolio-grid { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 20px; }
+#packages .package-card { padding: 14px; }
+#packages .package-card h3 { font-size: 18px; }
+#packages .package-card .catalog-card-meta { flex-wrap: wrap; gap: 7px; }
+#packages .package-card > .catalog-outline-button { padding-inline: 12px; font-size: 12px; }
+#works .portfolio-card h3 { font-size: 17px; }
+#works .portfolio-card-body { padding: 17px 12px 15px; }
+@media(max-width:1099px) { #packages .package-grid,#works .portfolio-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:600px) { #packages .package-grid { grid-template-columns: 1fr; } #works .portfolio-grid { gap: 12px; } #works .portfolio-card h3 { font-size: 14px; } }
+
+/* Direct contact is a concise companion to a compact, structured form. */
+#contact .contact-layout { grid-template-columns: minmax(290px,.85fr) minmax(0,1.35fr); gap: 28px; align-items: start; }
+#contact .contact-overview { position: sticky; top: 104px; }
+.contact-form-column { min-width: 0; }
+.contact-form fieldset { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px 16px; }
+.contact-form .form-row { margin: 0; min-width: 0; }
+.contact-form .form-row:has(textarea),.contact-form .form-delivery-note,.contact-form .contact-submit { grid-column: 1/-1; }
+.contact-form .form-row > textarea { min-height: 170px; }
+.contact-followup { margin-top: 28px; padding: 24px 28px; border: 1px solid #b1c6bc; border-radius: 22px; background: #dbe6df; }
+.contact-followup .contact-expectations { margin: 0; padding: 0; border: 0; }
+.contact-followup ol { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; margin-top: 14px; }
+.contact-followup li { margin: 0; }
+.contact-followup p { font-size: 12px; margin-top: 14px; }
+@media(max-width:900px) {
+  #contact .contact-layout { grid-template-columns: 1fr; }
+  #contact .contact-overview { position: static; }
+  .contact-overview-copy .contact-method-list > ul { max-width: 550px; }
+  .contact-followup ol { grid-template-columns: 1fr; gap: 9px; }
+}
+@media(max-width:600px) { .contact-form fieldset { grid-template-columns: 1fr; } .contact-followup { padding: 22px; } }
+
+/* Decorative effects never intercept pointer or keyboard interactions. */
+.meteor-canvas { position: fixed; inset: 0; z-index: 95; width: 100%; height: 100%; pointer-events: none; }
+.site-motion-toggle { position: fixed; bottom: 15px; left: 15px; z-index: 45; display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 8px 12px; background: #dce3efeb; border: 1px solid #a9bad1; border-radius: 99px; color: #384773; font-size: 11px; }
+[data-site-motion="on"] [data-reveal-state="waiting"] { opacity: 0; }
+[data-site-motion="on"] [data-reveal-state="shown"] { animation-duration: .6s; animation-delay: var(--reveal-delay,0ms); animation-fill-mode: backwards; animation-timing-function: cubic-bezier(.2,.75,.25,1); }
+[data-reveal="rise"][data-reveal-state="shown"] { animation-name: reveal-rise; }
+[data-reveal="portrait"][data-reveal-state="shown"] { animation-name: reveal-portrait; }
+[data-reveal="slide"][data-reveal-state="shown"] { animation-name: reveal-slide; }
+[data-reveal="steps"][data-reveal-state="shown"] { animation-name: reveal-steps; }
+[data-reveal="scale"][data-reveal-state="shown"] { animation-name: reveal-scale; }
+[data-reveal="glide"][data-reveal-state="shown"] { animation-name: reveal-glide; }
+[data-reveal="unfold"][data-reveal-state="shown"] { animation-name: reveal-unfold; }
+[data-reveal="settle"][data-reveal-state="shown"] { animation-name: reveal-settle; }
+[data-reveal="curtain"][data-reveal-state="shown"] { animation-name: reveal-curtain; }
+@keyframes reveal-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes reveal-portrait { from { opacity: 0; transform: translateX(-24px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes reveal-slide { from { opacity: 0; transform: translateX(25px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes reveal-steps { from { opacity: 0; transform: translateY(28px) rotate(-1deg); } to { opacity: 1; transform: translateY(0) rotate(0); } }
+@keyframes reveal-scale { from { opacity: 0; transform: scale(.955); } to { opacity: 1; transform: scale(1); } }
+@keyframes reveal-glide { from { opacity: 0; transform: translate(-18px,10px); } to { opacity: 1; transform: translate(0,0); } }
+@keyframes reveal-unfold { from { opacity: 0; transform: scaleY(.94) translateY(8px); } to { opacity: 1; transform: scaleY(1) translateY(0); } }
+@keyframes reveal-settle { from { opacity: 0; transform: translateY(20px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes reveal-curtain { from { opacity: 0; clip-path: inset(0 0 14% 0); } to { opacity: 1; clip-path: inset(0); } }
+@media(prefers-reduced-motion:reduce) { [data-reveal] { opacity: 1 !important; animation: none !important; transform: none !important; } .meteor-canvas,.site-motion-toggle { display: none; } }
 @media(prefers-reduced-motion:reduce) { :where(button,summary,.catalog-cta,.catalog-outline-button,.workflow-all > a,.footer-circle-links > a,.footer-top-pill,.contact-platform > a):is(:hover,:active) { transform: none; } }
 
 .not-found-page { min-height: 75vh; display: grid; align-content: center; justify-items: center; gap: 20px; text-align: center; }

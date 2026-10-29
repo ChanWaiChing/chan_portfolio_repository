@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./site.css";
+import { SiteMotion } from "@/components/site-motion";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001"),
@@ -21,7 +22,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body>{children}<SiteMotion /></body>
     </html>
   );
 }

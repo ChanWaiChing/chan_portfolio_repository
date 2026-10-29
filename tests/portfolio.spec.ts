@@ -45,7 +45,7 @@ test("all original package thumbnails load across pagination", async ({ page }) 
   await page.goto("/");
   const section=page.locator("#packages");
   const sources=new Set<string>();
-  for(const [index,count] of [6,6,6,2].entries()) {
+  for(const [index,count] of [8,8,4].entries()) {
     await section.getByRole("navigation",{name:"パッケージのページ切り替え"}).getByRole("button",{name:`${index+1}ページ目`}).click();
     const images=section.locator(".package-thumbnail img");
     await expect(images).toHaveCount(count);
@@ -84,14 +84,14 @@ test("all 20 published packages are reachable, filterable and open for consultat
   await page.goto("/");
   const section = page.locator("#packages");
   const pagination = section.getByRole("navigation", { name: "パッケージのページ切り替え" });
-  await expect(section.locator(".catalog-summary")).toContainText("20件中 1〜6件");
-  for (const [index, count] of [6, 6, 6, 2].entries()) {
+  await expect(section.locator(".catalog-summary")).toContainText("20件中 1〜8件");
+  for (const [index, count] of [8, 8, 4].entries()) {
     await pagination.getByRole("button", { name: `${index + 1}ページ目` }).click();
     await expect(section.locator(".package-card")).toHaveCount(count);
   }
   await section.locator('.catalog-filters button[data-category="ウェブ制作"]').click();
-  await expect(section.locator(".package-card")).toHaveCount(6);
-  await expect(section.locator(".catalog-summary")).toContainText("8件中 1〜6件");
+  await expect(section.locator(".package-card")).toHaveCount(8);
+  await expect(section.locator(".catalog-summary")).toContainText("8件中 1〜8件");
   const opener = section.getByRole("button", { name: /プランの詳細を見る/ }).first();
   await opener.click();
   await expect(page.getByRole("dialog")).toContainText("正式な費用・納期は個別にご相談");
@@ -107,7 +107,7 @@ test("all 18 supplied projects are reachable with search, empty state and detail
   await page.goto("/");
   const section = page.locator("#works");
   const pagination = section.getByRole("navigation", { name: "ポートフォリオのページ切り替え" });
-  for (const [index, count] of [9, 9].entries()) {
+  for (const [index, count] of [8, 8, 2].entries()) {
     await pagination.getByRole("button", { name: `${index + 1}ページ目` }).click();
     await expect(section.locator(".portfolio-card")).toHaveCount(count);
   }
@@ -119,7 +119,7 @@ test("all 18 supplied projects are reachable with search, empty state and detail
   await page.getByRole("searchbox").fill("no-such-example-999");
   await expect(section.locator(".catalog-empty")).toBeVisible();
   await section.getByRole("button", { name: "検索条件をリセット" }).click();
-  await expect(section.locator(".catalog-summary")).toContainText("18件中 1〜9件");
+  await expect(section.locator(".catalog-summary")).toContainText("18件中 1〜8件");
   await section.locator('.catalog-filters button[data-category="ウェブサイト"]').click();
   await expect(section.locator(".portfolio-card")).toHaveCount(6);
 });
@@ -138,8 +138,8 @@ test("package prices and plan scopes match the supplied documents", async ({ pag
   ];
   const section = page.locator("#packages");
   for (let index = 0; index < expected.length; index++) {
-    await section.getByRole("navigation", { name: "パッケージのページ切り替え" }).getByRole("button", { name: `${Math.floor(index / 6) + 1}ページ目` }).click();
-    await section.locator(".package-card").nth(index % 6).getByRole("button").click();
+    await section.getByRole("navigation", { name: "パッケージのページ切り替え" }).getByRole("button", { name: `${Math.floor(index / 8) + 1}ページ目` }).click();
+    await section.locator(".package-card").nth(index % 8).getByRole("button").click();
     const dialog = page.getByRole("dialog");
     await expect(dialog.locator(".package-plan")).toHaveCount(expected[index].length);
     for (const [i, price] of expected[index].entries()) {
@@ -265,14 +265,14 @@ test("contact platform icons open the correct channels without displaying IDs", 
 
 test("catalog URL restores filters, search and pagination after reload", async ({ page }) => {
   await page.goto("/?package=Web%E5%88%B6%E4%BD%9C&work=%E3%82%A6%E3%82%A7%E3%83%96%E3%82%B5%E3%82%A4%E3%83%88&q=%E3%83%AF%E3%82%B3%E3%83%BC%E3%83%AB#works");
-  await expect(page.locator("#packages .package-card")).toHaveCount(6);
+  await expect(page.locator("#packages .package-card")).toHaveCount(8);
   await expect(page.locator("#works .portfolio-card")).toHaveCount(1);
   await expect(page.getByRole("searchbox")).toHaveValue("ワコール");
   await page.reload();
   await expect(page.locator("#works").locator('.catalog-filters button[data-category="ウェブサイト"]')).toHaveAttribute("aria-pressed", "true");
   await page.goto("/?pp=4&wp=4");
-  await expect(page.locator("#packages .package-card")).toHaveCount(2);
-  await expect(page.locator("#works .portfolio-card")).toHaveCount(9);
+  await expect(page.locator("#packages .package-card")).toHaveCount(4);
+  await expect(page.locator("#works .portfolio-card")).toHaveCount(2);
 });
 
 test("dialogs isolate the background and focus returns to the opener", async ({ page, isMobile }) => {
@@ -388,4 +388,4 @@ test("hero keeps the first brand scene and uses three human-led images", async (
   }
 });
 
- test("published projects have unique links and load their real previews", async ({page})=>{test.setTimeout(90000);await page.goto("/");const section=page.locator("#works");const links=new Set<string>();for(let n=1;n<=2;n++){await section.getByRole("navigation").getByRole("button",{name:`${n}ページ目`}).click();for(let i=0;i<9;i++){const card=section.locator(".portfolio-card").nth(i);await card.scrollIntoViewIfNeeded();await card.locator("img").evaluate((img:HTMLImageElement)=>img.decode());await card.getByRole("button").click();const dialog=page.getByRole("dialog");const link=dialog.getByRole("link",{name:"公開サイトを見る（新しいタブ）"});links.add((await link.getAttribute("href"))!);await expect(dialog.locator(".concept-brief")).toHaveCount(0);await expect(link).toHaveAttribute("rel","noopener noreferrer");await page.keyboard.press("Escape");}}expect(links.size).toBe(18);expect([...links].filter(x=>x.includes("tanica.jp"))).toHaveLength(1);});
+ test("published projects have unique links and load their real previews", async ({page})=>{test.setTimeout(90000);await page.goto("/");const section=page.locator("#works");const links=new Set<string>();for(let n=1;n<=3;n++){await section.getByRole("navigation").getByRole("button",{name:`${n}ページ目`}).click();for(let i=0;i<(n===3?2:8);i++){const card=section.locator(".portfolio-card").nth(i);await card.scrollIntoViewIfNeeded();await card.locator("img").evaluate((img:HTMLImageElement)=>img.decode());await card.getByRole("button").click();const dialog=page.getByRole("dialog");const link=dialog.getByRole("link",{name:"公開サイトを見る（新しいタブ）"});links.add((await link.getAttribute("href"))!);await expect(dialog.locator(".concept-brief")).toHaveCount(0);await expect(link).toHaveAttribute("rel","noopener noreferrer");await page.keyboard.press("Escape");}}expect(links.size).toBe(18);expect([...links].filter(x=>x.includes("tanica.jp"))).toHaveLength(1);});
