@@ -18,14 +18,35 @@ test("package cards stay concise and preserve the complete pricing and scope in 
   await expect(card.getByRole("button")).toBeFocused();
 });
 
+test("bot-colored badges and primary controls retain readable contrast", async ({ page }) => {
+  await page.goto("/");
+  const ratios = await page.locator("#packages .package-card .catalog-card-meta > span, .hero-primary-actions > .catalog-cta, .contact-submit").evaluateAll(elements => {
+    const luminance = (rgb: number[]) => rgb.map(v => {
+      const c = v / 255;
+      return c <= .04045 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4;
+    }).reduce((sum, value, i) => sum + value * [.2126, .7152, .0722][i], 0);
+    const parse = (color: string) => (color.match(/[\d.]+/g) || []).slice(0, 3).map(Number);
+    return elements.flatMap(el => {
+      const style = getComputedStyle(el), foreground = luminance(parse(style.color));
+      const stops = style.backgroundImage.match(/rgb\([^)]+\)/g) || [style.backgroundColor];
+      return stops.map(color => {
+        const background = luminance(parse(color));
+        return (Math.max(foreground, background) + .05) / (Math.min(foreground, background) + .05);
+      });
+    });
+  });
+  for (const ratio of ratios) expect(ratio).toBeGreaterThanOrEqual(4.5);
+});
+
 test("section images load, surfaces remain opaque, and the footer scene is not cropped", async ({ page }) => {
   await page.goto("/");
   const backgrounds = new Set<string>();
-  for (const selector of ["#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact", ".footer-scene"]) {
+  for (const selector of ["#introduction", "#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact", ".footer-scene"]) {
     const style = await page.locator(selector).evaluate(el => getComputedStyle(el).backgroundImage);
     expect(style).toContain("/images/environments/");
     for (const match of style.matchAll(/url\("?([^"\)]+)"?\)/g)) backgrounds.add(match[1]);
   }
+  expect(backgrounds.size).toBe(10);
   for (const url of backgrounds) {
     const response = await page.request.get(url);
     expect(response.ok()).toBe(true);
@@ -46,8 +67,10 @@ test("section images load, surfaces remain opaque, and the footer scene is not c
     });
     expect(contrast).toBeGreaterThanOrEqual(4.5);
   }
-  await expect(page.locator(".package-card").first()).toHaveCSS("background-color", "rgb(255, 255, 255)");
-  await expect(page.locator(".contact-form")).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(page.locator(".package-card").first()).toHaveCSS("background-color", "rgb(223, 230, 240)");
+  await expect(page.locator(".contact-form")).toHaveCSS("background-color", "rgb(224, 230, 237)");
+  await expect(page.locator(".contact-form")).toHaveCSS("background-image", /calm-inquiry/);
+  await expect(page.locator(".contact-time-intro")).toContainText("本来の仕事に、向き合う時間をつくる。");
   const scene = await page.locator(".footer-scene").boundingBox();
   expect(scene!.width / scene!.height).toBeCloseTo(3, 1);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

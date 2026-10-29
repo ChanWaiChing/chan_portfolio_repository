@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, ArrowUpRight, Copy } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Clock3, Copy, Sparkles } from "lucide-react";
 import { categories, servicePackages } from "@/lib/catalog";
 import { trackInteraction } from "@/lib/interaction-events";
 
@@ -39,6 +39,12 @@ export function ContactForm({ topic, onTopic, directSend }: { topic: string; onT
     <h3>プロジェクトのご相談</h3>
     <p className="form-intro">まずはお困りごとをひとつ。ご予算や時期は、決まっている範囲で大丈夫です。</p>
     <details className="contact-privacy"><summary>お問い合わせ情報の取り扱い</summary><p>窓口は大穂兄弟です。お名前・連絡先・ご相談内容は、ご相談への対応と連絡のために利用します。</p><p>{directSend ? "フォームはメール送信サービスを経由して窓口へ送ります。サイト独自のデータベースには入力内容を保存しません。" : "現在はメールで受け付けています。メールアプリで送信するまで、入力内容は窓口へ送られません。サイトには保存されません。"}</p><p>送信後の内容確認や訂正については、同じ窓口へご連絡ください。</p></details>
+    <div className="contact-time-intro">
+      <span><Clock3 size={18} aria-hidden="true" />あなたの時間を、大切に。</span>
+      <h3>本来の仕事に、<br />向き合う時間をつくる。</h3>
+      <p>整理・設計・制作をひとつのチームで。<br />手間を減らし、次の一歩を考える余白をご一緒に。</p>
+      <div className="contact-time-shapes" aria-hidden="true"><span /><span /><Sparkles size={23} /></div>
+    </div>
     <fieldset disabled={sending || sent}>
       <div className="form-row"><label htmlFor="contact-name">お名前 <span>必須</span></label><input id="contact-name" autoComplete="name" required maxLength={100} placeholder="山田 太郎" value={name} onChange={event => setName(event.target.value)} /></div>
       <div className="form-row"><label htmlFor="contact-email">メールアドレス <span>必須</span></label><input id="contact-email" type="email" autoComplete="email" required maxLength={200} placeholder="ご連絡用のメールアドレス" value={email} onChange={event => setEmail(event.target.value)} /></div>
