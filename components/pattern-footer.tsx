@@ -15,7 +15,7 @@ export function PatternFooter() {
       <a className="icon-link-green" href={site.contactUrl}><Mail size={19} />メール</a>
     </div>
     <p className="pattern-copyright">© {new Date().getFullYear()} 大穂兄弟. 無断転載を禁じます。</p>
-    <p className="pattern-sample-note">パッケージ・ポートフォリオは仮のサンプルです。</p>
+    <p className="pattern-sample-note">パッケージ料金は税別です。ポートフォリオは架空の制作コンセプトです。</p>
     <div className="footer-bottom-bar"><nav className="footer-nav-pill" aria-label="フッターナビゲーション">{links.map(([label, id]) => <a key={id} href={`#${id}`}>{label}</a>)}<a className="footer-contact-pill" href="#contact">相談する<ArrowUpRight size={16} /></a></nav><a className="footer-top-pill" href="#introduction" aria-label="ページの先頭へ"><ArrowUp size={18} /></a></div>
   </footer>;
 }

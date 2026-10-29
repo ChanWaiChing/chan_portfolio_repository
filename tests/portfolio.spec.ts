@@ -19,7 +19,7 @@ test("section order, navigation and page health", async ({ page, isMobile }) => 
   expect(errors).toEqual([]);
 });
 
-test("all 20 sample packages are reachable, filterable and open for consultation", async ({ page }) => {
+test("all 20 published packages are reachable, filterable and open for consultation", async ({ page }) => {
   await page.goto("/");
   const section = page.locator("#packages");
   const pagination = section.getByRole("navigation", { name: "パッケージのページ切り替え" });
@@ -29,8 +29,8 @@ test("all 20 sample packages are reachable, filterable and open for consultation
     await expect(section.locator(".package-card")).toHaveCount(count);
   }
   await section.locator('.catalog-filters button[data-category="ウェブ制作"]').click();
-  await expect(section.locator(".package-card")).toHaveCount(5);
-  await expect(section.locator(".catalog-summary")).toContainText("5件中 1〜5件");
+  await expect(section.locator(".package-card")).toHaveCount(6);
+  await expect(section.locator(".catalog-summary")).toContainText("8件中 1〜6件");
   const opener = section.getByRole("button", { name: /プランの詳細を見る/ }).first();
   await opener.click();
   await expect(page.getByRole("dialog")).toContainText("正式な費用・納期は個別にご相談");
@@ -39,7 +39,7 @@ test("all 20 sample packages are reachable, filterable and open for consultation
   await expect(opener).toBeFocused();
   await opener.click();
   await page.getByRole("button", { name: "この内容について相談する" }).click();
-  await expect(page.getByLabel("相談したいこと")).toHaveValue("はじめてのコーポレートサイト");
+  await expect(page.getByLabel("相談したいこと")).toHaveValue("ワードプレス制作・成長支援");
 });
 
 test("all 30 sample works are reachable with search, empty state and details", async ({ page }) => {
@@ -61,6 +61,40 @@ test("all 30 sample works are reachable with search, empty state and details", a
   await expect(section.locator(".catalog-summary")).toContainText("30件中 1〜9件");
   await section.locator('.catalog-filters button[data-category="デザイン"]').click();
   await expect(section.locator(".portfolio-card")).toHaveCount(7);
+});
+
+test("package prices and plan scopes match the supplied documents", async ({ page }) => {
+  test.setTimeout(90000);
+  await page.goto("/");
+  const expected = [
+    [30000,50000,200000], [30000,50000,100000], [30000,50000,200000],
+    [30000,50000,200000], [30000,50000,200000], [30000,50000,150000],
+    [30000,50000,200000], [50000,150000,300000], [100000,200000,500000],
+    [50000,150000,250000], [100000,200000,400000], [100000,200000,500000],
+    [30000,50000,200000], [50000,150000,300000], [50000,150000,250000],
+    [100000,200000,500000], [30000,50000,200000], [100000,200000,300000],
+    [30000,50000,200000], [30000,8000,3000,3000],
+  ];
+  const section = page.locator("#packages");
+  for (let index = 0; index < expected.length; index++) {
+    await section.getByRole("navigation", { name: "パッケージのページ切り替え" }).getByRole("button", { name: `${Math.floor(index / 6) + 1}ページ目` }).click();
+    await section.locator(".package-card").nth(index % 6).getByRole("button").click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog.locator(".package-plan")).toHaveCount(expected[index].length);
+    for (const [i, price] of expected[index].entries()) {
+      await expect(dialog.locator(".package-plan-amount").nth(i)).toContainText(`¥${price.toLocaleString("ja-JP")}`);
+    }
+    await expect(dialog).toContainText("税別");
+    await expect(dialog).toContainText("固定の制作期間は記載されていません");
+    await expect(dialog).not.toContainText("仮の表示例");
+    if (index === 19) {
+      await expect(dialog).toContainText("¥100,000");
+      await expect(dialog).toContainText("¥15,000");
+      await expect(dialog).toContainText("一ページ");
+      await expect(dialog.locator(".package-plan-monthly")).toHaveCount(0);
+    }
+    await page.keyboard.press("Escape");
+  }
 });
 
 test("FAQ and contact validation, mail draft and edit invalidation", async ({ page }) => {
@@ -166,7 +200,7 @@ test("contact platform icons open the correct channels without displaying IDs", 
 
 test("catalog URL restores filters, search and pagination after reload", async ({ page }) => {
   await page.goto("/?package=Web%E5%88%B6%E4%BD%9C&work=%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3&q=%E3%83%95%E3%82%A3%E3%82%B0%E3%83%9E#works");
-  await expect(page.locator("#packages .package-card")).toHaveCount(5);
+  await expect(page.locator("#packages .package-card")).toHaveCount(6);
   await expect(page.locator("#works .portfolio-card")).toHaveCount(7);
   await expect(page.getByRole("searchbox")).toHaveValue("フィグマ");
   await page.reload();
@@ -249,7 +283,7 @@ test("service entry points preselect consultation topics and explain contact han
 
 test("category counts are attached to centered filter buttons", async ({ page }) => {
   await page.goto("/");
-  for (const [id, counts] of [["packages", [20,5,4,4,4,3]], ["works", [30,9,7,6,4,4]]] as const) {
+  for (const [id, counts] of [["packages", [20,8,1,5,3,3]], ["works", [30,9,7,6,4,4]]] as const) {
     const section = page.locator(`#${id}`);
     const buttons = section.locator(".catalog-filters button");
     for (let index=0; index<counts.length; index++) {
