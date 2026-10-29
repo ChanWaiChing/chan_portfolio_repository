@@ -967,7 +967,7 @@ button:disabled { box-shadow: inset 0 1px 0 #fff8,0 1px 0 var(--button-edge); tr
 .footer-vertical-lockup { align-self: center; }
 .footer-invitation { padding: 28px 32px; background: #ffffffeb; border: 1px solid #dce5e2; border-radius: 24px; box-shadow: 0 18px 48px -30px #17304724; }
 .footer-invitation h2 { font-size: clamp(23px,2.3vw,32px); }
-.footer-scene { width: 100%; aspect-ratio: 3/1; margin: 22px 0 18px; background: linear-gradient(180deg,#f5f7f5 0%,transparent 18%,transparent 80%,#f5f7f5 100%),url('/images/environments/footer-collaboration.webp') center/cover no-repeat; }
+.footer-scene { position: relative; width: 100%; aspect-ratio: 3/1; margin: 22px 0 18px; background: none; }
 .footer-circle-links,.pattern-copyright,.pattern-sample-note,.footer-bottom-bar { padding-left: 24px; padding-right: 24px; }
 .footer-circle-links a,.footer-nav-pill { background: #fff; border-color: #dbe4e4; }
 .pattern-copyright { margin-top: 24px; }
@@ -1097,7 +1097,6 @@ button:disabled { box-shadow: inset 0 1px 0 #fff8,0 1px 0 var(--button-edge); tr
 .contact-privacy > summary { background: #cedbe3; }
 .pattern-footer { background: #ccd5d6; }
 .footer-invitation { background: #dce2e8; border-color: #afbec7; }
-.footer-scene { background: linear-gradient(180deg,#ccd5d6 0%,transparent 18%,transparent 80%,#ccd5d6 100%),url('/images/environments/footer-collaboration.webp') center/cover no-repeat; }
 .pattern-footer :is(.footer-circle-links a,.footer-nav-pill) { background: #dbe2e6; border-color: #afbec7; }
 .pattern-footer .footer-top-pill { background: #695681; }
 @media(max-width:760px) {
@@ -1119,10 +1118,6 @@ button:disabled { box-shadow: inset 0 1px 0 #fff8,0 1px 0 var(--button-edge); tr
 }
 .catalog-summary { padding: 10px 14px; border: 1px solid #b7c4d199; border-radius: 12px; background: #dbe2e9ee; }
 .contact-form { background-size: 100% 100%,100% auto; background-repeat: no-repeat,repeat-y; background-position: center,center top; }
-.footer-scene { position: relative; isolation: isolate; }
-.footer-scene::before { content: ""; position: absolute; inset: 0 0 64%; background: linear-gradient(180deg,#182d42b8,#182d4240,transparent); pointer-events: none; }
-.footer-statement { position: absolute; z-index: 1; top: 0; left: 4%; right: 4%; margin: 0; text-align: center; color: #fff; font: 700 clamp(20px,3.9vw,76px)/1.1 var(--sans); letter-spacing: -.035em; white-space: nowrap; text-shadow: 0 2px 10px #102131b3; }
 @media(max-width:760px) {
   #introduction,#selected-work,.introduction-copy,#services,#strengths,#packages,#works,#faq,#contact { background-size: 100% 100%,100% 100%,cover; }
-  .footer-statement { font-size: clamp(17px,5vw,29px); letter-spacing: -.045em; }
 }

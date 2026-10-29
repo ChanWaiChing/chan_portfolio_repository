@@ -41,12 +41,12 @@ test("bot-colored badges and primary controls retain readable contrast", async (
 test("section images load, surfaces remain opaque, and the footer scene is not cropped", async ({ page }) => {
   await page.goto("/");
   const backgrounds = new Set<string>();
-  for (const selector of ["#introduction", "#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact", ".footer-scene"]) {
+  for (const selector of ["#introduction", "#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact"]) {
     const style = await page.locator(selector).evaluate(el => getComputedStyle(el).backgroundImage);
     expect(style).toContain("/images/environments/");
     for (const match of style.matchAll(/url\("?([^"\)]+)"?\)/g)) backgrounds.add(match[1]);
   }
-  expect(backgrounds.size).toBe(10);
+  expect(backgrounds.size).toBe(9);
   for (const url of backgrounds) {
     const response = await page.request.get(url);
     expect(response.ok()).toBe(true);
@@ -73,15 +73,16 @@ test("section images load, surfaces remain opaque, and the footer scene is not c
   await expect(page.locator(".contact-time-intro")).toContainText("本来の仕事に、向き合う時間をつくる。");
   const scene = await page.locator(".footer-scene").boundingBox();
   expect(scene!.width / scene!.height).toBeCloseTo(3, 1);
-  const statement = page.locator(".footer-statement");
-  await expect(statement).toHaveText("Creating time for our clients");
-  await expect(statement).toHaveAttribute("lang", "en");
-  const title = await statement.boundingBox();
-  expect(title!.x).toBeGreaterThanOrEqual(scene!.x);
-  expect(title!.x + title!.width).toBeLessThanOrEqual(scene!.x + scene!.width + 1);
+  const artwork = page.locator(".footer-scene img");
+  await expect(artwork).toHaveCount(1);
+  await artwork.scrollIntoViewIfNeeded();
+  await artwork.evaluate((img: HTMLImageElement) => img.decode());
+  await expect(artwork).toHaveAttribute("alt", /お客様のために、時間をつくる。/);
+  await expect(artwork).toHaveCSS("object-fit", "contain");
+  await expect(page.locator(".footer-scene > :not(img)")).toHaveCount(0);
+  await expect(page.locator(".footer-scene")).toHaveCSS("background-image", "none");
   const sizing = await page.locator("#packages").evaluate(el => getComputedStyle(el).backgroundSize);
   expect(sizing).toBe("100% 100%, 100% 100%, cover");
   await expect(page.locator("#packages")).toHaveCSS("background-attachment", "scroll, scroll, fixed");
-  expect(await statement.evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

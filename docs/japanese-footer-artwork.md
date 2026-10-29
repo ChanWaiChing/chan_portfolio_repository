@@ -1,0 +1,12 @@
+# 日本語の一体型フッターバナー
+
+2026年10月29日。組み込み画像生成ツールで、文字・人物・ボット・背景を一枚の画像として作成しました。保存先は `public/images/environments/footer-client-time-ja.webp`（2172×724）です。
+
+見出しは「お客様のために、時間をつくる。」。ボットは資料整理、予定管理、データ処理を分担し、人は落ち着いて相談に向き合う構図です。男性は25歳と21歳に見える若い成人として指定しています。
+
+従来の英語テキスト要素と背景の重ね合わせを取り除き、単一の画像を全幅で表示します。画像内の日本語を代替テキストにも記載し、画面読み上げで内容を把握できるようにしています。モバイルでも全景を切り取らず表示します。
+
+## 最終プロンプト
+
+Edit the provided footer photo into ONE fully integrated final website banner image, ultra-wide landscape exactly 3:1. Keep a refined realistic Japanese editorial-photo look, soft overcast daylight, calm slate-blue, sage, mauve and warm-gray tones, sharp detail. Retain FOUR Japanese adult people (two women, two men) and THREE small friendly glossy white bots with black smiling glass faces and blue-purple, orange-pink, mint-purple hair. The older brother must appear 25 years old, younger brother 21 years old, fresh adult faces, no wrinkles or facial hair. Change their actions to clearly express creating time for clients: the two young men give attentive unhurried consultation to the two women at a beautiful oak table beside the studio's glass frontage, discussing a paper design calmly, with relaxed thoughtful smiles. Meanwhile the small bots support them in DIFFERENT useful poses: one neatly sorts documents, one organizes a simple calendar with blank colored cards, one processes routine data on a small tablet. Humans lead the conversation, bots free them from repetitive tasks. Subtle visual time motif: an elegant simple wall clock on the glass frontage, no competing numerals or words. Integrate large beautiful perfectly legible JAPANESE typography into the upper third of this SAME finished image, as a designed editorial headline, with quiet dark slate backing naturally part of the composition. The exact headline is: 「お客様のために、時間をつくる。」 Render ONLY the characters inside those corner brackets, not the brackets themselves. No English. Use refined bold Japanese sans serif, generous spacing, high contrast light lettering against slate. Headline should be large and readable even when the full banner is reduced to phone width. Keep all four human faces and all three bots clearly visible below the headline without covering them. No separate inset panels, no collage, no additional logo or text, no neon glow, no harsh white glare. This must be a single coherent final image, including the typography, people, robots, props and architecture.
+
