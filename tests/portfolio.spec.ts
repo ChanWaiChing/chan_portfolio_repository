@@ -202,6 +202,7 @@ test("four hero images cycle every four seconds and can be paused", async ({ pag
   await page.clock.install({ time: new Date("2026-10-29T00:00:00Z") });
   await page.clock.pauseAt(new Date("2026-10-29T00:00:01Z"));
   await page.goto("/");
+  await page.getByRole("button", { name: "自動切替を停止" }).click();
   await page.getByRole("tab", { name: /01 トータルサポート/ }).click();
   await page.getByRole("button", { name: "自動切替を再生" }).click();
   await expect(page.locator(".reference-hero")).toHaveAttribute("data-playing", "true");

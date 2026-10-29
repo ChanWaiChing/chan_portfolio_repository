@@ -45,7 +45,7 @@ export function HeroShowcase() {
         setActive((current) => (current + 1) % slides.length);
     }, SLIDE_INTERVAL_MS);
     return () => window.clearInterval(timer);
-  }, [paused, reducedMotion, visible]);
+  }, [paused, reducedMotion, visible, active]);
 
   return <>
     <div className="site-intro">
@@ -69,13 +69,12 @@ export function HeroShowcase() {
         </div>
       </div>
       <div className="reference-hero-controls">
-        <div role="tablist" aria-label="サービスを選ぶ" className="reference-hero-tabs"
-          onFocusCapture={() => setPaused(true)}>
+        <div role="tablist" aria-label="サービスを選ぶ" className="reference-hero-tabs">
           {slides.map((item, index) => <button key={item.label}
             ref={(element) => { tabs.current[index] = element; }}
             id={`hero-tab-${index}`} role="tab" aria-controls="hero-panel"
             aria-selected={active === index} tabIndex={active === index ? 0 : -1}
-            onClick={() => { setActive(index); setPaused(true); }}
+            onClick={() => setActive(index)}
             onKeyDown={(event) => {
               let next = index;
               if (event.key === "ArrowRight") next = (index + 1) % slides.length;
@@ -85,7 +84,6 @@ export function HeroShowcase() {
               else return;
               event.preventDefault();
               setActive(next);
-              setPaused(true);
               tabs.current[next]?.focus();
             }}>
             <span>0{index + 1}</span><strong>{item.label}</strong>

@@ -1,5 +1,7 @@
 # 大穂兄弟 / OHO BROTHERS
 
+ロゴを筆文字と２本の筆線が重なるシンボルへ更新。カテゴリを選んだあとも自動切り替えと流星ボーダーが続きます。[ロゴと演出の変更記録](docs/brand-logo-update.md)。
+
 独自の読書用スクロールバーを削除し、ブラウザー標準のスクロール操作に統一。９種類の落ち着いた背景写真と適度なぼかし、なめらかな章のつなぎ、左右に余白と角丸を付けたフッター画像。[変更内容・画像・生成プロンプト](docs/relaxed-section-backgrounds.md)。
 
 ホスト版：[大穂兄弟](https://oho-brothers-portfolio.h6wtz8mqjg.chatgpt.site)（一般公開・サインイン不要）。公開状況と更新手順は [ホスティングの記録](docs/deployment.md) を参照してください。
