@@ -73,5 +73,15 @@ test("section images load, surfaces remain opaque, and the footer scene is not c
   await expect(page.locator(".contact-time-intro")).toContainText("本来の仕事に、向き合う時間をつくる。");
   const scene = await page.locator(".footer-scene").boundingBox();
   expect(scene!.width / scene!.height).toBeCloseTo(3, 1);
+  const statement = page.locator(".footer-statement");
+  await expect(statement).toHaveText("Creating time for our clients");
+  await expect(statement).toHaveAttribute("lang", "en");
+  const title = await statement.boundingBox();
+  expect(title!.x).toBeGreaterThanOrEqual(scene!.x);
+  expect(title!.x + title!.width).toBeLessThanOrEqual(scene!.x + scene!.width + 1);
+  const sizing = await page.locator("#packages").evaluate(el => getComputedStyle(el).backgroundSize);
+  expect(sizing).toBe("100% 100%, 100% 100%, cover");
+  await expect(page.locator("#packages")).toHaveCSS("background-attachment", "scroll, scroll, fixed");
+  expect(await statement.evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

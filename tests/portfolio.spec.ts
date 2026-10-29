@@ -367,7 +367,7 @@ test("site-owned copy is Japanese and the skill orbit uses icons", async ({ page
   await page.getByText("対応領域・技術の組み合わせを見る", { exact:true }).click();
   await expect(page.locator(".skill-tool-badge > svg")).toHaveCount(13);
   await expect(page.locator(".skill-tool-badge > strong")).toHaveCount(0);
-  const latin = await page.locator("body").innerText();
+  const latin = (await page.locator("body").innerText()).replace("Creating time for our clients", "");
   expect(latin.match(/[A-Za-z]+/g)).toBeNull();
   const placeholders = await page.locator("input[placeholder],textarea[placeholder]").evaluateAll(elements=>elements.map(element=>element.getAttribute("placeholder")).join(" "));
   expect(placeholders.match(/[A-Za-z]+/g)).toBeNull();
