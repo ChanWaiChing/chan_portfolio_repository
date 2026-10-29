@@ -875,3 +875,30 @@ button:disabled { box-shadow: inset 0 1px 0 #fff8,0 1px 0 var(--button-edge); tr
 
 .mobile-gallery-hint { display: none; }
 @media (max-width:760px) { .mobile-gallery-hint { display: block; margin: 0 0 10px; color: var(--muted); font-size: 11px; } }
+
+/* Distinct section washes meet at the same paper tone for a seamless page. */
+#introduction { background: linear-gradient(180deg,#edf4fc 0%,var(--paper) 850px); }
+#introduction .site-intro { background: #eaf1f9; }
+#selected-work { --section-wash: #f1edf9; border-bottom: 0; }
+.introduction-copy { --section-wash: #edf0f8; }
+#services { --section-wash: #e8f3ef; }
+#strengths { --section-wash: #fbf1e5; }
+#packages { --section-wash: #eaf0fa; }
+#works { --section-wash: #f8edf1; }
+#faq { --section-wash: #eaf4f1; }
+#contact { --section-wash: #edf2fa; }
+#selected-work,.introduction-copy,#services,#strengths,#packages,#works,#faq,#contact {
+  background: linear-gradient(180deg,var(--paper) 0,var(--section-wash) 100px,var(--section-wash) calc(100% - 100px),var(--paper) 100%);
+}
+#selected-work .evidence-notes { background: #ffffffa6; border-color: #ddd9eb; }
+#services .workflow-diagram { background: #e7efed; }
+#services .skill-tool-universe { background: linear-gradient(135deg,#f7fbfa,#e5f0ed); border-color: #d5e4df; }
+#packages .sample-notice { background: #f7f9fddb; }
+#works .sample-notice { background: #fff9fbcc; }
+#faq .faq-bot-speech { background: #ffffffd9; }
+#contact .contact-overview { background: #eaf0f7; }
+@media (max-width:760px) {
+  #selected-work,.introduction-copy,#services,#strengths,#packages,#works,#faq,#contact {
+    background: linear-gradient(180deg,var(--paper) 0,var(--section-wash) 64px,var(--section-wash) calc(100% - 64px),var(--paper) 100%);
+  }
+}
