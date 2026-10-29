@@ -804,11 +804,6 @@ button:disabled { box-shadow: inset 0 1px 0 #fff8,0 1px 0 var(--button-edge); tr
 .evidence-notes ul { list-style: none; display: grid; gap: 12px; padding: 0; margin: 0; align-content: center; }
 .evidence-notes li { display: flex; gap: 10px; align-items: start; font-size: 12px; color: var(--muted); }
 .evidence-notes li svg { color: #377a72; margin-top: 3px; }
-.team-details { margin-top: 28px; }
-.team-details > summary { cursor: pointer; padding: 18px 24px; border: 1px solid var(--line); border-radius: 14px; background: #fff; font-weight: 600; }
-.team-details .brother-introductions { margin-top: 22px; }
-.team-details .bot-narration { display: block; }
-.team-details .bot-speech::before { display: none; }
 .design-walkthrough { margin: 20px 0; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: #f6f8fb; }
 .design-walkthrough summary { cursor: pointer; font-size: 14px; font-weight: 700; box-shadow: none; }
 .design-walkthrough li,.design-walkthrough p { margin-top: 12px; font-size: 13px; color: var(--muted); }
@@ -835,19 +830,10 @@ button:disabled { box-shadow: inset 0 1px 0 #fff8,0 1px 0 var(--button-edge); tr
   .package-card { padding: 20px; }
   .package-card > p { display: none; }
   .package-card h3 { font-size: 20px; margin: 14px 0 8px; }
-  .package-card .package-thumbnail { aspect-ratio: 2.4; max-height: 128px; margin-bottom: 12px; }
+  .package-card .package-thumbnail { aspect-ratio: 16 / 9; max-height: none; margin-bottom: 14px; }
   .package-price { padding: 14px; }
   .package-price strong { font-size: 25px; }
   .package-entry-scope { margin-bottom: 12px; }
-  .team-details .brother-intro-panel { display: block; }
-  .team-details .brother-intro-visual { min-height: 0; padding: 20px; flex-direction: row; gap: 18px; justify-content: flex-start; }
-  .team-details .profile-brand-bot { width: 76px; }
-  .team-details .profile-image-note { max-width: 150px; margin: 0; font-size: 10px; text-align: left; }
-  .team-details .brother-visual-label { display: none; }
-  .team-details .brother-intro-content { padding: 20px; }
-  .team-details .brother-intro-content h3 { font-size: 24px; }
-  .team-details .brother-intro-specialty { margin-top: 12px; }
-  .team-details .bot-narration { margin-top: 16px; }
   .footer-closing { grid-template-columns: 1fr; gap: 26px; text-align: center; }
   .footer-vertical-copy { height: 170px; }
   .footer-vertical-copy > p { font-size: 10px; }

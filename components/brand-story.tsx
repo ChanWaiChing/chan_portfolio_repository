@@ -1,5 +1,9 @@
-import { ArrowRight, ClipboardCheck, Layers3, MessageCircle, MousePointer2, PenTool, RefreshCw, Rocket } from "lucide-react";
+import { ArrowRight, Check, ClipboardCheck, Layers3, MessageCircle, MousePointer2, PenTool, RefreshCw, Rocket } from "lucide-react";
 import { BotMascot } from "./bot-mascot";
+
+export function BrandStory() {
+  return <div className="brand-story"><div><span className="eyebrow">ふたりの視点を、ひとつのチームに。</span><h3>つくる前から、<br />同じゴールを見ていたい。</h3></div><div><p>デザインを考えるときも、実装を考えるときも、出発点は「誰の、どんな課題を解くか」。大穂兄弟は、技術を担当する兄とデザインを担当する弟のチームです。</p><p>見た目と仕組みを別々に決めず、使う人と運用する人の両方から考えます。小さなチームでも相談しやすい、顔の見える制作パートナーを目指しています。</p><ul><li><Check size={16} />兄：要件・技術・保守性を整理</li><li><Check size={16} />弟：情報・導線・使い心地を設計</li><li><Check size={16} />ふたり：同じ仕様と試作を見ながら確認</li></ul></div></div>;
+}
 
 const entrances = [
   { title: "ウェブサイトをつくる", label: "ウェブサイト制作", icon: PenTool, forWhom: "事業やサービスの魅力を、きちんと伝えたい方へ。", deliver: "構成・デザイン・実装・更新方法をまとめて整理します。", category: "ウェブ制作", topic: "ウェブサイト制作", tags: "コーポレートサイト / 紹介ページ / 更新システム" },

@@ -1,5 +1,20 @@
 import { test, expect } from "@playwright/test";
 
+test("brothers and bot skill introduction are visible without expanding a panel",async({page})=>{
+  await page.goto("/");
+  await expect(page.locator(".brother-intro-panel")).toHaveCount(2);
+  await expect(page.locator(".brother-intro-panel").first()).toBeVisible();
+  await expect(page.locator(".narrator-bot")).toHaveCount(2);
+  await expect(page.locator(".brand-story")).toBeVisible();
+  await expect(page.locator(".workflow-skills")).toBeVisible();
+  expect(await page.locator(".workflow-skills").evaluate(e=>Boolean(e.closest("details")))).toBe(false);
+  await page.locator(".skill-tool-universe").scrollIntoViewIfNeeded();
+  await expect(page.locator(".skill-tool-universe")).toHaveAttribute("data-offscreen","false");
+  await expect(page.locator(".skill-orbit-ring").first()).toHaveCSS("animation-play-state","running");
+  await page.getByRole("button",{name:"スキルアニメーションを停止"}).click();
+  await expect(page.locator(".skill-orbit-ring").first()).toHaveCSS("animation-play-state","paused");
+});
+
 test("inquiry measurement excludes form values and counts the first interaction once",async({page})=>{
   const events: Record<string,unknown>[]=[];
   await page.route("**/api/events",async route=>{events.push(route.request().postDataJSON());await route.fulfill({status:204});});
@@ -25,17 +40,24 @@ test("tracking opt-out is respected and hero pause stops border motion",async({p
   expect(requests).toHaveLength(0);
 });
 
-test("all package artwork stays distinct and reachable across pagination", async ({ page }) => {
+test("all original package thumbnails load across pagination", async ({ page }) => {
+  test.setTimeout(90000);
   await page.goto("/");
   const section=page.locator("#packages");
-  const titles=new Set<string>();
+  const sources=new Set<string>();
   for(const [index,count] of [6,6,6,2].entries()) {
     await section.getByRole("navigation",{name:"パッケージのページ切り替え"}).getByRole("button",{name:`${index+1}ページ目`}).click();
-    await expect(section.locator(".catalog-artwork")).toHaveCount(count);
+    const images=section.locator(".package-thumbnail img");
+    await expect(images).toHaveCount(count);
     await expect(section.locator(".package-entry-scope")).toHaveCount(count);
-    for(const title of await section.locator(".artwork-caption").allTextContents())titles.add(title);
+    for(const image of await images.all()) {
+      await image.scrollIntoViewIfNeeded();
+      await image.evaluate((element:HTMLImageElement)=>element.decode());
+      await expect(image).toHaveCSS("object-fit","contain");
+      sources.add((await image.getAttribute("src"))!);
+    }
   }
-  expect(titles.size).toBe(20);
+  expect(sources.size).toBe(20);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 
