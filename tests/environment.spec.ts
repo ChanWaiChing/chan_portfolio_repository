@@ -90,9 +90,5 @@ test("section images load, surfaces remain opaque, and the footer scene is not c
   expect(scene!.x).toBeGreaterThan(footer!.x);
   expect(scene!.x+scene!.width).toBeLessThan(footer!.x+footer!.width);
   await expect(page.locator(".footer-scene")).toHaveCSS("overflow","hidden");
-  const rail = await page.locator(".page-scroll-control").boundingBox();
-  expect(rail!.x).toBeGreaterThanOrEqual(0);
-  expect(rail!.x).toBeLessThan(20);
-  expect(rail!.x+rail!.width).toBeLessThan(await page.evaluate(()=>innerWidth));
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });

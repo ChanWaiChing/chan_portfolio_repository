@@ -14,42 +14,12 @@ test("hero title is vertical brush text with a loaded local font", async ({ page
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
-test("custom scrollbar supports position seeking and keyboard navigation", async ({ page, isMobile }) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
+test("native page scrolling remains available without a custom reading rail", async ({ page }) => {
   await page.goto("/");
-  const control = page.getByRole("scrollbar", { name: "ページのスクロール位置" });
-  await expect(control).toHaveAttribute("aria-orientation", isMobile ? "horizontal" : "vertical");
-  await expect(control).toHaveAttribute("aria-controls", "main");
-  const box = await control.boundingBox();
-  await control.click({ position: isMobile ? { x: box!.width * .4, y: box!.height / 2 } : { x: box!.width / 2, y: box!.height * .4 } });
-  await expect.poll(async () => Number(await control.getAttribute("aria-valuenow"))).toBeGreaterThan(25);
-  await expect.poll(async () => Number(await control.getAttribute("aria-valuenow"))).toBeLessThan(55);
-  await control.press("End");
-  await expect(control).toHaveAttribute("aria-valuenow", "100");
-  await control.press("Home");
-  await expect(control).toHaveAttribute("aria-valuenow", "0");
-  await control.press("PageDown");
-  await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(200);
-  await page.getByRole("button", { name: "末尾までスクロール" }).click();
-  await expect(control).toHaveAttribute("aria-valuenow", "100");
-  await page.getByRole("button", { name: "先頭までスクロール" }).click();
-  await expect(control).toHaveAttribute("aria-valuenow", "0");
-});
-
-test("scroll thumb can be dragged without hiding normal page scrolling", async ({ page, isMobile }) => {
-  if (isMobile) return;
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  const control = page.getByRole("scrollbar", { name: "ページのスクロール位置" });
-  await expect(control).toBeVisible();
-  const box = (await control.boundingBox())!;
-  await page.mouse.move(box.x + box.width / 2, box.y + 8);
-  await page.mouse.down();
-  await page.mouse.move(box.x + box.width / 2, box.y + box.height * .75, { steps: 12 });
-  await page.mouse.up();
-  await expect.poll(async () => Number(await control.getAttribute("aria-valuenow"))).toBeGreaterThan(60);
-  const before = await page.evaluate(() => scrollY);
-  await page.mouse.move(500, 500);
-  await page.mouse.wheel(0, 600);
-  await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(before);
+  await expect(page.locator(".page-scroll-control")).toHaveCount(0);
+  await expect(page.locator(".portfolio-site")).toHaveCSS("padding-left", "0px");
+  await expect(page.locator(".portfolio-site")).toHaveCSS("padding-right", "0px");
+  await page.evaluate(() => scrollTo(0,500));
+  await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(100);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
