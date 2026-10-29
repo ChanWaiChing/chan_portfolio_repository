@@ -16,7 +16,7 @@ const faqs = [
 ];
 
 export function FaqSection({ directSend = false }: { directSend?: boolean }) {
-  const [active, setActive] = useState<number | null>(0);
+  const [active, setActive] = useState<number | null>(null);
   const questions = faqs.map(([question, answer], index) => index === 5 ? ["フォームから送信できますか？", directSend ? "はい。必要事項を入力して「この内容で送信する」を押すと、ご相談を送信できます。送信を確認できない場合は内容が残り、メールアプリからの送信も選べます。メール・チャットワーク・ディスコード・テレグラムからもご連絡いただけます。" : "現在はメール作成用です。内容を確認し、「メールアプリで送る」からメールを送信してください。入力内容はサイトに保存されません。メール・チャットワーク・ディスコード・テレグラムからもご相談いただけます。"] : [question, answer]);
   return <section className="content-section faq-guide-section" id="faq" aria-labelledby="faq-title">
     <div className="faq-guide-heading"><span>よくあるご質問</span><h2 id="faq-title">よくあるご質問</h2><p>ご相談の前に気になることを、まとめました。<br />知りたいことから、ひとつずつご覧ください。</p></div>
