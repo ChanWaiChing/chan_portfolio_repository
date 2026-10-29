@@ -4,7 +4,7 @@ export type PackagePlan = { name: string; price: number; priceEnd?: number; unit
 export type ServicePackage = {
   id: string; title: string; category: Category; description: string;
   price: number; duration: string; deliverables: string[];
-  plans: PackagePlan[]; conditions: string; source: string; pricingPage: number;
+  plans: PackagePlan[]; conditions: string; source: string; pricingPage: number; thumbnail: string;
 };
 
 type PackageRecord = {
@@ -153,12 +153,14 @@ const records: PackageRecord[] = [
 const tierNames = ["ベーシック", "スタンダード", "プレミアム"];
 const standardPackages: ServicePackage[] = records.map((record, index) => ({
   ...record, id: `package-${String(index + 1).padStart(2, "0")}`,
+  thumbnail: `/images/packages/${record.source.replace(/\.pdf$/i, "").replaceAll("_", "-").toLowerCase()}.webp`,
   price: record.prices[0], duration: "ご相談のうえ決定", pricingPage: record.source.startsWith("Full-Stack") ? 6 : 5,
   plans: record.prices.map((price, i) => ({ name: tierNames[i], price, scope: record.scopes[i] })),
 }));
 
 export const servicePackages: ServicePackage[] = [...standardPackages, {
   id: "package-20", source: "Design-Unification-Package.pdf", pricingPage: 5,
+  thumbnail: "/images/packages/design-unification-package.webp",
   title: "ブランドをそろえるデザイン制作", category: "デザイン",
   description: "ウェブ・広告・ロゴ・印刷物の印象を統一。編集可能なデータやテンプレートを整え、社内での制作も支援します。",
   price: 3000, duration: "ご相談のうえ決定",

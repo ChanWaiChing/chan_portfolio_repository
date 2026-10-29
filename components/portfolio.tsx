@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { trackInteraction } from "@/lib/interaction-events";
 import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Code2, Layers3, Menu, PenTool, Search, Sparkles, X } from "lucide-react";
+import { PackageThumbnail } from "./package-thumbnail";
 import { PackagePlanDetails } from "./package-plan-details";
 import { CategoryFilters } from "./category-filters";
 import { HeroShowcase } from "./hero-showcase";
@@ -147,7 +148,7 @@ export default function Portfolio({ directSend = false }: { directSend?: boolean
         <p className="sample-notice"><Sparkles size={17} />{servicePackages.length}のサービスから、ご希望に合う内容をお選びください。価格は税別です。詳細でプラン・支援範囲をご確認いただけます。</p>
         <CategoryFilters items={servicePackages} selected={packageCategory} label="パッケージのカテゴリ" onChange={category => { setPackageCategory(category); setPackagePage(1); }} />
         <p className="catalog-summary" ref={resultSummary} tabIndex={-1} aria-live="polite">{filteredPackages.length}件中 {(packagePage - 1) * 6 + 1}〜{Math.min(packagePage * 6, filteredPackages.length)}件を表示 <span>全{servicePackages.length}パッケージ</span></p>
-        <div className="package-grid">{filteredPackages.slice((packagePage - 1) * 6, packagePage * 6).map((item, i) => <article className={`package-card luminous-card package-tone-${i % 3}`} key={item.id}><div className="catalog-card-meta"><span>{item.category}</span><b>{item.plans.length === 4 ? "制作メニュー" : "三つのプラン"}</b></div><h3>{item.title}</h3><p>{item.description}</p><ul>{item.deliverables.map(deliverable => <li key={deliverable}><Check size={15} />{deliverable}</li>)}</ul><div className="package-price"><small>{item.plans.length === 4 ? "単体制作の目安・税別" : "ベーシック・税別"}</small><strong>¥{item.price.toLocaleString("ja-JP")}<span>〜</span></strong><span>制作期間：{item.duration}</span></div><button className="catalog-outline-button" aria-label={`${item.title} プランの詳細を見る`} onClick={() => setDetail({ kind: "package", item })}>プランの詳細を見る<ArrowRight size={17} /></button></article>)}</div>
+        <div className="package-grid">{filteredPackages.slice((packagePage - 1) * 6, packagePage * 6).map((item, i) => <article className={`package-card luminous-card package-tone-${i % 3}`} key={item.id}><PackageThumbnail item={item} /><div className="catalog-card-meta"><span>{item.category}</span><b>{item.plans.length === 4 ? "制作メニュー" : "三つのプラン"}</b></div><h3>{item.title}</h3><p>{item.description}</p><ul>{item.deliverables.map(deliverable => <li key={deliverable}><Check size={15} />{deliverable}</li>)}</ul><div className="package-price"><small>{item.plans.length === 4 ? "単体制作の目安・税別" : "ベーシック・税別"}</small><strong>¥{item.price.toLocaleString("ja-JP")}<span>〜</span></strong><span>制作期間：{item.duration}</span></div><button className="catalog-outline-button" aria-label={`${item.title} プランの詳細を見る`} onClick={() => setDetail({ kind: "package", item })}>プランの詳細を見る<ArrowRight size={17} /></button></article>)}</div>
         <Pagination page={packagePage} total={filteredPackages.length} size={6} onChange={changePackagePage} label="パッケージのページ切り替え" />
       </section>
       <section className="content-section" id="works"><Heading label="制作コンセプト" title="つくれるものは、ひとつじゃない。" text="ご相談のきっかけになる、デザインと開発の制作イメージをご紹介します。" />

@@ -1,5 +1,27 @@
 import { test, expect } from "@playwright/test";
 
+test("all package thumbnails load across pagination without cropping", async ({ page }) => {
+  test.setTimeout(90000);
+  await page.goto("/");
+  const section = page.locator("#packages");
+  const sources = new Set<string>();
+  for (const [index, count] of [6,6,6,2].entries()) {
+    await section.getByRole("navigation", { name: "パッケージのページ切り替え" }).getByRole("button", { name: `${index + 1}ページ目` }).click();
+    const images = section.locator(".package-thumbnail img");
+    await expect(images).toHaveCount(count);
+    for (const img of await images.all()) {
+      await expect(img).toHaveAttribute("loading", "lazy");
+      await img.scrollIntoViewIfNeeded();
+      await img.evaluate((image: HTMLImageElement) => image.decode());
+      expect(await img.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+      await expect(img).toHaveCSS("object-fit", "contain");
+      sources.add((await img.getAttribute("src"))!);
+    }
+  }
+  expect(sources.size).toBe(20);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
 test("section order, navigation and page health", async ({ page, isMobile }) => {
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));
