@@ -15,7 +15,7 @@ test("section order, navigation and page health", async ({ page, isMobile }) => 
     await page.getByRole("navigation", { name: "モバイルナビゲーション" }).getByRole("link", { name: /パッケージ/ }).click();
     await expect(page.getByRole("button", { name: "メニューを開く" })).toHaveAttribute("aria-expanded", "false");
   }
-  await expect(page.getByRole("contentinfo")).toContainText("BROTHERS");
+  await expect(page.getByRole("contentinfo")).toContainText("大穂兄弟");
   expect(errors).toEqual([]);
 });
 
@@ -28,7 +28,7 @@ test("all 20 sample packages are reachable, filterable and open for consultation
     await pagination.getByRole("button", { name: `${index + 1}ページ目` }).click();
     await expect(section.locator(".package-card")).toHaveCount(count);
   }
-  await section.getByRole("button", { name: "Web制作", exact: true }).click();
+  await section.locator('.catalog-filters button[data-category="ウェブ制作"]').click();
   await expect(section.locator(".package-card")).toHaveCount(5);
   await expect(section.locator(".catalog-summary")).toContainText("5件中 1〜5件");
   const opener = section.getByRole("button", { name: /プランの詳細を見る/ }).first();
@@ -50,7 +50,7 @@ test("all 30 sample works are reachable with search, empty state and details", a
     await pagination.getByRole("button", { name: `${index + 1}ページ目` }).click();
     await expect(section.locator(".portfolio-card")).toHaveCount(count);
   }
-  await page.getByRole("searchbox", { name: "ポートフォリオを検索" }).fill("flow");
+  await page.getByRole("searchbox", { name: "ポートフォリオを検索" }).fill("ながれ");
   await expect(section.locator(".portfolio-card")).toHaveCount(1);
   await section.locator(".portfolio-card button").click();
   await expect(page.getByRole("dialog")).toContainText("架空の自主制作コンセプト");
@@ -59,7 +59,7 @@ test("all 30 sample works are reachable with search, empty state and details", a
   await expect(section.locator(".catalog-empty")).toBeVisible();
   await section.getByRole("button", { name: "検索条件をリセット" }).click();
   await expect(section.locator(".catalog-summary")).toContainText("30件中 1〜9件");
-  await section.getByRole("button", { name: "デザイン", exact: true }).click();
+  await section.locator('.catalog-filters button[data-category="デザイン"]').click();
   await expect(section.locator(".portfolio-card")).toHaveCount(7);
 });
 
@@ -72,7 +72,7 @@ test("FAQ and contact validation, mail draft and edit invalidation", async ({ pa
   await page.getByLabel("お名前").fill("テスト 太郎");
   await page.getByRole("textbox", { name: "メールアドレス 必須" }).fill("test@example.com");
   await page.getByLabel("会社名・屋号").fill("サンプル株式会社");
-  await page.getByLabel("相談したいこと").selectOption("AI活用 / 業務改善");
+  await page.getByLabel("相談したいこと").selectOption("人工知能活用 / 業務改善");
   await page.getByLabel("ご相談内容").fill("日々の集計作業を効率化したいです。");
   await page.getByRole("button", { name: "内容を確認する" }).click();
   const review = page.locator("#contact-review");
@@ -90,7 +90,7 @@ test("hero keyboard controls and reduced motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   await expect(page.getByRole("button", { name: "自動切替を再生" })).toBeDisabled();
-  await page.getByRole("tab", { name: /02 ITコンサルティング/ }).click();
+  await page.getByRole("tab", { name: /02 情報技術コンサルティング/ }).click();
   await expect(page.getByRole("tabpanel")).toContainText("進むべき道筋を。");
   await page.keyboard.press("ArrowRight");
   await expect(page.getByRole("tab", { name: /03 デザイン・開発/ })).toBeFocused();
@@ -131,8 +131,8 @@ test("workflow links select packages, tool motion pauses, and footer navigation 
   await page.goto("/");
   await page.getByText("対応領域・技術の組み合わせを見る", { exact: true }).click();
   await expect(page.locator(".workflow-card")).toHaveCount(3);
-  await page.getByRole("link", { name: /想いを整理して、使いやすいWebサイトへ/ }).click();
-  await expect(page.locator("#packages").getByRole("button", { name: "Web制作", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("link", { name: /想いを整理して、使いやすいウェブサイトへ/ }).click();
+  await expect(page.locator("#packages").locator('.catalog-filters button[data-category="ウェブ制作"]')).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: "スキルアニメーションを停止" }).click();
   await expect(page.locator(".skill-tool-universe")).toHaveAttribute("data-paused", "true");
   await expect(page.locator(".skill-orbit-ring").first()).toHaveCSS("animation-play-state", "paused");
@@ -143,33 +143,34 @@ test("workflow links select packages, tool motion pauses, and footer navigation 
   await expect(page.getByRole("button", { name: "スキルアニメーションを再生" })).toBeDisabled();
 });
 
-test("contact methods copy exact IDs and the FAQ bot guides the accordion", async ({ page }) => {
+test("contact platform icons open the correct channels without displaying IDs", async ({ page }) => {
   await page.addInitScript(() => {
     const writes: string[] = [];
     Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: async (value: string) => { writes.push(value); } } });
     (window as Window & { contactClipboardWrites?: string[] }).contactClipboardWrites = writes;
   });
   await page.goto("/");
-  const methods = [["Mail", "cbnbc07@gmail.com"], ["Chatwork", "3htt4mii70cg8"], ["Discord", "shiner715."], ["Telegram", "@shiningstar1997"]];
-  for (const [label, value] of methods) {
-    await expect(page.locator(".contact-method-list")).toContainText(value);
-    await page.getByRole("button", { name: new RegExp(`^${label}の`) }).click();
-    expect(await page.evaluate(() => (window as Window & { contactClipboardWrites?: string[] }).contactClipboardWrites?.at(-1))).toBe(value);
-  }
+  const panel = page.locator(".contact-method-list");
+  await expect(panel.locator(".contact-platform svg")).toHaveCount(4);
+  for (const id of ["cbnbc07@gmail.com", "3htt4mii70cg8", "shiner715.", "@shiningstar1997"]) await expect(panel).not.toContainText(id);
+  await expect(panel.getByRole("link", { name: "メールで相談する" })).toHaveAttribute("href", "mailto:cbnbc07@gmail.com");
+  await expect(panel.getByRole("link", { name: "チャットワークで相談する" })).toHaveAttribute("href", "https://www.chatwork.com/3htt4mii70cg8");
+  await expect(panel.getByRole("link", { name: "テレグラムで相談する" })).toHaveAttribute("href", "https://t.me/shiningstar1997");
+  await panel.getByRole("button", { name: "ディスコードの連絡先をコピー" }).click();
+  expect(await page.evaluate(() => (window as Window & { contactClipboardWrites?: string[] }).contactClipboardWrites?.at(-1))).toBe("shiner715.");
+  await expect(panel.getByRole("status")).toContainText("コピーしました");
   await expect(page.locator(".faq-guide-item")).toHaveCount(8);
-  await expect(page.locator(".faq-guide-bot")).toBeVisible();
   await page.locator("#faq-question-7").click();
   await expect(page.locator("#faq-answer-7")).toBeVisible();
-  await expect(page.locator("#faq-answer-0")).toBeHidden();
 });
 
 test("catalog URL restores filters, search and pagination after reload", async ({ page }) => {
-  await page.goto("/?package=Web%E5%88%B6%E4%BD%9C&work=%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3&q=Figma#works");
+  await page.goto("/?package=Web%E5%88%B6%E4%BD%9C&work=%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3&q=%E3%83%95%E3%82%A3%E3%82%B0%E3%83%9E#works");
   await expect(page.locator("#packages .package-card")).toHaveCount(5);
   await expect(page.locator("#works .portfolio-card")).toHaveCount(7);
-  await expect(page.getByRole("searchbox")).toHaveValue("Figma");
+  await expect(page.getByRole("searchbox")).toHaveValue("フィグマ");
   await page.reload();
-  await expect(page.locator("#works").getByRole("button", { name: "デザイン", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#works").locator('.catalog-filters button[data-category="デザイン"]')).toHaveAttribute("aria-pressed", "true");
   await page.goto("/?pp=4&wp=4");
   await expect(page.locator("#packages .package-card")).toHaveCount(2);
   await expect(page.locator("#works .portfolio-card")).toHaveCount(3);
@@ -236,12 +237,54 @@ test("three selected concepts have usable demos and reset on close", async ({ pa
 test("service entry points preselect consultation topics and explain contact handling", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator(".service-entrance")).toHaveCount(3);
-  const topics = ["Webサイト制作", "Web・業務システム開発", "AI活用 / 業務改善"];
+  const topics = ["ウェブサイト制作", "ウェブ・業務システム開発", "人工知能活用 / 業務改善"];
   for (let index = 0; index < topics.length; index++) {
     await page.locator(".service-entrance").nth(index).getByRole("button", { name: "このサービスを相談する" }).click();
     await expect(page.getByLabel("相談したいこと")).toHaveValue(topics[index]);
   }
   await page.getByText("お問い合わせ情報の取り扱い", { exact: true }).click();
-  await expect(page.locator(".contact-privacy")).toContainText("大穂兄弟 / OHO BROTHERS");
+  await expect(page.locator(".contact-privacy")).toContainText("大穂兄弟");
   await expect(page.locator(".contact-expectations")).toContainText("送信だけで契約が成立することはありません");
+});
+
+test("category counts are attached to centered filter buttons", async ({ page }) => {
+  await page.goto("/");
+  for (const [id, counts] of [["packages", [20,5,4,4,4,3]], ["works", [30,9,7,6,4,4]]] as const) {
+    const section = page.locator(`#${id}`);
+    const buttons = section.locator(".catalog-filters button");
+    for (let index=0; index<counts.length; index++) {
+      await expect(buttons.nth(index).locator(".category-count")).toHaveText(String(counts[index]));
+      await expect(buttons.nth(index)).toHaveAttribute("data-count", String(counts[index]));
+    }
+    const position = await section.locator(".catalog-filters").evaluate(element => { const rect=element.getBoundingClientRect(); return { center: rect.x+rect.width/2, window: innerWidth/2 }; });
+    expect(Math.abs(position.center-position.window)).toBeLessThan(3);
+    const badge = await buttons.first().locator(".category-count").evaluate(element => getComputedStyle(element).position);
+    expect(badge).toBe("absolute");
+  }
+});
+
+test("site-owned copy is Japanese and the skill orbit uses icons", async ({ page }) => {
+  await page.goto("/");
+  await page.getByText("対応領域・技術の組み合わせを見る", { exact:true }).click();
+  await expect(page.locator(".skill-tool-badge > svg")).toHaveCount(13);
+  await expect(page.locator(".skill-tool-badge > strong")).toHaveCount(0);
+  const latin = await page.locator("body").innerText();
+  expect(latin.match(/[A-Za-z]+/g)).toBeNull();
+  const placeholders = await page.locator("input[placeholder],textarea[placeholder]").evaluateAll(elements=>elements.map(element=>element.getAttribute("placeholder")).join(" "));
+  expect(placeholders.match(/[A-Za-z]+/g)).toBeNull();
+  await page.goto("/does-not-exist");
+  await expect(page.getByRole("heading", { level:1 })).toHaveText("ページが見つかりません");
+});
+
+test("hero keeps the first brand scene and uses three human-led images", async ({ page }) => {
+  await page.emulateMedia({reducedMotion:"reduce"});
+  await page.goto("/");
+  await expect(page.locator(".hero-photo-layer").first().locator(".hero-brand-scene")).toHaveCount(1);
+  await expect(page.locator(".human-led-image img")).toHaveCount(3);
+  for (const index of [1,2,3]) {
+    await page.locator('[role="tab"]').nth(index).click();
+    await expect(page.locator(".hero-photo-layer").nth(index)).toHaveAttribute("data-active","true");
+    const src=await page.locator(".hero-photo-layer").nth(index).locator("img").getAttribute("src");
+    expect(decodeURIComponent(src || "")).toContain("human-led.webp");
+  }
 });

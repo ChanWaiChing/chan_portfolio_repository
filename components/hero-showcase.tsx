@@ -1,14 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import { BotMascot } from "./bot-mascot";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Pause, Play } from "lucide-react";
 
-const slides = [
-  { label: "トータルサポート", title: ["考える兄と、", "描く弟。"], phase: "ONE TEAM", note: "課題から、ひとつのチームで。", steps: ["目的を整理", "体験を設計", "仕組みを実装"] },
-  { label: "ITコンサルティング", title: ["その課題に、", "進むべき道筋を。"], phase: "PLAN", note: "何をつくるか、一緒に決める。", steps: ["課題・制約", "優先順位", "実行する計画"] },
-  { label: "デザイン・開発", title: ["伝わるデザイン。", "使いやすい仕組み。"], phase: "DESIGN & BUILD", note: "使う人と、運用する人のために。", steps: ["情報と導線", "操作できる試作", "デザインと実装"] },
-  { label: "AI活用・運用改善", title: ["つくった先の、", "可能性を広げる。"], phase: "IMPROVE", note: "必要なところから、小さく改善。", steps: ["現状を確認", "改善を試す", "運用に引き継ぐ"] },
+type HeroSlide = { label: string; title: string[]; phase: string; note: string; steps: string[]; image?: string; alt?: string };
+const slides: HeroSlide[] = [
+  { label: "トータルサポート", title: ["考える兄と、", "描く弟。"], phase: "ひとつのチーム", note: "課題から、ひとつのチームで。", steps: ["目的を整理", "体験を設計", "仕組みを実装"] },
+  { label: "情報技術コンサルティング", title: ["その課題に、", "進むべき道筋を。"], image: "/images/heroes/consulting-human-led.webp", alt: "二人の男性が図面と端末を使って企画を進め、二体の小さなボットが付箋とアイデアで支える制作イメージ", phase: "企画・設計", note: "何をつくるか、一緒に決める。", steps: ["課題・制約", "優先順位", "実行する計画"] },
+  { label: "デザイン・開発", title: ["伝わるデザイン。", "使いやすい仕組み。"], image: "/images/heroes/design-human-led.webp", alt: "女性が紙の設計案を説明し、男性がパソコンを操作するかたわら、二体のボットが配色と資料を補助する制作イメージ", phase: "デザインと開発", note: "使う人と、運用する人のために。", steps: ["情報と導線", "操作できる試作", "デザインと実装"] },
+  { label: "人工知能活用・運用改善", title: ["つくった先の、", "可能性を広げる。"], image: "/images/heroes/improvement-human-led.webp", alt: "男女が端末とチェックリストで改善を検討し、二体の小さなボットが材料と発想を補助する制作イメージ", phase: "改善・運用", note: "必要なところから、小さく改善。", steps: ["現状を確認", "改善を試す", "運用に引き継ぐ"] },
 ];
 
 const SLIDE_INTERVAL_MS = 4000;
@@ -51,13 +53,13 @@ export function HeroShowcase() {
       <span>アイデアから、事業の次の一歩まで。</span>
     </div>
     <section ref={stage} className="reference-hero" aria-label="大穂兄弟のサービス" data-playing={!paused && !reducedMotion && visible}>
-      <div className="hero-primary-copy"><p className="eyebrow">OHO BROTHERS / DESIGN & ENGINEERING</p><h1 id="hero-title">デザインと開発を、<br /><span>ひとつのチームで。</span></h1><p>中小企業・小さなチームのWebサイトと業務システムを、企画から公開後の改善まで。考える兄と描く弟が、事業の次の一歩を一緒につくります。</p><div className="hero-primary-actions"><a className="catalog-cta" href="#contact">プロジェクトを相談する<ArrowRight size={18} /></a><a className="catalog-outline-button" href="#selected-work">制作イメージを見る<ArrowRight size={18} /></a></div><p className="hero-experience">開発・IT相談 11年 <span>×</span> デザイン 3年</p></div>
+      <div className="hero-primary-copy"><p className="eyebrow">大穂兄弟のデザインと開発</p><h1 id="hero-title">デザインと開発を、<br /><span>ひとつのチームで。</span></h1><p>中小企業・小さなチームのウェブサイトと業務システムを、企画から公開後の改善まで。考える兄と描く弟が、事業の次の一歩を一緒につくります。</p><div className="hero-primary-actions"><a className="catalog-cta" href="#contact">プロジェクトを相談する<ArrowRight size={18} /></a><a className="catalog-outline-button" href="#selected-work">制作イメージを見る<ArrowRight size={18} /></a></div><p className="hero-experience">開発・情報技術相談 11年 <span>×</span> デザイン 3年</p></div>
       <div className="reference-hero-stage hero-scene-stage" id="hero-panel" role="tabpanel"
         aria-labelledby={`hero-tab-${active}`} tabIndex={0}
         onFocusCapture={() => setPaused(true)} data-slide={active}>
         <div className="hero-photo-deck">
           {slides.map((item, index) => <div className={`hero-photo-layer brand-scene-layer scene-${index}`} key={item.phase} data-active={index === active} aria-hidden={index !== active}>
-            <div className="hero-brand-scene"><span className="scene-phase">{item.phase}</span><div className="scene-orbit-line" aria-hidden="true" /><div className="scene-brothers"><div><BotMascot variant="ocean" /><span>ENGINEERING</span></div><div><BotMascot variant="sunset" /><span>DESIGN</span></div></div><strong>{item.note}</strong><div className="scene-steps">{item.steps.map((step, stepIndex) => <span key={step}><small>0{stepIndex + 1}</small>{step}</span>)}</div><small className="scene-note">OHO BROTHERS / ブランドキャラクターによるイメージ</small></div>
+            {item.image ? <div className="human-led-image"><div className="human-led-photo"><Image src={item.image} alt={item.alt || "人が主役の制作イメージ"} fill sizes="(max-width: 760px) 100vw, (max-width: 1440px) 55vw, 780px" loading={index === 1 ? "eager" : "lazy"} /></div><span className="hero-image-label">人とボットが協力する制作イメージ</span><div className="hero-photo-support">{item.steps.map((step, stepIndex) => <span key={step}><small>0{stepIndex + 1}</small>{step}</span>)}</div></div> : <div className="hero-brand-scene"><span className="scene-phase">{item.phase}</span><div className="scene-orbit-line" aria-hidden="true" /><div className="scene-brothers"><div><BotMascot variant="ocean" /><span>設計・開発</span></div><div><BotMascot variant="sunset" /><span>デザイン</span></div></div><strong>{item.note}</strong><div className="scene-steps">{item.steps.map((step, stepIndex) => <span key={step}><small>0{stepIndex + 1}</small>{step}</span>)}</div><small className="scene-note">大穂兄弟のブランドキャラクター</small></div>}
           </div>)} 
         </div>
         <div className="hero-scene-caption">

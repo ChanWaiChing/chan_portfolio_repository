@@ -11,8 +11,8 @@ export const site = {
 };
 
 export const contactMethods = [
-  { id: "mail", label: "Mail", value: "cbnbc07@gmail.com", href: "mailto:cbnbc07@gmail.com" },
-  { id: "chatwork", label: "Chatwork", value: "3htt4mii70cg8", href: "https://www.chatwork.com/3htt4mii70cg8" },
-  { id: "discord", label: "Discord", value: "shiner715.", href: null },
-  { id: "telegram", label: "Telegram", value: "@shiningstar1997", href: "https://t.me/shiningstar1997" },
+  { id: "mail", label: "メール", value: "cbnbc07@gmail.com", href: "mailto:cbnbc07@gmail.com" },
+  { id: "chatwork", label: "チャットワーク", value: "3htt4mii70cg8", href: "https://www.chatwork.com/3htt4mii70cg8" },
+  { id: "discord", label: "ディスコード", value: "shiner715.", href: null },
+  { id: "telegram", label: "テレグラム", value: "@shiningstar1997", href: "https://t.me/shiningstar1997" },
 ] as const;

@@ -18,10 +18,10 @@ export function ContactForm({ topic, onTopic, directSend }: { topic: string; onT
   useEffect(() => { setReviewed(false); setStatus(""); setSent(false); requestId.current = ""; }, [topic]);
   const draft = `【プロジェクトのご相談】\n\nお名前：${name}\nメールアドレス：${email}\n会社・屋号：${company || "未入力"}\n相談したいこと：${topic}\n\n${message}`;
   const mailHref = `mailto:cbnbc07@gmail.com?subject=${encodeURIComponent(`【ご相談】${topic} / ${name}`)}&body=${encodeURIComponent(draft)}`;
-  const basicTopics = ["まずは相談したい", "Webサイト制作", "デザイン / UI・UX", "Web・業務システム開発", "AI活用 / 業務改善"];
+  const basicTopics = ["まずは相談したい", "ウェブサイト制作", "デザイン / 画面・体験設計", "ウェブ・業務システム開発", "人工知能活用 / 業務改善"];
   const knownTopic = basicTopics.includes(topic) || servicePackages.some(item => item.title === topic);
 
-  return <form className="contact-form" onChange={() => { setReviewed(false); setStatus(""); setSent(false); requestId.current = ""; }} onSubmit={async event => {
+  return <form className="contact-form" onInvalid={event => { const field = event.target as HTMLInputElement; field.setCustomValidity(field.validity.typeMismatch ? "メールアドレスを正しく入力してください。" : field.validity.tooShort ? "ご相談内容は１０文字以上で入力してください。" : "必須項目を入力してください。"); }} onInput={event => { (event.target as HTMLInputElement).setCustomValidity(""); }} onChange={() => { setReviewed(false); setStatus(""); setSent(false); requestId.current = ""; }} onSubmit={async event => {
     event.preventDefault();
     if (!directSend) { setReviewed(true); trackInteraction("contact_draft_ready"); requestAnimationFrame(() => document.getElementById("contact-review")?.focus()); return; }
     const form = event.currentTarget;
@@ -37,14 +37,14 @@ export function ContactForm({ topic, onTopic, directSend }: { topic: string; onT
   }}>
     <h3>プロジェクトのご相談</h3>
     <p className="form-intro">目的・ご予算・ご希望の時期を、わかる範囲でお知らせください。</p>
-    <details className="contact-privacy"><summary>お問い合わせ情報の取り扱い</summary><p>窓口は大穂兄弟 / OHO BROTHERSです。お名前・連絡先・ご相談内容は、ご相談への対応と連絡のために利用します。</p><p>{directSend ? "フォームはメール送信サービスを経由して窓口へ送ります。サイト独自のデータベースには入力内容を保存しません。" : "現在はメール作成モードです。内容を確認してメールアプリで送信するまで、入力内容は窓口へ送られません。サイトには保存されません。"}</p><p>送信後の内容確認や訂正については、同じ窓口へご連絡ください。</p></details>
+    <details className="contact-privacy"><summary>お問い合わせ情報の取り扱い</summary><p>窓口は大穂兄弟です。お名前・連絡先・ご相談内容は、ご相談への対応と連絡のために利用します。</p><p>{directSend ? "フォームはメール送信サービスを経由して窓口へ送ります。サイト独自のデータベースには入力内容を保存しません。" : "現在はメール作成モードです。内容を確認してメールアプリで送信するまで、入力内容は窓口へ送られません。サイトには保存されません。"}</p><p>送信後の内容確認や訂正については、同じ窓口へご連絡ください。</p></details>
     <fieldset disabled={sending || sent}>
       <div className="form-row"><label htmlFor="contact-name">お名前 <span>必須</span></label><input id="contact-name" autoComplete="name" required maxLength={100} placeholder="山田 太郎" value={name} onChange={event => setName(event.target.value)} /></div>
-      <div className="form-row"><label htmlFor="contact-email">メールアドレス <span>必須</span></label><input id="contact-email" type="email" autoComplete="email" required maxLength={200} placeholder="hello@example.com" value={email} onChange={event => setEmail(event.target.value)} /></div>
+      <div className="form-row"><label htmlFor="contact-email">メールアドレス <span>必須</span></label><input id="contact-email" type="email" autoComplete="email" required maxLength={200} placeholder="ご連絡用のメールアドレス" value={email} onChange={event => setEmail(event.target.value)} /></div>
       <div className="form-row"><label htmlFor="contact-company">会社名・屋号 <small>任意</small></label><input id="contact-company" autoComplete="organization" maxLength={150} placeholder="株式会社サンプル" value={company} onChange={event => setCompany(event.target.value)} /></div>
       <div className="form-row"><label htmlFor="contact-topic">相談したいこと <span>必須</span></label><select id="contact-topic" value={topic} onChange={event => onTopic(event.target.value)}><optgroup label="ご相談の内容">{basicTopics.map(value => <option key={value}>{value}</option>)}</optgroup>{categories.slice(1).map(category => <optgroup label={`${category}のパッケージ`} key={category}>{servicePackages.filter(item => item.category === category).map(item => <option key={item.id}>{item.title}</option>)}</optgroup>)}{!knownTopic && <optgroup label="選択した制作イメージ"><option>{topic}</option></optgroup>}</select></div>
       <div className="form-row"><label htmlFor="contact-message">ご相談内容 <span>必須</span></label><textarea id="contact-message" required minLength={10} maxLength={3000} rows={6} aria-describedby="message-help" placeholder="実現したいこと、今のお困りごと、ご希望の時期など" value={message} onChange={event => setMessage(event.target.value)} /><small id="message-help">10〜3,000文字。まだ決まっていない項目は、空欄のままで大丈夫です。</small></div>
-      <label className="honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
+      <label className="honeypot" aria-hidden="true">予備欄<input name="website" tabIndex={-1} autoComplete="off" /></label>
       <p className="form-delivery-note">{directSend ? "入力内容は、ご相談への返信のために使用します。ボタンを押すと送信されます。" : "このサイトからは送信されません。確認後にメールアプリを開き、ご自身で送信してください。入力内容は保存されません。"}</p>
       <button type="submit" className="catalog-cta contact-submit">{sending ? "送信中…" : directSend ? "この内容で送信する" : "内容を確認する"}<ArrowRight size={18} /></button>
     </fieldset>
