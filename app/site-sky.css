@@ -1,0 +1,72 @@
+/* A single viewport-sized sky continues behind every chapter of the site. */
+body { background: #060c20; }
+.site-night-sky { position: fixed; inset: 0; z-index: 0; isolation: isolate; overflow: hidden; pointer-events: none; }
+.site-night-sky .night-sky { z-index: 0; inset: 0; transform: none; }
+.dipper-star { transform-box: fill-box; transform-origin: center; animation: dipper-twinkle var(--star-duration) ease-in-out var(--star-delay) infinite; }
+.site-night-sky[data-sky-motion="false"] .dipper-star { animation-play-state: paused; }
+.site-night-sky[data-sky-motion="false"] .night-sky { transform: none; }
+.site-night-sky[data-sky-motion="false"] :is(.night-star,.night-meteor,.milky-way) { animation-play-state: paused; }
+.portfolio-site { position: relative; z-index: 1; background: transparent; color: #e1edff; }
+.portfolio-site :is(#introduction,#selected-work,.introduction-copy,#services,#strengths,#packages,#works,#faq,#contact,.pattern-footer,.hero-night) {
+ --environment-image: none; --environment-veil: transparent; --muted: #bbcee8;
+ background: transparent; color: #e1edff;
+}
+.portfolio-site :is(#introduction,#selected-work,.introduction-copy,#services,#strengths,#packages,#works,#faq,#contact,.pattern-footer,.reference-hero)::before,
+.portfolio-site .pattern-footer::after { content: none; background-image: none; animation: none; }
+.portfolio-site :is(.content-heading,.faq-guide-heading) h2 { color: #e7f3ff; }
+.portfolio-site :is(.content-heading,.faq-guide-heading) > span { color: #95d9ff; }
+.portfolio-site .workflow-heading > span { color: #95d9ff; }
+.portfolio-site :is(.content-heading,.faq-guide-heading) > p { color: #c6d9f1; }
+.portfolio-site :is(.selected-work > .text-link,.mobile-gallery-hint) { color: #abdfff; }
+.portfolio-site .contact-form { background-image: none; }
+.portfolio-site .contact-time-intro { background: #101f3bd9; border-color: #5979a2; color: #e1edff; }
+.portfolio-site .contact-time-intro :is(h3,p),.portfolio-site .contact-time-intro > span { color: #d4e9ff; }
+.portfolio-site .contact-time-intro::before,.portfolio-site .contact-time-intro::after { content: none; animation: none; }
+.portfolio-site .catalog-summary { color: #173047; }
+.portfolio-site .footer-invitation { background: #101f3be6; border-color: #5979a2; }
+.portfolio-site .footer-vertical-wordmark { color: #e1f3ff; }
+/* Readable controls and content surfaces sit above the shared sky. */
+.portfolio-site :is(.contact-form,.contact-followup,.faq-guide-item,.package-entry-details,.catalog-dialog) { --muted: #3c5570; color: #07213c; }
+.portfolio-site .mobile-nav { background: #0c1735f7; color: #e1edff; }
+.portfolio-site .mobile-nav a { border-color: #829fc63d; }
+.portfolio-site .mobile-nav a > span { color: #a0c6ec; }
+.portfolio-site #about { scroll-margin-top: 0; }
+.portfolio-site #about .content-heading > span { color: #a4dbff; }
+.portfolio-site #about > .content-heading p { text-wrap: balance; }
+.team-background,.section-subchapter { margin-top: 80px; }
+.portfolio-site #works > #selected-work { padding: 0; margin-top: 80px; }
+.portfolio-site #contact > #faq { padding: 0; margin-top: 80px; }
+@media(max-width:760px) {
+ .team-background,.section-subchapter { margin-top: 56px; }
+ .portfolio-site .footer-nav-pill { flex-wrap: wrap; justify-content: center; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .site-night-sky :is(.night-star,.milky-way,.dipper-star) { animation: none; }
+ .site-night-sky .night-sky { transform: none; }
+ .site-night-sky .night-meteor { display: none; }
+}
+
+/* Keep the footer message outside the photograph and clear of every face. */
+@media(max-width:760px) {
+}
+
+@keyframes dipper-twinkle { 0%,100% { opacity: .6; transform: scale(.95); } 50% { opacity: 1; transform: scale(1.15); } }
+
+/* A scroll gesture lights the constellation like a quiet celestial signature. */
+.sky-resonance { position: absolute; inset: 0; opacity: 0; background: radial-gradient(ellipse at 35% 25%,#76caff16,transparent 55%); }
+.constellation-trace { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; }
+.constellation-halo { opacity: 0; }
+.night-star:nth-child(7n)::before { content: ''; position: absolute; inset: -5px; border-radius: 50%; opacity: 0; background: radial-gradient(circle,#d4f3ff99,transparent 70%); }
+.site-night-sky[data-constellation-pulse="true"] .constellation-trace { animation: constellation-trace 2.4s ease-out both; }
+.site-night-sky[data-constellation-pulse="true"] .constellation-halo { animation: constellation-halo 1.6s ease-out both; }
+.site-night-sky[data-constellation-pulse="true"] .sky-resonance { animation: sky-resonance 2.4s ease-out both; }
+.site-night-sky[data-constellation-pulse="true"] .night-star:nth-child(7n)::before { animation: star-echo 1.3s ease-out var(--echo-delay) both; }
+@keyframes constellation-trace { 0% { stroke-dashoffset: 1; opacity: 0; } 12% { opacity: .8; } 72% { stroke-dashoffset: 0; opacity: .65; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes constellation-halo { 0%,100% { opacity: 0; } 35% { opacity: .22; } }
+@keyframes sky-resonance { 0%,100% { opacity: 0; } 45% { opacity: 1; } }
+@keyframes star-echo { 0%,100% { opacity: 0; transform: scale(.7); } 35% { opacity: .8; transform: scale(1.25); } }
+@media(prefers-reduced-motion:reduce) {
+ .site-night-sky :is(.constellation-trace,.constellation-halo,.sky-resonance),.site-night-sky .night-star::before { animation: none !important; opacity: 0; }
+}
+
+@keyframes workflow-detail-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }

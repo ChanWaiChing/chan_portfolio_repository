@@ -1,0 +1,59 @@
+.portfolio-site #contact {
+  --muted: #bbcee8;
+  color: #e1edff;
+  background: transparent;
+}
+.portfolio-site #contact :is(p,li,input,textarea,select) { font-family: var(--font-heading); }
+.portfolio-site #contact .content-heading h2 { color: #e7f3ff; }
+.portfolio-site #contact .content-heading p { color: #c6d9f1; }
+.portfolio-site #contact .content-heading > span { color: #95d9ff; }
+.portfolio-site #contact .contact-reference-layout { grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); grid-auto-rows: 1fr; gap: 32px; align-items: stretch; }
+.portfolio-site #contact .contact-form-column { display: flex; }
+.portfolio-site #contact .contact-form-column > .contact-form { flex: 1; width: 100%; }
+.portfolio-site #contact :is(.contact-reference-info,.contact-form) {
+  --muted: #bdcfe3;
+  position: static;
+  border: 1px solid transparent;
+  border-radius: 24px;
+  color: #dceafb;
+  background: linear-gradient(145deg,#19334b,#101f34 80%) padding-box,linear-gradient(135deg,#87b8d08c,#4d6c8f45 60%,#7aa6c270) border-box;
+  box-shadow: inset 0 1px 0 #e1f3ff0d,0 18px 42px #02081755;
+}
+.portfolio-site #contact .contact-reference-info :is(h3,h4),.portfolio-site #contact .contact-form > h3 { color: #dceafb; }
+.portfolio-site #contact .contact-reference-info h3,.portfolio-site #contact .contact-form > h3 { margin: 0 0 26px; font-size: 20px; line-height: 1.6; font-weight: 700; }
+.portfolio-site #contact .contact-reference-info h4 { font-size: 12px; font-weight: 700; }
+.portfolio-site #contact .contact-reference-info h3,.portfolio-site #contact .contact-form > h3 { display: flex; align-items: center; gap: 12px; font-size: 23px; letter-spacing: .02em; }
+.portfolio-site #contact .contact-reference-info h3::before,.portfolio-site #contact .contact-form > h3::before { content: ""; width: 3px; height: 22px; flex: none; border-radius: 2px; background: #8bd8ff; }
+.portfolio-site #contact .contact-form > h3::before { background: #bfb6ff; }
+.portfolio-site #contact .contact-reference-info h4 { color: #97c6e8; }
+.portfolio-site #contact .contact-services { border-top: 1px solid #7fa3c033; padding-top: 22px; }
+.portfolio-site #contact .contact-services li { position: relative; padding-left: 15px; }
+.portfolio-site #contact .contact-services li::before { content: ""; position: absolute; left: 0; top: .7em; width: 4px; height: 4px; border-radius: 50%; background: #83c5e6; }
+.portfolio-site #contact .contact-reference-info li { font-size: 14px; color: #bdcfe3; }
+.portfolio-site #contact .contact-email-link { color: #a7ddff; }
+.portfolio-site #contact .contact-social-icon { transform: none; }
+.portfolio-site #contact .contact-platform > .contact-social-icon > svg { width: 32px; height: 32px; }
+.portfolio-site #contact .contact-method-status { min-height: 0; margin: 0; font-size: 12px; line-height: 1.7; color: #a7ddff; }
+.portfolio-site #contact .contact-method-status:not(:empty) { margin-top: 12px; }
+.portfolio-site #contact .contact-form { padding: 32px; }
+.portfolio-site #contact .contact-form fieldset { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.portfolio-site #contact .contact-selected-topic { margin: -8px 0 20px; font-size: 12px; line-height: 1.8; color: #a9bfd5; }
+.portfolio-site #contact .form-row > label { font-size: 14px; line-height: 1.5; font-weight: 500; color: #dceafb; }
+.portfolio-site #contact .form-row label > span { background: transparent; padding: 0; font-size: 10px; font-weight: 500; color: #a4bad2; }
+.portfolio-site #contact .form-row > :is(input,textarea,select) { min-height: 48px; border: 1px solid #6d91b36b; border-radius: 12px; background: #0b182b99; padding: 11px 14px; color: #e9f3ff; font-size: 16px; line-height: 1.4; box-shadow: none; }
+.portfolio-site #contact .form-row > textarea { min-height: 132px; line-height: 1.65; }
+.portfolio-site #contact .form-row > :is(input,textarea)::placeholder { color: #849db8; opacity: 1; }
+.portfolio-site #contact .form-row > :is(input,textarea,select):focus-visible { outline: 2px solid #8ed6ff; outline-offset: 3px; }
+.portfolio-site #contact .form-row > select option,.portfolio-site #contact .form-row > select optgroup { background: #14283e; color: #e9f3ff; }
+.portfolio-site #contact :is(.form-row > small,.form-delivery-note,.measurement-note,.contact-privacy p) { color: #a9bfd5; font-size: 11px; line-height: 1.8; }
+.portfolio-site #contact .contact-extra { border: 0; padding: 0; background: transparent; }
+.portfolio-site #contact .contact-extra > summary { min-height: 28px; padding: 0; color: #b2c9e0; font-size: 12px; font-weight: 500; box-shadow: none; transform: none; background: transparent; }
+.portfolio-site #contact .contact-extra[open] > div { display: grid; gap: 18px; margin-top: 16px; }
+.portfolio-site #contact .form-delivery-note { margin: 0; }
+.portfolio-site #contact .contact-submit { justify-content: center; width: 100%; min-height: 48px; padding: 12px 20px; border: 0; border-radius: 999px; background: linear-gradient(125deg,#176bbd,#3549b5); color: #fff; box-shadow: inset 0 1px 0 #e5f3ff40,0 4px 0 #07172f; transform: none; font-family: var(--font-heading); font-size: 15px; font-weight: 700; }
+.portfolio-site #contact .contact-submit:hover { background: linear-gradient(125deg,#227dd0,#455bc6); }
+.portfolio-site #contact .contact-submit > svg { display: none; }
+.portfolio-site #contact .form-status { min-height: 0; margin: 0; color: #a7ddff; }
+.portfolio-site #contact .form-status:not(:empty) { margin-top: 16px; }
+@media(max-width:900px) { .portfolio-site #contact .contact-reference-layout { grid-template-columns: 1fr; gap: 24px; } }
+@media(max-width:600px) { .portfolio-site #contact .contact-form { padding: 24px; } }

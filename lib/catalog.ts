@@ -1,5 +1,5 @@
 /** Package data comes from supplied PDFs; the three interactive demos remain illustrative. */
-export const categories = ["すべて", "ウェブ制作", "デザイン", "システム開発", "人工知能・業務改善", "コンサルティング"] as const;
+export const categories = ["すべて", "ウェブ制作", "デザイン", "システム開発", "AI・業務改善", "コンサルティング"] as const;
 export type Category = Exclude<(typeof categories)[number], "すべて">;
 export { servicePackages, type ServicePackage } from "./service-packages";
 
@@ -12,7 +12,7 @@ const conceptBriefs: Record<Category, [string, string, string]> = {
   "ウェブ制作": ["サービスの魅力が伝わりにくく、必要な情報を探す手間がかかる。", "閲覧する人の目的を整理し、情報の優先順位とお問い合わせまでの導線を設計。", "スマートフォンでの読みやすさ、主要ページへの到達、キーボード操作を確認する想定です。"],
   "デザイン": ["画面や媒体によって見た目が異なり、操作の意味が伝わりにくい。", "利用シーンとユーザーフローから、色・文字・コンポーネントのルールをそろえる。", "主要タスクをプロトタイプで試し、迷いやすい箇所と文字の視認性を確認する想定です。"],
   "システム開発": ["情報が複数のシートに分かれ、状況把握や引き継ぎに時間がかかる。", "業務フローと権限を整理し、必要な情報をひとつの画面に集約。", "入力・検索・更新の流れ、例外処理、権限ごとの表示を確認する想定です。"],
-  "人工知能・業務改善": ["繰り返す情報整理に時間を取られ、判断に使う情報がそろわない。", "入力資料を整理し、人工知能の草案作成と人の確認をつなぐワークフローを検討。", "元資料との整合性、確認手順、誤った出力への対応を小さく検証する想定です。"],
+  "AI・業務改善": ["繰り返す情報整理に時間を取られ、判断に使う情報がそろわない。", "入力資料を整理し、AIの草案作成と人の確認をつなぐワークフローを検討。", "元資料との整合性、確認手順、誤った出力への対応を小さく検証する想定です。"],
   "コンサルティング": ["改善したいことはあるが、取り組む順序と必要な体制が決まっていない。", "課題・制約・運用体制を整理し、優先順位と段階的な実行計画を作成。", "目的に対する実現性、費用と運用の負担、次の判断に必要な条件を確認する想定です。"],
 };
 const featuredBriefs: Record<string, [string, string, string]> = {
@@ -29,9 +29,9 @@ const workSeeds: [string, string, Category][] = [
 export const demoItems: PortfolioItem[] = workSeeds.map(([brand, title, category], i) => ({
   id: `work-${String(i + 1).padStart(2, "0")}`, brand, title, category,
   description: `架空の「${brand}」を題材にした、${category}の制作イメージです。目的と利用シーンを整理し、わかりやすい導線と使いやすさを検討したサンプルです。`,
-  technologies: category === "デザイン" ? ["フィグマ", "画面と使い心地の設計"] : category === "人工知能・業務改善" ? ["パイソン", "人工知能ワークフロー"] : category === "コンサルティング" ? ["要件定義", "業務設計"] : ["ネクスト", "タイプスクリプト"],
+  technologies: category === "デザイン" ? ["フィグマ", "画面と使い心地の設計"] : category === "AI・業務改善" ? ["パイソン", "AIワークフロー"] : category === "コンサルティング" ? ["要件定義", "業務設計"] : ["ネクスト", "タイプスクリプト"],
   accent: ["blue", "teal", "orange", "violet", "green"][i % 5],
-  kind: category === "システム開発" || category === "人工知能・業務改善" ? "dashboard" : category === "デザイン" ? "mobile" : "website",
+  kind: category === "システム開発" || category === "AI・業務改善" ? "dashboard" : category === "デザイン" ? "mobile" : "website",
   challenge: (featuredBriefs[brand] || conceptBriefs[category])[0],
   approach: (featuredBriefs[brand] || conceptBriefs[category])[1],
   validation: (featuredBriefs[brand] || conceptBriefs[category])[2],

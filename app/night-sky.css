@@ -1,0 +1,146 @@
+/* The opening chapter sits inside a full-width, self-contained night sky. */
+.hero-night { position: relative; isolation: isolate; overflow: hidden; background: #060c20; color: #e4edff; }
+.night-sky { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; background: radial-gradient(ellipse at 74% 18%,#1a245449,transparent 65%),linear-gradient(155deg,#040817,#0c1735 58%,#090e24); }
+.milky-way { position: absolute; inset: -30%; opacity: .7; transform: rotate(-24deg); background: radial-gradient(ellipse at 48% 46%,#c8d5ff26,transparent 12%),radial-gradient(ellipse at 63% 51%,#9586d62b,transparent 22%),radial-gradient(ellipse at 36% 48%,#6094c62e,transparent 20%),linear-gradient(180deg,transparent 33%,#8295d50c 41%,#afbee21a 47%,#d5d7ff16 49%,#050a1c66 50%,#9f95cc22 52%,#6e86b111 58%,transparent 67%); filter: blur(9px); animation: milky-way-drift 40s ease-in-out infinite alternate; }
+.milky-way::after { content: ""; position: absolute; inset: 37% 0; opacity: .65; background-image: radial-gradient(circle,#e9edffb3 .65px,transparent 1px),radial-gradient(circle,#aebdeb80 .6px,transparent 1px); background-size: 31px 29px,47px 43px; background-position: 0 0,13px 17px; mask-image: linear-gradient(transparent,#000 42%,#000 58%,transparent); }
+.night-stars,.night-meteors { position: absolute; inset: 0; }
+.night-star { position: absolute; width: var(--star-size); height: var(--star-size); border-radius: 50%; background: #e7f2ff; opacity: .55; box-shadow: 0 0 8px 1px #a7d7ffb3; animation: night-twinkle var(--star-duration) ease-in-out var(--star-delay) infinite; }
+.night-star:nth-child(9n) { background: #fff4d7; box-shadow: 0 0 12px 2px #d6dcffbf; }
+.night-star:nth-child(9n)::after { content: ""; position: absolute; inset: -4px; background: #d4e8ffbf; clip-path: polygon(50% 0,59% 40%,100% 50%,59% 59%,50% 100%,41% 59%,0 50%,41% 40%); }
+.night-meteor { position: absolute; width: 180px; height: 2px; border-radius: 100%; opacity: 0; background: linear-gradient(90deg,transparent,#a3caff80 70%,#f5faff); transform: rotate(140deg); transform-origin: right center; animation: night-shooting-star var(--meteor-duration) linear var(--meteor-delay) infinite; }
+.night-meteor::after { content: ""; position: absolute; right: -1px; top: -1px; width: 4px; height: 4px; border-radius: 50%; background: #fff; box-shadow: 0 0 9px 2px #aad1ff; }
+@keyframes night-twinkle { 0%,100% { opacity: .12; transform: scale(.65); } 38% { opacity: .45; transform: scale(.9); } 52% { opacity: 1; transform: scale(1.4); } 68% { opacity: .35; transform: scale(.85); } }
+@keyframes milky-way-drift { from { transform: rotate(-24deg) translate3d(-1%,0,0); opacity: .55; } to { transform: rotate(-21deg) translate3d(2%,2%,0); opacity: .85; } }
+@keyframes night-shooting-star { 0% { opacity: 0; transform: translate3d(100px,-80px,0) rotate(140deg); } 1% { opacity: 1; } 8% { opacity: 0; transform: translate3d(-560px,430px,0) rotate(140deg); } 100% { opacity: 0; transform: translate3d(-560px,430px,0) rotate(140deg); } }
+.hero-night[data-sky-motion="false"] :is(.night-star,.night-meteor,.milky-way) { animation-play-state: paused; }
+#introduction .hero-night .site-intro { position: relative; background: #060c2073; color: #cfdef9; border-color: #a9c6ff26; }
+.hero-night .site-intro > span { color: #acbbd7; }
+.portfolio-site .hero-night .reference-hero { background: transparent; }
+.portfolio-site .hero-night .hero-primary-copy { color: #e1e9f7; text-shadow: 0 2px 14px #030718; }
+.portfolio-site .hero-night .hero-primary-copy { grid-template-rows: auto auto; align-content: center; padding-block: 32px; }
+.portfolio-site .hero-night .hero-primary-copy h1 { grid-row: 1/3; }
+.portfolio-site .hero-night .hero-primary-copy h1 > .hero-title-line { background: none; color: #d9f3ff; -webkit-text-fill-color: currentColor; text-shadow: 0 0 5px #c5efff80,0 0 18px #62bdff55; }
+.portfolio-site .hero-night .scene-0 .human-led-photo img { object-position: 70% center; }
+.portfolio-site .hero-night .hero-title-line:first-child { transform: translateY(34px); }
+.portfolio-site .hero-night .hero-title-line:nth-child(2) { transform: translateY(-34px); }
+.portfolio-site .hero-night .hero-primary-copy > p:not(.eyebrow) { grid-row: 1; align-self: end; margin-top: 48px; color: #d6edff; text-shadow: 0 2px 10px #030718; }
+.portfolio-site .hero-night .hero-primary-actions { grid-row: 2; align-self: start; margin-top: 26px; }
+.portfolio-site .hero-night .hero-primary-copy > .eyebrow { color: #b8d9ff; }
+.portfolio-site .hero-night .hero-primary-actions > .catalog-outline-button { color: #d9eaff; background: #11203cd9; border-color: #7999ca; box-shadow: 0 3px 0 #060c20; }
+.portfolio-site .hero-night .hero-brand-scene { background: #09142ca6; color: #e3eeff; }
+.portfolio-site .hero-night .hero-brand-scene > strong { color: #e3eeff; }
+.portfolio-site .hero-night .hero-brand-scene :is(.scene-phase,.scene-note,.scene-brothers > div > span) { color: #bbd9ff; }
+.portfolio-site .hero-night .hero-brand-scene .scene-steps > span { color: #dceaff; background: transparent; border-color: #789fd342; }
+.portfolio-site .hero-night .hero-brand-scene .scene-steps small { color: #8dcaff; }
+.portfolio-site .hero-night .hero-scene-caption { background: transparent; color: #e1edff; }
+.portfolio-site .hero-night .reference-hero .reference-hero-tabs > button { color: #d5e5ff; background: #0c1932e6; border-color: #4b648b; box-shadow: 0 3px 0 #03091a; }
+.portfolio-site .hero-night .reference-hero .reference-hero-tabs > button[aria-selected="true"] { color: #f0f6ff; background: linear-gradient(120deg,#1c3859,#302650); border-color: #a1bff7; }
+.portfolio-site .hero-night .reference-hero-tabs .hero-tab-number { color: #a6c9f6; }
+@media(max-width:760px) { .night-star:nth-child(n+90) { display: none; } .night-meteor { width: 110px; } }
+/* Carry the opening sky's navy and starlight colors into the title/navigation bar. */
+.portfolio-site .site-header { background: #080f24f5; color: #deebff; border-color: #41567d; box-shadow: 0 4px 24px #02071433; }
+.portfolio-site .site-header .brand-name { color: #e2efff; }
+.portfolio-site .site-header .brand-name > span { color: #a9c9ed; }
+.portfolio-site .desktop-nav a:is([aria-current],:hover) { color: #b6e6ff; border-color: #8ccfff; }
+.portfolio-site .site-header .menu-toggle { color: #deebff; border-color: #607a9f; }
+.portfolio-site .site-header .header-contact { background: linear-gradient(135deg,var(--tone-top),var(--tone-bottom)); border-color: var(--tone-edge); box-shadow: inset 0 1px 0 #ffffff70,0 4px 0 #083b8b,0 8px 20px #0a63c72b; }
+.portfolio-site .site-header .header-contact:hover { background: linear-gradient(135deg,var(--tone-bottom),var(--tone-edge)); }
+.portfolio-site .site-header .wordmark { gap: 12px; }
+.portfolio-site .site-header .brand-symbol { width: 46px; height: 46px; filter: drop-shadow(0 0 10px #66bfff26); }
+.portfolio-site .site-header .brand-name { font-family: "Noto Sans JP Variable",sans-serif; font-size: 27px; font-weight: 800; line-height: 1.2; letter-spacing: .08em; }
+.portfolio-site .desktop-nav { gap: 6px; }
+.portfolio-site .desktop-nav a { position: relative; padding: 8px 10px; border: 1px solid transparent; border-radius: 12px; transition: color .2s,background .2s,border-color .2s,box-shadow .2s; }
+.portfolio-site .desktop-nav a[aria-current] { color: #c0edff; background: #69b9ff12; border-color: #80c9ff38; }
+.portfolio-site .desktop-nav a:is(:hover,:focus-visible) { color: #effaff; background: linear-gradient(135deg,#68caff20,#a18bff20); border-color: #9edcff70; box-shadow: inset 0 1px 0 #d1f3ff20,0 0 18px #61b9ff1f; }
+@media(max-width:760px) {
+ .portfolio-site .site-header .wordmark { gap: 8px; }
+ .portfolio-site .site-header .brand-symbol { width: 35px; height: 35px; }
+ .portfolio-site .site-header .brand-name { font-size: clamp(19px,5.6vw,25px); letter-spacing: .04em; }
+}
+@media(max-width:760px) {
+ .portfolio-site .hero-night .hero-primary-copy { padding-block: 24px; }
+ .portfolio-site .hero-night .hero-primary-copy > p:not(.eyebrow) { grid-row: 1/3; align-self: center; margin-top: 28px; }
+ .portfolio-site .hero-night .hero-primary-actions { grid-row: 3; margin-top: 24px; }
+ .portfolio-site .hero-night .hero-title-line:first-child { transform: translateY(22px); }
+ .portfolio-site .hero-night .hero-title-line:nth-child(2) { transform: translateY(-22px); }
+}
+@media(prefers-reduced-motion:reduce) { .hero-night :is(.night-star,.milky-way) { animation: none; } .night-meteor { display: none; } }
+
+/* Larger centered chapter labels alongside the original bot artwork. */
+.portfolio-site .hero-night .reference-hero .reference-hero-tabs > button { justify-content: center; gap: 12px; padding: 10px 16px; text-align: center; }
+.portfolio-site .hero-night .reference-hero .reference-hero-tabs > button > .hero-tab-copy { flex: 1; align-items: center; justify-content: center; gap: 6px; }
+.portfolio-site .hero-night .reference-hero .reference-hero-tabs strong { font-size: clamp(20px,1.6vw,28px); line-height: 1.4; white-space: nowrap; }
+.portfolio-site .hero-night .reference-hero-tabs .hero-tab-number { font-size: 17px; }
+.portfolio-site .hero-night .reference-hero-tabs .hero-selector-bot { width: 80px; min-width: 80px; height: 82px; }
+
+/* Reserve space for the complete selector row inside the opening screen. */
+@media(min-width:1101px) and (min-height:600px) {
+ .hero-night { height: calc(100svh - 80px); min-height: 520px; }
+ #introduction .hero-night .site-intro { height: 44px; padding-block: 8px; display: flex; align-items: center; justify-content: center; }
+ .portfolio-site .hero-night .reference-hero { height: calc(100% - 44px); padding: clamp(12px,2.4svh,28px) 28px 20px; grid-template-columns: .95fr 1.2fr; grid-template-rows: minmax(0,1fr) auto; gap: 0 32px; align-items: center; }
+ .portfolio-site .hero-night .hero-primary-copy { padding-block: 0; row-gap: 10px; }
+ .portfolio-site .hero-night .reference-hero .hero-primary-copy h1 { font-size: clamp(38px,6.1svh,68px); padding-block: 40px; }
+ .portfolio-site .hero-night .hero-primary-copy > p:not(.eyebrow) { margin-top: 20px; line-height: 1.8; }
+ .portfolio-site .hero-night .hero-primary-actions { margin-top: 20px; gap: 12px; }
+ .portfolio-site .hero-night .hero-primary-actions > a { min-height: 48px; padding-block: 10px; }
+ .portfolio-site .hero-night .hero-scene-stage { align-self: stretch; display: grid; grid-template-rows: minmax(0,1fr) auto; min-height: 0; }
+ .portfolio-site .hero-night .hero-photo-deck { height: 100%; min-height: 0; }
+ .portfolio-site .hero-night .hero-scene-caption { padding: 12px 8px; }
+ .portfolio-site .hero-night .reference-hero-controls { margin-top: 16px; }
+}
+@media(max-width:760px) {
+ .portfolio-site .hero-night .reference-hero .reference-hero-tabs > button { padding: 10px 8px; gap: 6px; }
+ .portfolio-site .hero-night .reference-hero .reference-hero-tabs strong { font-size: 17px; white-space: normal; }
+ .portfolio-site .hero-night .reference-hero-tabs .hero-tab-number { font-size: 14px; }
+ .portfolio-site .hero-night .reference-hero-tabs .hero-selector-bot { width: 44px; min-width: 44px; height: 58px; }
+}
+@media(min-width:1101px) and (min-height:600px) and (max-height:740px) {
+ .portfolio-site .hero-night .reference-hero .hero-primary-copy h1 { font-size: 5.2svh; padding-block: 28px; }
+ .portfolio-site .hero-night .hero-primary-copy > p:not(.eyebrow) { font-size: 18px; line-height: 1.65; margin-top: 12px; }
+ .portfolio-site .hero-night .hero-primary-actions { gap: 8px; margin-top: 12px; }
+ .portfolio-site .hero-night .hero-primary-actions > a { min-height: 44px; font-size: 15px; padding-block: 8px; }
+ .portfolio-site .hero-night .reference-hero .reference-hero-tabs > button { min-height: 88px; }
+ .portfolio-site .hero-night .reference-hero-tabs .hero-selector-bot { width: 64px; min-width: 64px; height: 66px; }
+ .portfolio-site .hero-night .reference-hero-copy h2 { font-size: 24px; }
+}
+/* More breathing room between vertical glyphs, with a brighter starlight halo. */
+.portfolio-site .hero-night .reference-hero .hero-primary-copy h1 { letter-spacing: .1em; line-height: 1.55; }
+.portfolio-site .hero-night .hero-primary-copy h1 > .hero-title-line { text-shadow: 0 0 5px #effcffcc,0 0 16px #a0e2ffb3,0 0 32px #63bdff80,0 0 52px #528fff4d; }
+@keyframes hero-title-glow {
+ 0%,100% { text-shadow: 0 0 5px #effcffcc,0 0 16px #a0e2ffb3,0 0 32px #63bdff80,0 0 52px #528fff4d; }
+ 50% { text-shadow: 0 0 7px #f5fdff,0 0 22px #b0ebffe6,0 0 44px #6cc9ffb3,0 0 68px #629aff80; }
+}
+@media(max-width:760px) { .portfolio-site .hero-night .reference-hero .hero-primary-copy h1 { font-size: clamp(36px,10.3vw,46px); padding-block: 30px; } }
+
+/* Equal side insets keep the chapter row centered and a little more compact. */
+.portfolio-site .hero-night .reference-hero-controls { width: 94%; margin-inline: auto; }
+.portfolio-site .hero-night .human-led-image { background: #0b1630; }
+.portfolio-site .hero-night .human-led-photo img { object-fit: contain; object-position: center; }
+.portfolio-site .hero-night .scene-0 .human-led-photo img { object-position: center; }
+.portfolio-site .hero-night .hero-photo-deck { height: auto; min-height: 0; aspect-ratio: 3/2; }
+.portfolio-site .hero-night .human-led-image { display: block; }
+.portfolio-site .hero-night .human-led-photo { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; }
+.portfolio-site .hero-night .hero-photo-support { display: none; }
+.portfolio-site .hero-night .human-led-image .hero-image-label { position: absolute; left: 12px; bottom: 12px; padding: 5px 10px; border-radius: 999px; background: #0a1630db; color: #e0efff; }
+@media(min-width:1101px) and (min-height:600px) {
+ .portfolio-site .hero-night .hero-scene-stage { align-self: center; }
+ .portfolio-site .hero-night .hero-photo-deck { height: auto; aspect-ratio: 3/2; max-height: calc(100svh - 370px); }
+}
+@media(max-width:760px) { .portfolio-site .hero-night .reference-hero-controls { width: 96%; } }
+
+/* Match the image's true aspect ratio so rounding follows the visible pixels. */
+.portfolio-site .hero-night .hero-scene-stage { display: grid; grid-template-rows: auto auto; gap: 14px; background: transparent; border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
+.portfolio-site .hero-night .hero-photo-deck { background: transparent; border: 0; border-radius: 20px; box-shadow: none; overflow: hidden; margin-inline: auto; }
+.portfolio-site .hero-night .hero-photo-layer { border-radius: 20px; overflow: hidden; transform: none; }
+.portfolio-site .hero-night .hero-photo-layer img { border-radius: 20px; }
+.portfolio-site .hero-night .hero-scene-caption { padding: 0 8px; background: transparent; }
+.portfolio-site .hero-night .reference-hero-copy h2 { font-size: clamp(20px,1.8vw,28px); line-height: 1.6; color: #e1edff; }
+@media(min-width:1101px) and (min-height:600px) {
+ .portfolio-site .hero-night .hero-scene-stage { width: calc(100% + 20px); margin-inline: -10px; }
+ .portfolio-site .hero-night .hero-photo-deck { width: min(100%,calc((100svh - 350px)*1.5)); height: auto; max-height: none; aspect-ratio: 3/2; }
+}
+
+@media(min-width:1101px) and (min-height:600px) and (max-height:740px) {
+ .portfolio-site .hero-night .hero-title-line:first-child { transform: translateY(24px); }
+ .portfolio-site .hero-night .hero-title-line:nth-child(2) { transform: translateY(-24px); }
+}

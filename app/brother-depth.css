@@ -1,0 +1,64 @@
+/* Fixed hover poses keep the two profiles calm while separating their layers. */
+.brother-profile-card {
+  transform-style: preserve-3d;
+  transform: perspective(1200px) translateY(0) rotateX(0) rotateY(0);
+  box-shadow: inset 0 1px 0 #eaf5ff12,0 10px 24px #02081750,0 28px 60px #0208173d;
+  transition: transform .55s cubic-bezier(.2,.75,.2,1),box-shadow .55s ease;
+}
+.brother-profile-card::before,.brother-profile-card::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+}
+.brother-profile-card::before {
+  border: 1px solid #e8f3ff0a;
+  background: linear-gradient(145deg,#edf7ff08,transparent 38%,#02081714);
+  transform: translateZ(1px);
+}
+.brother-profile-card::after {
+  background: radial-gradient(ellipse at 85% 0%,var(--profile-glow),transparent 65%);
+  opacity: .35; transition: opacity .55s ease; transform: translateZ(2px);
+}
+.brother-profile-card .brother-profile-texture { overflow: hidden; transition: opacity .55s ease; }
+.brother-profile-top { position: relative; transform-style: preserve-3d; transform: translateZ(12px); }
+.brother-profile-card > :is(h4,p,ul) { position: relative; transform: translateZ(10px); }
+.brother-portrait-shell {
+  transform: translateZ(20px);
+  box-shadow: 0 10px 20px #02081755,0 0 0 5px #02081712;
+  transition: transform .55s cubic-bezier(.2,.75,.2,1),box-shadow .55s ease,border-color .55s ease;
+}
+.brother-profile-card .profile-cta { transform: translateZ(16px); }
+.brother-portrait-orbit {
+  inset: -5px;
+  background: conic-gradient(transparent 0deg 230deg,var(--profile-line) 280deg,var(--profile-edge) 330deg,transparent 360deg);
+  mask: radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px));
+  animation: profile-border-orbit 12s linear infinite;
+}
+.brother-portrait-shell::after {
+  content: ""; position: absolute; inset: -5px; border: 1px solid var(--profile-line); border-radius: inherit;
+  pointer-events: none; box-shadow: 0 0 12px var(--profile-glow),inset 0 0 8px var(--profile-glow);
+  animation: profile-border-breathe 5s ease-in-out infinite;
+}
+.brother-profile-card:nth-child(2) .brother-portrait-orbit { animation-direction: reverse; animation-delay: -4s; }
+.brother-profile-card:nth-child(2) .brother-portrait-shell::after { animation-delay: -2.5s; }
+@keyframes profile-border-orbit { to { transform: rotate(360deg); } }
+@keyframes profile-border-breathe { 0%,100% { opacity: .3; } 50% { opacity: .85; } }
+.brother-profile-card:focus-within::after { opacity: .85; }
+.brother-profile-card:focus-within .brother-portrait-shell { border-color: var(--profile-edge); }
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .brother-profile-card:is(:hover,:focus-within) {
+    transform: perspective(1200px) translateY(-6px) rotateX(1.3deg) rotateY(var(--profile-turn));
+    box-shadow: inset 0 1px 0 #edf7ff20,0 16px 30px #02081770,0 40px 80px #02081766,0 0 0 1px var(--profile-line);
+  }
+  .brother-profile-card:is(:hover,:focus-within)::after { opacity: 1; }
+  .brother-profile-card:is(:hover,:focus-within) .brother-profile-texture { opacity: .45; }
+  .brother-profile-card:is(:hover,:focus-within) .brother-portrait-shell {
+    transform: translateZ(42px) translateY(-2px);
+    border-color: var(--profile-edge);
+    box-shadow: 0 14px 25px #02081770,0 0 0 5px #02081718;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  .brother-profile-card,.brother-profile-top,.brother-profile-card > :is(h4,p,ul),.brother-portrait-shell,.brother-profile-card .profile-cta { transform: none; transition: none; }
+  .brother-profile-card::before,.brother-profile-card::after { transform: none; transition: none; }
+  .brother-profile-card .brother-profile-texture { transition: none; }
+  .brother-portrait-orbit,.brother-portrait-shell::after { animation: none; }
+}

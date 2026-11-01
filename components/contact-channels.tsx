@@ -107,7 +107,7 @@ export function ContactChannels() {
             <h3>
               つながる方法も、
               <br />
-              あなたらしく。
+              あなたらしく
             </h3>
             <p className="contact-panel-intro">
               相談のきっかけは、小さなひとことで。
@@ -199,7 +199,7 @@ export function ContactChannels() {
               <span className="contact-panel-eyebrow">
                 LET’S MAKE IT HAPPEN
               </span>
-              <h3>次の一歩を、ここから。</h3>
+              <h3>次の一歩を、ここから</h3>
             </div>
           </div>
           <p className="form-lead">

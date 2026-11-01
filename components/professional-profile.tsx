@@ -4,7 +4,7 @@ import { BotMascot } from "./bot-mascot";
 export function ProfessionalProfile() {
   return <article className="professional-profile" aria-labelledby="professional-profile-title">
     <aside className="profile-guide"><span className="eyebrow">プロフィールガイド</span><BotMascot variant="ocean" className="profile-guide-bot" /><strong>数字で捉え、<br />世界へつなぐ。</strong><p>アオが、経歴と得意分野をご紹介します。</p><small>ボットは紹介役のブランドキャラクターです。</small></aside>
-    <div className="profile-biography"><span className="eyebrow">経済学・事業分析・グローバルな視点</span><h3 id="professional-profile-title">挑戦する人と、<br />事業の可能性を広げる。</h3>
+    <div className="profile-biography"><span className="eyebrow">経済学・事業分析・グローバルな視点</span><h3 id="professional-profile-title">挑戦する人と、<br />事業の可能性を広げる</h3>
       <div className="profile-education"><GraduationCap size={28} aria-hidden="true" /><p><strong>ボストン大学</strong><span>経済学の学位を取得</span></p></div>
       <p>現在はスターティングゲート・ファンドのアシスタントとして、チームとともに初期段階のプロジェクトを支援し、グローバル市場への進出を目指す起業家をサポートしています。</p>
       <p>シーメイトのコミュニティ運営にも貢献。ステラ・キャピタルとデロイト・コンサルティングでの経験を通じて、投資調査・リスク評価・企業戦略への理解を深めてきました。</p>

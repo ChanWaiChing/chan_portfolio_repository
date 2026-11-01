@@ -1,14 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 
-/** One site-wide control also pauses autonomous hero effects. */
+/** Follow the visitor's system motion preference without a floating control. */
 export function useSiteMotion() {
  const [enabled,setEnabled]=useState(true);
  useEffect(()=>{
-  try {setEnabled(sessionStorage.getItem("oho-motion")!=="off");} catch { /* Optional preference. */ }
-  const update=(event:Event)=>setEnabled((event as CustomEvent<boolean>).detail);
-  window.addEventListener("oho-motion-change",update);
-  return ()=>window.removeEventListener("oho-motion-change",update);
+  const media=matchMedia("(prefers-reduced-motion: reduce)");
+  const update=()=>setEnabled(!media.matches);
+  update();
+  media.addEventListener("change",update);
+  return ()=>media.removeEventListener("change",update);
  },[]);
  return enabled;
 }

@@ -28,7 +28,7 @@ export function TeamPortrait() {
       </div>
       <figcaption>
         <span>ENGINEERING × DESIGN</span>
-        <p>多様な視点が、ひとつのアイデアになる。</p>
+        <p>多様な視点が、ひとつのアイデアになる</p>
       </figcaption>
     </figure>
   );

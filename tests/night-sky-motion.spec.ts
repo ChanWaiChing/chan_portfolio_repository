@@ -1,0 +1,34 @@
+import {test,expect} from '@playwright/test';
+
+test('scroll illuminates the constellation without moving the sky and honors reduced motion',async({page},testInfo)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/');
+ const sky=page.locator('.site-night-sky'),background=sky.locator('.night-sky');
+ await expect(sky).toHaveAttribute('data-sky-motion','true');
+ await expect(sky.locator('.dipper-star')).toHaveCount(7);
+ await expect(background).toHaveCSS('transform','none');
+ const before=await background.boundingBox();
+ await page.evaluate(()=>scrollTo({top:(document.documentElement.scrollHeight-innerHeight)/2,behavior:'instant'}));
+ await expect(sky).toHaveAttribute('data-constellation-pulse','true');
+ await expect(sky.locator('.constellation-trace')).toHaveCSS('animation-name','constellation-trace');
+ expect(await background.boundingBox()).toEqual(before);
+ const style=await page.addStyleTag({content:'.portfolio-site { visibility: hidden; }'});
+ await page.waitForTimeout(700);
+ await page.screenshot({caret:'initial',path:testInfo.outputPath('constellation-glow.png')});
+ await style.evaluate(el=>el.remove());
+ await expect(sky).not.toHaveAttribute('data-constellation-pulse','true',{timeout:4000});
+ await page.waitForTimeout(300);
+ await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
+ await expect(sky).toHaveAttribute('data-constellation-pulse','true');
+ await expect(background).toHaveCSS('transform','none');
+ expect(await background.boundingBox()).toEqual(before);
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await expect(sky).toHaveAttribute('data-sky-motion','false');
+ await expect(sky).not.toHaveAttribute('data-constellation-pulse','true');
+ await page.evaluate(()=>scrollTo({top:1000,behavior:'instant'}));
+ await expect(sky.locator('.constellation-trace')).toHaveCSS('animation-name','none');
+ await expect(sky.locator('.dipper-star').first()).toHaveCSS('animation-name','none');
+ await expect(sky.locator('.night-meteor').first()).toHaveCSS('display','none');
+ expect(errors).toEqual([]);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});

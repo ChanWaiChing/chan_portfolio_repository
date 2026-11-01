@@ -4,7 +4,7 @@ export type PackagePlan = { name: string; price: number; priceEnd?: number; unit
 export type ServicePackage = {
   id: string; title: string; category: Category; description: string;
   price: number; duration: string; deliverables: string[];
-  plans: PackagePlan[]; conditions: string; source: string; pricingPage: number; thumbnail: string;
+  technologies: string[]; plans: PackagePlan[]; conditions: string; source: string; pricingPage: number; thumbnail: string;
 };
 
 type PackageRecord = {
@@ -89,8 +89,8 @@ const records: PackageRecord[] = [
     source: "SaaS-Development-Package.pdf", title: "月額型ウェブサービス開発", category: "システム開発",
     description: "事業のアイデアを、利用者が試せるサービスへ。試作から認証・継続課金、複数企業のデータ分離、大規模基盤まで支援します。",
     deliverables: ["試作・主要機能の実装", "認証・継続課金の構築", "企業別データ分離・拡張設計"],
-    prices: [100000, 200000, 400000], scopes: ["最小限の製品設計、画面構築、主要な中核機能の実装。", "複数企業のデータ分離、ストライプ決済、認証基盤。", "高度な人工知能の統合と、利用拡大に対応する基盤設計。"],
-    conditions: "サーバー・外部連携・認証・決済等の利用料や手数料は別途。機能数、企業別構造、課金方式、人工知能連携、運用支援の範囲を事前に確認します。",
+    prices: [100000, 200000, 400000], scopes: ["最小限の製品設計、画面構築、主要な中核機能の実装。", "複数企業のデータ分離、ストライプ決済、認証基盤。", "高度なAIの統合と、利用拡大に対応する基盤設計。"],
+    conditions: "サーバー・外部連携・認証・決済等の利用料や手数料は別途。機能数、企業別構造、課金方式、AI連携、運用支援の範囲を事前に確認します。",
   },
   {
     source: "3D-Online-Dev-Package.pdf", title: "立体表現・オンライン体験開発", category: "システム開発",
@@ -100,24 +100,24 @@ const records: PackageRecord[] = [
     conditions: "対象端末、立体素材の有無、同時接続人数、通信要件、運用範囲を事前に確認します。月額利用料は目安です。",
   },
   {
-    source: "KINTONE-Dev-Package.pdf", title: "キントーン業務アプリ構築", category: "人工知能・業務改善",
+    source: "KINTONE-Dev-Package.pdf", title: "キントーン業務アプリ構築", category: "AI・業務改善",
     description: "表計算に分散した業務を、チームで扱いやすいアプリへ。権限設計、独自機能、外部ツールとの連携まで整えます。",
     deliverables: ["業務アプリ・データ構造の設計", "権限・社内ポータルの構築", "独自拡張・外部連携"],
-    prices: [30000, 50000, 200000], scopes: ["基礎アプリ設計、社内ポータル構築、権限設定。", "独自カスタマイズと通知・外部ツール連携。", "大規模なアプリ群、基幹連携、人工知能の統合と継続支援。"],
+    prices: [30000, 50000, 200000], scopes: ["基礎アプリ設計、社内ポータル構築、権限設定。", "独自カスタマイズと通知・外部ツール連携。", "大規模なアプリ群、基幹連携、AIの統合と継続支援。"],
     conditions: "利用人数、契約プラン、有料プラグイン、外部連携、保守範囲を事前に確認します。資料の月額利用料は目安で、契約条件により変動します。",
   },
   {
-    source: "Generative-AI-Package.pdf", title: "生成系の人工知能・社内データ活用", category: "人工知能・業務改善",
+    source: "Generative-AI-Package.pdf", title: "生成AI・社内データ活用", category: "AI・業務改善",
     description: "社内文書を参照する検索・回答や、業務を支援するエージェントを構築。小さな精度検証から全社基盤への展開まで支援します。",
     deliverables: ["社内データの検索・回答基盤", "業務エージェント・画面構築", "データ保護・精度の継続改善"],
     prices: [50000, 150000, 300000], scopes: ["小規模な社内データ検索・回答の構築と試作画面。", "高度な検索拡張生成、モデル選定・連携、安全な画面実装。", "複数モデル統合、エージェントによる業務処理、伴走支援。"],
     conditions: "利用モデル、データ量、機密情報の扱い、回答精度の評価方法、利用上限、保守範囲を事前に確認します。月額利用料は目安です。",
   },
   {
-    source: "n8n_Package_Description.pdf", title: "ツール連携による業務自動化", category: "人工知能・業務改善",
+    source: "n8n_Package_Description.pdf", title: "ツール連携による業務自動化", category: "AI・業務改善",
     description: "繰り返す転記・通知・集計をつなぎ、自動で流れる業務へ。単一の処理から社内基盤の統合まで段階的に構築します。",
     deliverables: ["業務フロー設計・実装", "自社運用環境・外部ツール連携", "例外処理・再実行・監視設計"],
-    prices: [50000, 150000, 250000], scopes: ["単一の業務シナリオを自動化するフローの設計・実装。", "自社運用環境の構築と、複数ツール・人工知能の連携。", "高度な独自処理の開発、大規模基盤統合、常時監視体制の構築。"],
+    prices: [50000, 150000, 250000], scopes: ["単一の業務シナリオを自動化するフローの設計・実装。", "自社運用環境の構築と、複数ツール・AIの連携。", "高度な独自処理の開発、大規模基盤統合、常時監視体制の構築。"],
     conditions: "サーバー・クラウド・外部連携等の利用料は別途。月額費用は処理量・実行頻度・環境により変動します。構築範囲と運用条件を事前に確認します。",
   },
   {
@@ -151,15 +151,30 @@ const records: PackageRecord[] = [
 ];
 
 const tierNames = ["ベーシック", "スタンダード", "プレミアム"];
+// Only technologies explicitly named in the supplied package data are listed.
+const packageTechnologies: Record<string, string[]> = {
+  'WordPress-Development-Package.pdf': ['WordPress'],
+  'Shopify-EC-Package.pdf': ['Shopify'],
+  'STUDIO-Web-Package.pdf': ['STUDIO'],
+  'SWELL-Website-Package.pdf': ['WordPress', 'SWELL'],
+  'Modern-Web-Stack-Package.pdf': ['Next.js', 'Astro'],
+  'NextJS-Headless-CMS-Package.pdf': ['Next.js', 'microCMS'],
+  'Salon-Branding-Package.pdf': ['LINE'],
+  'EC-CUBE-Customization-Package.pdf': ['EC-CUBE'],
+  'SaaS-Development-Package.pdf': ['Stripe'],
+  'KINTONE-Dev-Package.pdf': ['kintone'],
+  'Generative-AI-Package.pdf': ['RAG'],
+  'n8n_Package_Description.pdf': ['n8n'],
+};
 const standardPackages: ServicePackage[] = records.map((record, index) => ({
-  ...record, id: `package-${String(index + 1).padStart(2, "0")}`,
+  ...record, technologies: packageTechnologies[record.source] ?? [], id: `package-${String(index + 1).padStart(2, "0")}`,
   thumbnail: `/images/packages/${record.source.replace(/\.pdf$/i, "").replaceAll("_", "-").toLowerCase()}.webp`,
   price: record.prices[0], duration: "ご相談のうえ決定", pricingPage: record.source.startsWith("Full-Stack") ? 6 : 5,
   plans: record.prices.map((price, i) => ({ name: tierNames[i], price, scope: record.scopes[i] })),
 }));
 
 export const servicePackages: ServicePackage[] = [...standardPackages, {
-  id: "package-20", source: "Design-Unification-Package.pdf", pricingPage: 5,
+  id: "package-20", technologies: [], source: "Design-Unification-Package.pdf", pricingPage: 5,
   thumbnail: "/images/packages/design-unification-package.webp",
   title: "ブランドをそろえるデザイン制作", category: "デザイン",
   description: "ウェブ・広告・ロゴ・印刷物の印象を統一。編集可能なデータやテンプレートを整え、社内での制作も支援します。",

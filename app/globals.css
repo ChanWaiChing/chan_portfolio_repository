@@ -1,0 +1,23 @@
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+/* Keep the site's existing reset while migrating its component styles. */
+@import "./site.css" layer(components);
+@import "./bot-palette.css" layer(components);
+@import "./bold-blue.css" layer(components);
+@import "./hero-refresh.css" layer(components);
+@import "./night-sky.css" layer(components);
+@import "./site-sky.css" layer(components);
+@import "./brother-depth.css" layer(components);
+@import "./contact-reference.css" layer(components);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "./catalog-night.css" layer(utilities);
+
+@source "../components";
+@source "./";
+
+@theme {
+  --font-heading: "Noto Sans JP Variable", sans-serif;
+  --font-body: "Noto Serif JP Variable", "Yu Mincho", serif;
+}
+

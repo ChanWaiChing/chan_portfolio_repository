@@ -1,0 +1,66 @@
+/* Catalog surfaces share the night sky palette, with quiet depth and crisp copy. */
+.portfolio-site :is(#packages,#works) { overflow-anchor: none; }
+.portfolio-site :is(.package-grid,.portfolio-grid) { align-content: start; overflow-anchor: none; }
+.portfolio-site :is(#packages .package-card,#works .portfolio-card):nth-child(n) {
+  --muted: #bbcce1;
+  --card-accent: #abd9f8;
+  --tone-ink: #b9e2ff;
+  --tone-border: #739ec14d;
+  color: #edf5ff;
+  background: radial-gradient(ellipse at 8% 0%,#6685a32b,transparent 62%),linear-gradient(145deg,#233b52f5,#15243afa);
+  border: 1px solid #a7c3dc59;
+  box-shadow: inset 0 1px 0 #d6edff14,0 16px 36px -18px #020815cc;
+  transition: border-color .3s ease,box-shadow .35s ease,transform .45s cubic-bezier(.22,1,.36,1);
+}
+.portfolio-site :is(#packages .package-card,#works .portfolio-card):nth-child(n)::before,
+.portfolio-site :is(#packages .package-card,#works .portfolio-card):nth-child(n)::after { display: none; }
+.portfolio-site :is(#packages .package-card,#works .portfolio-card):is(:hover,:focus-within) {
+  border-color: #c5e6f8b3;
+  box-shadow: inset 0 1px 0 #eaf6ff40,0 22px 44px -20px #020815e6,0 0 24px -14px #a9d9ff70;
+  transform: translateY(-4px);
+}
+.portfolio-site :is(#packages .package-card,#works .portfolio-card) h3 { color: #edf5ff; }
+.portfolio-site :is(#packages .package-card,#works .portfolio-card) p { color: #bbcce1; }
+.portfolio-site :is(#packages .package-card,#works .portfolio-card) .catalog-card-meta > span {
+  color: #b9ddf5; background: #294b6666; border: 1px solid #7fa5c430;
+}
+.portfolio-site :is(#packages .package-card,#works .portfolio-card) .catalog-card-meta > b,
+.portfolio-site #works .portfolio-card-body > span:first-of-type,
+.portfolio-site :is(#packages .package-card,#works .portfolio-card) .card-technologies > span { color: #a9bfd7; }
+.portfolio-site :is(#packages .package-card,#works .portfolio-card) .card-technologies li {
+  color: #c0def3; background: #7bafd212; border-color: #88b9dc40;
+}
+.portfolio-site #packages .package-card > .catalog-outline-button {
+  color: #d6ecff; background: linear-gradient(115deg,#244c6a,#253956); border: 1px solid #8abbd45c;
+  box-shadow: inset 0 1px 0 #ffffff0d; transform: none;
+}
+.portfolio-site #packages .package-card > .catalog-outline-button:hover { background: #305775; border-color: #b3dcf3; }
+.portfolio-site #works .portfolio-detail-link { color: #b6e0ff; border-top: 1px solid #7fa5c430; }
+.portfolio-site #works .portfolio-card > button { background: transparent; color: inherit; }
+.portfolio-site #works .catalog-card-meta { justify-content: flex-start; flex-wrap: wrap; }
+.portfolio-site #works .catalog-card-meta > .portfolio-field-badge { color: #c9cfe5; background: #9ca8d112; border-color: #a0abc52e; }
+.portfolio-site :is(#works .project-thumbnail,#packages .package-thumbnail) {
+  border: 1px solid #d8e9f28c; background: #eaf2f7; overflow: hidden;
+  box-shadow: 0 3px 14px #020b181a;
+}
+/* Preserve the source artwork's light tones; no dark veil or dimming filter. */
+.portfolio-site :is(#works .project-thumbnail,#packages .package-thumbnail) img {
+  opacity: 1; filter: none; mix-blend-mode: normal;
+  transition: transform .65s cubic-bezier(.22,1,.36,1);
+}
+.portfolio-site :is(#works .portfolio-detail-link,#packages .catalog-outline-button) svg {
+  transition: transform .4s cubic-bezier(.22,1,.36,1);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .portfolio-site :is(#works .portfolio-card,#packages .package-card):hover img { transform: scale(1.025); }
+  .portfolio-site #works .portfolio-card:hover .portfolio-detail-link svg { transform: translate(3px,-3px); }
+  .portfolio-site #packages .package-card:hover .catalog-outline-button svg { transform: translateX(3px); }
+}
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .portfolio-site :is(#packages .package-card,#works .portfolio-card):is(:hover,:focus-within) { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-site :is(#packages .package-card,#works .portfolio-card):nth-child(n) { transition: none; }
+  .portfolio-site :is(#works .project-thumbnail,#packages .package-thumbnail) img,
+  .portfolio-site :is(#works .portfolio-detail-link,#packages .catalog-outline-button) svg { transition: none; transform: none; }
+}

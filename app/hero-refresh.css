@@ -15,23 +15,14 @@
 .portfolio-site .hero-scene-caption { border: 0; background: #fff; padding: 22px 8px; text-align: center; }
 .portfolio-site .reference-hero-copy h2 { font-family: "Noto Sans JP Variable",sans-serif; font-size: clamp(23px,2.1vw,30px); font-weight: 750; line-height: 1.65; letter-spacing: .015em; text-align: center; margin: 0; }
 
-/* Heavy modern Japanese lettering with a seven-color aurora inside the glyphs. */
-.portfolio-site .reference-hero .hero-primary-copy h1 { font-family: "Noto Sans JP Variable",sans-serif; font-weight: 900; font-size: clamp(42px,3.65vw,56px); line-height: 1.38; letter-spacing: .025em; padding: 8px 0; color: #1659c4; }
-.portfolio-site .reference-hero .hero-primary-copy h1 > .hero-rainbow-line {
- display: block; position: relative; font: inherit; writing-mode: inherit; white-space: nowrap;
- color: #1659c4; -webkit-text-fill-color: transparent;
- background-image: linear-gradient(160deg,transparent 35%,#ffffff3b 46%,#c9f6ff40 50%,transparent 62%),linear-gradient(180deg,#1455dc,#087e9f,#167b57,#9c6b00,#bc500c,#be286a,#6932c7,#1455dc);
- background-size: 100% 320%,100% 210%; background-position: 0 -120%,0 0; background-clip: text; -webkit-background-clip: text;
- filter: drop-shadow(0 0 7px #67cfff55) drop-shadow(0 0 16px #a88aff22);
- animation: hero-rainbow-aurora 8s ease-in-out infinite;
-}
-.portfolio-site .reference-hero .hero-primary-copy h1 > .hero-rainbow-line:nth-child(2) { animation-delay: -3s; }
-@keyframes hero-rainbow-aurora { 0%,100% { background-position: 0 -120%,0 0; } 50% { background-position: 0 120%,0 100%; } }
-.reference-hero[data-border-motion="false"] .hero-rainbow-line,html:not([data-site-motion="on"]) .hero-rainbow-line { animation-play-state: paused !important; }
+/* Solid luminous lettering, with motion controlled by the shared pause button. */
+.portfolio-site .reference-hero .hero-primary-copy h1 { font-family: "Noto Sans JP Variable",sans-serif; font-weight: 900; font-size: clamp(42px,3.65vw,56px); line-height: 1.38; letter-spacing: .025em; padding: 26px 0; color: #d9f3ff; }
+.portfolio-site .reference-hero .hero-primary-copy h1 > .hero-title-line { display: block; position: relative; font: inherit; writing-mode: inherit; white-space: nowrap; color: #d9f3ff; -webkit-text-fill-color: currentColor; animation: hero-title-glow 4s ease-in-out infinite; }
+@keyframes hero-title-glow { 0%,100% { text-shadow: 0 0 5px #c5efff80,0 0 18px #62bdff55,0 0 36px #428bff30; } 50% { text-shadow: 0 0 8px #e1f8ffb3,0 0 24px #71caff99,0 0 48px #488fff66; } }
+.reference-hero[data-border-motion="false"] .hero-title-line,html:not([data-site-motion="on"]) .hero-title-line { animation-play-state: paused !important; }
 .portfolio-site .hero-primary-copy > .eyebrow { text-align: center; }
 .portfolio-site .hero-primary-actions { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin: 18px auto 8px; gap: 14px; }
 .portfolio-site .hero-primary-actions > a { width: min(100%,280px); min-height: 54px; text-align: center; font-size: 16px; padding: 13px 18px; }
-.portfolio-site .hero-primary-copy > .hero-experience { text-align: center; }
 
 /* Character-led chapter selectors follow the real scene sequence. */
 .portfolio-site .reference-hero-controls { display: block; margin-top: 24px; }
@@ -52,12 +43,13 @@
 .site-motion-toggle { left: 16px; right: auto; bottom: 16px; }
 
 /* Increase reading sizes throughout this single-page site. */
-body { font-size: 17px; }
-.portfolio-site p,.portfolio-site .profile-biography > p { font-size: 17px; line-height: 1.95; }
-.portfolio-site :is(.content-heading,.faq-guide-heading) > p { font-size: 18px; }
-.portfolio-site .hero-primary-copy > p:not(.eyebrow):not(.hero-experience) { font-size: 18px; line-height: 1.95; }
+body { font-size: 19px; }
+.portfolio-site :is(p,dd,.package-detail-deliverables li,.contact-expectations li) { font-family: var(--body-serif); }
+.portfolio-site .eyebrow { font-family: var(--heading-serif); }
+.portfolio-site p,.portfolio-site .profile-biography > p { font-size: 19px; line-height: 1.95; }
+.portfolio-site :is(.content-heading,.faq-guide-heading) > p { font-size: 20px; }
+.portfolio-site .hero-primary-copy > p:not(.eyebrow):not(.hero-experience) { font-size: 20px; line-height: 1.95; }
 .portfolio-site .hero-primary-copy > .eyebrow { font-size: 18px; }
-.portfolio-site .hero-primary-copy > .hero-experience { font-size: 15px; }
 .portfolio-site :is(.eyebrow,.content-heading > span,.faq-guide-heading > span,.workflow-heading > span,.skill-universe-copy > span,.dialog-eyebrow,.scene-phase,.brother-intro-specialty,.workflow-outcome > span:first-child) { font-size: 19px; }
 .portfolio-site :is(.content-heading,.faq-guide-heading) h2 { font-size: clamp(38px,3.6vw,54px); }
 #packages .package-card h3,#works .portfolio-card h3 { font-size: clamp(23px,1.9vw,28px); }
@@ -71,7 +63,7 @@ body { font-size: 17px; }
 .portfolio-site .footer-vertical-copy p { font-size: 16px; }
 .portfolio-site .footer-vertical-copy { height: 300px; }
 .portfolio-site .scene-brothers > div > span,.portfolio-site .scene-steps small { font-size: 13px; }
-.portfolio-site .profile-career li p { font-size: 16px; }
+.portfolio-site .profile-career li p { font-size: 18px; }
 @media(max-width:1100px) { .portfolio-site .reference-hero-tabs { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media(max-width:760px) {
  .portfolio-site .reference-hero { padding: 26px 18px 28px; }
@@ -81,10 +73,8 @@ body { font-size: 17px; }
  .portfolio-site .hero-primary-copy > .eyebrow { grid-column: 2; grid-row: 1; }
  .portfolio-site .hero-primary-copy > p:not(.eyebrow):not(.hero-experience) { grid-column: 2; grid-row: 2; }
  .portfolio-site .hero-primary-copy > .hero-primary-actions { grid-column: 1/-1; grid-row: 3; }
- .portfolio-site .hero-primary-copy > .hero-experience { grid-column: 1/-1; grid-row: 4; }
- .portfolio-site .hero-primary-copy > p:not(.eyebrow):not(.hero-experience) { font-size: 16px; line-height: 1.9; }
+ .portfolio-site .hero-primary-copy > p:not(.eyebrow):not(.hero-experience) { font-size: 18px; line-height: 1.9; }
  .portfolio-site .hero-primary-copy > .eyebrow { font-size: 15px; }
- .portfolio-site .hero-primary-copy > .hero-experience { font-size: 14px; }
  .portfolio-site .hero-primary-actions > a { font-size: 14px; padding: 12px 9px; min-height: 50px; }
  .portfolio-site .reference-hero-copy h2 { font-size: 23px; }
  .portfolio-site .reference-hero-tabs { gap: 10px; }
@@ -93,8 +83,8 @@ body { font-size: 17px; }
  .portfolio-site .reference-hero .reference-hero-tabs strong { font-size: 14px; }
  .portfolio-site .reference-hero-tabs .hero-tab-number { font-size: 13px; }
  .portfolio-site .reference-hero .reference-hero-tabs > button::after { left: 8px; right: 8px; }
- .portfolio-site p,.portfolio-site .profile-biography > p { font-size: 16px; }
- .portfolio-site :is(.content-heading,.faq-guide-heading) > p { font-size: 17px; }
+ .portfolio-site p,.portfolio-site .profile-biography > p { font-size: 18px; }
+ .portfolio-site :is(.content-heading,.faq-guide-heading) > p { font-size: 18px; }
  .portfolio-site :is(.eyebrow,.content-heading > span,.faq-guide-heading > span,.workflow-heading > span,.skill-universe-copy > span,.dialog-eyebrow,.scene-phase,.workflow-outcome > span:first-child) { font-size: 17px; }
  .portfolio-site :is(.content-heading,.faq-guide-heading) h2 { font-size: clamp(33px,8.8vw,40px); }
  #packages .package-card h3 { font-size: 26px; }
@@ -107,4 +97,4 @@ body { font-size: 17px; }
  .site-motion-toggle { left: 12px; right: auto; bottom: 12px; font-size: 12px; }
 }
 @media(max-width:400px) { .portfolio-site .site-header .header-contact { font-size: 13px; padding-inline: 10px; } .site-header .header-contact svg { width: 14px; } }
-@media(prefers-reduced-motion:reduce) { .hero-rainbow-line,.portfolio-site .reference-hero .reference-hero-tabs > button::after { animation: none !important; } }
+@media(prefers-reduced-motion:reduce) { .hero-title-line,.portfolio-site .reference-hero .reference-hero-tabs > button::after { animation: none !important; } }

@@ -38,60 +38,66 @@ test("bot-colored badges and primary controls retain readable contrast", async (
   for (const ratio of ratios) expect(ratio).toBeGreaterThanOrEqual(4.5);
 });
 
-test("section images load, surfaces remain opaque, and the footer scene is not cropped", async ({ page }) => {
-  await page.goto("/");
-  const backgrounds = new Set<string>();
-  for (const selector of ["#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact"]) {
-    const style = await page.locator(selector).evaluate(el => getComputedStyle(el,"::before").backgroundImage);
-    expect(style).toContain("/images/environments/");
-    for (const match of style.matchAll(/url\("?([^"\)]+)"?\)/g)) backgrounds.add(match[1]);
-  }
-  expect(backgrounds.size).toBe(8);
-  for (const url of backgrounds) {
-    const response = await page.request.get(url);
-    expect(response.ok()).toBe(true);
-    expect(response.headers()["content-type"]).toContain("image/webp");
-  }
-  // The darkest possible photograph pixel must still give body copy sufficient contrast.
-  for (const selector of ["#selected-work", ".introduction-copy", "#services", "#strengths", "#packages", "#works", "#faq", "#contact"]) {
-    const contrast = await page.locator(selector).evaluate(el => {
-      const style = getComputedStyle(el);
-      const veil = style.getPropertyValue("--environment-veil").trim().slice(1);
-      const ink = style.getPropertyValue("--muted").trim().slice(1);
-      const alpha = parseInt(veil.slice(6, 8), 16) / 255;
-      const luminance = (hex: string, opacity = 1) => [0, 2, 4].map(i => {
-        const channel = parseInt(hex.slice(i, i + 2), 16) / 255 * opacity;
-        return channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4;
-      }).reduce((sum, value, index) => sum + value * [.2126, .7152, .0722][index], 0);
-      const foreground=luminance(ink);
-      const ratio=(background:number)=>(Math.max(background,foreground)+.05)/(Math.min(background,foreground)+.05);
-      const whitePixel=[0,2,4].map(i=>Math.round(parseInt(veil.slice(i,i+2),16)*alpha+255*(1-alpha)).toString(16).padStart(2,"0")).join("");
-      return Math.min(ratio(luminance(veil,alpha)),ratio(luminance(whitePixel)));
-    });
-    expect(contrast).toBeGreaterThanOrEqual(4.5);
-  }
-  await expect(page.locator(".package-card").first()).toHaveCSS("background-color", "rgb(255, 255, 255)");
-  await expect(page.locator(".contact-form")).toHaveCSS("background-color", "rgb(255, 255, 255)");
-  await expect(page.locator(".contact-form")).toHaveCSS("background-image", /calm-inquiry/);
-  await expect(page.locator(".contact-time-intro")).toContainText("本来の仕事に、向き合う時間をつくる。");
-  const scene = await page.locator(".footer-scene").boundingBox();
-  expect(scene!.width / scene!.height).toBeCloseTo(3, 1);
-  const artwork = page.locator(".footer-scene img");
-  await expect(artwork).toHaveCount(1);
-  await artwork.scrollIntoViewIfNeeded();
-  await artwork.evaluate((img: HTMLImageElement) => img.decode());
-  await expect(artwork).toHaveAttribute("alt", /お客様のために、時間をつくる。/);
-  await expect(artwork).toHaveCSS("object-fit", "contain");
-  await expect(page.locator(".footer-scene > :not(img)")).toHaveCount(0);
-  await expect(page.locator(".footer-scene")).toHaveCSS("background-image", "none");
-  const photo = await page.locator("#packages").evaluate(el => { const layer=getComputedStyle(el,"::before"); return {blur:layer.filter,mask:layer.maskImage,events:layer.pointerEvents}; });
-  expect(photo.blur).toMatch(/blur\([35]px\)/);
-  expect(photo.mask).toContain("linear-gradient");
-  expect(photo.events).toBe("none");
-  await expect(page.locator("#packages")).toHaveCSS("filter","none");
-  const footer = await page.locator(".pattern-footer").boundingBox();
-  expect(scene!.x).toBeGreaterThan(footer!.x);
-  expect(scene!.x+scene!.width).toBeLessThan(footer!.x+footer!.width);
-  await expect(page.locator(".footer-scene")).toHaveCSS("overflow","hidden");
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+test("all sections share the fixed night sky and honor reduced motion",async({page,isMobile},testInfo)=>{
+ await page.goto('/');
+ const sky=page.locator('.site-night-sky');
+ await expect(sky).toHaveCount(1);
+ await expect(sky).toHaveCSS('position','fixed');
+ await expect(sky).toHaveCSS('pointer-events','none');
+ await expect(page.locator('.night-star')).toHaveCount(140);
+ await expect(page.locator('.night-meteor')).toHaveCount(8);
+ await expect(page.locator('.night-star').first()).toHaveCSS('animation-name','night-twinkle');
+ await expect(page.locator('.milky-way')).toHaveCSS('animation-name','milky-way-drift');
+ await expect(page.locator('.night-meteor').first()).toHaveCSS('animation-name','night-shooting-star');
+ const universe=page.locator('.skill-tool-universe');
+ await universe.scrollIntoViewIfNeeded();
+ await universe.screenshot({caret:'initial',path:testInfo.outputPath('skills-night.png')});
+ await page.emulateMedia({reducedMotion:'reduce'});
+ for(const selector of ['.introduction-copy','#skills','#packages','#works','#faq','#contact','.pattern-footer']) {
+  const section=page.locator(selector);
+  await section.scrollIntoViewIfNeeded();
+  await expect(section).toHaveCSS('background-image','none');
+  await expect(section).toHaveCSS('background-color','rgba(0, 0, 0, 0)');
+  expect(await section.evaluate(el=>getComputedStyle(el,'::before').content)).toBe('none');
+  const bounds=(await sky.boundingBox())!;
+  expect(bounds.y).toBe(0);
+  expect(bounds.height).toBe(page.viewportSize()!.height);
+  await page.screenshot({caret:"initial",path:testInfo.outputPath(selector.replace(/[^a-z]/g,'')+'.png')});
+ }
+ await expect(page.locator('.milky-way')).toHaveCSS('animation-name','none');
+ await expect(page.locator('.night-meteor').first()).toHaveCSS('display','none');
+ await expect(page.locator('[data-reveal]')).toHaveCount(0);
+ await expect(page.locator('#selected-work')).toHaveCount(0);
+ await expect(page.locator('.faq-guide-heading > span')).toHaveText('FAQ');
+ await expect(page.locator('#faq-title')).not.toHaveText('FAQ');
+ await expect(page.locator('.footer-artwork img')).toHaveAttribute('src',/footer-collaboration/);
+ const scene=(await page.locator('.footer-scene').boundingBox())!;
+ const caption=(await page.locator('.footer-artwork figcaption').boundingBox())!;
+ expect(caption.y).toBeGreaterThanOrEqual(scene.y+scene.height);
+ await expect(page.locator('.footer-top-pill svg')).toHaveCount(1);
+ const primary=await page.locator('.hero-primary-actions .catalog-cta').evaluate(el=>getComputedStyle(el).backgroundImage);
+ await expect(page.locator('.footer-top-pill')).toHaveCSS('background-image',primary);
+ await expect(page.locator('.footer-nav-pill a')).toHaveCount(5);
+ await expect(page.locator('.footer-nav-pill a[href="#faq"]')).toHaveText('FAQ');
+ await expect(page.locator('.footer-invitation,.footer-closing')).toHaveCount(0);
+ await expect(page.locator('.footer-end .footer-vertical-lockup')).toHaveCount(1);
+ const brand=(await page.locator('.footer-brand').boundingBox())!;
+ expect(brand.y).toBeGreaterThanOrEqual(caption.y+caption.height);
+ const details=(await page.locator('.footer-end-details').boundingBox())!;
+ const upper=(await page.locator('.footer-circle-links').boundingBox())!;
+ expect(Math.abs(details.x+details.width/2-upper.x-upper.width/2)).toBeLessThan(2);
+ const nav=(await page.locator('.footer-nav-pill').boundingBox())!;
+ expect(Math.abs(nav.x+nav.width/2-upper.x-upper.width/2)).toBeLessThan(2);
+ if(!isMobile) expect(brand.x+brand.width).toBeLessThan(details.x);
+
+
+ if(isMobile) await page.locator('.footer-nav-pill a').first().focus();
+ else await page.locator('.footer-nav-pill a').first().hover();
+ await expect(page.locator('.footer-nav-pill a').first()).toHaveCSS('background-image',/linear-gradient/);
+ await page.screenshot({path:testInfo.outputPath('footer-refined.png')});
+ await page.locator('.footer-nav-pill a[href="#faq"]').click();
+ await expect.poll(()=>page.locator('#faq').evaluate(el=>el.getBoundingClientRect().top)).toBeLessThan(180);
+
+ await expect(page.locator('.contact-form')).toHaveCSS('background-image',/linear-gradient/);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });

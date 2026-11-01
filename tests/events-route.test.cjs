@@ -6,3 +6,11 @@ function req(data,origin='https://portfolio.example'){return new Request('https:
 test('measurement accepts known interactions and stores only aggregate-safe fields',async()=>{const {post,logs}=route();assert.equal((await post(req({name:'package_open',id:'package-01'}))).status,204);assert.deepEqual(Object.keys(logs[0]).sort(),['day','id','name','type']);assert.equal(logs[0].id,'package-01');});
 test('measurement rejects foreign origins, unknown events and arbitrary personal text',async()=>{const {post,logs}=route();assert.equal((await post(req({name:'contact_started'},'https://other.example'))).status,403);for(const data of [{name:'anything'},{name:'contact_started',email:'private@example.com'},{name:'package_open',id:'private@example.com'},{name:'contact_started',message:'private text'},null,[]])assert.equal((await post(req(data))).status,400);assert.equal(logs.length,0);});
 test('measurement bounds payloads and event volume',async()=>{const {post}=route();assert.equal((await post(req({name:'x'.repeat(500)}))).status,413);for(let i=0;i<600;i++)assert.equal((await post(req({name:'contact_started'}))).status,204);assert.equal((await post(req({name:'contact_started'}))).status,429);});
+
+
+test('AI category is accepted and legacy category is normalized',async()=>{
+ const {post,logs}=route();
+ for(const id of ['AI・業務改善','人工知能・業務改善'])assert.equal((await post(req({name:'service_browse',id}))).status,204);
+ assert.equal(logs.length,2);
+ for(const entry of logs)assert.equal(entry.id,'AI・業務改善');
+});
