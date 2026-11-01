@@ -15,7 +15,8 @@ test('new projects have complete assets, market data and NDA safeguards', () => 
     if (item.confidential) {
       expect(item.url).toBeUndefined();
       expect(existsSync('public' + item.thumbnail.replace('.webp', '.svg'))).toBe(true);
-      expect(item.period).toMatch(/illustrative|参考/);
+      expect(item.period).not.toMatch(/\(illustrative periods?\)|（参考期間）/);
+      expect(item.periodLabel).toMatch(/Illustrative|参考/);
       expect(item.period).toMatch(/202[4-6]/);
     } else {
       expect(new URL(item.url!).protocol).toBe('https:');

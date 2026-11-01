@@ -8,9 +8,9 @@ test('header keeps logout beside Consultation and removes its login link', async
   const header = page.locator('.site-header');
   await expect(header.locator('.header-actions > .header-contact')).toBeVisible();
   await expect(header.getByRole('link', { name: 'Log In', exact: true })).toHaveCount(0);
-  await expect(header.getByRole('button', { name: 'Log Out', exact: true })).toBeVisible();
+  await expect(header.getByRole('button', { name: 'ログアウト', exact: true })).toBeVisible();
   await expect(page.locator('footer').getByRole('button', { name: /Log Out|ログアウト/ })).toHaveCount(0);
-  await expect(page.getByRole('button', { name: 'Log Out', exact: true })).toHaveCount(1);
+  await expect(page.getByRole('button', { name: 'ログアウト', exact: true })).toHaveCount(1);
   for (const width of [1440, 1024, 390, 320]) {
     await page.setViewportSize({ width, height: 900 });
     const boxes = await header.locator('.header-actions > .header-contact,.header-access-actions a,.header-access-actions button').evaluateAll(els => els.map(el => el.getBoundingClientRect().toJSON()));
@@ -27,7 +27,7 @@ test('header keeps logout beside Consultation and removes its login link', async
   await page.getByRole('button', { name: 'サイトを見る', exact: true }).click();
   await expect(page).toHaveURL(new URL('/', baseURL!).href);
   await expect(page.locator('.portfolio-site')).toBeVisible();
-  await page.locator('.site-header').getByRole('button', { name: 'Log Out', exact: true }).click();
+  await page.locator('.site-header').getByRole('button', { name: 'ログアウト', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'ログイン', exact: true })).toBeVisible();
   await expect(page.locator('.portfolio-site')).toHaveCount(0);
 });

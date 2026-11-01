@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import { portfolioItems } from '../lib/projects';
+import { servicePackages } from '../lib/catalog';
 
 test.beforeEach(async ({ page, baseURL }) => {
   const response = await page.request.post('/api/auth/login', { headers: { Origin: new URL(baseURL!).origin }, data: { id: process.env.TEST_SITE_LOGIN_ID, password: process.env.TEST_SITE_LOGIN_PASSWORD } });
@@ -23,6 +25,8 @@ test('pagination stages card depth in a directional cascade while preserving scr
       await button.scrollIntoViewIfNeeded();
       await page.waitForTimeout(150);
       const y = await page.evaluate(() => scrollY);
+      const beforeCount = await page.locator(`#${id} article`).count();
+      const pagerTop = (await nav.boundingBox())!.y;
       await button.click();
       await expect(button).toHaveAttribute('aria-current', 'page');
       const grid = page.locator(`#${id} .${id === 'packages' ? 'package' : 'portfolio'}-grid`);
@@ -34,7 +38,10 @@ test('pagination stages card depth in a directional cascade while preserving scr
       expect(arrivals.every(effect => effect.frames.some(frame => String(frame.transform).includes('perspective')))).toBe(true);
       await expect(grid).not.toHaveAttribute('data-page-motion');
       expect(await grid.evaluate(el => el.inert)).toBe(false);
-      expect(Math.abs((await page.evaluate(() => scrollY)) - y)).toBeLessThanOrEqual(2);
+      if (beforeCount < 6 || await grid.locator('article').count() < 6) {
+        expect(Math.abs((await nav.boundingBox())!.y - pagerTop)).toBeLessThanOrEqual(2);
+        expect(await grid.evaluate(el => (el as HTMLElement).style.minHeight)).toBe('');
+      } else expect(Math.abs((await page.evaluate(() => scrollY)) - y)).toBeLessThanOrEqual(2);
     }
     await nav.screenshot({ path: testInfo.outputPath(`${id}-pagination.png`) });
   }
@@ -64,4 +71,39 @@ test('rapid selections and filter changes cancel stale page transitions', async 
   await expect(nav.getByRole('button', { name: '1ページ目', exact: true })).toHaveAttribute('aria-current', 'page');
   await expect(section.locator('.package-grid')).not.toHaveAttribute('data-page-motion');
   expect(await section.locator('.package-grid').evaluate(el => el.inert)).toBe(false);
+});
+
+test('short final pages put the pager directly beneath the last card row', async ({ page }, testInfo) => {
+  const cases = [
+    { id: 'packages', total: servicePackages.length, english: false },
+    { id: 'works', total: portfolioItems.filter(item => item.market === 'japan' && item.category === 'ウェブサイト').length, english: false },
+    { id: 'works', total: portfolioItems.filter(item => item.market === 'global').length, english: true },
+  ];
+  for (const scenario of cases) {
+    const section = page.locator(`#${scenario.id}`);
+    if (scenario.id === 'works') {
+      if (scenario.english) await section.locator('[data-market="global"]').click();
+      else await section.locator('[data-category="ウェブサイト"]').click();
+    }
+    const last = Math.ceil(scenario.total / 6), nav = section.locator('.catalog-pagination');
+    const lastButton = nav.getByRole('button', { name: scenario.english ? `Page ${last}` : `${last}ページ目`, exact: true });
+    await lastButton.click();
+    await expect(lastButton).toHaveAttribute('aria-current', 'page');
+    const grid = section.locator('.package-grid,.portfolio-grid');
+    await expect(grid).not.toHaveAttribute('data-page-motion');
+    await expect(grid.locator('article')).toHaveCount(scenario.total % 6);
+    const geometry = await grid.evaluate(el => ({
+      bottom: el.getBoundingClientRect().bottom,
+      lastCardBottom: Math.max(...Array.from(el.children).map(card => card.getBoundingClientRect().bottom)),
+      minHeight: (el as HTMLElement).style.minHeight,
+    }));
+    expect(geometry.minHeight).toBe('');
+    expect(Math.abs(geometry.bottom - geometry.lastCardBottom)).toBeLessThan(2);
+    const pager = (await nav.boundingBox())!;
+    expect(pager.y - geometry.lastCardBottom).toBeLessThan(48);
+    expect(pager.y - geometry.lastCardBottom).toBeGreaterThanOrEqual(0);
+    expect(pager.y).toBeGreaterThan(0);
+    expect(pager.y).toBeLessThan(await page.evaluate(() => innerHeight));
+    await page.screenshot({ path: testInfo.outputPath(`${scenario.id}-${scenario.english ? 'global' : 'japan'}-compact-final.png`) });
+  }
 });

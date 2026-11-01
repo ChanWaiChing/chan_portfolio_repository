@@ -2,10 +2,10 @@
 
 import { useLayoutEffect, useRef } from "react";
 
-/** Stage each page as a depth sequence while retaining its footprint and scroll position. */
-export function useCatalogTransition(page: number, filterKey: string) {
+/** Animate full pages steadily, and let short final pages compact around their cards. */
+export function useCatalogTransition(page: number, filterKey: string, pageSize = 6) {
   const grid = useRef<HTMLDivElement>(null);
-  const pending = useRef<{ x: number; y: number; direction: number; target: number; sequence: number } | null>(null);
+  const pending = useRef<{ x: number; y: number; direction: number; target: number; sequence: number; height: number; count: number; pagerVisible: boolean } | null>(null);
   const animations = useRef<Animation[]>([]);
   const sequence = useRef(0);
 
@@ -50,7 +50,12 @@ export function useCatalogTransition(page: number, filterKey: string) {
     if (!change || !element || change.target !== page) return;
     pending.current = null;
     release();
-    window.scrollTo({ left: change.x, top: change.y, behavior: "instant" });
+    const compact = element.children.length < pageSize || change.count < pageSize;
+    if (compact) element.style.removeProperty("min-height");
+    // Keep the visible pager anchored when removing a row, rather than leaving
+    // the reader looking at the next section after the catalog contracts.
+    const adjustment = compact && change.pagerVisible ? element.getBoundingClientRect().height - change.height : 0;
+    window.scrollTo({ left: change.x, top: change.y + adjustment, behavior: "instant" });
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     element.dataset.pageMotion = "arriving";
     element.setAttribute("aria-busy", "true");
@@ -79,8 +84,10 @@ export function useCatalogTransition(page: number, filterKey: string) {
     pending.current = null;
     if (!element || nextPage === page) return;
     const direction = nextPage > page ? 1 : -1;
-    pending.current = { x: scrollX, y: scrollY, direction, target: nextPage, sequence: current };
-    element.style.minHeight = `${element.getBoundingClientRect().height}px`;
+    const height = element.getBoundingClientRect().height;
+    const pager = element.parentElement?.querySelector(".catalog-pagination")?.getBoundingClientRect();
+    pending.current = { x: scrollX, y: scrollY, direction, target: nextPage, sequence: current, height, count: element.children.length, pagerVisible: Boolean(pager && pager.top >= 0 && pager.top < innerHeight) };
+    element.style.minHeight = `${height}px`;
     if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
       element.dataset.pageMotion = "departing";
       element.setAttribute("aria-busy", "true");

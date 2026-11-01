@@ -4,6 +4,6 @@ const buttonClass = "inline-flex h-11 min-h-11 items-center justify-center gap-1
 
 export function HeaderAccessActions() {
   return <div className="header-access-actions flex items-center gap-2">
-    <form action="/api/auth/logout" method="post" className="m-0 flex"><button type="submit" className={buttonClass}><LogOut size={15} aria-hidden="true" />Log Out</button></form>
+    <form action="/api/auth/logout" method="post" className="m-0 flex"><button type="submit" className={buttonClass}><LogOut size={15} aria-hidden="true" />ログアウト</button></form>
   </div>;
 }

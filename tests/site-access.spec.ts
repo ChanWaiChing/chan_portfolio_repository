@@ -27,7 +27,7 @@ test('site requires valid server credentials, keeps the session and supports log
   expect(cookie.value).not.toContain(password);
   await page.reload();
   await expect(page.locator('.portfolio-site')).toBeVisible();
-  await page.getByRole('button', { name: 'Log Out', exact: true }).click();
+  await page.getByRole('button', { name: 'ログアウト', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'ログイン', exact: true })).toBeVisible();
   expect((await context.cookies()).some(cookie => cookie.name === 'oho_site_session')).toBe(false);
   await context.addCookies([{ ...cookie, value: cookie.value.slice(0, -1) + (cookie.value.endsWith('0') ? '1' : '0') }]);
