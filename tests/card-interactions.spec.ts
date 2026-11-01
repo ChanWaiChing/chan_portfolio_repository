@@ -6,7 +6,7 @@ test.beforeEach(async ({ page, baseURL }) => {
   await page.goto('/');
 });
 
-test('cards stay stable on hover, press on click, and open details with a spatial reveal', async ({ page, isMobile }, testInfo) => {
+test('brighter cards reveal depth and light trails, with accessible details and reduced motion', async ({ page, isMobile }, testInfo) => {
   for (const id of ['packages', 'works']) {
     const card = page.locator(`#${id} article`).first();
     const button = card.getByRole('button').first();
@@ -15,9 +15,11 @@ test('cards stay stable on hover, press on click, and open details with a spatia
     if (!isMobile) {
       await card.hover();
       await page.waitForTimeout(850);
-      await expect(card).toHaveCSS('transform', 'none');
-      await expect(card.locator('img')).toHaveCSS('transform', 'none');
+      expect(await card.evaluate(el => new DOMMatrix(getComputedStyle(el).transform).m42)).toBeLessThan(-5);
+      expect(await card.locator('img').evaluate(el => new DOMMatrix(getComputedStyle(el).transform).a)).toBeGreaterThan(1.01);
       expect(await card.evaluate(el => Number(getComputedStyle(el, '::before').opacity))).toBeGreaterThan(.8);
+      expect(await card.evaluate(el => getComputedStyle(el, '::before').animationName)).toBe('catalog-edge-travel');
+      await card.screenshot({ path: testInfo.outputPath(`${id}-hover.png`) });
       await button.hover();
       await page.mouse.down();
       await page.waitForTimeout(140);
@@ -34,6 +36,10 @@ test('cards stay stable on hover, press on click, and open details with a spatia
     await expect(button).toBeFocused();
   }
   await page.emulateMedia({ reducedMotion: 'reduce' });
+  const quietCard = page.locator('#works article').first();
+  await quietCard.hover();
+  await expect(quietCard).toHaveCSS('transform', 'none');
+  expect(await quietCard.evaluate(el => getComputedStyle(el, '::before').display)).toBe('none');
   await page.locator('#works article button').first().click();
   const dialog = page.getByRole('dialog');
   await expect(dialog).toBeVisible();
