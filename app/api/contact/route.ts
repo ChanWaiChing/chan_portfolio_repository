@@ -1,10 +1,11 @@
+import { requestSession, sameOriginRequest } from "@/lib/site-access.server";
 import { createHash } from "node:crypto";
 
 // Per-instance backstop. Configure an edge/WAF rate limit for a multi-instance deployment.
 const attempts = new Map<string, { count: number; expires: number }>();
 export async function POST(request: Request) {
-  const origin = request.headers.get("origin");
-  if (!origin || origin !== new URL(request.url).origin) return Response.json({ error: "Invalid origin" }, { status: 403 });
+  if (!await requestSession(request)) return Response.json({ error: "Authentication required" }, { status: 401, headers: { "Cache-Control": "no-store" } });
+  if (!sameOriginRequest(request)) return Response.json({ error: "Invalid origin" }, { status: 403 });
   if (!request.headers.get("content-type")?.includes("application/json")) return Response.json({ error: "JSON required" }, { status: 415 });
   if (!process.env.RESEND_API_KEY || !process.env.CONTACT_FROM) return Response.json({ error: "Email unavailable" }, { status: 503 });
   const raw = await request.text();

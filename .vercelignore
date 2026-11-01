@@ -1,0 +1,11 @@
+.deployment/
+.npm-cache/
+.next/
+node_modules/
+test-results/
+playwright-report/
+tests/
+tmp/
+.env*
+!.env.example
+*.tsbuildinfo

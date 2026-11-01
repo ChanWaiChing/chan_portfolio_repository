@@ -5,7 +5,7 @@ test('global portfolio and all project dialogs use English exclusively', async (
   await page.goto('/?market=global#works');
   const section = page.locator('#works');
   await expect(section).toHaveAttribute('lang', 'en');
-  await expect(section.locator('h2')).toHaveText('Digital experiences that connect');
+  await expect(section.locator('h2')).toHaveText('Our Work');
   for (const n of [1, 2]) {
     if (n === 2) await section.getByRole('button', { name: 'Page 2', exact: true }).click();
     expect(await section.innerText()).not.toMatch(japanese);
@@ -24,7 +24,7 @@ test('global portfolio and all project dialogs use English exclusively', async (
   expect(await section.innerText()).not.toMatch(japanese);
   await section.locator('[data-market="japan"]').click();
   await expect(section).toHaveAttribute('lang', 'ja');
-  await expect(section.locator('h2')).toContainText('さまざまな事業');
+  await expect(section.locator('h2')).toContainText('制作実績');
 });
 
 test('bright artwork remains unfiltered and hover responds without pointer tracking', async ({ page, isMobile }, testInfo) => {

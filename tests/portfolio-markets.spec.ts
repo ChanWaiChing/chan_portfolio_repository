@@ -24,7 +24,8 @@ test('market filters isolate projects and preserve the global selection in the U
     await card.getByRole('button').click();
     const dialog = page.getByRole('dialog');
     await expect(dialog.locator('h2')).toHaveText(item.title);
-    await expect(dialog.locator('.project-visit')).toHaveAttribute('href', item.url);
+    if (item.url) await expect(dialog.locator('.project-visit')).toHaveAttribute('href', item.url);
+    else await expect(dialog.locator('.project-visit')).toHaveCount(0);
     await expect(dialog.locator('.project-details')).toContainText(item.description);
     await expect(dialog.locator('.project-details')).toContainText('Skills applied');
     if (!item.technologies.length) await expect(dialog.locator('.project-details')).not.toContainText('未掲載');

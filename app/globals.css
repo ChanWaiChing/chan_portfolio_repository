@@ -12,6 +12,8 @@
 @import "./contact-reference.css" layer(components);
 @import "tailwindcss/utilities.css" layer(utilities);
 @import "./catalog-night.css" layer(utilities);
+@import "./portfolio-browser.css" layer(utilities);
+@import "./motion-details.css" layer(utilities);
 
 @source "../components";
 @source "./";
@@ -20,4 +22,6 @@
   --font-heading: "Noto Sans JP Variable", sans-serif;
   --font-body: "Noto Serif JP Variable", "Yu Mincho", serif;
 }
+
+
 

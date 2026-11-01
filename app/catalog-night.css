@@ -64,3 +64,46 @@
   .portfolio-site :is(#works .project-thumbnail,#packages .package-thumbnail) img,
   .portfolio-site :is(#works .portfolio-detail-link,#packages .catalog-outline-button) svg { transition: none; transform: none; }
 }
+
+/* Focus frames replace the previous card lift and image zoom. */
+.portfolio-site :is(#packages .package-card,#works .portfolio-card):nth-child(n):is(:hover,:focus-within) { transform: none; border-color: #a7c3dc80; box-shadow: inset 0 1px 0 #eaf6ff26,0 20px 38px -22px #020815e6; }
+.portfolio-site :is(#packages .package-card,#works .portfolio-card):nth-child(n)::before {
+  content: ""; display: block; position: absolute; inset: 10px; z-index: 2; padding: 0; border-radius: 0; mask: none; filter: none; pointer-events: none;
+  background: linear-gradient(#c2eaff,#c2eaff) left top/24px 1px,linear-gradient(#c2eaff,#c2eaff) left top/1px 24px,linear-gradient(#c2eaff,#c2eaff) right top/24px 1px,linear-gradient(#c2eaff,#c2eaff) right top/1px 24px,linear-gradient(#c2eaff,#c2eaff) left bottom/24px 1px,linear-gradient(#c2eaff,#c2eaff) left bottom/1px 24px,linear-gradient(#c2eaff,#c2eaff) right bottom/24px 1px,linear-gradient(#c2eaff,#c2eaff) right bottom/1px 24px;
+  background-repeat: no-repeat; opacity: 0; transform: scale(.975); animation: none;
+  transition: opacity .25s ease,transform .5s cubic-bezier(.16,1,.3,1);
+}
+.portfolio-site :is(#packages .package-card,#works .portfolio-card):nth-child(n):is(:hover,:focus-within)::before { opacity: .85; transform: scale(1); }
+.portfolio-site :is(#packages .package-card,#works .portfolio-card):nth-child(n)::after { display: none; }
+.portfolio-site :is(#works .project-thumbnail,#packages .package-thumbnail) img,
+.portfolio-site :is(#works .portfolio-card,#packages .package-card):is(:hover,:focus-within) img { transform: none; transition: none; }
+.portfolio-site :is(#works .project-thumbnail,#packages .package-thumbnail)::after { content: ""; position: absolute; bottom: 0; left: 0; width: 48%; height: 2px; background: linear-gradient(90deg,transparent,#d7f2ff,transparent); pointer-events: none; opacity: 0; transform: translateX(-110%); transition: transform .8s cubic-bezier(.16,1,.3,1),opacity .25s; }
+.portfolio-site :is(#packages .package-card,#works .portfolio-card) h3 { text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 1px; text-underline-offset: 6px; transition: text-decoration-color .35s; }
+.portfolio-site :is(#packages .package-card,#works .portfolio-card):is(:hover,:focus-within) h3 { text-decoration-color: #a5d7f35c; }
+.portfolio-site :is(#works .portfolio-detail-link,#packages .package-card > .catalog-outline-button) svg { box-sizing: content-box; flex: none; padding: 5px; border: 1px solid #a5d7f347; border-radius: 50%; background: #a5d7f30a; transition: color .3s,background-color .3s,border-color .3s,transform .4s cubic-bezier(.16,1,.3,1); }
+.portfolio-site :is(#works .portfolio-card,#packages .package-card):is(:hover,:focus-within) :is(.portfolio-detail-link,.catalog-outline-button) svg { color: #12334d; background: #c6eaff; border-color: #c6eaff; transform: none; }
+.portfolio-site :is(#packages .package-card,#works .portfolio-card):nth-child(n):has(button:active) { transform: scale(.992); transition: transform .12s ease; }
+.portfolio-site .catalog-backdrop { animation: catalog-veil-in .25s ease-out both; }
+@keyframes catalog-veil-in { from { background-color: #070e2200; backdrop-filter: blur(0); } to { background-color: #070e229c; backdrop-filter: blur(8px); } }
+
+/* One even edge replaces the inherited raised-button rim. */
+.portfolio-site :is(#packages,#works) .catalog-pagination { position: relative; flex-wrap: nowrap; justify-content: flex-start; gap: 8px; width: max-content; max-width: 100%; margin: 26px auto 0; padding: 6px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: #91bdd54d transparent; }
+.portfolio-site :is(#packages,#works) .catalog-pagination button:nth-child(n) { display: grid; place-items: center; flex: 0 0 44px; width: 44px; min-width: 44px; height: 44px; margin: 0; padding: 0; box-sizing: border-box; border: 1px solid #a2c4de59; border-radius: 50%; background: #14283db3; color: #c9e4f7; box-shadow: none; filter: none; transform: none; font: 600 15px/1 var(--font-heading); transition: color .2s ease,background-color .2s ease,border-color .2s ease; }
+.portfolio-site :is(#packages,#works) .catalog-pagination button::before,.portfolio-site :is(#packages,#works) .catalog-pagination button::after { display: none; }
+.portfolio-site :is(#packages,#works) .catalog-pagination button[aria-current="page"] { background: #c7e7fa; color: #14374e; border-color: #c7e7fa; box-shadow: none; }
+.portfolio-site :is(#packages,#works) .catalog-pagination button:disabled { opacity: .3; background: transparent; border-color: #a2c4de40; cursor: default; box-shadow: none; }
+.portfolio-site :is(#packages,#works) .catalog-pagination button:not(:disabled):hover { background: #294a62; border-color: #c7e7fa; color: #edf7ff; box-shadow: none; transform: none; }
+.portfolio-site :is(#packages,#works) .catalog-pagination button[aria-current="page"]:hover { background: #ddf2ff; color: #14374e; }
+.portfolio-site :is(#packages,#works) .catalog-pagination button:focus-visible { outline: 2px solid #d1efff; outline-offset: 3px; box-shadow: none; }
+.portfolio-site :is(#packages,#works) .catalog-pagination button:not(:disabled):active { background: #9bc9e5; color: #14374e; border-color: #9bc9e5; transform: none; box-shadow: none; }
+@media(prefers-reduced-motion:reduce) { .portfolio-site :is(#packages,#works) .catalog-pagination button:nth-child(n) { transition: none; } }
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .portfolio-site :is(#works .portfolio-card,#packages .package-card):hover :is(.project-thumbnail,.package-thumbnail)::after { opacity: .9; transform: translateX(220%); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .portfolio-site :is(#packages .package-card,#works .portfolio-card):nth-child(n)::before { transition: none; transform: none; }
+  .portfolio-site :is(#packages .package-card,#works .portfolio-card):nth-child(n):has(button:active) { transform: none; }
+  .portfolio-site :is(#works .project-thumbnail,#packages .package-thumbnail)::after { display: none; }
+  .portfolio-site :is(#packages .package-card,#works .portfolio-card) h3,.portfolio-site :is(#works .portfolio-detail-link,#packages .package-card > .catalog-outline-button) svg { transition: none; transform: none; }
+  .portfolio-site .catalog-backdrop { animation: none; }
+}

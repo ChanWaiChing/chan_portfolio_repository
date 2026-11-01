@@ -25,7 +25,8 @@ test('all supplied projects show complete details, images and distinct links', a
       await expect(dialog.locator('.project-details')).toContainText(item.description);
       await expect(dialog.locator('.project-details')).toContainText(item.scope);
       const link = dialog.locator('.project-visit');
-      await expect(link).toHaveAttribute('href', item.url);
+      if (item.url) await expect(link).toHaveAttribute('href', item.url);
+      else await expect(link).toHaveCount(0);
       await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
       links.add((await link.getAttribute('href'))!);
       if (item.preview) await expect(link).toContainText('プレビュー');

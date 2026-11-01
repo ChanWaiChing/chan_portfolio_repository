@@ -37,7 +37,7 @@ export function BrotherIntroductions() {
             <h3 className="mt-3 font-heading text-[56px] leading-[1.2] font-semibold max-[360px]:text-[48px]">{brother.name}</h3>
           </div>
           <div className={'brother-portrait-shell relative size-[132px] shrink-0 rounded-full before:pointer-events-none before:absolute before:-inset-8 before:-z-10 before:rounded-full before:bg-[radial-gradient(circle,var(--profile-glow),transparent_70%)] border border-[var(--profile-line)] p-1.5 max-[760px]:size-[116px] max-[360px]:size-[100px] '+brother.ring}>
-            <span className="brother-portrait-orbit pointer-events-none absolute rounded-full" aria-hidden="true" />
+            <span className="brother-portrait-orbit pointer-events-none absolute rounded-full" aria-hidden="true" /><span className="brother-portrait-satellite pointer-events-none absolute rounded-full" aria-hidden="true" />
             <div className="brother-profile-photo relative size-full overflow-hidden rounded-full border border-solid border-[var(--profile-edge)] bg-[#14213b] shadow-[0_0_12px_var(--profile-glow)]">
               <Image src="/images/heroes/team-introduction-v2.webp" alt={brother.name+'のポートレート'} width={1536} height={1024} unoptimized className="absolute h-auto max-w-none" style={{ left: brother.portraitLeft, top: brother.portraitTop, width: brother.portraitWidth }} />
             </div>

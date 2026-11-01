@@ -1,9 +1,11 @@
+import { requestSession, sameOriginRequest } from "@/lib/site-access.server";
 const names=new Set(["contact_intent","contact_started","contact_draft_ready","contact_mail_open","contact_provider_accepted","contact_failed","portfolio_open","concept_open","package_open","service_browse"]);
 const categories=new Set(["すべて","ウェブ制作","デザイン","システム開発","AI・業務改善","コンサルティング"]);
 // Bounded per-instance volume guard; no IPs, user agents, form fields or cookies are collected.
 let windowStart=0, count=0;
 export async function POST(request:Request) {
-  if(request.headers.get("origin")!==new URL(request.url).origin) return new Response(null,{status:403});
+  if (!await requestSession(request)) return Response.json({ error: "Authentication required" }, { status: 401, headers: { "Cache-Control": "no-store" } });
+  if(!sameOriginRequest(request)) return new Response(null,{status:403});
   if(!request.headers.get("content-type")?.includes("application/json")) return new Response(null,{status:415});
   const raw=await request.text();
   if(raw.length>400) return new Response(null,{status:413});

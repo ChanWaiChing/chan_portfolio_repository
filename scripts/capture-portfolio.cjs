@@ -8,7 +8,7 @@ async function main() {
   const projects = JSON.parse(source.split('export const portfolioItems: PortfolioProject[] = ')[1].trim().replace(/;$/, ''));
   const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', args: ['--no-sandbox'] });
   const results = [];
-  const queue = projects.filter(project => !process.argv[2] || process.argv.slice(2).includes(project.id));
+  const queue = projects.filter(project => project.url && (!process.argv[2] || process.argv.slice(2).includes(project.id)));
   await Promise.all(Array.from({ length: 3 }, async () => {
     while (queue.length) {
       const project = queue.shift();

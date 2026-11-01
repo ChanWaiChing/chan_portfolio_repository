@@ -1,11 +1,11 @@
 import type { PortfolioField } from "./portfolio-fields";
 /** Project descriptions, dates, responsibilities and stacks supplied by the site owner. */
-export const portfolioCategories = ["すべて", "ウェブサイト", "ECサイト", "ランディングページ"] as const;
+export const portfolioCategories = ["すべて", "ウェブサイト", "ECサイト", "ランディングページ", "システム開発"] as const;
 export type PortfolioMarket = "japan" | "global";
 export type PortfolioProject = {
-  id: string; title: string; description: string; url: string; category: string;
+  id: string; title: string; description: string; url?: string; category: string;
   thumbnail: string; technologies: string[]; period: string; scope: string; field: PortfolioField;
-  preview?: boolean; market: PortfolioMarket; shortTitle?: string; skills?: string[]; periodLabel?: string; thumbnailAlt?: string;
+  preview?: boolean; market: PortfolioMarket; shortTitle?: string; skills?: string[]; periodLabel?: string; thumbnailAlt?: string; confidential?: boolean; highlights?: { title: string; text: string }[];
 };
 export const portfolioItems: PortfolioProject[] = [
   {
@@ -675,5 +675,568 @@ export const portfolioItems: PortfolioProject[] = [
       "Digital Banking & FinTech UX"
     ],
     "field": "finance"
+  },
+  {
+    "id": "global-qipology",
+    "shortTitle": "Qipology",
+    "title": "Qipology — Modern Qipao & Fashion E-Commerce",
+    "url": "https://www.qipology.com/",
+    "category": "ECサイト",
+    "field": "fashion",
+    "technologies": [
+      "Shopify"
+    ],
+    "description": "The official online store for Qipology, presenting modern qipao designs and contemporary apparel through a visually refined shopping experience.",
+    "scope": "Built the Shopify store and implemented product management and design customizations.",
+    "skills": [
+      "E-Commerce Development",
+      "Product Management",
+      "Theme Customization"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-qipology.webp",
+    "period": "Created: 2024",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-icanread",
+    "shortTitle": "I Can Read",
+    "title": "I Can Read — Education & Learning Portal",
+    "url": "https://www.icanread.asia/",
+    "category": "ウェブサイト",
+    "field": "education",
+    "technologies": [
+      "CMS"
+    ],
+    "description": "The official website for I Can Read's education and learning programmes, presenting children's English education and programme information in an accessible format.",
+    "scope": "Built a multilingual CMS portal and implemented content management functionality.",
+    "skills": [
+      "Portal Development",
+      "Multilingual Websites",
+      "Content Management"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-icanread.webp",
+    "period": "Created: 2022",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-ms-chu",
+    "shortTitle": "MS Chu Soap and Beauty",
+    "title": "MS Chu Soap and Beauty — Beauty E-Commerce",
+    "url": "https://www.mschusoapandbeaut.com/",
+    "category": "ECサイト",
+    "field": "beauty",
+    "technologies": [
+      "Shopify"
+    ],
+    "description": "An online shop for MS Chu Soap and Beauty, introducing natural soaps and beauty products with clear, considered product presentation.",
+    "scope": "Created the Shopify store and implemented the product catalogue and checkout functionality.",
+    "skills": [
+      "E-Commerce Development",
+      "Product Catalogues",
+      "Checkout Implementation"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-ms-chu.webp",
+    "period": "Created: 2023",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-lifeyoung",
+    "shortTitle": "LifeYoung",
+    "title": "LifeYoung — Healthcare & Wellness Website",
+    "url": "https://lifeyoung.com/",
+    "category": "ウェブサイト",
+    "field": "healthcare",
+    "technologies": [],
+    "description": "The official LifeYoung healthcare and wellness website, presenting information and services that support healthy lifestyles.",
+    "scope": "Built the initial website and implemented layouts for publishing information and services.",
+    "skills": [
+      "Website Development",
+      "Information Architecture",
+      "Layout Implementation"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-lifeyoung.webp",
+    "period": "Created: 2022",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-propman",
+    "shortTitle": "Propman",
+    "title": "Propman — Property Management Platform Website",
+    "url": "https://www.propman.io/",
+    "category": "ウェブサイト",
+    "field": "realestate",
+    "technologies": [],
+    "description": "The official website for the Propman property management platform, introducing solutions and services designed to streamline property management operations.",
+    "scope": "Renewed the platform website and optimized user journeys and navigation.",
+    "skills": [
+      "Website Renewal",
+      "Platform Websites",
+      "User Journey Optimization"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-propman.webp",
+    "period": "Renewal: 2024",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-cuthys",
+    "shortTitle": "Cuthys",
+    "title": "Cuthys — Brand & Product Website",
+    "url": "https://www.cuthys.com/",
+    "category": "ウェブサイト",
+    "field": "beauty",
+    "technologies": [],
+    "description": "The official Cuthys brand and product website, using refined visuals to communicate its distinctive identity and product offering.",
+    "scope": "Built the brand website and optimized its page layouts.",
+    "skills": [
+      "Brand Websites",
+      "Website Development",
+      "Layout Optimization"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-cuthys.webp",
+    "period": "Created: 2022",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-brilliant-mlle",
+    "shortTitle": "Brilliant Mlle",
+    "title": "Brilliant Mlle — Full-Stack Brand Website",
+    "url": "https://www.brilliantmlle.com.hk/",
+    "category": "ウェブサイト",
+    "field": "fashion",
+    "technologies": [
+      "React",
+      "Express",
+      "Node.js"
+    ],
+    "description": "The official Brilliant Mlle website, communicating the appeal of an apparel and lifestyle brand through a modern web experience.",
+    "scope": "Built a full-stack system encompassing the React frontend and Express and Node.js backend.",
+    "skills": [
+      "Full-Stack Development",
+      "Frontend Development",
+      "Backend Development"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-brilliant-mlle.webp",
+    "period": "Created: 2022",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-designgood",
+    "shortTitle": "DesignGood",
+    "title": "DesignGood — Design & Lifestyle E-Commerce",
+    "url": "https://www.designgood.hk/",
+    "category": "ECサイト",
+    "field": "lifestyle",
+    "technologies": [
+      "Shopify"
+    ],
+    "description": "An online store for DesignGood, offering a curated selection of design goods and lifestyle items.",
+    "scope": "Built the Shopify shop and customized its design theme.",
+    "skills": [
+      "E-Commerce Development",
+      "Shopify Themes",
+      "Design Customization"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-designgood.webp",
+    "period": "Created: 2022",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-paka-wellness",
+    "shortTitle": "Paka Wellness",
+    "title": "Paka Wellness — Wellness & Fitness E-Commerce",
+    "url": "https://www.pakawellness.com/",
+    "category": "ECサイト",
+    "field": "fitness",
+    "technologies": [
+      "Shopify"
+    ],
+    "description": "A wellness and fitness online shop for Paka Wellness, presenting products and information that support physical and mental wellbeing.",
+    "scope": "Built the Shopify store and implemented the purchasing journey.",
+    "skills": [
+      "E-Commerce Development",
+      "Store Setup",
+      "Purchase Flows"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-paka-wellness.webp",
+    "period": "Created: 2022",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-lean-fitness",
+    "shortTitle": "Lean Fitness",
+    "title": "Lean Fitness — Hong Kong Studio Website",
+    "url": "https://www.leanfitnesshk.com/",
+    "category": "ウェブサイト",
+    "field": "fitness",
+    "technologies": [],
+    "description": "The official website for Hong Kong fitness studio Lean Fitness, presenting training programmes and class information in a clear and accessible way.",
+    "scope": "Built the official website and implemented booking and enquiry forms.",
+    "skills": [
+      "Service Websites",
+      "Booking Forms",
+      "Enquiry Forms"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-lean-fitness.webp",
+    "period": "Created: 2023",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-sparky",
+    "shortTitle": "Sparky",
+    "title": "Sparky — Dating & Community Platform",
+    "url": "https://sparky-dating.com/",
+    "category": "システム開発",
+    "field": "technology",
+    "technologies": [],
+    "description": "A dating service platform designed to support new connections through a comfortable matching and social experience.",
+    "scope": "Built the platform's frontend and backend as a web application.",
+    "skills": [
+      "Web Application Development",
+      "Frontend Development",
+      "Backend Development"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-sparky.webp",
+    "period": "Created: 2023",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-healing-voices",
+    "shortTitle": "Healing Voices",
+    "title": "Healing Voices — Counselling & Wellbeing Website",
+    "url": "https://www.healingvoices.com.hk/",
+    "category": "ウェブサイト",
+    "field": "healthcare",
+    "technologies": [
+      "Wix"
+    ],
+    "description": "The official Healing Voices website, presenting counselling and healing services alongside information about its practitioners and approach to emotional wellbeing.",
+    "scope": "Built the website in Wix and implemented layouts for the booking journey.",
+    "skills": [
+      "Service Websites",
+      "Wix Development",
+      "Booking Journeys"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-healing-voices.webp",
+    "period": "Created: 2023",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-wintech",
+    "shortTitle": "Wintech",
+    "title": "Wintech — Technology & Engineering Corporate Website",
+    "url": "https://wintech-hk.com/",
+    "category": "ウェブサイト",
+    "field": "corporate",
+    "technologies": [],
+    "description": "A corporate website for Wintech, introducing its technical and engineering services, business activities and company information.",
+    "scope": "Built the corporate website and implemented company information pages.",
+    "skills": [
+      "Corporate Websites",
+      "Website Development",
+      "Company Information Pages"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-wintech.webp",
+    "period": "Created: 2023",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-woaw",
+    "shortTitle": "WOAW Store",
+    "title": "WOAW Store — Streetwear & Selected Goods E-Commerce",
+    "url": "https://woawstore.com/",
+    "category": "ECサイト",
+    "field": "fashion",
+    "technologies": [
+      "Shopify"
+    ],
+    "description": "An online shop for WOAW Store, presenting streetwear and selected products through a distinctive, style-led shopping experience.",
+    "scope": "Created the initial Shopify store and customized its store design.",
+    "skills": [
+      "E-Commerce Development",
+      "Store Setup",
+      "Store Design Customization"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-woaw.webp",
+    "period": "Created: 2019",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "global-wild-organic",
+    "shortTitle": "Wild Organic Life",
+    "title": "Wild Organic Life — Organic Lifestyle E-Commerce",
+    "url": "https://wildorganiclife.com/",
+    "category": "ECサイト",
+    "field": "beauty",
+    "technologies": [
+      "Shopify"
+    ],
+    "description": "An online store for Wild Organic Life, offering natural products and lifestyle goods inspired by organic living.",
+    "scope": "Built the Shopify store and implemented checkout and product management systems.",
+    "skills": [
+      "E-Commerce Development",
+      "Checkout Implementation",
+      "Product Management"
+    ],
+    "market": "global",
+    "thumbnail": "/images/portfolio/global-wild-organic.webp",
+    "period": "Created: 2019",
+    "periodLabel": "Project year"
+  },
+  {
+    "id": "nda-kintone",
+    "market": "japan",
+    "shortTitle": "kintone業務アプリ連携",
+    "title": "kintone業務アプリ連携（NDA）",
+    "technologies": [
+      "kintone",
+      "API Integration"
+    ],
+    "description": "日本向けのkintone業務アプリと外部サービスをつなぐ、匿名のシステム開発実績です。業務データの連携や定型処理の自動化を扱います。",
+    "scope": "kintoneを用いた業務アプリ連携の設計・実装。公開情報は担当領域の要約に限定し、クライアント名や個別の業務構成は非公開です。 記載した月は公開表示用の参考値であり、実際の契約・稼働期間を示すものではありません。",
+    "category": "システム開発",
+    "field": "technology",
+    "confidential": true,
+    "period": "2024年04月〜2025年02月（参考期間）",
+    "periodLabel": "公開表示用の参考期間",
+    "thumbnail": "/images/portfolio/nda-kintone.webp",
+    "thumbnailAlt": "kintone業務アプリ連携の公開用概念図。実際の画面・構成ではありません"
+  },
+  {
+    "id": "nda-n8n",
+    "market": "global",
+    "shortTitle": "n8n Workflow Automation",
+    "title": "n8n Workflow Automation — NDA Case Summary",
+    "technologies": [
+      "n8n",
+      "SaaS Integration"
+    ],
+    "description": "An anonymized development case covering n8n workflows that connect events, business tools and recurring processes. Client-specific workflows and operational data are not disclosed.",
+    "scope": "Designed and implemented workflow automation and service integrations with n8n. This summary describes the development area without revealing private configurations. The displayed months are illustrative placeholders, not verified contract or delivery dates.",
+    "category": "システム開発",
+    "field": "technology",
+    "confidential": true,
+    "period": "2024/08–2025/03 (illustrative period)",
+    "periodLabel": "Illustrative public period",
+    "thumbnail": "/images/portfolio/nda-n8n.webp",
+    "thumbnailAlt": "n8n Workflow Automation: public conceptual diagram, not an actual system screen",
+    "skills": [
+      "Workflow Automation",
+      "Service Integration"
+    ]
+  },
+  {
+    "id": "nda-saas",
+    "market": "global",
+    "shortTitle": "SaaS System Development",
+    "title": "SaaS System Development — NDA Case Summary",
+    "technologies": [
+      "SaaS",
+      "API Integration"
+    ],
+    "description": "An anonymized SaaS development case focused on application functionality and connections with business services. Client identities, actual screens and application data remain private.",
+    "scope": "Worked on SaaS application development and business-service integration. Product-specific requirements and implementation details are withheld under NDA. The displayed months are illustrative placeholders, not verified contract or delivery dates.",
+    "category": "システム開発",
+    "field": "technology",
+    "confidential": true,
+    "period": "2025/02–2026/06 (illustrative period)",
+    "periodLabel": "Illustrative public period",
+    "thumbnail": "/images/portfolio/nda-saas.webp",
+    "thumbnailAlt": "SaaS System Development: public conceptual diagram, not an actual system screen",
+    "skills": [
+      "System Development",
+      "Service Integration"
+    ]
+  },
+  {
+    "id": "nda-ai-workflow",
+    "market": "global",
+    "shortTitle": "AI / LLM Workflow Automation",
+    "title": "AI / LLM Workflow Automation — NDA Case Summary",
+    "technologies": [
+      "AI / LLM",
+      "Workflow Automation"
+    ],
+    "description": "An anonymized project covering the integration of AI and language-model capabilities into business workflows. Private prompts, source content and system configurations are not shown.",
+    "scope": "Developed AI/LLM-based workflow automation and integrations between model-driven processing and business tools. The public illustration is conceptual only. The displayed months are illustrative placeholders, not verified contract or delivery dates.",
+    "category": "システム開発",
+    "field": "technology",
+    "confidential": true,
+    "period": "2025/05–2026/09 (illustrative period)",
+    "periodLabel": "Illustrative public period",
+    "thumbnail": "/images/portfolio/nda-ai-workflow.webp",
+    "thumbnailAlt": "AI / LLM Workflow Automation: public conceptual diagram, not an actual system screen",
+    "skills": [
+      "AI Integration",
+      "Workflow Automation"
+    ]
+  },
+  {
+    "id": "nda-api-security",
+    "market": "global",
+    "shortTitle": "API Security & Integration",
+    "title": "API Security & Integration — NDA Case Summary",
+    "technologies": [
+      "API Security",
+      "Authentication",
+      "Access Control"
+    ],
+    "description": "An anonymized development case covering API integration, authentication and access-control work. Endpoint addresses, credentials and client-specific policies are not disclosed.",
+    "scope": "Worked on API integrations and their authentication and access-control mechanisms. Sensitive implementation and deployment information is excluded from this public summary. The displayed months are illustrative placeholders, not verified contract or delivery dates.",
+    "category": "システム開発",
+    "field": "technology",
+    "confidential": true,
+    "period": "2024/11–2025/04 (illustrative period)",
+    "periodLabel": "Illustrative public period",
+    "thumbnail": "/images/portfolio/nda-api-security.webp",
+    "thumbnailAlt": "API Security & Integration: public conceptual diagram, not an actual system screen",
+    "skills": [
+      "API Integration",
+      "Authentication & Access Control"
+    ]
+  },
+  {
+    "id": "nda-infrastructure",
+    "market": "global",
+    "shortTitle": "Infrastructure & Operations",
+    "title": "Infrastructure & Operations — NDA Case Summary",
+    "technologies": [
+      "Infrastructure",
+      "Deployment",
+      "Operations"
+    ],
+    "description": "An anonymized infrastructure project covering the runtime foundation for web systems. Network addresses, topology, accounts and deployment details remain private.",
+    "scope": "Worked on infrastructure setup and operational foundations for deployed systems. The visual represents a generic development area and does not reproduce a client's environment. The displayed months are illustrative placeholders, not verified contract or delivery dates.",
+    "category": "システム開発",
+    "field": "technology",
+    "confidential": true,
+    "period": "2025/01–2026/02 (illustrative period)",
+    "periodLabel": "Illustrative public period",
+    "thumbnail": "/images/portfolio/nda-infrastructure.webp",
+    "thumbnailAlt": "Infrastructure & Operations: public conceptual diagram, not an actual system screen",
+    "skills": [
+      "Infrastructure Setup",
+      "Operational Support"
+    ]
+  },
+  {
+    "id": "nda-excel",
+    "market": "japan",
+    "shortTitle": "Excel業務自動化",
+    "title": "Excel業務自動化（NDA）",
+    "technologies": [
+      "Excel",
+      "Workflow Automation"
+    ],
+    "description": "日本向けのExcel業務を対象に、定型的なデータ処理や集計作業の自動化を扱う匿名実績です。実際の帳票・業務データは公開していません。",
+    "scope": "Excelを利用する業務の自動化処理と、関連するデータの受け渡しを設計・実装。公開用の図では、実際の帳票やファイル構成を使用していません。 記載した月は公開表示用の参考値であり、実際の契約・稼働期間を示すものではありません。",
+    "category": "システム開発",
+    "field": "technology",
+    "confidential": true,
+    "period": "2024年06月〜2024年10月（参考期間）",
+    "periodLabel": "公開表示用の参考期間",
+    "thumbnail": "/images/portfolio/nda-excel.webp",
+    "thumbnailAlt": "Excel業務自動化の公開用概念図。実際の画面・構成ではありません"
+  },
+  {
+    "id": "nda-whatsapp",
+    "market": "global",
+    "shortTitle": "WhatsApp Bot Development",
+    "title": "WhatsApp Bot Development — NDA Case Summary",
+    "technologies": [
+      "WhatsApp",
+      "Bot Development",
+      "API Integration"
+    ],
+    "description": "An anonymized WhatsApp bot project covering messaging-based interactions and service connections. Real conversations, customer details and private integrations are not shared.",
+    "scope": "Developed WhatsApp bot functionality and connected messaging workflows with external services. Client-specific conversation flows and credentials remain confidential. The displayed months are illustrative placeholders, not verified contract or delivery dates.",
+    "category": "システム開発",
+    "field": "technology",
+    "confidential": true,
+    "period": "2025/08–2026/01 (illustrative period)",
+    "periodLabel": "Illustrative public period",
+    "thumbnail": "/images/portfolio/nda-whatsapp.webp",
+    "thumbnailAlt": "WhatsApp Bot Development: public conceptual diagram, not an actual system screen",
+    "skills": [
+      "Bot Development",
+      "Messaging Integration"
+    ]
+  },
+  {
+    "id": "nda-telegram",
+    "market": "global",
+    "shortTitle": "Telegram Bot Development",
+    "title": "Telegram Bot Development — NDA Case Summary",
+    "technologies": [
+      "Telegram",
+      "Bot Development",
+      "API Integration"
+    ],
+    "description": "An anonymized Telegram bot development case covering command-driven interactions and automated actions. Bot identities, chat histories and private service details are withheld.",
+    "scope": "Designed and implemented Telegram bot functionality and API-based workflow connections. The public description is limited to the development area. The displayed months are illustrative placeholders, not verified contract or delivery dates.",
+    "category": "システム開発",
+    "field": "technology",
+    "confidential": true,
+    "period": "2024/09–2025/02 (illustrative period)",
+    "periodLabel": "Illustrative public period",
+    "thumbnail": "/images/portfolio/nda-telegram.webp",
+    "thumbnailAlt": "Telegram Bot Development: public conceptual diagram, not an actual system screen",
+    "skills": [
+      "Bot Development",
+      "Messaging Integration"
+    ]
+  },
+  {
+    "id": "nda-line",
+    "market": "japan",
+    "shortTitle": "LINEボット・業務連携",
+    "title": "LINEボット・業務連携（NDA）",
+    "technologies": [
+      "LINE",
+      "Bot Development",
+      "API Integration"
+    ],
+    "description": "日本向けのLINEボットによるメッセージ処理と業務システム連携を扱う匿名実績です。実際の会話・アカウント・利用者情報は非公開です。",
+    "scope": "LINEボットの機能と、外部システムへの通知・連携処理を設計・実装。公開用の説明では、個別の会話フローや接続情報を使用していません。 記載した月は公開表示用の参考値であり、実際の契約・稼働期間を示すものではありません。",
+    "category": "システム開発",
+    "field": "technology",
+    "confidential": true,
+    "period": "2025年03月〜2025年07月（参考期間）",
+    "periodLabel": "公開表示用の参考期間",
+    "thumbnail": "/images/portfolio/nda-line.webp",
+    "thumbnailAlt": "LINEボット・業務連携の公開用概念図。実際の画面・構成ではありません"
+  },
+  {
+    "id": "nda-slack",
+    "market": "japan",
+    "shortTitle": "Slackボット・業務自動化",
+    "title": "Slackボット・業務自動化（NDA）",
+    "technologies": [
+      "Slack",
+      "Bot Development",
+      "Workflow Automation"
+    ],
+    "description": "日本向けのSlackボットを利用した通知・業務自動化の匿名実績です。実際のワークスペース、メッセージ、社内運用情報は公開していません。",
+    "scope": "Slackボットの機能と業務フローの連携処理を設計・実装。公開情報は担当領域の要約に限定し、社内固有のルールや接続構成は非公開です。 記載した月は公開表示用の参考値であり、実際の契約・稼働期間を示すものではありません。",
+    "category": "システム開発",
+    "field": "technology",
+    "confidential": true,
+    "period": "2026年02月〜2026年08月（参考期間）",
+    "periodLabel": "公開表示用の参考期間",
+    "thumbnail": "/images/portfolio/nda-slack.webp",
+    "thumbnailAlt": "Slackボット・業務自動化の公開用概念図。実際の画面・構成ではありません"
   }
 ];

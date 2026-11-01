@@ -7,12 +7,12 @@ import { NightSky } from "@/components/night-sky";
 import { SiteMotion } from "@/components/site-motion";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3001")),
   twitter: { card: "summary_large_image" },
   title: "大穂兄弟 | デザインと開発を、ひとつのチームで",
   description:
     "中小企業・小さなチームのウェブサイトと業務システムを、企画・デザイン・開発から公開後の改善まで。事業分析とグローバルな視点を大切にする、大穂兄弟の制作ポートフォリオ。プロフィールと操作できる自主制作デモ、制作の進め方をご紹介します。",
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
   openGraph: {
     title: "大穂兄弟 | デザインと開発を、ひとつのチームで",
     description:

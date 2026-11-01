@@ -25,11 +25,15 @@ export function useCatalogTransition(page: number, filterKey: string) {
     // Restore before paint; prevent scroll anchoring when the card contents change.
     window.scrollTo({ left: change.x, top: change.y, behavior: "instant" });
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const animations = Array.from(element.children).map((card, index) => card.animate([
-      { opacity: 0, transform: `translate3d(${change.direction * 14}px, 8px, 0) scale(.985)` },
-      { opacity: 1, transform: "translate3d(0, 0, 0) scale(1)" },
-    ], { duration: 360, delay: index * 28, easing: "cubic-bezier(.22,1,.36,1)", fill: "backwards" }));
-    return () => animations.forEach(animation => animation.cancel());
+    // Reveal the new page as one coherent surface, with crisp text throughout.
+    const animation = element.animate([
+      { opacity: .15, clipPath: change.direction > 0 ? "inset(0 0 0 8% round 18px)" : "inset(0 8% 0 0 round 18px)", transform: `translate3d(${change.direction * 16}px,0,0)` },
+      { opacity: 1, clipPath: "inset(0 0 0 0 round 18px)", transform: "translate3d(0,0,0)" },
+    ], { duration: 380, easing: "cubic-bezier(.22,1,.36,1)" });
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const stop = () => { if (media.matches) animation.cancel(); };
+    media.addEventListener("change", stop);
+    return () => { media.removeEventListener("change", stop); animation.cancel(); };
   }, [page]);
 
   const prepare = (nextPage: number) => {

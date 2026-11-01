@@ -9,7 +9,7 @@ test('profile depth has stable hover poses and accessible motion fallbacks', asy
   const base = await card.evaluate(el => getComputedStyle(el).transform);
   const photo = card.locator('.brother-profile-photo');
   await expect(page.locator('.brother-portrait-orbit')).toHaveCount(2);
-  await expect(card.locator('.brother-portrait-orbit')).toHaveCSS('animation-name', 'profile-border-orbit');
+  await expect(card.locator('.brother-portrait-orbit')).toHaveCSS('animation-name', 'portrait-arc-drift');
   expect(await photo.evaluate(el => parseFloat(getComputedStyle(el).borderTopLeftRadius) >= el.clientWidth / 2)).toBe(true);
   if (!isMobile) {
     await card.hover({ position: { x: 50, y: 60 } });
