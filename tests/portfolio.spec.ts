@@ -118,7 +118,7 @@ test("all 32 supplied projects are reachable with search, empty state and detail
   await page.getByRole("searchbox").fill("no-such-example-999");
   await expect(section.locator(".catalog-empty")).toBeVisible();
   await section.getByRole("button", { name: "検索条件をリセット" }).click();
-  await expect(section.locator(".catalog-result-status")).toContainText("32件中 1〜6件");
+  await expect(section.locator(".catalog-result-status")).toContainText("42件中 1〜6件");
   await section.locator('.catalog-filters button[data-category="ウェブサイト"]').click();
   await expect(section.locator(".portfolio-card")).toHaveCount(6);
 });
@@ -362,4 +362,3 @@ test("hero keeps the first brand scene and uses three human-led images", async (
     expect(decodeURIComponent(src || "")).toContain("human-led.webp");
   }
 });
-

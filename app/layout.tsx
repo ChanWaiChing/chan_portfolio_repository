@@ -5,6 +5,7 @@ import "@fontsource-variable/noto-serif-jp";
 import "./globals.css";
 import { NightSky } from "@/components/night-sky";
 import { SiteMotion } from "@/components/site-motion";
+import { SiteLanguageProvider } from "@/components/site-language";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3001")),
@@ -26,7 +27,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ja">
-      <body><NightSky />{children}<SiteMotion /></body>
+      <body><SiteLanguageProvider><NightSky />{children}<SiteMotion /></SiteLanguageProvider></body>
     </html>
   );
 }

@@ -1,0 +1,126 @@
+{
+  "savedOn": "2026-11-02",
+  "reason": "Original wording before owner-requested sample copy",
+  "projects": [
+    {
+      "id": "global-hush-uk",
+      "description": "Public project website supplied for this portfolio entry. The provided notes list its technology stack and project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-lomi-cafe",
+      "description": "Public project website supplied for this portfolio entry. The provided notes list its technology stack and project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-lambert-bags",
+      "description": "Public project website supplied for this portfolio entry. The provided notes identify Shopify and the project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-la-crawfish",
+      "description": "Public project website supplied for this portfolio entry. The provided notes identify WordPress and the project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-facefacts-buxton",
+      "description": "Public project website supplied for this portfolio entry. The provided notes list its technology stack and project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-van-michael",
+      "description": "Public project website supplied for this portfolio entry. The provided notes list GSAP, Swiper, and the project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-koko-hair",
+      "description": "Public project website supplied for this portfolio entry. The provided notes list WordPress, React, MySQL, and the project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-beauty-lounge-bergedorf",
+      "description": "Public project website supplied for this portfolio entry. The provided notes list WooCommerce, Elementor, Swiper, Astra, MySQL, and the project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-anushka-spa",
+      "description": "Public project website supplied for this portfolio entry. The provided notes identify WordPress and the project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-manor-real-estate",
+      "description": "Public project website supplied for this portfolio entry. The provided notes list the project period.",
+      "scope": "Individual responsibilities and technology stack were not specified in the supplied notes."
+    },
+    {
+      "id": "global-charcot-immobilier",
+      "description": "Public project website supplied for this portfolio entry. The provided notes list the project year.",
+      "scope": "Individual responsibilities and technology stack were not specified in the supplied notes."
+    },
+    {
+      "id": "global-lancastrian-estates",
+      "description": "Public project website supplied for this portfolio entry. The provided notes identify WordPress and the project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-kent-place",
+      "description": "Public project website supplied for this portfolio entry. The provided notes list Java, Firebase, and the project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-sgs",
+      "description": "Public project website supplied for this portfolio entry. The provided notes identify WordPress and the project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-beacon-derm",
+      "description": "Public project website supplied for this portfolio entry. The provided notes list its technology stack and project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-pillway",
+      "description": "Public project website supplied for this portfolio entry. The provided notes list the project period.",
+      "scope": "Individual responsibilities and technology stack were not specified in the supplied notes."
+    },
+    {
+      "id": "global-jetts",
+      "description": "Public project website supplied for this portfolio entry. The provided notes identify WordPress and the project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "global-catering",
+      "description": "Public project website supplied for this portfolio entry. The provided notes identify WordPress and the project period.",
+      "scope": "Individual responsibilities and deliverables were not specified in the supplied notes."
+    },
+    {
+      "id": "utage-teacher-training",
+      "description": "教師向けの3か月間オンライン養成講座を紹介するLP・サンクスページです。テーマ別カリキュラム、講師プロフィール、受講生の声を掲載し、講座の価値と受講後の変化を伝えます。",
+      "scope": "UTAGEを利用したLP・サンクスページの制作実績です。個別の担当範囲は提供情報に記載がありません。"
+    },
+    {
+      "id": "utage-toeic-course",
+      "description": "無料オンライン講座への登録を案内するTOEIC対策LPです。学習者の悩みを提示し、学習によって期待できる変化を伝え、登録フォームへつなげます。",
+      "scope": "UTAGEを利用した無料講座LP・登録フォームの制作実績です。個別の担当範囲は提供情報に記載がありません。"
+    },
+    {
+      "id": "utage-parent-course",
+      "description": "子育て中の保護者向けに、動画教材・オンライン授業・会員サイトと継続的な学習カリキュラムを案内するオンライン講座です。",
+      "scope": "UTAGEを利用したオンライン講座の案内ページ制作実績です。個別の担当範囲は提供情報に記載がありません。"
+    },
+    {
+      "id": "utage-trial-lesson",
+      "description": "実店舗向けの初回無料体験レッスン募集LPです。月5名限定のキャンペーン、通常2,500円から初回0円への価格訴求、仕事帰りの利用を想定した案内を掲載しています。",
+      "scope": "UTAGEを利用した体験申し込みLPの制作実績です。個別の担当範囲は提供情報に記載がありません。"
+    },
+    {
+      "id": "utage-treatment-trial",
+      "description": "初回体験コースを紹介し、カウンセリングから施術後までの流れを掲載したLPです。第1〜第3希望日を入力できる予約フォームを設置しています。",
+      "scope": "UTAGEを利用した体験コース紹介・予約LPの制作実績です。個別の担当範囲は提供情報に記載がありません。"
+    },
+    {
+      "id": "utage-regional-trial-events",
+      "description": "複数地域の対面体験会を掲載し、地域選択に応じて該当地域の日程を表示するページです。開催場所・日時・残席数、参加者情報、支払方法、注意事項を案内し、申込完了後に自動返信メールを送信します。",
+      "scope": "UTAGEを利用した地域別体験会の案内・申込ページ制作実績です。個別の担当範囲は提供情報に記載がありません。"
+    }
+  ]
+}

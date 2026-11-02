@@ -5,6 +5,8 @@ node_modules/
 test-results/
 playwright-report/
 tests/
+docs/
+scripts/
 tmp/
 .env*
 !.env.example

@@ -8,7 +8,10 @@ async function main() {
   const projects = JSON.parse(source.split('export const portfolioItems: PortfolioProject[] = ')[1].trim().replace(/;$/, ''));
   const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', args: ['--no-sandbox'] });
   const results = [];
-  const queue = projects.filter(project => project.url && (!process.argv[2] || process.argv.slice(2).includes(project.id)));
+  const missingGlobal = process.argv.includes('--missing-global');
+  const queue = projects.filter(project => project.url && (missingGlobal
+    ? project.market === 'global' && !project.thumbnail
+    : !process.argv[2] || process.argv.slice(2).includes(project.id)));
   await Promise.all(Array.from({ length: 3 }, async () => {
     while (queue.length) {
       const project = queue.shift();
@@ -29,11 +32,19 @@ async function main() {
           const close = page.locator('button[class*="-top-12"][class*="bg-white/90"]').first();
           if (await close.isVisible()) { await close.click(); await page.waitForTimeout(700); }
         }
+        // Dismiss optional overlays so thumbnails show the actual website.
+        for (const selector of ['#onetrust-reject-all-handler', '#onetrust-accept-btn-handler', 'button[aria-label="Close"]', 'button[aria-label="Close modal"]']) {
+          const close = page.locator(selector).first();
+          if (await close.isVisible().catch(() => false)) await close.click({ timeout: 1500 }).catch(() => {});
+        }
         const title = await page.title();
         if (/access denied|just a moment|403 forbidden|404 not found/i.test(title)) throw new Error(title);
-        const target = path.join('public', project.thumbnail);
+        const text = await page.locator('body').innerText();
+        if (/verify you are human|checking your browser|this domain is for sale|website is for sale/i.test(text)) throw new Error('Site unavailable or blocked');
+        const thumbnail = project.thumbnail || `/images/portfolio/${project.id}.webp`;
+        const target = path.join('public', thumbnail);
         await sharp(await page.screenshot({ animations: 'disabled', timeout: 15000 })).resize(1200, 800).webp({ quality: 82 }).toFile(target);
-        results.push({ id: project.id, status: 'captured', title, url: page.url() });
+        results.push({ id: project.id, status: 'captured', title, url: page.url(), thumbnail });
         console.log(`${project.id}: captured`);
       } catch (error) {
         results.push({ id: project.id, status: 'unavailable', error: error.message });
@@ -44,5 +55,15 @@ async function main() {
   await browser.close();
   fs.mkdirSync('test-results/portfolio-capture', { recursive: true });
   fs.writeFileSync('test-results/portfolio-capture/results.json', JSON.stringify(results, null, 2));
+  if (missingGlobal) {
+    let updated = source;
+    for (const result of results.filter(result => result.status === 'captured')) {
+      const project = projects.find(project => project.id === result.id);
+      const previous = `"thumbnailAlt": ${JSON.stringify(project.thumbnailAlt)}`;
+      const replacement = `"thumbnail": ${JSON.stringify(result.thumbnail)},\n    "thumbnailAlt": ${JSON.stringify(`${project.shortTitle || project.title} website homepage screenshot`)}`;
+      updated = updated.replace(previous, replacement);
+    }
+    fs.writeFileSync('lib/projects.ts', updated);
+  }
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });

@@ -23,6 +23,11 @@
 .portfolio-site .hero-night .scene-0 .human-led-photo img { object-position: 70% center; }
 .portfolio-site .hero-night .hero-title-line:first-child { transform: translateY(34px); }
 .portfolio-site .hero-night .hero-title-line:nth-child(2) { transform: translateY(-34px); }
+.portfolio-site .hero-night .hero-primary-copy h1[lang="ja"],
+.portfolio-site .hero-night .hero-primary-copy h1[lang="zh-CN"],
+.portfolio-site .hero-night .hero-primary-copy h1[lang="zh-HK"] { writing-mode: vertical-rl; text-orientation: upright; }
+.portfolio-site .hero-night .hero-primary-copy h1[lang="en"] { width: 100%; min-width: 0; height: auto; max-width: 100%; justify-self: stretch; writing-mode: horizontal-tb; text-orientation: mixed; white-space: normal; font-size: clamp(32px,3.2vw,48px); line-height: 1.2; letter-spacing: .01em; }
+.portfolio-site .hero-night .hero-primary-copy h1[lang="en"] .hero-title-line { width: 100%; max-width: 100%; min-width: 0; transform: none; white-space: normal; overflow-wrap: anywhere; }
 .portfolio-site .hero-night .hero-primary-copy > p:not(.eyebrow) { grid-row: 1; align-self: end; margin-top: 48px; color: #d6edff; text-shadow: 0 2px 10px #030718; }
 .portfolio-site .hero-night .hero-primary-actions { grid-row: 2; align-self: start; margin-top: 26px; }
 .portfolio-site .hero-night .hero-primary-copy > .eyebrow { color: #b8d9ff; }
@@ -36,7 +41,11 @@
 .portfolio-site .hero-night .reference-hero .reference-hero-tabs > button { color: #d5e5ff; background: #0c1932e6; border-color: #4b648b; box-shadow: 0 3px 0 #03091a; }
 .portfolio-site .hero-night .reference-hero .reference-hero-tabs > button[aria-selected="true"] { color: #f0f6ff; background: linear-gradient(120deg,#1c3859,#302650); border-color: #a1bff7; }
 .portfolio-site .hero-night .reference-hero-tabs .hero-tab-number { color: #a6c9f6; }
-@media(max-width:760px) { .night-star:nth-child(n+90) { display: none; } .night-meteor { width: 110px; } }
+@media(max-width:760px) {
+ .night-star:nth-child(n+90) { display: none; }
+ .night-meteor { width: 110px; }
+ .portfolio-site .hero-night .hero-primary-copy h1[lang="en"] { font-size: clamp(32px,8.5vw,42px); }
+}
 /* Carry the opening sky's navy and starlight colors into the title/navigation bar. */
 .portfolio-site .site-header { background: #080f24f5; color: #deebff; border-color: #41567d; box-shadow: 0 4px 24px #02071433; }
 .portfolio-site .site-header .brand-name { color: #e2efff; }
@@ -144,3 +153,9 @@
  .portfolio-site .hero-night .hero-title-line:first-child { transform: translateY(24px); }
  .portfolio-site .hero-night .hero-title-line:nth-child(2) { transform: translateY(-24px); }
 }
+
+/* Keep translated hero headings horizontal and inside their copy column. */
+.portfolio-site .hero-night[data-language="en"] .hero-primary-copy { grid-template-columns: minmax(0,1fr); grid-template-rows: auto auto auto; align-content: center; min-width: 0; row-gap: 12px; }
+.portfolio-site .hero-night[data-language="en"] .hero-primary-copy h1 { grid-column: 1; grid-row: 1; align-self: auto; margin: 0; padding-block: 12px; }
+.portfolio-site .hero-night[data-language="en"] .hero-primary-copy > p:not(.eyebrow) { grid-column: 1; grid-row: 2; align-self: auto; min-width: 0; margin: 0; }
+.portfolio-site .hero-night[data-language="en"] .hero-primary-actions { grid-column: 1; grid-row: 3; align-self: auto; margin: 8px 0 0; }

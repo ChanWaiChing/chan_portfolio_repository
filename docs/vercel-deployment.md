@@ -3,6 +3,9 @@
 Deploy this repository root as a **Next.js** project. The `.deployment/portfolio`
 directory is the separate Sites/Vinext checkout and must not be used for Vercel.
 
+Production project: [`oho-brothers-portfolio`](https://vercel.com/cbnbc07-5134/oho-brothers-portfolio)
+at <https://oho-brothers-portfolio.vercel.app/>.
+
 - Install: `npm ci`
 - Build: `npm run build`
 - Output: Next.js default
@@ -33,5 +36,6 @@ After linking the authenticated account and setting the production variables:
 npx.cmd --yes vercel@latest --prod --yes
 ```
 
-The `.vercelignore` file excludes local secrets, build caches, tests and the
-separate Sites checkout from upload. Vercel's local `.vercel/` link is ignored by Git.
+The `.vercelignore` file excludes local secrets, build caches, tests, documentation,
+scripts and the separate Sites checkout from upload. Vercel's local `.vercel/` link
+is ignored by Git.

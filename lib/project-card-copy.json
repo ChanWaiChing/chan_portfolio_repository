@@ -1,0 +1,1712 @@
+{
+  "hankyu-hanshin": {
+    "ja": {
+      "title": "阪急阪神ホールディングス",
+      "shortTitle": "阪急阪神ホールディングス"
+    },
+    "en": {
+      "title": "Hankyu Hanshin Holdings",
+      "shortTitle": "Hankyu Hanshin Holdings",
+      "description": "The official portal for Hankyu Hanshin Holdings Group, covering transport, real estate, entertainment and other businesses, alongside shareholder and investor information."
+    },
+    "zh-CN": {
+      "title": "阪急阪神控股",
+      "shortTitle": "阪急阪神控股",
+      "description": "阪急阪神控股集团官方门户，介绍交通、房地产、娱乐等多元业务，以及面向股东和投资者的信息。"
+    },
+    "zh-HK": {
+      "title": "阪急阪神控股",
+      "shortTitle": "阪急阪神控股",
+      "description": "阪急阪神控股集團官方網站，介紹交通、地產、娛樂等多元業務，以及面向股東同投資者嘅資訊。"
+    }
+  },
+  "tiger-gym": {
+    "ja": {
+      "title": "タイガージム",
+      "shortTitle": "タイガージム"
+    },
+    "en": {
+      "title": "Tiger Gym",
+      "shortTitle": "Tiger Gym",
+      "description": "The official website for Tiger Gym in the Yokohama area, clearly introducing its fitness and training concept, trainers and facilities."
+    },
+    "zh-CN": {
+      "title": "Tiger健身房",
+      "shortTitle": "Tiger健身房",
+      "description": "横滨地区健身训练场馆Tiger Gym的官方网站，清晰介绍健身理念、教练与设施环境。"
+    },
+    "zh-HK": {
+      "title": "Tiger健身室",
+      "shortTitle": "Tiger健身室",
+      "description": "橫濱地區健身訓練場館Tiger Gym嘅官方網站，清晰介紹健身理念、教練同設施環境。"
+    }
+  },
+  "momo-pilates": {
+    "ja": {
+      "title": "MOMO",
+      "shortTitle": "MOMO"
+    },
+    "en": {
+      "title": "MOMO",
+      "shortTitle": "MOMO",
+      "description": "The official website for MOMO, a women-only personal equipment Pilates studio in Azabu-Juban, Tokyo. A modern technical foundation combines refined design with comfortable navigation."
+    },
+    "zh-CN": {
+      "title": "MOMO",
+      "shortTitle": "MOMO",
+      "description": "东京麻布十番女性专属私人器械普拉提工作室MOMO的官方网站，结合现代技术、精致设计与舒适操作体验。"
+    },
+    "zh-HK": {
+      "title": "MOMO",
+      "shortTitle": "MOMO",
+      "description": "東京麻布十番女性專屬私人器械普拉提工作室MOMO嘅官方網站，結合現代技術、精緻設計同舒適操作體驗。"
+    }
+  },
+  "wacoal": {
+    "ja": {
+      "title": "ワコール",
+      "shortTitle": "ワコール"
+    },
+    "en": {
+      "title": "Wacoal",
+      "shortTitle": "Wacoal",
+      "description": "The official online store and brand website for underwear manufacturer Wacoal, designed to help visitors comfortably choose lingerie and loungewear from an extensive range."
+    },
+    "zh-CN": {
+      "title": "华歌尔",
+      "shortTitle": "华歌尔",
+      "description": "内衣品牌华歌尔的官方商店及品牌网站，方便访客从丰富款式中挑选合适的内衣与家居服。"
+    },
+    "zh-HK": {
+      "title": "華歌爾",
+      "shortTitle": "華歌爾",
+      "description": "內衣品牌華歌爾嘅官方網店同品牌網站，方便訪客從豐富款式中挑選合適嘅內衣同家居服。"
+    }
+  },
+  "ryuyu": {
+    "ja": {
+      "title": "Ryuyu",
+      "shortTitle": "Ryuyu"
+    },
+    "en": {
+      "title": "Ryuyu",
+      "shortTitle": "Ryuyu",
+      "description": "Ryuyu is an online store focused on women’s dresses, suits and fashion, presenting colourful, trend-led products through multiple photographs and clear categories."
+    },
+    "zh-CN": {
+      "title": "Ryuyu",
+      "shortTitle": "Ryuyu",
+      "description": "Ryuyu女装电商网站，主要销售连衣裙、套装等时尚商品，通过多角度图片与清晰分类展示丰富款式。"
+    },
+    "zh-HK": {
+      "title": "Ryuyu",
+      "shortTitle": "Ryuyu",
+      "description": "Ryuyu女裝網店，主要銷售連身裙、套裝等時尚商品，透過多角度圖片同清晰分類展示豐富款式。"
+    }
+  },
+  "fits-store": {
+    "ja": {
+      "title": "FITS you. STORE",
+      "shortTitle": "FITS you. STORE"
+    },
+    "en": {
+      "title": "FITS you. STORE",
+      "shortTitle": "FITS you. STORE",
+      "description": "The official online shop operated by FITS Corporation, offering fragrances and body-care products. Astro and ecforce support a smooth shopping experience."
+    },
+    "zh-CN": {
+      "title": "FITS you. STORE",
+      "shortTitle": "FITS you. STORE",
+      "description": "FITS Corporation运营的官方商店，提供香水与身体护理产品，结合Astro和ecforce打造流畅购物体验。"
+    },
+    "zh-HK": {
+      "title": "FITS you. STORE",
+      "shortTitle": "FITS you. STORE",
+      "description": "FITS Corporation營運嘅官方網店，提供香水同身體護理產品，結合Astro同ecforce打造流暢購物體驗。"
+    }
+  },
+  "chiikawa-market": {
+    "ja": {
+      "title": "ちいかわマーケット",
+      "shortTitle": "ちいかわマーケット"
+    },
+    "en": {
+      "title": "Chiikawa Market",
+      "shortTitle": "Chiikawa Market",
+      "description": "Chiikawa Market is the official merchandise store for the popular Chiikawa characters. Its Shopify foundation supports a robust store structure for high traffic during new product releases."
+    },
+    "zh-CN": {
+      "title": "吉伊卡哇商城",
+      "shortTitle": "吉伊卡哇商城",
+      "description": "吉伊卡哇官方周边商店，以Shopify为基础建立稳健的商店结构，应对新品发售时的高访问量。"
+    },
+    "zh-HK": {
+      "title": "吉伊卡哇商城",
+      "shortTitle": "吉伊卡哇商城",
+      "description": "吉伊卡哇官方周邊網店，以Shopify為基礎建立穩健嘅商店結構，應對新品發售時嘅高瀏覽量。"
+    }
+  },
+  "saiseikai": {
+    "ja": {
+      "title": "済生会",
+      "shortTitle": "済生会"
+    },
+    "en": {
+      "title": "Saiseikai",
+      "shortTitle": "Saiseikai",
+      "description": "The official portal for Saiseikai, a nationwide medical and social-welfare group, sharing healthcare facilities, health information and organizational initiatives with patients and local communities."
+    },
+    "zh-CN": {
+      "title": "济生会",
+      "shortTitle": "济生会",
+      "description": "全国医疗及社会福利机构济生会的官方门户，向患者与社区居民介绍医疗设施、健康信息及组织活动。"
+    },
+    "zh-HK": {
+      "title": "濟生會",
+      "shortTitle": "濟生會",
+      "description": "全國醫療同社會福利機構濟生會嘅官方網站，向病人同社區居民介紹醫療設施、健康資訊及組織活動。"
+    }
+  },
+  "webmarks": {
+    "ja": {
+      "title": "WEBMARKS",
+      "shortTitle": "WEBMARKS"
+    },
+    "en": {
+      "title": "WEBMARKS",
+      "shortTitle": "WEBMARKS",
+      "description": "The corporate website for WEBMARKS, which provides web-marketing support and SEO training. The design clearly presents business-support projects and course content."
+    },
+    "zh-CN": {
+      "title": "WEBMARKS",
+      "shortTitle": "WEBMARKS",
+      "description": "提供网络营销支持与SEO培训的WEBMARKS企业网站，清晰展示企业获客支持案例及课程内容。"
+    },
+    "zh-HK": {
+      "title": "WEBMARKS",
+      "shortTitle": "WEBMARKS",
+      "description": "提供網絡營銷支援同SEO培訓嘅WEBMARKS企業網站，清晰展示企業推廣支援案例同課程內容。"
+    }
+  },
+  "fit-u": {
+    "ja": {
+      "title": "FIT U",
+      "shortTitle": "FIT U"
+    },
+    "en": {
+      "title": "FIT U",
+      "shortTitle": "FIT U",
+      "description": "The official website for 24-hour gym FIT U, introducing training equipment, self-service beauty facilities, a sauna and membership plans."
+    },
+    "zh-CN": {
+      "title": "FIT U",
+      "shortTitle": "FIT U",
+      "description": "24小时健身房FIT U官方网站，介绍训练器械、自助美容设备、桑拿与会员方案。"
+    },
+    "zh-HK": {
+      "title": "FIT U",
+      "shortTitle": "FIT U",
+      "description": "24小時健身室FIT U官方網站，介紹訓練器械、自助美容設備、桑拿同會員方案。"
+    }
+  },
+  "siki-sai": {
+    "ja": {
+      "title": "SIKI-SAI",
+      "shortTitle": "SIKI-SAI"
+    },
+    "en": {
+      "title": "SIKI-SAI",
+      "shortTitle": "SIKI-SAI",
+      "description": "The official website for image-consulting service SIKI-SAI, introducing personal colour and body-shape consultations. The SWELL theme supports approachable, detailed styling guidance."
+    },
+    "zh-CN": {
+      "title": "SIKI-SAI",
+      "shortTitle": "SIKI-SAI",
+      "description": "形象咨询服务SIKI-SAI官方网站，介绍个人色彩与体型分析，使用SWELL主题展示亲切细致的造型信息。"
+    },
+    "zh-HK": {
+      "title": "SIKI-SAI",
+      "shortTitle": "SIKI-SAI",
+      "description": "形象顧問服務SIKI-SAI官方網站，介紹個人色彩同體型分析，使用SWELL主題展示親切細緻嘅造型資訊。"
+    }
+  },
+  "refa-beauty-showcase": {
+    "ja": {
+      "title": "ReFa ビューティーショーケース",
+      "shortTitle": "ReFa ビューティーショーケース"
+    },
+    "en": {
+      "title": "ReFa Beauty Showcase",
+      "shortTitle": "ReFa Beauty Showcase",
+      "description": "A promotional page for a special ReFa hair-care collaboration, presenting the brand’s visual identity alongside new products and colour variations."
+    },
+    "zh-CN": {
+      "title": "ReFa美发产品展示",
+      "shortTitle": "ReFa美发产品展示",
+      "description": "ReFa美发产品特别合作推广页面，通过品牌视觉介绍新产品系列与颜色选择。"
+    },
+    "zh-HK": {
+      "title": "ReFa美髮產品展示",
+      "shortTitle": "ReFa美髮產品展示",
+      "description": "ReFa美髮產品特別合作推廣頁面，透過品牌視覺介紹新產品系列同顏色選擇。"
+    }
+  },
+  "lair-de-savon": {
+    "ja": {
+      "title": "レールデュサボン AIR OASIS",
+      "shortTitle": "レールデュサボン AIR OASIS"
+    },
+    "en": {
+      "title": "L'air de Savon AIR OASIS",
+      "shortTitle": "L'air de Savon AIR OASIS",
+      "description": "A special page for the soap-inspired fragrance range L’air de Savon, introducing its products, fresh visual identity and ideas for a comfortable living space."
+    },
+    "zh-CN": {
+      "title": "L'air de Savon AIR OASIS",
+      "shortTitle": "L'air de Savon AIR OASIS",
+      "description": "以香皂气息为主题的L’air de Savon香氛系列专题页面，介绍产品特色、清新品牌形象与舒适空间提案。"
+    },
+    "zh-HK": {
+      "title": "L'air de Savon AIR OASIS",
+      "shortTitle": "L'air de Savon AIR OASIS",
+      "description": "以香皂氣息為主題嘅L’air de Savon香氛系列專題頁面，介紹產品特色、清新品牌形象同舒適空間提案。"
+    }
+  },
+  "yoom": {
+    "ja": {
+      "title": "Yoom",
+      "shortTitle": "Yoom"
+    },
+    "en": {
+      "title": "Yoom",
+      "shortTitle": "Yoom",
+      "description": "An introduction and marketing page for Yoom, a business-automation and cloud-integration platform, explaining how no-code service connections support more efficient workflows."
+    },
+    "zh-CN": {
+      "title": "Yoom",
+      "shortTitle": "Yoom",
+      "description": "业务自动化及云工具集成平台Yoom的介绍推广页面，清晰说明如何通过无代码服务连接提高工作效率。"
+    },
+    "zh-HK": {
+      "title": "Yoom",
+      "shortTitle": "Yoom",
+      "description": "業務自動化同雲端工具整合平台Yoom嘅介紹推廣頁面，清晰說明點樣透過無代碼服務連接提升工作效率。"
+    }
+  },
+  "fancl-skinpatch": {
+    "ja": {
+      "title": "ファンケル スキンパッチ",
+      "shortTitle": "ファンケル スキンパッチ"
+    },
+    "en": {
+      "title": "FANCL Skin Patch",
+      "shortTitle": "FANCL Skin Patch",
+      "description": "An introduction to FANCL’s Skin Patch AI analysis service, describing how analysis of outer skin-layer cells assesses current skin conditions and predicts future skin risks."
+    },
+    "zh-CN": {
+      "title": "FANCL肌肤检测",
+      "shortTitle": "FANCL肌肤检测",
+      "description": "FANCL Skin Patch AI角质层分析服务介绍页，说明如何通过角质细胞分析评估当前肌肤状态及预测未来风险。"
+    },
+    "zh-HK": {
+      "title": "FANCL肌膚檢測",
+      "shortTitle": "FANCL肌膚檢測",
+      "description": "FANCL Skin Patch AI角質層分析服務介紹頁，說明點樣透過角質細胞分析評估目前肌膚狀態及預測未來風險。"
+    }
+  },
+  "kirei-preview": {
+    "ja": {
+      "title": "美容ローション 検証用ページ",
+      "shortTitle": "美容ローション 検証用ページ"
+    },
+    "en": {
+      "title": "Beauty lotion preview page",
+      "shortTitle": "Beauty lotion preview page",
+      "description": "A preview page created to review the design and sales presentation of a beauty lotion, including its clarity, moisturizing appeal and limited-campaign messaging before release."
+    },
+    "zh-CN": {
+      "title": "美容乳液预览页面",
+      "shortTitle": "美容乳液预览页面",
+      "description": "用于美容乳液销售展示与设计确认的预览页面，预先检查产品通透感、保湿诉求及限定活动的呈现。"
+    },
+    "zh-HK": {
+      "title": "美容乳液預覽頁面",
+      "shortTitle": "美容乳液預覽頁面",
+      "description": "用作美容乳液銷售展示同設計確認嘅預覽頁面，預先檢查產品通透感、保濕訴求同限定活動嘅呈現。"
+    }
+  },
+  "sanwa-holdings": {
+    "ja": {
+      "title": "三和ホールディングス",
+      "shortTitle": "三和ホールディングス"
+    },
+    "en": {
+      "title": "Sanwa Holdings",
+      "shortTitle": "Sanwa Holdings",
+      "description": "The corporate website for Sanwa Holdings, presenting company information and group initiatives relating to construction materials and manufacturing."
+    },
+    "zh-CN": {
+      "title": "三和控股",
+      "shortTitle": "三和控股",
+      "description": "三和控股企业网站，介绍建筑材料、制造业务相关企业信息及集团举措。"
+    },
+    "zh-HK": {
+      "title": "三和控股",
+      "shortTitle": "三和控股",
+      "description": "三和控股企業網站，介紹建築材料、製造業務相關企業資訊同集團措施。"
+    }
+  },
+  "synx": {
+    "ja": {
+      "title": "シンク",
+      "shortTitle": "シンク"
+    },
+    "en": {
+      "title": "Synx",
+      "shortTitle": "Synx",
+      "description": "The official website for Synx, a provider of IT and business solutions, presenting enterprise systems and service information clearly."
+    },
+    "zh-CN": {
+      "title": "Synx",
+      "shortTitle": "Synx",
+      "description": "提供IT及业务解决方案的Synx官方网站，清晰介绍企业系统与各类服务。"
+    },
+    "zh-HK": {
+      "title": "Synx",
+      "shortTitle": "Synx",
+      "description": "提供IT同業務方案嘅Synx官方網站，清晰介紹企業系統同各類服務。"
+    }
+  },
+  "smk": {
+    "ja": {
+      "title": "SMK",
+      "shortTitle": "SMK"
+    },
+    "en": {
+      "title": "SMK",
+      "shortTitle": "SMK",
+      "description": "The global official website for electronic component and device manufacturer SMK, publishing product catalogues, technical information and investor relations content."
+    },
+    "zh-CN": {
+      "title": "SMK",
+      "shortTitle": "SMK",
+      "description": "电子元件及设备制造商SMK的全球官方网站，发布产品目录、技术资料与投资者关系信息。"
+    },
+    "zh-HK": {
+      "title": "SMK",
+      "shortTitle": "SMK",
+      "description": "電子元件同設備製造商SMK嘅全球官方網站，發佈產品目錄、技術資料同投資者關係資訊。"
+    }
+  },
+  "cosfa": {
+    "ja": {
+      "title": "岩瀬コスファ",
+      "shortTitle": "岩瀬コスファ"
+    },
+    "en": {
+      "title": "Iwase Cosfa",
+      "shortTitle": "Iwase Cosfa",
+      "description": "The official website for Iwase Cosfa, a supplier of cosmetic ingredients and health-food materials, introducing its businesses, research and ingredients around the theme of beauty and health."
+    },
+    "zh-CN": {
+      "title": "岩濑科丝发",
+      "shortTitle": "岩濑科丝发",
+      "description": "化妆品及健康食品原料供应商Iwase Cosfa官方网站，围绕美与健康介绍业务、研发及原料信息。"
+    },
+    "zh-HK": {
+      "title": "岩瀨科絲發",
+      "shortTitle": "岩瀨科絲發",
+      "description": "化妝品同健康食品原料供應商Iwase Cosfa官方網站，圍繞美同健康介紹業務、研發同原料資訊。"
+    }
+  },
+  "obitsu": {
+    "ja": {
+      "title": "オビツ製作所",
+      "shortTitle": "オビツ製作所"
+    },
+    "en": {
+      "title": "Obitsu Manufacturing",
+      "shortTitle": "Obitsu Manufacturing",
+      "description": "The official website for Obitsu Manufacturing, which produces and sells soft-vinyl products and dolls, introducing its brands, products, specialist techniques and approach to craftsmanship."
+    },
+    "zh-CN": {
+      "title": "Obitsu制作所",
+      "shortTitle": "Obitsu制作所",
+      "description": "软胶制品与玩偶制造销售商Obitsu制作所的官方网站，介绍品牌、商品、独有技术及制造理念。"
+    },
+    "zh-HK": {
+      "title": "Obitsu製作所",
+      "shortTitle": "Obitsu製作所",
+      "description": "軟膠製品同玩偶製造銷售商Obitsu製作所嘅官方網站，介紹品牌、商品、獨有技術同製造理念。"
+    }
+  },
+  "unifast": {
+    "ja": {
+      "title": "ユニファースト",
+      "shortTitle": "ユニファースト"
+    },
+    "en": {
+      "title": "Unifast",
+      "shortTitle": "Unifast",
+      "description": "The official website for Unifast, a planner and producer of promotional merchandise, introducing its project experience and original goods."
+    },
+    "zh-CN": {
+      "title": "Unifast",
+      "shortTitle": "Unifast",
+      "description": "促销礼品策划制作企业Unifast官方网站，介绍丰富案例与原创商品的魅力。"
+    },
+    "zh-HK": {
+      "title": "Unifast",
+      "shortTitle": "Unifast",
+      "description": "促銷禮品策劃製作企業Unifast官方網站，介紹豐富案例同原創商品嘅魅力。"
+    }
+  },
+  "rosso": {
+    "ja": {
+      "title": "Rosso",
+      "shortTitle": "Rosso"
+    },
+    "en": {
+      "title": "Rosso",
+      "shortTitle": "Rosso",
+      "description": "The official website for Rosso, covering machine learning, AI and application development, and infrastructure setup and operations, with animated visuals introducing its services and company."
+    },
+    "zh-CN": {
+      "title": "Rosso",
+      "shortTitle": "Rosso",
+      "description": "Rosso官方网站，通过动态视觉介绍机器学习、AI及应用开发、基础设施搭建与运维服务和企业信息。"
+    },
+    "zh-HK": {
+      "title": "Rosso",
+      "shortTitle": "Rosso",
+      "description": "Rosso官方網站，透過動態視覺介紹機器學習、AI同應用開發、基建搭建及營運服務同企業資訊。"
+    }
+  },
+  "triedge": {
+    "ja": {
+      "title": "トライエッジ",
+      "shortTitle": "トライエッジ"
+    },
+    "en": {
+      "title": "Triedge",
+      "shortTitle": "Triedge",
+      "description": "The official website for Triedge, presenting business-support and technology services alongside company information in a clear, organized structure."
+    },
+    "zh-CN": {
+      "title": "Triedge",
+      "shortTitle": "Triedge",
+      "description": "提供业务支持与技术服务的Triedge官方网站，以清晰结构展示服务与企业信息。"
+    },
+    "zh-HK": {
+      "title": "Triedge",
+      "shortTitle": "Triedge",
+      "description": "提供業務支援同技術服務嘅Triedge官方網站，以清晰結構展示服務同企業資訊。"
+    }
+  },
+  "towa-corporation": {
+    "ja": {
+      "title": "東和コーポレーション",
+      "shortTitle": "東和コーポレーション"
+    },
+    "en": {
+      "title": "Towa Corporation",
+      "shortTitle": "Towa Corporation",
+      "description": "The official website for Towa Corporation, sharing its corporate philosophy, business activities and latest information through a practical, accessible layout."
+    },
+    "zh-CN": {
+      "title": "东和集团",
+      "shortTitle": "东和集团",
+      "description": "东和公司官方网站，通过易用布局介绍企业理念、业务内容与最新信息。"
+    },
+    "zh-HK": {
+      "title": "東和集團",
+      "shortTitle": "東和集團",
+      "description": "東和公司官方網站，透過易用版面介紹企業理念、業務內容同最新資訊。"
+    }
+  },
+  "nana-canele": {
+    "ja": {
+      "title": "NANA-Canele",
+      "shortTitle": "NANA-Canele"
+    },
+    "en": {
+      "title": "NANA-Canele",
+      "shortTitle": "NANA-Canele",
+      "description": "An online shop specializing in canelés, combining attractive presentation of carefully made sweets with a smooth purchasing experience."
+    },
+    "zh-CN": {
+      "title": "NANA-Canele",
+      "shortTitle": "NANA-Canele",
+      "description": "可露丽专卖网店，以精美视觉呈现甜点特色，同时提供流畅的购物体验。"
+    },
+    "zh-HK": {
+      "title": "NANA-Canele",
+      "shortTitle": "NANA-Canele",
+      "description": "可露麗專賣網店，以精美視覺呈現甜點特色，同時提供流暢嘅購物體驗。"
+    }
+  },
+  "spa-touan": {
+    "ja": {
+      "title": "統合庵",
+      "shortTitle": "統合庵"
+    },
+    "en": {
+      "title": "Touan",
+      "shortTitle": "Touan",
+      "description": "The official website for relaxation salon Touan, using a calm visual style to introduce treatments and salon information clearly."
+    },
+    "zh-CN": {
+      "title": "统合庵",
+      "shortTitle": "统合庵",
+      "description": "放松护理沙龙统合庵官方网站，以宁静风格清晰介绍护理项目与门店信息。"
+    },
+    "zh-HK": {
+      "title": "統合庵",
+      "shortTitle": "統合庵",
+      "description": "放鬆護理沙龍統合庵官方網站，以寧靜風格清晰介紹護理項目同店舖資訊。"
+    }
+  },
+  "edo-komachi": {
+    "ja": {
+      "title": "江戸小町",
+      "shortTitle": "江戸小町"
+    },
+    "en": {
+      "title": "Edo Komachi",
+      "shortTitle": "Edo Komachi",
+      "description": "The official website for Edo Komachi, a salon with a Japanese-inspired atmosphere, combining traditional aesthetics with contemporary services."
+    },
+    "zh-CN": {
+      "title": "江户小町",
+      "shortTitle": "江户小町",
+      "description": "融入日式氛围的江户小町沙龙官方网站，结合传统审美与现代服务。"
+    },
+    "zh-HK": {
+      "title": "江戶小町",
+      "shortTitle": "江戶小町",
+      "description": "融入日式氣氛嘅江戶小町沙龍官方網站，結合傳統美學同現代服務。"
+    }
+  },
+  "love-shabon": {
+    "ja": {
+      "title": "ラブシャボン",
+      "shortTitle": "ラブシャボン"
+    },
+    "en": {
+      "title": "Love Shabon",
+      "shortTitle": "Love Shabon",
+      "description": "The official website for beauty and care salon Love Shabon, carefully presenting its clean, comfortable environment and service menu."
+    },
+    "zh-CN": {
+      "title": "Love Shabon",
+      "shortTitle": "Love Shabon",
+      "description": "美容护理沙龙Love Shabon官方网站，细致介绍洁净舒适的环境与服务项目。"
+    },
+    "zh-HK": {
+      "title": "Love Shabon",
+      "shortTitle": "Love Shabon",
+      "description": "美容護理沙龍Love Shabon官方網站，細緻介紹潔淨舒適嘅環境同服務項目。"
+    }
+  },
+  "m-no-rakuen": {
+    "ja": {
+      "title": "Mの楽園",
+      "shortTitle": "Mの楽園"
+    },
+    "en": {
+      "title": "M no Rakuen",
+      "shortTitle": "M no Rakuen",
+      "description": "The official website for M no Rakuen, a salon offering a soothing environment, with relaxing visuals and detailed service information."
+    },
+    "zh-CN": {
+      "title": "M的乐园",
+      "shortTitle": "M的乐园",
+      "description": "提供疗愈空间的M的乐园沙龙官方网站，展示轻松氛围与丰富服务信息。"
+    },
+    "zh-HK": {
+      "title": "M的樂園",
+      "shortTitle": "M的樂園",
+      "description": "提供療癒空間嘅M的樂園沙龍官方網站，展示輕鬆氣氛同豐富服務資訊。"
+    }
+  },
+  "luana-shinagawa": {
+    "ja": {
+      "title": "ルアナ",
+      "shortTitle": "ルアナ"
+    },
+    "en": {
+      "title": "Luana",
+      "shortTitle": "Luana",
+      "description": "The official website for private salon Luana in the Shinagawa area, introducing its refined atmosphere, treatment plans and access information."
+    },
+    "zh-CN": {
+      "title": "Luana",
+      "shortTitle": "Luana",
+      "description": "品川地区私人沙龙Luana官方网站，介绍精致环境、护理方案与交通信息。"
+    },
+    "zh-HK": {
+      "title": "Luana",
+      "shortTitle": "Luana",
+      "description": "品川地區私人沙龍Luana官方網站，介紹精緻環境、護理方案同交通資訊。"
+    }
+  },
+  "salon-cms": {
+    "ja": {
+      "title": "サロン向けCMS",
+      "shortTitle": "サロン向けCMS"
+    },
+    "en": {
+      "title": "Salon CMS",
+      "shortTitle": "Salon CMS",
+      "description": "A landing page introducing CMS and website-production services for salons, presenting the benefits and expected value of salon-focused tools."
+    },
+    "zh-CN": {
+      "title": "沙龙CMS",
+      "shortTitle": "沙龙CMS",
+      "description": "沙龙CMS及网站制作服务的推广页面，介绍面向沙龙的工具优势与应用价值。"
+    },
+    "zh-HK": {
+      "title": "沙龍CMS",
+      "shortTitle": "沙龍CMS",
+      "description": "沙龍CMS同網站製作服務嘅推廣頁面，介紹面向沙龍嘅工具優勢同應用價值。"
+    }
+  },
+  "global-acsl": {
+    "ja": {
+      "title": "ACSL｜産業用ドローンサイト",
+      "shortTitle": "ACSL｜産業用ドローンサイト"
+    },
+    "en": {
+      "title": "ACSL Corporate Website & Industrial Drone Solutions Platform",
+      "shortTitle": "ACSL"
+    },
+    "zh-CN": {
+      "title": "ACSL｜工业无人机网站",
+      "shortTitle": "ACSL｜工业无人机网站"
+    },
+    "zh-HK": {
+      "title": "ACSL｜工業無人機網站",
+      "shortTitle": "ACSL｜工業無人機網站"
+    }
+  },
+  "global-nest-salon": {
+    "ja": {
+      "title": "The Nest Salon｜ヘア・ビューティーサロン",
+      "shortTitle": "The Nest Salon｜ヘア・ビューティーサロン"
+    },
+    "en": {
+      "title": "The Nest Salon Luxury Hair & Beauty Website in Dubai",
+      "shortTitle": "The Nest Salon"
+    },
+    "zh-CN": {
+      "title": "The Nest Salon｜美发美容沙龙",
+      "shortTitle": "The Nest Salon｜美发美容沙龙"
+    },
+    "zh-HK": {
+      "title": "The Nest Salon｜美髮美容沙龍",
+      "shortTitle": "The Nest Salon｜美髮美容沙龍"
+    }
+  },
+  "global-well-grow": {
+    "ja": {
+      "title": "Well Grow Store｜ウェルネス通販",
+      "shortTitle": "Well Grow Store｜ウェルネス通販"
+    },
+    "en": {
+      "title": "Well Grow Store E-Commerce Website for Vastu Products",
+      "shortTitle": "Well Grow Store"
+    },
+    "zh-CN": {
+      "title": "Well Grow Store｜健康生活网店",
+      "shortTitle": "Well Grow Store｜健康生活网店"
+    },
+    "zh-HK": {
+      "title": "Well Grow Store｜健康生活網店",
+      "shortTitle": "Well Grow Store｜健康生活網店"
+    }
+  },
+  "global-animoca": {
+    "ja": {
+      "title": "Animoca Brands｜Web3 企業サイト",
+      "shortTitle": "Animoca Brands｜Web3 企業サイト"
+    },
+    "en": {
+      "title": "Animoca Brands Web3 Technology & Digital Economy Corporate Website",
+      "shortTitle": "Animoca Brands"
+    },
+    "zh-CN": {
+      "title": "Animoca Brands｜Web3企业网站",
+      "shortTitle": "Animoca Brands｜Web3企业网站"
+    },
+    "zh-HK": {
+      "title": "Animoca Brands｜Web3企業網站",
+      "shortTitle": "Animoca Brands｜Web3企業網站"
+    }
+  },
+  "global-sabia-amor": {
+    "ja": {
+      "title": "SABIA AMOR｜ファッション通販",
+      "shortTitle": "SABIA AMOR｜ファッション通販"
+    },
+    "en": {
+      "title": "SABIA AMOR Luxury Fashion & Lingerie E-Commerce Website",
+      "shortTitle": "SABIA AMOR"
+    },
+    "zh-CN": {
+      "title": "SABIA AMOR｜时装网店",
+      "shortTitle": "SABIA AMOR｜时装网店"
+    },
+    "zh-HK": {
+      "title": "SABIA AMOR｜時裝網店",
+      "shortTitle": "SABIA AMOR｜時裝網店"
+    }
+  },
+  "global-sola-hair": {
+    "ja": {
+      "title": "SOLA Hair Singapore｜ヘアサロンサイト",
+      "shortTitle": "SOLA Hair Singapore｜ヘアサロンサイト"
+    },
+    "en": {
+      "title": "SOLA Hair Singapore Luxury Salon Website",
+      "shortTitle": "SOLA Hair Singapore"
+    },
+    "zh-CN": {
+      "title": "SOLA Hair Singapore｜美发沙龙网站",
+      "shortTitle": "SOLA Hair Singapore｜美发沙龙网站"
+    },
+    "zh-HK": {
+      "title": "SOLA Hair Singapore｜美髮沙龍網站",
+      "shortTitle": "SOLA Hair Singapore｜美髮沙龍網站"
+    }
+  },
+  "global-welab-bank": {
+    "ja": {
+      "title": "WeLab Bank｜デジタル銀行サイト",
+      "shortTitle": "WeLab Bank｜デジタル銀行サイト"
+    },
+    "en": {
+      "title": "WeLab Bank Digital Banking Website & Financial Services Platform",
+      "shortTitle": "WeLab Bank"
+    },
+    "zh-CN": {
+      "title": "WeLab Bank｜数字银行网站",
+      "shortTitle": "WeLab Bank｜数字银行网站"
+    },
+    "zh-HK": {
+      "title": "WeLab Bank｜數碼銀行網站",
+      "shortTitle": "WeLab Bank｜數碼銀行網站"
+    }
+  },
+  "global-qipology": {
+    "ja": {
+      "title": "Qipology｜チャイナドレス通販",
+      "shortTitle": "Qipology｜チャイナドレス通販"
+    },
+    "en": {
+      "title": "Qipology — Modern Qipao & Fashion E-Commerce",
+      "shortTitle": "Qipology"
+    },
+    "zh-CN": {
+      "title": "Qipology｜旗袍网店",
+      "shortTitle": "Qipology｜旗袍网店"
+    },
+    "zh-HK": {
+      "title": "Qipology｜旗袍網店",
+      "shortTitle": "Qipology｜旗袍網店"
+    }
+  },
+  "global-icanread": {
+    "ja": {
+      "title": "I Can Read｜英語教育ポータル",
+      "shortTitle": "I Can Read｜英語教育ポータル"
+    },
+    "en": {
+      "title": "I Can Read — Education & Learning Portal",
+      "shortTitle": "I Can Read"
+    },
+    "zh-CN": {
+      "title": "I Can Read｜英语教育门户",
+      "shortTitle": "I Can Read｜英语教育门户"
+    },
+    "zh-HK": {
+      "title": "I Can Read｜英語教育網站",
+      "shortTitle": "I Can Read｜英語教育網站"
+    }
+  },
+  "global-ms-chu": {
+    "ja": {
+      "title": "MS Chu Soap and Beauty｜美容・石けん通販",
+      "shortTitle": "MS Chu Soap and Beauty｜美容・石けん通販"
+    },
+    "en": {
+      "title": "MS Chu Soap and Beauty — Beauty E-Commerce",
+      "shortTitle": "MS Chu Soap and Beauty"
+    },
+    "zh-CN": {
+      "title": "MS Chu Soap and Beauty｜美容香皂网店",
+      "shortTitle": "MS Chu Soap and Beauty｜美容香皂网店"
+    },
+    "zh-HK": {
+      "title": "MS Chu Soap and Beauty｜美容香皂網店",
+      "shortTitle": "MS Chu Soap and Beauty｜美容香皂網店"
+    }
+  },
+  "global-lifeyoung": {
+    "ja": {
+      "title": "LifeYoung｜ヘルスケアサイト",
+      "shortTitle": "LifeYoung｜ヘルスケアサイト"
+    },
+    "en": {
+      "title": "LifeYoung — Healthcare & Wellness Website",
+      "shortTitle": "LifeYoung"
+    },
+    "zh-CN": {
+      "title": "LifeYoung｜医疗健康网站",
+      "shortTitle": "LifeYoung｜医疗健康网站"
+    },
+    "zh-HK": {
+      "title": "LifeYoung｜醫療健康網站",
+      "shortTitle": "LifeYoung｜醫療健康網站"
+    }
+  },
+  "global-propman": {
+    "ja": {
+      "title": "Propman｜不動産管理サイト",
+      "shortTitle": "Propman｜不動産管理サイト"
+    },
+    "en": {
+      "title": "Propman — Property Management Platform Website",
+      "shortTitle": "Propman"
+    },
+    "zh-CN": {
+      "title": "Propman｜物业管理网站",
+      "shortTitle": "Propman｜物业管理网站"
+    },
+    "zh-HK": {
+      "title": "Propman｜物業管理網站",
+      "shortTitle": "Propman｜物業管理網站"
+    }
+  },
+  "global-cuthys": {
+    "ja": {
+      "title": "Cuthys｜ブランド・商品紹介",
+      "shortTitle": "Cuthys｜ブランド・商品紹介"
+    },
+    "en": {
+      "title": "Cuthys — Brand & Product Website",
+      "shortTitle": "Cuthys"
+    },
+    "zh-CN": {
+      "title": "Cuthys｜品牌与商品介绍",
+      "shortTitle": "Cuthys｜品牌与商品介绍"
+    },
+    "zh-HK": {
+      "title": "Cuthys｜品牌及商品介紹",
+      "shortTitle": "Cuthys｜品牌及商品介紹"
+    }
+  },
+  "global-brilliant-mlle": {
+    "ja": {
+      "title": "Brilliant Mlle｜ブランドサイト",
+      "shortTitle": "Brilliant Mlle｜ブランドサイト"
+    },
+    "en": {
+      "title": "Brilliant Mlle — Full-Stack Brand Website",
+      "shortTitle": "Brilliant Mlle"
+    },
+    "zh-CN": {
+      "title": "Brilliant Mlle｜品牌网站",
+      "shortTitle": "Brilliant Mlle｜品牌网站"
+    },
+    "zh-HK": {
+      "title": "Brilliant Mlle｜品牌網站",
+      "shortTitle": "Brilliant Mlle｜品牌網站"
+    }
+  },
+  "global-designgood": {
+    "ja": {
+      "title": "DesignGood｜デザイン雑貨通販",
+      "shortTitle": "DesignGood｜デザイン雑貨通販"
+    },
+    "en": {
+      "title": "DesignGood — Design & Lifestyle E-Commerce",
+      "shortTitle": "DesignGood"
+    },
+    "zh-CN": {
+      "title": "DesignGood｜设计生活用品网店",
+      "shortTitle": "DesignGood｜设计生活用品网店"
+    },
+    "zh-HK": {
+      "title": "DesignGood｜設計生活用品網店",
+      "shortTitle": "DesignGood｜設計生活用品網店"
+    }
+  },
+  "global-paka-wellness": {
+    "ja": {
+      "title": "Paka Wellness｜ウェルネス・フィットネス通販",
+      "shortTitle": "Paka Wellness｜ウェルネス・フィットネス通販"
+    },
+    "en": {
+      "title": "Paka Wellness — Wellness & Fitness E-Commerce",
+      "shortTitle": "Paka Wellness"
+    },
+    "zh-CN": {
+      "title": "Paka Wellness｜健康健身网店",
+      "shortTitle": "Paka Wellness｜健康健身网店"
+    },
+    "zh-HK": {
+      "title": "Paka Wellness｜健康健身網店",
+      "shortTitle": "Paka Wellness｜健康健身網店"
+    }
+  },
+  "global-lean-fitness": {
+    "ja": {
+      "title": "Lean Fitness｜フィットネススタジオ",
+      "shortTitle": "Lean Fitness｜フィットネススタジオ"
+    },
+    "en": {
+      "title": "Lean Fitness — Hong Kong Studio Website",
+      "shortTitle": "Lean Fitness"
+    },
+    "zh-CN": {
+      "title": "Lean Fitness｜健身工作室",
+      "shortTitle": "Lean Fitness｜健身工作室"
+    },
+    "zh-HK": {
+      "title": "Lean Fitness｜健身工作室",
+      "shortTitle": "Lean Fitness｜健身工作室"
+    }
+  },
+  "global-sparky": {
+    "ja": {
+      "title": "Sparky｜マッチング・交流サービス",
+      "shortTitle": "Sparky｜マッチング・交流サービス"
+    },
+    "en": {
+      "title": "Sparky — Dating & Community Platform",
+      "shortTitle": "Sparky"
+    },
+    "zh-CN": {
+      "title": "Sparky｜交友社交平台",
+      "shortTitle": "Sparky｜交友社交平台"
+    },
+    "zh-HK": {
+      "title": "Sparky｜交友社交平台",
+      "shortTitle": "Sparky｜交友社交平台"
+    }
+  },
+  "global-healing-voices": {
+    "ja": {
+      "title": "Healing Voices｜カウンセリングサイト",
+      "shortTitle": "Healing Voices｜カウンセリングサイト"
+    },
+    "en": {
+      "title": "Healing Voices — Counselling & Wellbeing Website",
+      "shortTitle": "Healing Voices"
+    },
+    "zh-CN": {
+      "title": "Healing Voices｜心理咨询网站",
+      "shortTitle": "Healing Voices｜心理咨询网站"
+    },
+    "zh-HK": {
+      "title": "Healing Voices｜心理輔導網站",
+      "shortTitle": "Healing Voices｜心理輔導網站"
+    }
+  },
+  "global-wintech": {
+    "ja": {
+      "title": "Wintech｜技術・エンジニアリングサイト",
+      "shortTitle": "Wintech｜技術・エンジニアリングサイト"
+    },
+    "en": {
+      "title": "Wintech — Technology & Engineering Corporate Website",
+      "shortTitle": "Wintech"
+    },
+    "zh-CN": {
+      "title": "Wintech｜技术工程企业网站",
+      "shortTitle": "Wintech｜技术工程企业网站"
+    },
+    "zh-HK": {
+      "title": "Wintech｜技術工程企業網站",
+      "shortTitle": "Wintech｜技術工程企業網站"
+    }
+  },
+  "global-woaw": {
+    "ja": {
+      "title": "WOAW Store｜ストリートファッション通販",
+      "shortTitle": "WOAW Store｜ストリートファッション通販"
+    },
+    "en": {
+      "title": "WOAW Store — Streetwear & Selected Goods E-Commerce",
+      "shortTitle": "WOAW Store"
+    },
+    "zh-CN": {
+      "title": "WOAW Store｜街头服饰网店",
+      "shortTitle": "WOAW Store｜街头服饰网店"
+    },
+    "zh-HK": {
+      "title": "WOAW Store｜街頭服飾網店",
+      "shortTitle": "WOAW Store｜街頭服飾網店"
+    }
+  },
+  "global-wild-organic": {
+    "ja": {
+      "title": "Wild Organic Life｜オーガニック雑貨通販",
+      "shortTitle": "Wild Organic Life｜オーガニック雑貨通販"
+    },
+    "en": {
+      "title": "Wild Organic Life — Organic Lifestyle E-Commerce",
+      "shortTitle": "Wild Organic Life"
+    },
+    "zh-CN": {
+      "title": "Wild Organic Life｜有机生活网店",
+      "shortTitle": "Wild Organic Life｜有机生活网店"
+    },
+    "zh-HK": {
+      "title": "Wild Organic Life｜有機生活網店",
+      "shortTitle": "Wild Organic Life｜有機生活網店"
+    }
+  },
+  "nda-kintone": {
+    "ja": {
+      "title": "kintone 業務アプリ連携（守秘義務対象）",
+      "shortTitle": "kintone 業務アプリ連携"
+    },
+    "en": {
+      "title": "kintone Business App Integration — NDA Case Summary",
+      "shortTitle": "kintone Business App Integration",
+      "description": "An anonymized Japan-market project connecting kintone business apps with external services, covering business-data integration and routine-process automation."
+    },
+    "zh-CN": {
+      "title": "kintone业务应用集成（保密项目）",
+      "shortTitle": "kintone业务应用集成",
+      "description": "面向日本市场的匿名开发案例，连接kintone业务应用与外部服务，涵盖业务数据集成及日常处理自动化。"
+    },
+    "zh-HK": {
+      "title": "kintone業務應用整合（保密項目）",
+      "shortTitle": "kintone業務應用整合",
+      "description": "面向日本市場嘅匿名開發案例，連接kintone業務應用同外部服務，涵蓋業務資料整合同日常處理自動化。"
+    }
+  },
+  "nda-n8n": {
+    "ja": {
+      "title": "n8n ワークフロー自動化（守秘義務対象）",
+      "shortTitle": "n8n ワークフロー自動化"
+    },
+    "en": {
+      "title": "n8n Workflow Automation — NDA Case Summary",
+      "shortTitle": "n8n Workflow Automation"
+    },
+    "zh-CN": {
+      "title": "n8n工作流自动化（保密项目）",
+      "shortTitle": "n8n工作流自动化"
+    },
+    "zh-HK": {
+      "title": "n8n工作流程自動化（保密項目）",
+      "shortTitle": "n8n工作流程自動化"
+    }
+  },
+  "nda-saas": {
+    "ja": {
+      "title": "SaaS システム開発（守秘義務対象）",
+      "shortTitle": "SaaS システム開発"
+    },
+    "en": {
+      "title": "SaaS System Development — NDA Case Summary",
+      "shortTitle": "SaaS System Development"
+    },
+    "zh-CN": {
+      "title": "SaaS系统开发（保密项目）",
+      "shortTitle": "SaaS系统开发"
+    },
+    "zh-HK": {
+      "title": "SaaS系統開發（保密項目）",
+      "shortTitle": "SaaS系統開發"
+    }
+  },
+  "nda-ai-workflow": {
+    "ja": {
+      "title": "AI・LLM 業務自動化（守秘義務対象）",
+      "shortTitle": "AI・LLM 業務自動化"
+    },
+    "en": {
+      "title": "AI / LLM Workflow Automation — NDA Case Summary",
+      "shortTitle": "AI / LLM Workflow Automation"
+    },
+    "zh-CN": {
+      "title": "AI与LLM业务自动化（保密项目）",
+      "shortTitle": "AI与LLM业务自动化"
+    },
+    "zh-HK": {
+      "title": "AI及LLM業務自動化（保密項目）",
+      "shortTitle": "AI及LLM業務自動化"
+    }
+  },
+  "nda-api-security": {
+    "ja": {
+      "title": "API セキュリティ・連携（守秘義務対象）",
+      "shortTitle": "API セキュリティ・連携"
+    },
+    "en": {
+      "title": "API Security & Integration — NDA Case Summary",
+      "shortTitle": "API Security & Integration"
+    },
+    "zh-CN": {
+      "title": "API安全与集成（保密项目）",
+      "shortTitle": "API安全与集成"
+    },
+    "zh-HK": {
+      "title": "API安全及整合（保密項目）",
+      "shortTitle": "API安全及整合"
+    }
+  },
+  "nda-infrastructure": {
+    "ja": {
+      "title": "インフラ構築・運用（守秘義務対象）",
+      "shortTitle": "インフラ構築・運用"
+    },
+    "en": {
+      "title": "Infrastructure & Operations — NDA Case Summary",
+      "shortTitle": "Infrastructure & Operations"
+    },
+    "zh-CN": {
+      "title": "基础设施与运维（保密项目）",
+      "shortTitle": "基础设施与运维"
+    },
+    "zh-HK": {
+      "title": "基建及營運（保密項目）",
+      "shortTitle": "基建及營運"
+    }
+  },
+  "nda-excel": {
+    "ja": {
+      "title": "Excel 業務自動化（守秘義務対象）",
+      "shortTitle": "Excel 業務自動化"
+    },
+    "en": {
+      "title": "Excel Workflow Automation — NDA Case Summary",
+      "shortTitle": "Excel Workflow Automation",
+      "description": "An anonymized Japan-market project automating routine Excel data processing and aggregation. Actual forms and business data are not disclosed."
+    },
+    "zh-CN": {
+      "title": "Excel业务自动化（保密项目）",
+      "shortTitle": "Excel业务自动化",
+      "description": "面向日本市场的匿名Excel自动化案例，涵盖常规数据处理与汇总，不公开实际报表或业务数据。"
+    },
+    "zh-HK": {
+      "title": "Excel業務自動化（保密項目）",
+      "shortTitle": "Excel業務自動化",
+      "description": "面向日本市場嘅匿名Excel自動化案例，涵蓋日常資料處理同匯總，唔會公開實際報表或業務資料。"
+    }
+  },
+  "nda-whatsapp": {
+    "ja": {
+      "title": "WhatsApp ボット開発（守秘義務対象）",
+      "shortTitle": "WhatsApp ボット開発"
+    },
+    "en": {
+      "title": "WhatsApp Bot Development — NDA Case Summary",
+      "shortTitle": "WhatsApp Bot Development"
+    },
+    "zh-CN": {
+      "title": "WhatsApp机器人开发（保密项目）",
+      "shortTitle": "WhatsApp机器人开发"
+    },
+    "zh-HK": {
+      "title": "WhatsApp機械人開發（保密項目）",
+      "shortTitle": "WhatsApp機械人開發"
+    }
+  },
+  "nda-telegram": {
+    "ja": {
+      "title": "Telegram ボット開発（守秘義務対象）",
+      "shortTitle": "Telegram ボット開発"
+    },
+    "en": {
+      "title": "Telegram Bot Development — NDA Case Summary",
+      "shortTitle": "Telegram Bot Development"
+    },
+    "zh-CN": {
+      "title": "Telegram机器人开发（保密项目）",
+      "shortTitle": "Telegram机器人开发"
+    },
+    "zh-HK": {
+      "title": "Telegram機械人開發（保密項目）",
+      "shortTitle": "Telegram機械人開發"
+    }
+  },
+  "nda-line": {
+    "ja": {
+      "title": "LINE ボット・業務連携（守秘義務対象）",
+      "shortTitle": "LINE ボット・業務連携"
+    },
+    "en": {
+      "title": "LINE Bot & Business Integration — NDA Case Summary",
+      "shortTitle": "LINE Bot & Business Integration",
+      "description": "An anonymized Japan-market LINE bot project covering message processing and business-system integration. Actual conversations, accounts and user information remain private."
+    },
+    "zh-CN": {
+      "title": "LINE机器人与业务集成（保密项目）",
+      "shortTitle": "LINE机器人与业务集成",
+      "description": "面向日本市场的匿名LINE机器人项目，涵盖消息处理与业务系统集成，不公开实际对话、账户或用户信息。"
+    },
+    "zh-HK": {
+      "title": "LINE機械人及業務整合（保密項目）",
+      "shortTitle": "LINE機械人及業務整合",
+      "description": "面向日本市場嘅匿名LINE機械人項目，涵蓋訊息處理同業務系統整合，唔會公開實際對話、帳戶或用戶資訊。"
+    }
+  },
+  "nda-slack": {
+    "ja": {
+      "title": "Slack ボット・業務自動化（守秘義務対象）",
+      "shortTitle": "Slack ボット・業務自動化"
+    },
+    "en": {
+      "title": "Slack Bot & Workflow Automation — NDA Case Summary",
+      "shortTitle": "Slack Bot & Workflow Automation",
+      "description": "An anonymized Japan-market Slack bot project covering notifications and workflow automation. Actual workspaces, messages and internal operations are not disclosed."
+    },
+    "zh-CN": {
+      "title": "Slack机器人与业务自动化（保密项目）",
+      "shortTitle": "Slack机器人与业务自动化",
+      "description": "面向日本市场的匿名Slack机器人项目，涵盖通知与业务自动化，不公开实际工作区、消息或内部运营信息。"
+    },
+    "zh-HK": {
+      "title": "Slack機械人及業務自動化（保密項目）",
+      "shortTitle": "Slack機械人及業務自動化",
+      "description": "面向日本市場嘅匿名Slack機械人項目，涵蓋通知同業務自動化，唔會公開實際工作區、訊息或內部營運資訊。"
+    }
+  },
+  "utage-teacher-training": {
+    "ja": {
+      "title": "教師向け 3か月オンライン養成講座",
+      "shortTitle": "教師向け 3か月オンライン養成講座"
+    },
+    "en": {
+      "title": "Teacher training · 3-month online course",
+      "shortTitle": "Teacher training · 3-month online course"
+    },
+    "zh-CN": {
+      "title": "教师3个月在线培训课程",
+      "shortTitle": "教师3个月在线培训课程"
+    },
+    "zh-HK": {
+      "title": "教師3個月網上培訓課程",
+      "shortTitle": "教師3個月網上培訓課程"
+    }
+  },
+  "utage-toeic-course": {
+    "ja": {
+      "title": "TOEIC対策 無料オンライン講座",
+      "shortTitle": "TOEIC対策 無料オンライン講座"
+    },
+    "en": {
+      "title": "Free online TOEIC preparation course",
+      "shortTitle": "Free online TOEIC preparation course"
+    },
+    "zh-CN": {
+      "title": "TOEIC备考免费在线课程",
+      "shortTitle": "TOEIC备考免费在线课程"
+    },
+    "zh-HK": {
+      "title": "TOEIC備試免費網上課程",
+      "shortTitle": "TOEIC備試免費網上課程"
+    }
+  },
+  "utage-parent-course": {
+    "ja": {
+      "title": "子育て中の保護者向けオンライン講座",
+      "shortTitle": "子育て中の保護者向けオンライン講座"
+    },
+    "en": {
+      "title": "Online parenting course and community",
+      "shortTitle": "Online parenting course and community"
+    },
+    "zh-CN": {
+      "title": "家长在线课程与学习社群",
+      "shortTitle": "家长在线课程与学习社群"
+    },
+    "zh-HK": {
+      "title": "家長網上課程同學習社群",
+      "shortTitle": "家長網上課程同學習社群"
+    }
+  },
+  "utage-trial-lesson": {
+    "ja": {
+      "title": "実店舗向け 初回無料体験レッスン",
+      "shortTitle": "実店舗向け 初回無料体験レッスン"
+    },
+    "en": {
+      "title": "Free introductory Pilates trial lesson",
+      "shortTitle": "Free introductory Pilates trial lesson"
+    },
+    "zh-CN": {
+      "title": "普拉提首次免费体验课",
+      "shortTitle": "普拉提首次免费体验课"
+    },
+    "zh-HK": {
+      "title": "普拉提首次免費體驗課",
+      "shortTitle": "普拉提首次免費體驗課"
+    }
+  },
+  "utage-treatment-trial": {
+    "ja": {
+      "title": "初回体験コース・予約LP",
+      "shortTitle": "初回体験コース・予約LP"
+    },
+    "en": {
+      "title": "Introductory treatment and reservation page",
+      "shortTitle": "Introductory treatment and reservation page"
+    },
+    "zh-CN": {
+      "title": "护理首次体验与预约页面",
+      "shortTitle": "护理首次体验与预约页面"
+    },
+    "zh-HK": {
+      "title": "護理首次體驗同預約頁面",
+      "shortTitle": "護理首次體驗同預約頁面"
+    }
+  },
+  "utage-regional-trial-events": {
+    "ja": {
+      "title": "地域別 対面体験会・申し込みページ",
+      "shortTitle": "地域別 対面体験会・申し込みページ"
+    },
+    "en": {
+      "title": "Regional in-person trial event registration",
+      "shortTitle": "Regional in-person trial event registration"
+    },
+    "zh-CN": {
+      "title": "地区线下体验活动报名页面",
+      "shortTitle": "地区线下体验活动报名页面"
+    },
+    "zh-HK": {
+      "title": "地區實體體驗活動報名頁面",
+      "shortTitle": "地區實體體驗活動報名頁面"
+    }
+  },
+  "global-hush-uk": {
+    "ja": {
+      "title": "Hush｜ファッションサイト",
+      "shortTitle": "Hush｜ファッションサイト"
+    },
+    "en": {
+      "title": "Hush — UK Website",
+      "shortTitle": "Hush"
+    },
+    "zh-CN": {
+      "title": "Hush｜时装网站",
+      "shortTitle": "Hush｜时装网站"
+    },
+    "zh-HK": {
+      "title": "Hush｜時裝網站",
+      "shortTitle": "Hush｜時裝網站"
+    }
+  },
+  "global-lomi-cafe": {
+    "ja": {
+      "title": "Lomi Café｜コーヒーブランドサイト",
+      "shortTitle": "Lomi Café｜コーヒーブランドサイト"
+    },
+    "en": {
+      "title": "Lomi Café — Website",
+      "shortTitle": "Lomi Café"
+    },
+    "zh-CN": {
+      "title": "Lomi Café｜咖啡品牌网站",
+      "shortTitle": "Lomi Café｜咖啡品牌网站"
+    },
+    "zh-HK": {
+      "title": "Lomi Café｜咖啡品牌網站",
+      "shortTitle": "Lomi Café｜咖啡品牌網站"
+    }
+  },
+  "global-lambert-bags": {
+    "ja": {
+      "title": "Lambert Bags｜バッグ・アクセサリー通販",
+      "shortTitle": "Lambert Bags｜バッグ・アクセサリー通販"
+    },
+    "en": {
+      "title": "Lambert Bags — E-Commerce Website",
+      "shortTitle": "Lambert Bags"
+    },
+    "zh-CN": {
+      "title": "Lambert Bags｜箱包配饰网店",
+      "shortTitle": "Lambert Bags｜箱包配饰网店"
+    },
+    "zh-HK": {
+      "title": "Lambert Bags｜箱包配飾網店",
+      "shortTitle": "Lambert Bags｜箱包配飾網店"
+    }
+  },
+  "global-la-crawfish": {
+    "ja": {
+      "title": "LA Crawfish｜水産食品サイト",
+      "shortTitle": "LA Crawfish｜水産食品サイト"
+    },
+    "en": {
+      "title": "LA Crawfish — Website",
+      "shortTitle": "LA Crawfish"
+    },
+    "zh-CN": {
+      "title": "LA Crawfish｜海鲜食品网站",
+      "shortTitle": "LA Crawfish｜海鲜食品网站"
+    },
+    "zh-HK": {
+      "title": "LA Crawfish｜海鮮食品網站",
+      "shortTitle": "LA Crawfish｜海鮮食品網站"
+    }
+  },
+  "global-facefacts-buxton": {
+    "ja": {
+      "title": "Facefacts Buxton｜美容・スキンケアサイト",
+      "shortTitle": "Facefacts Buxton｜美容・スキンケアサイト"
+    },
+    "en": {
+      "title": "Facefacts Buxton — Website",
+      "shortTitle": "Facefacts Buxton"
+    },
+    "zh-CN": {
+      "title": "Facefacts Buxton｜美容护肤网站",
+      "shortTitle": "Facefacts Buxton｜美容护肤网站"
+    },
+    "zh-HK": {
+      "title": "Facefacts Buxton｜美容護膚網站",
+      "shortTitle": "Facefacts Buxton｜美容護膚網站"
+    }
+  },
+  "global-van-michael": {
+    "ja": {
+      "title": "Van Michael｜ヘアサロンサイト",
+      "shortTitle": "Van Michael｜ヘアサロンサイト"
+    },
+    "en": {
+      "title": "Van Michael — Website",
+      "shortTitle": "Van Michael"
+    },
+    "zh-CN": {
+      "title": "Van Michael｜美发沙龙网站",
+      "shortTitle": "Van Michael｜美发沙龙网站"
+    },
+    "zh-HK": {
+      "title": "Van Michael｜美髮沙龍網站",
+      "shortTitle": "Van Michael｜美髮沙龍網站"
+    }
+  },
+  "global-koko-hair": {
+    "ja": {
+      "title": "Koko Hair｜ヘアサロンサイト",
+      "shortTitle": "Koko Hair｜ヘアサロンサイト"
+    },
+    "en": {
+      "title": "Koko Hair — Website",
+      "shortTitle": "Koko Hair"
+    },
+    "zh-CN": {
+      "title": "Koko Hair｜美发沙龙网站",
+      "shortTitle": "Koko Hair｜美发沙龙网站"
+    },
+    "zh-HK": {
+      "title": "Koko Hair｜美髮沙龍網站",
+      "shortTitle": "Koko Hair｜美髮沙龍網站"
+    }
+  },
+  "global-beauty-lounge-bergedorf": {
+    "ja": {
+      "title": "Beauty Lounge Bergedorf｜美容・スパ通販サイト",
+      "shortTitle": "Beauty Lounge Bergedorf｜美容・スパ通販サイト"
+    },
+    "en": {
+      "title": "Beauty Lounge Bergedorf — E-Commerce Website",
+      "shortTitle": "Beauty Lounge Bergedorf"
+    },
+    "zh-CN": {
+      "title": "Beauty Lounge Bergedorf｜美容水疗网店",
+      "shortTitle": "Beauty Lounge Bergedorf｜美容水疗网店"
+    },
+    "zh-HK": {
+      "title": "Beauty Lounge Bergedorf｜美容水療網店",
+      "shortTitle": "Beauty Lounge Bergedorf｜美容水療網店"
+    }
+  },
+  "global-anushka-spa": {
+    "ja": {
+      "title": "Anushka Spa｜スパ・サロンサイト",
+      "shortTitle": "Anushka Spa｜スパ・サロンサイト"
+    },
+    "en": {
+      "title": "Anushka Spa — Website",
+      "shortTitle": "Anushka Spa"
+    },
+    "zh-CN": {
+      "title": "Anushka Spa｜水疗沙龙网站",
+      "shortTitle": "Anushka Spa｜水疗沙龙网站"
+    },
+    "zh-HK": {
+      "title": "Anushka Spa｜水療沙龍網站",
+      "shortTitle": "Anushka Spa｜水療沙龍網站"
+    }
+  },
+  "global-manor-real-estate": {
+    "ja": {
+      "title": "Manor Real Estate｜不動産サイト",
+      "shortTitle": "Manor Real Estate｜不動産サイト"
+    },
+    "en": {
+      "title": "Manor Real Estate — Website",
+      "shortTitle": "Manor Real Estate"
+    },
+    "zh-CN": {
+      "title": "Manor Real Estate｜房地产网站",
+      "shortTitle": "Manor Real Estate｜房地产网站"
+    },
+    "zh-HK": {
+      "title": "Manor Real Estate｜地產網站",
+      "shortTitle": "Manor Real Estate｜地產網站"
+    }
+  },
+  "global-charcot-immobilier": {
+    "ja": {
+      "title": "Charcot Immobilier｜不動産会社サイト",
+      "shortTitle": "Charcot Immobilier｜不動産会社サイト"
+    },
+    "en": {
+      "title": "Charcot Immobilier — Website",
+      "shortTitle": "Charcot Immobilier"
+    },
+    "zh-CN": {
+      "title": "Charcot Immobilier｜房地产中介网站",
+      "shortTitle": "Charcot Immobilier｜房地产中介网站"
+    },
+    "zh-HK": {
+      "title": "Charcot Immobilier｜地產代理網站",
+      "shortTitle": "Charcot Immobilier｜地產代理網站"
+    }
+  },
+  "global-lancastrian-estates": {
+    "ja": {
+      "title": "Lancastrian Estates｜不動産会社サイト",
+      "shortTitle": "Lancastrian Estates｜不動産会社サイト"
+    },
+    "en": {
+      "title": "Lancastrian Estates — Website",
+      "shortTitle": "Lancastrian Estates"
+    },
+    "zh-CN": {
+      "title": "Lancastrian Estates｜房地产中介网站",
+      "shortTitle": "Lancastrian Estates｜房地产中介网站"
+    },
+    "zh-HK": {
+      "title": "Lancastrian Estates｜地產代理網站",
+      "shortTitle": "Lancastrian Estates｜地產代理網站"
+    }
+  },
+  "global-kent-place": {
+    "ja": {
+      "title": "Kent Place｜学校紹介サイト",
+      "shortTitle": "Kent Place｜学校紹介サイト"
+    },
+    "en": {
+      "title": "Kent Place — Website",
+      "shortTitle": "Kent Place"
+    },
+    "zh-CN": {
+      "title": "Kent Place｜学校介绍网站",
+      "shortTitle": "Kent Place｜学校介绍网站"
+    },
+    "zh-HK": {
+      "title": "Kent Place｜學校介紹網站",
+      "shortTitle": "Kent Place｜學校介紹網站"
+    }
+  },
+  "global-sgs": {
+    "ja": {
+      "title": "SGS｜団体紹介サイト",
+      "shortTitle": "SGS｜団体紹介サイト"
+    },
+    "en": {
+      "title": "SGS — Website",
+      "shortTitle": "SGS"
+    },
+    "zh-CN": {
+      "title": "SGS｜机构介绍网站",
+      "shortTitle": "SGS｜机构介绍网站"
+    },
+    "zh-HK": {
+      "title": "SGS｜機構介紹網站",
+      "shortTitle": "SGS｜機構介紹網站"
+    }
+  },
+  "global-beacon-derm": {
+    "ja": {
+      "title": "Beacon Dermatology｜皮膚科クリニックサイト",
+      "shortTitle": "Beacon Dermatology｜皮膚科クリニックサイト"
+    },
+    "en": {
+      "title": "Beacon Dermatology — Website",
+      "shortTitle": "Beacon Dermatology"
+    },
+    "zh-CN": {
+      "title": "Beacon Dermatology｜皮肤科诊所网站",
+      "shortTitle": "Beacon Dermatology｜皮肤科诊所网站"
+    },
+    "zh-HK": {
+      "title": "Beacon Dermatology｜皮膚科診所網站",
+      "shortTitle": "Beacon Dermatology｜皮膚科診所網站"
+    }
+  },
+  "global-pillway": {
+    "ja": {
+      "title": "Pillway｜オンライン薬局サイト",
+      "shortTitle": "Pillway｜オンライン薬局サイト"
+    },
+    "en": {
+      "title": "Pillway — Website",
+      "shortTitle": "Pillway"
+    },
+    "zh-CN": {
+      "title": "Pillway｜在线药房网站",
+      "shortTitle": "Pillway｜在线药房网站"
+    },
+    "zh-HK": {
+      "title": "Pillway｜網上藥房網站",
+      "shortTitle": "Pillway｜網上藥房網站"
+    }
+  },
+  "global-jetts": {
+    "ja": {
+      "title": "Jetts｜フィットネスクラブサイト",
+      "shortTitle": "Jetts｜フィットネスクラブサイト"
+    },
+    "en": {
+      "title": "Jetts — Website",
+      "shortTitle": "Jetts"
+    },
+    "zh-CN": {
+      "title": "Jetts｜健身俱乐部网站",
+      "shortTitle": "Jetts｜健身俱乐部网站"
+    },
+    "zh-HK": {
+      "title": "Jetts｜健身會所網站",
+      "shortTitle": "Jetts｜健身會所網站"
+    }
+  },
+  "global-catering": {
+    "ja": {
+      "title": "Catering.com｜ケータリングサイト",
+      "shortTitle": "Catering.com｜ケータリングサイト"
+    },
+    "en": {
+      "title": "Catering.com — Website",
+      "shortTitle": "Catering.com"
+    },
+    "zh-CN": {
+      "title": "Catering.com｜活动餐饮网站",
+      "shortTitle": "Catering.com｜活动餐饮网站"
+    },
+    "zh-HK": {
+      "title": "Catering.com｜活動餐飲網站",
+      "shortTitle": "Catering.com｜活動餐飲網站"
+    }
+  }
+}

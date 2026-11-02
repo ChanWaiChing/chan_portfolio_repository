@@ -4,8 +4,14 @@ export const portfolioCategories = ["すべて", "ウェブサイト", "ECサイ
 export type PortfolioMarket = "japan" | "global";
 export type PortfolioProject = {
   id: string; title: string; description: string; url?: string; category: string;
-  thumbnail: string; technologies: string[]; period: string; scope: string; field: PortfolioField;
+  thumbnail?: string; technologies: string[]; period: string; scope: string; field: PortfolioField;
   preview?: boolean; market: PortfolioMarket; shortTitle?: string; skills?: string[]; periodLabel?: string; thumbnailAlt?: string; confidential?: boolean; highlights?: { title: string; text: string }[];
+  programmingLanguages?: string[]; frameworks?: string[];
+  suggestedStack?: { technologies: string[]; languages: string[]; frameworks: string[] };
+  thumbnailKind?: "concept";
+  copyStatus?: "draft";
+  thumbnailScale?: number;
+  thumbnailOrigin?: string;
 };
 export const portfolioItems: PortfolioProject[] = [
   {
@@ -180,6 +186,8 @@ export const portfolioItems: PortfolioProject[] = [
   },
   {
     "id": "refa-beauty-showcase",
+    "thumbnailScale": 2.7,
+    "thumbnailOrigin": "center center",
     "title": "ReFa BEAUTY SHOWCASE",
     "url": "https://www.refa.net/beauty_showcase/",
     "category": "ランディングページ",
@@ -248,6 +256,8 @@ export const portfolioItems: PortfolioProject[] = [
   },
   {
     "id": "kirei-preview",
+    "thumbnailScale": 3.1,
+    "thumbnailOrigin": "center 30%",
     "title": "美容ローション 検証用ページ",
     "url": "https://remmier-test.com/preview/lp/kirei",
     "category": "ランディングページ",
@@ -892,6 +902,24 @@ export const portfolioItems: PortfolioProject[] = [
   },
   {
     "id": "global-sparky",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "Node.js",
+        "PostgreSQL",
+        "Redis",
+        "WebSocket"
+      ],
+      "languages": [
+        "TypeScript",
+        "SQL"
+      ],
+      "frameworks": [
+        "React",
+        "Next.js",
+        "NestJS"
+      ]
+    },
     "shortTitle": "Sparky",
     "title": "Sparky — Dating & Community Platform",
     "url": "https://sparky-dating.com/",
@@ -906,7 +934,8 @@ export const portfolioItems: PortfolioProject[] = [
       "Backend Development"
     ],
     "market": "global",
-    "thumbnail": "/images/portfolio/global-sparky.webp",
+    "thumbnail": "/images/portfolio/global-sparky-dashboard-v2.webp",
+    "thumbnailAlt": "Sparky: illustrated concept dashboard, not an actual client screen",
     "period": "Created: 2023",
     "periodLabel": "Project year"
   },
@@ -998,6 +1027,22 @@ export const portfolioItems: PortfolioProject[] = [
   },
   {
     "id": "nda-kintone",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "kintone",
+        "REST APIs",
+        "Node.js"
+      ],
+      "languages": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "frameworks": [
+        "kintone JavaScript SDK",
+        "React"
+      ]
+    },
     "market": "japan",
     "shortTitle": "kintone業務アプリ連携",
     "title": "kintone業務アプリ連携（NDA）",
@@ -1012,11 +1057,27 @@ export const portfolioItems: PortfolioProject[] = [
     "confidential": true,
     "period": "2024年04月〜2025年02月",
     "periodLabel": "公開表示用の参考期間",
-    "thumbnail": "/images/portfolio/nda-kintone.webp",
-    "thumbnailAlt": "kintone業務アプリ連携の公開用概念図。実際の画面・構成ではありません"
+    "thumbnail": "/images/portfolio/nda-kintone-dashboard-v2.webp",
+    "thumbnailAlt": "kintone業務アプリ連携の公開用コンセプト画面。実際のクライアント画面ではありません"
   },
   {
     "id": "nda-n8n",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "n8n",
+        "REST APIs",
+        "PostgreSQL",
+        "Docker"
+      ],
+      "languages": [
+        "JavaScript",
+        "TypeScript"
+      ],
+      "frameworks": [
+        "Express.js"
+      ]
+    },
     "market": "global",
     "shortTitle": "n8n Workflow Automation",
     "title": "n8n Workflow Automation — NDA Case Summary",
@@ -1031,8 +1092,8 @@ export const portfolioItems: PortfolioProject[] = [
     "confidential": true,
     "period": "2024/08–2025/03",
     "periodLabel": "Illustrative public period",
-    "thumbnail": "/images/portfolio/nda-n8n.webp",
-    "thumbnailAlt": "n8n Workflow Automation: public conceptual diagram, not an actual system screen",
+    "thumbnail": "/images/portfolio/nda-n8n-dashboard-v2.webp",
+    "thumbnailAlt": "n8n Workflow Automation: illustrated concept dashboard, not an actual client screen",
     "skills": [
       "Workflow Automation",
       "Service Integration"
@@ -1040,6 +1101,23 @@ export const portfolioItems: PortfolioProject[] = [
   },
   {
     "id": "nda-saas",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "Node.js",
+        "PostgreSQL",
+        "Redis",
+        "Docker"
+      ],
+      "languages": [
+        "TypeScript",
+        "SQL"
+      ],
+      "frameworks": [
+        "Next.js",
+        "NestJS"
+      ]
+    },
     "market": "global",
     "shortTitle": "SaaS System Development",
     "title": "SaaS System Development — NDA Case Summary",
@@ -1054,8 +1132,8 @@ export const portfolioItems: PortfolioProject[] = [
     "confidential": true,
     "period": "2025/02–2026/06",
     "periodLabel": "Illustrative public period",
-    "thumbnail": "/images/portfolio/nda-saas.webp",
-    "thumbnailAlt": "SaaS System Development: public conceptual diagram, not an actual system screen",
+    "thumbnail": "/images/portfolio/nda-saas-dashboard-v2.webp",
+    "thumbnailAlt": "SaaS System Development: illustrated concept dashboard, not an actual client screen",
     "skills": [
       "System Development",
       "Service Integration"
@@ -1063,6 +1141,22 @@ export const portfolioItems: PortfolioProject[] = [
   },
   {
     "id": "nda-ai-workflow",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "OpenAI API",
+        "PostgreSQL",
+        "pgvector"
+      ],
+      "languages": [
+        "Python",
+        "TypeScript"
+      ],
+      "frameworks": [
+        "FastAPI",
+        "LangChain"
+      ]
+    },
     "market": "global",
     "shortTitle": "AI / LLM Workflow Automation",
     "title": "AI / LLM Workflow Automation — NDA Case Summary",
@@ -1077,8 +1171,8 @@ export const portfolioItems: PortfolioProject[] = [
     "confidential": true,
     "period": "2025/05–2026/09",
     "periodLabel": "Illustrative public period",
-    "thumbnail": "/images/portfolio/nda-ai-workflow.webp",
-    "thumbnailAlt": "AI / LLM Workflow Automation: public conceptual diagram, not an actual system screen",
+    "thumbnail": "/images/portfolio/nda-ai-workflow-dashboard-v2.webp",
+    "thumbnailAlt": "AI / LLM Workflow Automation: illustrated concept dashboard, not an actual client screen",
     "skills": [
       "AI Integration",
       "Workflow Automation"
@@ -1086,6 +1180,23 @@ export const portfolioItems: PortfolioProject[] = [
   },
   {
     "id": "nda-api-security",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "REST APIs",
+        "OAuth 2.0",
+        "JWT",
+        "PostgreSQL"
+      ],
+      "languages": [
+        "TypeScript",
+        "SQL"
+      ],
+      "frameworks": [
+        "NestJS",
+        "Passport.js"
+      ]
+    },
     "market": "global",
     "shortTitle": "API Security & Integration",
     "title": "API Security & Integration — NDA Case Summary",
@@ -1101,8 +1212,8 @@ export const portfolioItems: PortfolioProject[] = [
     "confidential": true,
     "period": "2024/11–2025/04",
     "periodLabel": "Illustrative public period",
-    "thumbnail": "/images/portfolio/nda-api-security.webp",
-    "thumbnailAlt": "API Security & Integration: public conceptual diagram, not an actual system screen",
+    "thumbnail": "/images/portfolio/nda-api-security-dashboard-v2.webp",
+    "thumbnailAlt": "API Security & Integration: illustrated concept dashboard, not an actual client screen",
     "skills": [
       "API Integration",
       "Authentication & Access Control"
@@ -1110,6 +1221,23 @@ export const portfolioItems: PortfolioProject[] = [
   },
   {
     "id": "nda-infrastructure",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "Linux",
+        "Docker",
+        "AWS",
+        "Terraform"
+      ],
+      "languages": [
+        "Bash",
+        "Python",
+        "HCL"
+      ],
+      "frameworks": [
+        "Ansible"
+      ]
+    },
     "market": "global",
     "shortTitle": "Infrastructure & Operations",
     "title": "Infrastructure & Operations — NDA Case Summary",
@@ -1125,8 +1253,8 @@ export const portfolioItems: PortfolioProject[] = [
     "confidential": true,
     "period": "2025/01–2026/02",
     "periodLabel": "Illustrative public period",
-    "thumbnail": "/images/portfolio/nda-infrastructure.webp",
-    "thumbnailAlt": "Infrastructure & Operations: public conceptual diagram, not an actual system screen",
+    "thumbnail": "/images/portfolio/nda-infrastructure-dashboard-v2.webp",
+    "thumbnailAlt": "Infrastructure & Operations: illustrated concept dashboard, not an actual client screen",
     "skills": [
       "Infrastructure Setup",
       "Operational Support"
@@ -1134,6 +1262,21 @@ export const portfolioItems: PortfolioProject[] = [
   },
   {
     "id": "nda-excel",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "Excel",
+        "Microsoft 365"
+      ],
+      "languages": [
+        "Python",
+        "VBA"
+      ],
+      "frameworks": [
+        "pandas",
+        "openpyxl"
+      ]
+    },
     "market": "japan",
     "shortTitle": "Excel業務自動化",
     "title": "Excel業務自動化（NDA）",
@@ -1148,11 +1291,27 @@ export const portfolioItems: PortfolioProject[] = [
     "confidential": true,
     "period": "2024年06月〜2024年10月",
     "periodLabel": "公開表示用の参考期間",
-    "thumbnail": "/images/portfolio/nda-excel.webp",
-    "thumbnailAlt": "Excel業務自動化の公開用概念図。実際の画面・構成ではありません"
+    "thumbnail": "/images/portfolio/nda-excel-dashboard-v2.webp",
+    "thumbnailAlt": "Excel業務自動化の公開用コンセプト画面。実際のクライアント画面ではありません"
   },
   {
     "id": "nda-whatsapp",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "WhatsApp Business Platform",
+        "Node.js",
+        "PostgreSQL",
+        "Redis"
+      ],
+      "languages": [
+        "TypeScript",
+        "SQL"
+      ],
+      "frameworks": [
+        "Express.js"
+      ]
+    },
     "market": "global",
     "shortTitle": "WhatsApp Bot Development",
     "title": "WhatsApp Bot Development — NDA Case Summary",
@@ -1168,8 +1327,8 @@ export const portfolioItems: PortfolioProject[] = [
     "confidential": true,
     "period": "2025/08–2026/01",
     "periodLabel": "Illustrative public period",
-    "thumbnail": "/images/portfolio/nda-whatsapp.webp",
-    "thumbnailAlt": "WhatsApp Bot Development: public conceptual diagram, not an actual system screen",
+    "thumbnail": "/images/portfolio/nda-whatsapp-dashboard-v2.webp",
+    "thumbnailAlt": "WhatsApp Bot Development: illustrated concept dashboard, not an actual client screen",
     "skills": [
       "Bot Development",
       "Messaging Integration"
@@ -1177,6 +1336,21 @@ export const portfolioItems: PortfolioProject[] = [
   },
   {
     "id": "nda-telegram",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "Telegram Bot API",
+        "PostgreSQL",
+        "Redis"
+      ],
+      "languages": [
+        "Python"
+      ],
+      "frameworks": [
+        "aiogram",
+        "FastAPI"
+      ]
+    },
     "market": "global",
     "shortTitle": "Telegram Bot Development",
     "title": "Telegram Bot Development — NDA Case Summary",
@@ -1192,8 +1366,8 @@ export const portfolioItems: PortfolioProject[] = [
     "confidential": true,
     "period": "2024/09–2025/02",
     "periodLabel": "Illustrative public period",
-    "thumbnail": "/images/portfolio/nda-telegram.webp",
-    "thumbnailAlt": "Telegram Bot Development: public conceptual diagram, not an actual system screen",
+    "thumbnail": "/images/portfolio/nda-telegram-dashboard-v2.webp",
+    "thumbnailAlt": "Telegram Bot Development: illustrated concept dashboard, not an actual client screen",
     "skills": [
       "Bot Development",
       "Messaging Integration"
@@ -1201,6 +1375,21 @@ export const portfolioItems: PortfolioProject[] = [
   },
   {
     "id": "nda-line",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "LINE Messaging API",
+        "Node.js",
+        "PostgreSQL"
+      ],
+      "languages": [
+        "TypeScript"
+      ],
+      "frameworks": [
+        "LINE Bot SDK",
+        "Express.js"
+      ]
+    },
     "market": "japan",
     "shortTitle": "LINEボット・業務連携",
     "title": "LINEボット・業務連携（NDA）",
@@ -1216,11 +1405,26 @@ export const portfolioItems: PortfolioProject[] = [
     "confidential": true,
     "period": "2025年03月〜2025年07月",
     "periodLabel": "公開表示用の参考期間",
-    "thumbnail": "/images/portfolio/nda-line.webp",
-    "thumbnailAlt": "LINEボット・業務連携の公開用概念図。実際の画面・構成ではありません"
+    "thumbnail": "/images/portfolio/nda-line-dashboard-v2.webp",
+    "thumbnailAlt": "LINEボット・業務連携の公開用コンセプト画面。実際のクライアント画面ではありません"
   },
   {
     "id": "nda-slack",
+    "thumbnailKind": "concept",
+    "suggestedStack": {
+      "technologies": [
+        "Slack API",
+        "Node.js",
+        "PostgreSQL"
+      ],
+      "languages": [
+        "TypeScript"
+      ],
+      "frameworks": [
+        "Bolt for JavaScript",
+        "Express.js"
+      ]
+    },
     "market": "japan",
     "shortTitle": "Slackボット・業務自動化",
     "title": "Slackボット・業務自動化（NDA）",
@@ -1236,7 +1440,445 @@ export const portfolioItems: PortfolioProject[] = [
     "confidential": true,
     "period": "2026年02月〜2026年08月",
     "periodLabel": "公開表示用の参考期間",
-    "thumbnail": "/images/portfolio/nda-slack.webp",
-    "thumbnailAlt": "Slackボット・業務自動化の公開用概念図。実際の画面・構成ではありません"
+    "thumbnail": "/images/portfolio/nda-slack-dashboard-v2.webp",
+    "thumbnailAlt": "Slackボット・業務自動化の公開用コンセプト画面。実際のクライアント画面ではありません"
+  },
+  {
+    "id": "utage-teacher-training",
+    "thumbnail": "/images/portfolio/utage-teacher-training.webp",
+    "thumbnailAlt": "教師向け 3か月オンライン養成講座の公開ページのスクリーンショット",
+    "copyStatus": "draft",
+    "title": "教師向け 3か月オンライン養成講座",
+    "url": "https://utage-system.com/p/lloh2X5NECgz",
+    "category": "ランディングページ",
+    "period": "掲載情報に制作期間の記載なし",
+    "description": "使命感・レジリエンス・AI活用をテーマにした、教師向けの3か月オンライン養成講座の紹介LPです。講座の考え方、カリキュラム、講師紹介、受講生の声を掲載し、受講を検討する方を申込へ案内します。",
+    "scope": "担当範囲の文案例：講座の訴求整理、カリキュラム・講師紹介セクションの構成、UTAGEでのLP組み立て、申込ボタンとフォームの導線設計、スマートフォン表示の調整。",
+    "technologies": ["UTAGE"],
+    "market": "japan",
+    "field": "education",
+    "highlights": [
+      { "title": "講座内容", "text": "教師向けの3か月間オンライン養成講座。" },
+      { "title": "カリキュラム", "text": "テーマ別のカリキュラムを掲載。" },
+      { "title": "講師・受講生", "text": "講師プロフィールと受講生の声を紹介。" },
+      { "title": "講座の価値", "text": "講座の価値や受講後の変化を訴求。" }
+    ]
+  },
+  {
+    "id": "utage-toeic-course",
+    "thumbnailScale": 1.45,
+    "thumbnailOrigin": "center top",
+    "thumbnail": "/images/portfolio/utage-toeic-course.webp",
+    "thumbnailAlt": "TOEIC対策 無料オンライン講座の公開ページのスクリーンショット",
+    "copyStatus": "draft",
+    "title": "TOEIC対策 無料オンライン講座",
+    "url": "https://utage-system.com/p/Hi4eHXtmlOz0",
+    "category": "ランディングページ",
+    "period": "掲載情報に制作期間の記載なし",
+    "description": "TOEIC対策と仕事で使える英語力の学習方法を紹介する、無料動画講座の登録LPです。3ステップの講座内容、講師プロフィール、学習者の声を掲載し、メールアドレスの登録から動画視聴へつなげます。",
+    "scope": "担当範囲の文案例：講座内容と見出しの整理、UTAGEのLPレイアウト作成、メール登録フォームの配置、動画視聴への案内文整備、画面サイズ別の表示と入力項目の確認。",
+    "technologies": ["UTAGE"],
+    "market": "japan",
+    "field": "education",
+    "highlights": [
+      { "title": "講座", "text": "TOEIC対策の無料オンライン講座。" },
+      { "title": "課題の提示", "text": "学習者の悩みを提示し、学習後に期待できる変化を訴求。" },
+      { "title": "登録導線", "text": "無料受講の登録フォームを設置。" }
+    ]
+  },
+  {
+    "id": "utage-parent-course",
+    "thumbnail": "/images/portfolio/utage-parent-course.webp",
+    "thumbnailAlt": "子育て中の保護者向けオンライン講座の公開ページのスクリーンショット",
+    "copyStatus": "draft",
+    "title": "子育て中の保護者向けオンライン講座",
+    "url": "https://utage-system.com/p/gnUglcxjjTqM",
+    "category": "ランディングページ",
+    "period": "掲載情報に制作期間の記載なし",
+    "description": "子育て中の保護者向けオンライン講座・コミュニティ「ママの学校」の紹介ページです。親子のコミュニケーションをテーマに、講座の特徴、動画教材、オンライン授業、会員サイトでの学習環境を案内し、申込・決済ページへつなげます。",
+    "scope": "担当範囲の文案例：講座とコミュニティの情報設計、教材・授業紹介のレイアウト作成、UTAGEでのページ実装、申込・決済への導線整理、スマートフォンでの可読性とボタン配置の調整。",
+    "technologies": ["UTAGE"],
+    "market": "japan",
+    "field": "education",
+    "highlights": [
+      { "title": "対象", "text": "子育て中の保護者向けオンライン講座。" },
+      { "title": "学習環境", "text": "動画教材・オンライン授業・会員サイトを案内。" },
+      { "title": "授業", "text": "月2回のZoom授業。" },
+      { "title": "継続学習", "text": "継続的な学習カリキュラムを掲載。" }
+    ]
+  },
+  {
+    "id": "utage-trial-lesson",
+    "thumbnailScale": 1.6,
+    "thumbnailOrigin": "center top",
+    "thumbnail": "/images/portfolio/utage-trial-lesson.webp",
+    "thumbnailAlt": "実店舗向け 初回無料体験レッスンの公開ページのスクリーンショット",
+    "copyStatus": "draft",
+    "title": "実店舗向け 初回無料体験レッスン",
+    "url": "https://utage-system.com/page/rjcUhRyjEPrc",
+    "category": "ランディングページ",
+    "period": "掲載情報に制作期間の記載なし",
+    "description": "ピラティススタジオの初回無料体験を案内する、スマートフォンで見やすい縦長LPです。スタジオの特徴、体験キャンペーン、駅からのアクセスをコンパクトにまとめ、仕事帰りの利用を検討する方を予約へ案内します。",
+    "scope": "担当範囲の文案例：体験キャンペーンの見せ方とファーストビューの構成、スタジオ紹介・アクセス情報の配置、UTAGEでのLP実装、予約ボタンの設置、スマートフォン表示の調整。",
+    "technologies": ["UTAGE"],
+    "market": "japan",
+    "field": "education",
+    "highlights": [
+      { "title": "体験募集", "text": "初回無料体験レッスンを案内。" },
+      { "title": "限定訴求", "text": "月5名限定のキャンペーン。" },
+      { "title": "料金訴求", "text": "通常2,500円の体験を初回0円で案内。" },
+      { "title": "利用シーン", "text": "仕事帰りの利用を想定した訴求。" }
+    ]
+  },
+  {
+    "id": "utage-treatment-trial",
+    "thumbnailScale": 1.65,
+    "thumbnailOrigin": "center top",
+    "thumbnail": "/images/portfolio/utage-treatment-trial.webp",
+    "thumbnailAlt": "初回体験コース・予約LPの公開ページのスクリーンショット",
+    "copyStatus": "draft",
+    "title": "初回体験コース・予約LP",
+    "url": "https://utage-system.com/page/6Xt9nRj4vLBN",
+    "category": "ランディングページ",
+    "period": "掲載情報に制作期間の記載なし",
+    "description": "サロンの初回施術体験を案内する予約LPです。コースの紹介、体験料金、カウンセリングから施術後までの流れを掲載し、利用者の声とあわせて検討材料を提示。第1〜第3希望日を入力できる予約フォームへつなげます。",
+    "scope": "担当範囲の文案例：コース情報と料金表示の整理、施術の流れ・利用者の声のレイアウト作成、UTAGEでのLP組み立て、希望日入力フォームの設計、予約周辺の案内文と表示の確認。",
+    "technologies": ["UTAGE"],
+    "market": "japan",
+    "field": "beauty",
+    "highlights": [
+      { "title": "体験コース", "text": "通常25,000円から特別価格15,000円への訴求。" },
+      { "title": "施術の流れ", "text": "カウンセリングから施術後までを掲載。" },
+      { "title": "予約フォーム", "text": "第1〜第3希望日を入力可能。" }
+    ]
+  },
+  {
+    "id": "utage-regional-trial-events",
+    "thumbnailScale": 1.5,
+    "thumbnailOrigin": "center top",
+    "thumbnail": "/images/portfolio/utage-regional-trial-events.webp",
+    "thumbnailAlt": "地域別 対面体験会・申し込みページの公開ページのスクリーンショット",
+    "copyStatus": "draft",
+    "title": "地域別 対面体験会・申し込みページ",
+    "url": "https://utage-system.com/p/P8q3fQ98wsrT?area=tokai_hokuriku",
+    "category": "ランディングページ",
+    "period": "掲載情報に制作期間の記載なし",
+    "description": "地域別の対面体験会を選び、参加を申し込めるページです。地域に応じた開催日時・会場・残席数を表示し、参加者情報、支払方法、同伴者、キャンセル規定をまとめて確認できる構成で、申込確認へ案内します。",
+    "scope": "担当範囲の文案例：地域別の日程選択と残席表示の構成、参加者・同伴者・支払方法のフォーム項目設計、UTAGEでのページ実装、注意事項と確認画面への導線整理、選択内容と表示の動作確認。",
+    "technologies": ["UTAGE"],
+    "market": "japan",
+    "field": "education",
+    "highlights": [
+      { "title": "地域別の日程", "text": "地域を選択すると該当地域の開催日程を表示。" },
+      { "title": "開催情報", "text": "開催場所・日時・残席数を掲載。" },
+      { "title": "申込情報", "text": "参加者情報・支払方法・注意事項を入力。" },
+      { "title": "申込後の案内", "text": "申込完了後に自動返信メールを送信。" }
+    ]
+  },
+  {
+    "id": "global-hush-uk",
+    "copyStatus": "draft",
+    "shortTitle": "Hush",
+    "title": "Hush — UK Website",
+    "url": "https://www.hush-uk.com/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-hush-uk.webp",
+    "thumbnailAlt": "Hush homepage hero image",
+    "period": "United Kingdom · August–September 2020",
+    "periodLabel": "Project period and location",
+    "description": "A fashion storefront concept that brings seasonal collections, editorial imagery and everyday styling ideas into a cohesive shopping experience. The sample direction emphasizes clear product discovery and a calm, mobile-friendly presentation.",
+    "scope": "Sample contribution: organize collection navigation, design responsive product and editorial layouts, implement reusable interface components, and review the journey from browsing to product selection.",
+    "technologies": ["Vue", "Nuxt", "Node.js", "Tailwind CSS", "Vercel"],
+    "market": "global",
+    "field": "fashion"
+  },
+  {
+    "id": "global-lomi-cafe",
+    "copyStatus": "draft",
+    "shortTitle": "Lomi Café",
+    "title": "Lomi Café — Website",
+    "url": "https://lomi.cafe/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-lomi-cafe.webp",
+    "thumbnailAlt": "Lomi Café website homepage screenshot",
+    "period": "France · May–June 2022",
+    "periodLabel": "Project period and location",
+    "description": "A coffee-brand website concept connecting the character of a roastery with its coffee selection, brewing equipment and learning experiences. Large imagery and concise storytelling create a warm introduction to the brand.",
+    "scope": "Sample contribution: develop the page structure, translate brand storytelling into responsive layouts, build image-led sections and product entry points, and refine typography and navigation across screen sizes.",
+    "technologies": ["React", "Next.js", "Node.js", "Swiper"],
+    "market": "global",
+    "field": "lifestyle"
+  },
+  {
+    "id": "global-lambert-bags",
+    "copyStatus": "draft",
+    "shortTitle": "Lambert Bags",
+    "title": "Lambert Bags — E-Commerce Website",
+    "url": "https://lambertbags.com/",
+    "category": "ECサイト",
+    "thumbnail": "/images/portfolio/global-lambert-bags.webp",
+    "thumbnailAlt": "Lambert Bags website homepage screenshot",
+    "period": "Canada · February–March 2022",
+    "periodLabel": "Project period and location",
+    "description": "An e-commerce concept for bags and accessories that balances lifestyle photography with practical product information. The sample presentation makes it easy to explore collections and compare everyday essentials.",
+    "scope": "Sample contribution: configure Shopify collection templates, arrange product imagery and variant information, customize reusable storefront sections, and check the mobile shopping flow and visual consistency.",
+    "technologies": ["Shopify"],
+    "market": "global",
+    "field": "fashion"
+  },
+  {
+    "id": "global-la-crawfish",
+    "copyStatus": "draft",
+    "shortTitle": "LA Crawfish",
+    "title": "LA Crawfish — Website",
+    "url": "https://www.lacrawfish.com/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-la-crawfish.webp",
+    "thumbnailAlt": "Louisiana Crawfish Company shipped-fresh image from its website",
+    "period": "United States · March–April 2022",
+    "periodLabel": "Project period and location",
+    "description": "A seafood retail website concept that combines product discovery with clear ordering and delivery guidance. An approachable visual hierarchy helps visitors move between product categories and useful preparation information.",
+    "scope": "Sample contribution: plan category and content navigation, create responsive promotional sections, organize product and delivery information, and review calls to action and readability on mobile devices.",
+    "technologies": ["WordPress"],
+    "market": "global",
+    "field": "lifestyle"
+  },
+  {
+    "id": "global-facefacts-buxton",
+    "copyStatus": "draft",
+    "shortTitle": "Facefacts Buxton",
+    "title": "Facefacts Buxton — Website",
+    "url": "https://www.facefactsbuxton.co.uk/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-facefacts-buxton.webp",
+    "thumbnailAlt": "Facefacts Buxton website homepage screenshot",
+    "period": "United Kingdom · March–April 2020",
+    "periodLabel": "Project period and location",
+    "description": "A beauty and skincare website concept presenting treatments in an approachable, reassuring format. Service categories, treatment imagery and clear contact paths help visitors understand their options before making an inquiry.",
+    "scope": "Sample contribution: structure treatment information, design reusable service-page components, implement responsive page layouts, and improve the visibility of consultation and appointment entry points.",
+    "technologies": ["React", "Next.js", "Node.js", "Tailwind CSS", "Vercel"],
+    "market": "global",
+    "field": "beauty"
+  },
+  {
+    "id": "global-van-michael",
+    "copyStatus": "draft",
+    "shortTitle": "Van Michael",
+    "title": "Van Michael — Website",
+    "url": "https://vanmichael.com/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-van-michael.webp",
+    "thumbnailAlt": "Van Michael website homepage screenshot",
+    "period": "United States · February–March 2020",
+    "periodLabel": "Project period and location",
+    "description": "A salon website concept built around expressive photography, confident typography and a clear introduction to the salon experience. The sample direction balances a strong brand impression with useful service and location information.",
+    "scope": "Sample contribution: compose the visual hierarchy, implement responsive image sections and restrained transitions, organize salon and service navigation, and refine appointment calls to action.",
+    "technologies": ["GSAP", "Swiper"],
+    "market": "global",
+    "field": "beauty"
+  },
+  {
+    "id": "global-koko-hair",
+    "copyStatus": "draft",
+    "shortTitle": "Koko Hair",
+    "title": "Koko Hair — Website",
+    "url": "https://kokohair.co.uk/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-koko-hair.webp",
+    "thumbnailAlt": "Koko Hair website homepage screenshot",
+    "period": "United Kingdom · July–August 2022",
+    "periodLabel": "Project period and location",
+    "description": "A hair-salon website concept highlighting style, atmosphere and the range of available services. The layout pairs large visual moments with concise information so visitors can explore the salon comfortably on any device.",
+    "scope": "Sample contribution: adapt a content-managed page structure, build responsive service and gallery layouts, arrange navigation and booking links, and check image presentation and basic accessibility.",
+    "technologies": ["WordPress", "React", "MySQL"],
+    "market": "global",
+    "field": "beauty"
+  },
+  {
+    "id": "global-beauty-lounge-bergedorf",
+    "copyStatus": "draft",
+    "shortTitle": "Beauty Lounge Bergedorf",
+    "title": "Beauty Lounge Bergedorf — E-Commerce Website",
+    "url": "https://beauty-lounge-bergedorf.de/",
+    "category": "ECサイト",
+    "thumbnail": "/images/portfolio/global-beauty-lounge-bergedorf.webp",
+    "thumbnailAlt": "Beauty Lounge Bergedorf website homepage screenshot",
+    "period": "Germany · March–May 2021",
+    "periodLabel": "Project period and location",
+    "description": "A beauty and wellness website concept bringing salon services, spa treatments and retail information into a unified visual experience. Soft color accents and organized content support a relaxed browsing experience.",
+    "scope": "Sample contribution: customize page templates and reusable content blocks, organize treatment and product categories, adjust responsive layouts, and review service-to-inquiry navigation.",
+    "technologies": ["WooCommerce", "Elementor", "Swiper", "Astra", "MySQL"],
+    "market": "global",
+    "field": "beauty"
+  },
+  {
+    "id": "global-anushka-spa",
+    "copyStatus": "draft",
+    "shortTitle": "Anushka Spa",
+    "title": "Anushka Spa — Website",
+    "url": "https://www.anushkaspa.com/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-anushka-spa.webp",
+    "thumbnailAlt": "Anushka Spa website homepage screenshot",
+    "period": "United States · August–September 2024",
+    "periodLabel": "Project period and location",
+    "description": "A spa and salon website concept combining a premium editorial feel with clear treatment discovery. Spacious layouts and carefully paced imagery introduce the setting while keeping service information easy to find.",
+    "scope": "Sample contribution: plan the homepage narrative, create responsive treatment-page layouts, arrange image galleries and promotional sections, and refine the hierarchy of booking and contact actions.",
+    "technologies": ["WordPress"],
+    "market": "global",
+    "field": "beauty"
+  },
+  {
+    "id": "global-manor-real-estate",
+    "copyStatus": "draft",
+    "shortTitle": "Manor Real Estate",
+    "title": "Manor Real Estate — Website",
+    "url": "https://manorrealestate.com/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-manor-real-estate.webp",
+    "thumbnailAlt": "Manor Real Estate website homepage screenshot",
+    "period": "United States · September–November 2022",
+    "periodLabel": "Project period and location",
+    "description": "A real-estate website concept that presents property opportunities alongside company and service information. A structured layout gives property imagery room to stand out while keeping practical details accessible.",
+    "scope": "Sample contribution: design property-card and detail-page layouts, organize service navigation and inquiry paths, build responsive listing sections, and check content hierarchy across desktop and mobile views.",
+    "technologies": [],
+    "market": "global",
+    "field": "realestate"
+  },
+  {
+    "id": "global-charcot-immobilier",
+    "copyStatus": "draft",
+    "shortTitle": "Charcot Immobilier",
+    "title": "Charcot Immobilier — Website",
+    "url": "https://www.charcot-immobilier.com/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-charcot-immobilier.webp",
+    "thumbnailAlt": "Charcot Immobilier website homepage screenshot",
+    "period": "France · 2022",
+    "periodLabel": "Project period and location",
+    "description": "A property-agency website concept combining local expertise, attractive listing imagery and approachable contact options. The sample structure guides visitors from an initial property search toward more detailed information.",
+    "scope": "Sample contribution: define the listing and agency-page structure, design responsive property information blocks, organize search and contact entry points, and refine spacing and image treatment.",
+    "technologies": [],
+    "market": "global",
+    "field": "realestate"
+  },
+  {
+    "id": "global-lancastrian-estates",
+    "copyStatus": "draft",
+    "shortTitle": "Lancastrian Estates",
+    "title": "Lancastrian Estates — Website",
+    "url": "https://www.lancastrianestates.co.uk/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-lancastrian-estates.webp",
+    "thumbnailAlt": "Lancastrian Estates team image from its website",
+    "period": "United Kingdom · November 2022",
+    "periodLabel": "Project period and location",
+    "description": "An estate-agency website concept supporting visitors exploring property sales, lettings and valuation services. Clear service pathways and consistent listing layouts help different audiences reach relevant information.",
+    "scope": "Sample contribution: customize content-managed templates, organize buyer and landlord navigation, compose property and branch information sections, and review responsive inquiry and valuation calls to action.",
+    "technologies": ["WordPress"],
+    "market": "global",
+    "field": "realestate"
+  },
+  {
+    "id": "global-kent-place",
+    "copyStatus": "draft",
+    "shortTitle": "Kent Place",
+    "title": "Kent Place — Website",
+    "url": "https://www.kentplace.org/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-kent-place.webp",
+    "thumbnailAlt": "Kent Place website homepage screenshot",
+    "period": "United States · March–May 2022",
+    "periodLabel": "Project period and location",
+    "description": "An education website concept using school-life imagery and a clear information hierarchy to introduce learning opportunities and community activities. The sample direction supports prospective families as they explore the school.",
+    "scope": "Sample contribution: organize admissions and programme navigation, design responsive editorial sections, create reusable event and news layouts, and review accessible reading order and contact pathways.",
+    "technologies": ["Java", "Firebase"],
+    "market": "global",
+    "field": "education"
+  },
+  {
+    "id": "global-sgs",
+    "copyStatus": "draft",
+    "shortTitle": "SGS",
+    "title": "SGS — Website",
+    "url": "https://sgs.org/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-sgs.webp",
+    "thumbnailAlt": "SGS website homepage screenshot",
+    "period": "Canada · November–December 2022",
+    "periodLabel": "Project period and location",
+    "description": "An institutional website concept that brings an organization’s identity, activities and community stories into a coherent presentation. Large visual sections are balanced with concise navigation and reusable editorial content.",
+    "scope": "Sample contribution: establish a flexible content structure, compose news and information templates, implement responsive page sections, and refine navigation consistency and editorial readability.",
+    "technologies": ["WordPress"],
+    "market": "global",
+    "field": "corporate"
+  },
+  {
+    "id": "global-beacon-derm",
+    "copyStatus": "draft",
+    "shortTitle": "Beacon Dermatology",
+    "title": "Beacon Dermatology — Website",
+    "url": "https://www.beaconderm.com/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-beacon-derm.webp",
+    "thumbnailAlt": "Beacon Dermatology website homepage screenshot",
+    "period": "Canada · June–September 2020",
+    "periodLabel": "Project period and location",
+    "description": "A dermatology-clinic website concept organizing clinic information and treatment categories into a clear, reassuring experience. The sample presentation prioritizes readable service descriptions and straightforward inquiry options.",
+    "scope": "Sample contribution: structure treatment and clinic pages, develop reusable responsive components, arrange consultation calls to action, and check contrast, text hierarchy and mobile navigation.",
+    "technologies": ["React", "Next.js", "Node.js", "Vercel"],
+    "market": "global",
+    "field": "healthcare"
+  },
+  {
+    "id": "global-pillway",
+    "copyStatus": "draft",
+    "shortTitle": "Pillway",
+    "title": "Pillway — Website",
+    "url": "https://www.pillway.com/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-pillway.webp",
+    "thumbnailAlt": "Pillway website homepage screenshot",
+    "period": "Canada · March–May 2021",
+    "periodLabel": "Project period and location",
+    "description": "A digital-pharmacy website concept explaining a service journey through concise steps, approachable illustrations and clear support information. The sample content structure helps visitors understand the service before taking the next step.",
+    "scope": "Sample contribution: plan the service-explanation flow, design responsive feature and FAQ sections, implement clear conversion entry points, and review the usability of supporting information and navigation.",
+    "technologies": [],
+    "market": "global",
+    "field": "healthcare"
+  },
+  {
+    "id": "global-jetts",
+    "copyStatus": "draft",
+    "shortTitle": "Jetts",
+    "title": "Jetts — Website",
+    "url": "https://jetts.co.uk/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-jetts.webp",
+    "thumbnailAlt": "Jetts website homepage screenshot",
+    "period": "United Kingdom · May–August 2023",
+    "periodLabel": "Project period and location",
+    "description": "A fitness-club website concept that pairs energetic imagery with practical information about locations and membership options. The layout balances a strong first impression with clear routes to club details and inquiries.",
+    "scope": "Sample contribution: build reusable location and membership sections, arrange promotional content and calls to action, customize responsive templates, and review the mobile club-discovery experience.",
+    "technologies": ["WordPress"],
+    "market": "global",
+    "field": "fitness"
+  },
+  {
+    "id": "global-catering",
+    "copyStatus": "draft",
+    "shortTitle": "Catering.com",
+    "title": "Catering.com — Website",
+    "url": "https://catering.com/",
+    "category": "ウェブサイト",
+    "thumbnail": "/images/portfolio/global-catering.webp",
+    "thumbnailAlt": "Catering.com website homepage screenshot",
+    "period": "May–July 2023",
+    "periodLabel": "Project period",
+    "description": "An event-catering website concept using food and event photography to introduce service options and inspire planning. The sample presentation leads visitors from visual exploration toward an organized event inquiry.",
+    "scope": "Sample contribution: compose image-led service pages, organize gallery and event information, create responsive inquiry entry points, and refine page rhythm, navigation and content-managed layouts.",
+    "technologies": ["WordPress"],
+    "market": "global",
+    "field": "lifestyle"
   }
 ];

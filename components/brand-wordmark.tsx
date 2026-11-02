@@ -1,7 +1,11 @@
+"use client";
 import Image from "next/image";
+import { useSiteLanguage } from "./site-language";
 
 /** Preserve the supplied star and Japanese lettering; render the English line as text. */
 export function BrandWordmark({ href = "#introduction" }: { href?: string }) {
+  const { language } = useSiteLanguage();
+  const label = language === "ja" ? "大穂兄弟のトップ" : language === "en" ? "OHO Brothers home" : language === "zh-CN" ? "大穗兄弟首页" : "大穗兄弟首頁";
   return <a href={href} className="wordmark" aria-label="大穂兄弟のトップ">
     <span className="relative block w-[204px] max-[760px]:w-[150px] max-[400px]:w-[124px]">
       <Image src="/images/brand/oho-brothers-night.webp" alt="大穂兄弟 OHO BROTHERS" width={816} height={272} priority unoptimized className="block h-auto w-full mix-blend-screen" style={{ clipPath: "polygon(0 0,100% 0,100% 72%,34% 72%,34% 100%,0 100%)" }} />
