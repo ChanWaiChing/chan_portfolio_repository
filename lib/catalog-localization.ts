@@ -28,6 +28,7 @@ export function localizeProject(item: PortfolioProject, language: SiteLanguage):
     period: localizeProjectPeriod(t(item.period), language),
     periodLabel: item.periodLabel ? t(item.periodLabel) : undefined,
     thumbnailAlt: item.thumbnailAlt ? t(item.thumbnailAlt) : undefined,
+    gallery: item.gallery?.map(image => ({ ...image, alt: t(image.alt) })),
     skills: item.skills,
     highlights: item.highlights?.map(value => ({ title: t(value.title), text: t(value.text) })),
   };

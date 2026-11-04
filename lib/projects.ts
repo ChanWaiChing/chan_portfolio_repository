@@ -8,7 +8,8 @@ export type PortfolioProject = {
   preview?: boolean; market: PortfolioMarket; shortTitle?: string; skills?: string[]; periodLabel?: string; thumbnailAlt?: string; confidential?: boolean; highlights?: { title: string; text: string }[];
   programmingLanguages?: string[]; frameworks?: string[];
   suggestedStack?: { technologies: string[]; languages: string[]; frameworks: string[] };
-  thumbnailKind?: "concept";
+  thumbnailKind?: "concept" | "representative";
+  gallery?: { src: string; alt: string }[];
   copyStatus?: "draft";
   thumbnailScale?: number;
   thumbnailOrigin?: string;
@@ -1880,5 +1881,88 @@ export const portfolioItems: PortfolioProject[] = [
     "technologies": ["WordPress"],
     "market": "global",
     "field": "lifestyle"
+  },
+  {
+    "id": "nda-clinic-line-reminder",
+    "shortTitle": "医療機関向けLINE予約・フォロー",
+    "title": "医療機関向け LINE予約リマインド＆自動フォローアップシステム",
+    "category": "システム開発",
+    "field": "healthcare",
+    "market": "japan",
+    "confidential": true,
+    "thumbnailKind": "representative",
+    "thumbnail": "/images/portfolio/nda-clinic-line-reminder-01.webp",
+    "thumbnailAlt": "医療機関向けLINE予約リマインドシステムの管理画面と通知の掲載用代表画像",
+    "gallery": [
+      { "src": "/images/portfolio/nda-clinic-line-reminder-01.webp", "alt": "予約管理画面と予約前日・当日のLINEリマインドの代表画像" },
+      { "src": "/images/portfolio/nda-clinic-line-reminder-02.webp", "alt": "術後フォローアップの自動配信と回答状況を管理する画面の代表画像" },
+      { "src": "/images/portfolio/nda-clinic-line-reminder-03.webp", "alt": "未応答時にクリニックスタッフへ通知する管理画面の代表画像" }
+    ],
+    "period": "2025年2月〜2025年5月（4ヶ月）",
+    "periodLabel": "開発期間",
+    "description": "患者様へ予約前日と当日の決まった時間にLINEでリマインドを自動送信し、来院状況や術後の体調を確認するシステムです。指定時間内に返信がない場合は再通知し、未応答が続いた場合はクリニックの管理画面にアラートを表示して、スタッフが電話で確認できる仕組みを構築しました。指定時間での配信、未応答時の再通知、運営側への通知を組み合わせる構成例です。",
+    "scope": "兄：AWSインフラ設計、要件定義、PythonによるLINE Messaging API連携とバッチ処理の開発を担当。弟：高齢の方にも見やすいLINEリッチメニューとスタッフ用管理画面のUI/UXデザインを担当しました。",
+    "technologies": ["Python", "FastAPI", "AWS EventBridge", "AWS Lambda", "Amazon DynamoDB", "LINE Messaging API"],
+    "skills": ["AWSインフラ設計", "LINE Messaging API連携", "バッチ処理", "UI/UXデザイン"],
+    "highlights": [
+      { "title": "定時リマインド", "text": "予約前日と当日の指定時刻にLINEで自動通知。" },
+      { "title": "未応答時の再通知", "text": "一定時間内に返信がない場合は再通知し、対応状況を記録。" },
+      { "title": "スタッフへのエスカレーション", "text": "未応答が続いた患者様を管理画面で知らせ、電話確認につなげます。" }
+    ]
+  },
+  {
+    "id": "nda-construction-line-health",
+    "shortTitle": "建設業向けLINE安否・体調確認",
+    "title": "建設業向け LINE従業員安否確認・体調管理システム",
+    "category": "システム開発",
+    "field": "corporate",
+    "market": "japan",
+    "confidential": true,
+    "thumbnailKind": "representative",
+    "thumbnail": "/images/portfolio/nda-construction-line-health-01.webp",
+    "thumbnailAlt": "建設業向けLINE従業員安否確認と未回答者への再通知の掲載用代表画像",
+    "gallery": [
+      { "src": "/images/portfolio/nda-construction-line-health-01.webp", "alt": "未回答の作業員へLINEで自動リマインドを送る管理画面の代表画像" },
+      { "src": "/images/portfolio/nda-construction-line-health-02.webp", "alt": "毎朝の体調確認を一斉配信し回答状況を確認する画面の代表画像" },
+      { "src": "/images/portfolio/nda-construction-line-health-03.webp", "alt": "未応答者を現場責任者へ通知する管理画面の代表画像" }
+    ],
+    "period": "2025年8月〜2025年11月（4ヶ月）",
+    "periodLabel": "開発期間",
+    "description": "数百名規模の作業員を対象に、毎朝指定の時間に体調確認のLINEメッセージを一斉送信するシステムです。一定時間内に回答がない作業員には自動で再送し、それでも応答がない場合は現場責任者のLINEと管理画面に緊急通知を送ります。小規模テストから始め、段階的に対象者を拡大しました。",
+    "scope": "兄：データベース設計、プロジェクト管理、バックエンドのロジック実装、クラウドサーバー構築を担当。弟：直感的に操作できる管理者用ダッシュボードのUI設計を担当しました。",
+    "technologies": ["Python", "Django", "AWS EC2", "Amazon RDS", "Amazon SQS", "LINE Messaging API", "PostgreSQL"],
+    "skills": ["データベース設計", "バックエンド開発", "AWS構築", "管理画面UI設計"],
+    "highlights": [
+      { "title": "毎朝の一斉配信", "text": "指定時刻に作業員へ体調確認メッセージを送信。" },
+      { "title": "回答状況の把握", "text": "回答・未回答と再通知の状況を管理画面で確認。" },
+      { "title": "段階的な展開", "text": "小規模なテストから開始し、対象者を段階的に拡大。" }
+    ]
+  },
+  {
+    "id": "nda-restaurant-line-ai-support",
+    "shortTitle": "飲食チェーン向けLINE AI応対",
+    "title": "飲食チェーン向け AI連携LINE自動応対＆エスカレーションボット",
+    "category": "システム開発",
+    "field": "lifestyle",
+    "market": "japan",
+    "confidential": true,
+    "thumbnailKind": "representative",
+    "thumbnail": "/images/portfolio/nda-restaurant-line-ai-01.webp",
+    "thumbnailAlt": "飲食チェーン向けLINE AI自動応対とスタッフ引き継ぎ画面の掲載用代表画像",
+    "gallery": [
+      { "src": "/images/portfolio/nda-restaurant-line-ai-01.webp", "alt": "AI応対中の問い合わせと有人対応への引き継ぎを管理する画面の代表画像" },
+      { "src": "/images/portfolio/nda-restaurant-line-ai-02.webp", "alt": "飲食店への問い合わせにLINE上でAIが応答する代表画像" }
+    ],
+    "period": "2026年3月〜2026年5月（3ヶ月）",
+    "periodLabel": "開発期間",
+    "description": "顧客からの問い合わせにAIがLINE上で自動応答し、複雑な要件や返信が途絶えた場合には、対話履歴を人間のオペレーターへ引き継ぐシステムです。将来的なAI会話機能の追加を見据え、自然言語処理モデル（LLM）をLINEボットへ組み込む構成を扱いました。",
+    "scope": "兄：システム全体のアーキテクチャ策定、LLMのプロンプト設計、API統合、セキュリティ対策を担当。弟：ブランドイメージに合わせたキャラクターデザインと操作画面のUX改善を担当しました。",
+    "technologies": ["Python", "AWS API Gateway", "AWS Lambda", "LINE Messaging API", "OpenAI API（LLM）"],
+    "skills": ["LLM連携", "プロンプト設計", "API統合", "セキュリティ対策", "UX改善"],
+    "highlights": [
+      { "title": "AIによる一次応対", "text": "LINEで届く問い合わせにAIが自動で応答。" },
+      { "title": "有人対応への引き継ぎ", "text": "複雑な相談や応答が止まった会話を、履歴とともにスタッフへ引き継ぎます。" },
+      { "title": "安全性を考慮した統合", "text": "LLMと各種APIを連携し、セキュリティに配慮した構成を設計。" }
+    ]
   }
 ];

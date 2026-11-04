@@ -102,11 +102,11 @@ test("all 20 published packages are reachable, filterable and open for consultat
   await expect(page.getByLabel("相談したいこと")).toHaveValue("ワードプレス制作・成長支援");
 });
 
-test("all 32 supplied projects are reachable with search, empty state and details", async ({ page }) => {
+test("all 45 Japanese projects are reachable with search, empty state and details", async ({ page }) => {
   await page.goto("/");
   const section = page.locator("#works");
-  const pagination = section.getByRole("navigation", { name: "ポートフォリオのページ切り替え" });
-  for (const [index, count] of [6, 6, 6, 6, 6, 2].entries()) {
+  const pagination = section.getByRole("navigation", { name: "ポートフォリオのページ切り替え", exact: true });
+  for (const [index, count] of [6, 6, 6, 6, 6, 6, 6, 3].entries()) {
     await pagination.getByRole("button", { name: `${index + 1}ページ目` }).click();
     await expect(section.locator(".portfolio-card")).toHaveCount(count);
   }
@@ -118,7 +118,7 @@ test("all 32 supplied projects are reachable with search, empty state and detail
   await page.getByRole("searchbox").fill("no-such-example-999");
   await expect(section.locator(".catalog-empty")).toBeVisible();
   await section.getByRole("button", { name: "検索条件をリセット" }).click();
-  await expect(section.locator(".catalog-result-status")).toContainText("42件中 1〜6件");
+  await expect(section.locator(".catalog-result-status")).toContainText("45 件中 1〜6件");
   await section.locator('.catalog-filters button[data-category="ウェブサイト"]').click();
   await expect(section.locator(".portfolio-card")).toHaveCount(6);
 });

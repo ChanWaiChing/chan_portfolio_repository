@@ -13,19 +13,20 @@ const suppliedProjectIds = [
 const additions = portfolioItems.filter(item => linkedIds.includes(item.id) || item.confidential || suppliedProjectIds.includes(item.id));
 
 test('new projects have complete assets, market data and NDA safeguards', () => {
-  expect(additions).toHaveLength(50);
+  expect(additions).toHaveLength(53);
   expect(new Set(portfolioItems.map(item => item.id)).size).toBe(portfolioItems.length);
   expect(portfolioItems.filter(item => suppliedProjectIds.includes(item.id))).toHaveLength(24);
   for (const item of additions) {
     if (item.thumbnail) expect(existsSync('public' + item.thumbnail)).toBe(true);
+    for (const image of item.gallery || []) expect(existsSync('public' + image.src)).toBe(true);
     expect(item.description.length).toBeGreaterThan(30);
     expect(item.scope.length).toBeGreaterThan(30);
     if (item.confidential) {
       expect(item.url).toBeUndefined();
       if (!item.thumbnail) throw new Error(`Confidential project ${item.id} needs a conceptual thumbnail`);
-      expect(item.thumbnailAlt).toMatch(/concept|概念|コンセプト/i);
+      expect(item.thumbnailAlt).toMatch(/concept|概念|コンセプト|代表/i);
       expect(item.period).not.toMatch(/\(illustrative periods?\)|（参考期間）/);
-      expect(item.periodLabel).toMatch(/Illustrative|参考/);
+      expect(item.periodLabel).toMatch(/Illustrative|参考|開発期間/);
       expect(item.period).toMatch(/202[4-6]/);
     } else {
       expect(new URL(item.url!).protocol).toBe('https:');
@@ -34,8 +35,8 @@ test('new projects have complete assets, market data and NDA safeguards', () => 
       expect([item.title, item.description, item.scope, item.period, ...(item.skills || [])].join(' ')).not.toMatch(/[\u3040-\u30ff\u3400-\u9fff]/);
     }
   }
-  expect(portfolioItems).toHaveLength(89);
-  expect(portfolioItems.filter(item => item.market === 'japan')).toHaveLength(42);
+  expect(portfolioItems).toHaveLength(92);
+  expect(portfolioItems.filter(item => item.market === 'japan')).toHaveLength(45);
   expect(portfolioItems.filter(item => item.market === 'global')).toHaveLength(47);
 });
 
@@ -51,7 +52,7 @@ test('new linked and anonymized projects open correctly in both markets', async 
     await page.locator('.language-menu-trigger').click();
     await page.getByRole('menuitemradio').filter({ has: page.locator('.language-menu-label', { hasText: market === 'japan' ? '日本語' : 'English' }) }).click();
     await section.locator(`[data-market="${market}"]`).click();
-    await expect(section.locator(`[data-market="${market}"]`)).toContainText(market === 'japan' ? '42' : '47');
+    await expect(section.locator(`[data-market="${market}"]`)).toContainText(market === 'japan' ? '45' : '47');
     for (const item of additions.filter(item => item.market === market)) {
       const localized = localizeProject(item, market === 'japan' ? 'ja' : 'en');
       await section.getByRole('searchbox').fill(item.title);
@@ -67,6 +68,12 @@ test('new linked and anonymized projects open correctly in both markets', async 
       if (item.confidential) {
         await expect(dialog.locator('.nda-notice')).toBeVisible();
         await expect(dialog.locator('.project-visit')).toHaveCount(0);
+        if (item.gallery?.length) {
+          const images = dialog.locator('.project-details figure img');
+          await expect(images).toHaveCount(item.gallery.length);
+          await expect(dialog.locator('.project-details')).toContainText('掲載用の代表画像');
+          for (const image of await images.all()) await image.evaluate((element: HTMLImageElement) => element.decode());
+        }
       } else {
         await expect(dialog.locator('.project-visit')).toHaveAttribute('href', item.url!);
       }

@@ -12,7 +12,7 @@ test('market filters isolate projects and preserve the global selection in the U
   const section = page.locator('#works');
   const markets = section.locator('.portfolio-markets [role="group"]');
   await expect(markets.locator('[data-market="japan"]')).toHaveAttribute('aria-pressed', 'true');
-  await expect(markets.locator('[data-market="japan"]')).toContainText('42');
+  await expect(markets.locator('[data-market="japan"]')).toContainText('45');
   await markets.locator('[data-market="global"]').click();
   await expect(section.locator('.market-period')).toContainText('2019–2024');
   await expect(section.locator('.portfolio-card')).toHaveCount(6);

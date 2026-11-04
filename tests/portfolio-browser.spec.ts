@@ -7,7 +7,7 @@ test('compact browser keeps market, filters and results in reading order', async
   await expect(section.locator('h2')).toContainText('制作実績');
   const panel = section.locator('.portfolio-filter-panel');
   await expect(panel.locator('.portfolio-filter-row h3')).toHaveText(['サイト種別', '業種']);
-  await expect(section.locator('.portfolio-results p')).toContainText('42件の制作実績');
+  await expect(section.locator('.portfolio-results p')).toContainText('45 件の制作実績');
   const reset = section.locator('.portfolio-results button');
   await expect(reset).toBeDisabled();
   await expect(section.locator('.portfolio-market-switch')).toHaveCSS('display', 'grid');
@@ -26,7 +26,7 @@ test('compact browser keeps market, filters and results in reading order', async
   await panel.locator('[data-category="ECサイト"]').click();
   await expect(section.locator('.portfolio-results p')).toContainText('1件の制作実績');
   await reset.click();
-  await expect(section.locator('.portfolio-results p')).toContainText('42件の制作実績');
+  await expect(section.locator('.portfolio-results p')).toContainText('45 件の制作実績');
   await expect(section.locator('.portfolio-card')).toHaveCount(6);
   await expect(reset).toBeDisabled();
   await expect(page).not.toHaveURL(/field=|work=/);
